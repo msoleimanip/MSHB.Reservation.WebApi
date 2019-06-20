@@ -47,7 +47,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                         Capacity = accommodationForm.Capacity,
                         CityId = accommodationForm.CityId,
                         RoomPrice = accommodationForm.RoomPrice,
-                        IsEmpty = accommodationForm.IsEmpty,
+                       
                         RoomType = (RoomType)accommodationForm.RoomType,
                     };
 
@@ -129,7 +129,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                         accommodationRoom.Description = accommodationForm.Description;
                         accommodationRoom.Rank = accommodationForm.Rank;
                         accommodationRoom.Capacity = accommodationForm.Capacity;
-                        accommodationRoom.IsEmpty = accommodationForm.IsEmpty;
+                        
                         accommodationRoom.RoomPrice = accommodationForm.RoomPrice;
                         accommodationRoom.RoomType = (RoomType)accommodationForm.RoomType;
                         _context.AccommodationRooms.Update(accommodationRoom);
@@ -155,10 +155,6 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
 
                 var queryable = _context.AccommodationRooms.AsQueryable();
 
-                if (accommodationForm.IsEmpty.HasValue)
-                {
-                    queryable = queryable.Where(q => q.IsEmpty == accommodationForm.IsEmpty);
-                }
                 queryable = queryable.Where(q => q.IsActivated == accommodationForm.IsActivated);
                 if (accommodationForm.BedRoom.HasValue)
                 {
@@ -189,12 +185,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                         case "roomprice|desc":
                             queryable = queryable.OrderByDescending(x => x.RoomPrice);
                             break;
-                        case "isempty|asc":
-                            queryable = queryable.OrderBy(x => x.IsEmpty);
-                            break;
-                        case "isempty|desc":
-                            queryable = queryable.OrderByDescending(x => x.IsEmpty);
-                            break;
+                      
                         case "isactivated|asc":
                             queryable = queryable.OrderBy(x => x.IsActivated);
                             break;
@@ -219,7 +210,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                     RoomType = response.RoomType,
                     Rank = response.Rank,
                     Bed = response.Bed,
-                    IsEmpty = response.IsEmpty,
+                   
                     IsActivated = response.IsActivated,
                     Capacity = response.Capacity,
                     Description = response.Description,

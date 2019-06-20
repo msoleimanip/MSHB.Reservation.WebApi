@@ -24,7 +24,7 @@ namespace MSHB.Reservation.Layers.L01_Entities.Models
         public string PhoneNumber { get; set; }
         public GenderType GenderType { get; set; }
         public string PersonalCode { get; set; }
-        public long? SystemCode { get; set; }
+        public Guid? SystemCode { get; set; }
         public int GuestCounts { get; set; }
         public long Description { get; set; }
         public long PriceAccommodation { get; set; }

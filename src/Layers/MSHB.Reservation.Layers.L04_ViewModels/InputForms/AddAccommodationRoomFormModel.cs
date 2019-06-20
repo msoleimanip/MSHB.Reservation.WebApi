@@ -12,7 +12,7 @@ namespace MSHB.Reservation.Layers.L04_ViewModels.InputForms
         [Required(ErrorMessage = "باید برای مکان اقامتگاه، قیمت لحاظ کنید.")]
         public long RoomPrice { get; set; }       
         public int? BedRoom { get; set; }
-        public bool? IsEmpty { get; set; } 
+        
         public int RoomType { get; set; }
         public int Rank { get; set; }
         [Required(ErrorMessage = "باید برای مکان اقامتگاه، تعداد تخت لحاظ کنید.")]

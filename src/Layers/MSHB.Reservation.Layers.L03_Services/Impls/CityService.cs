@@ -105,6 +105,10 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                         parentNode.state.selected = true;
                        
                     }
+                    if (or.IsActivated.HasValue && !or.IsActivated.Value)
+                    {
+                        parentNode.icon = "glyphicon glyphicon-flash";
+                    }
                     parentNode = FillChild(cities, parentNode, or.Id, UserCityId);
                     citynodes.Add(parentNode);
                 }
@@ -129,6 +133,10 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                             parentNodeChild.state.selected = true;
                            
                         }
+                        if (or.IsActivated.HasValue && !or.IsActivated.Value)
+                        {
+                            parentNodeChild.icon = "glyphicon glyphicon-flash";
+                    }
                         parentNode.children.Add(parentNodeChild);
                         FillChild(Citys, parentNodeChild, or.Id, UserCityId);
                     }
@@ -250,7 +258,6 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                 _context.Citys.Remove(child);
             }
         }
-
         public async  Task<bool> DeactivateCityAsync(User user, DeactivateCityFormModel cityForm)
         {
             try
