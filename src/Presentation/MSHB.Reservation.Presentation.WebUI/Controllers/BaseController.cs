@@ -14,7 +14,7 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
         {
             RequestResultViewModel res = new RequestResultViewModel
             {
-                Data = data
+                 Data = data
             };
             return res;
         }
