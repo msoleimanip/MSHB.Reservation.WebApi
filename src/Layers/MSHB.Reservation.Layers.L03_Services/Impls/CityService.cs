@@ -39,7 +39,9 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                         Id = city.Id,
                         CityName = city.CityName,
                         Description = city.Description,
-                        ParentId = city.ParentId
+                        ParentId = city.ParentId,
+                        DeactiveStartTime=city.DeactiveStartTime,
+                        IsActivated=city.IsActivated
                     };
                 }
                 throw new ReservationGlobalException(CityServiceErrors.CityNotFoundError);

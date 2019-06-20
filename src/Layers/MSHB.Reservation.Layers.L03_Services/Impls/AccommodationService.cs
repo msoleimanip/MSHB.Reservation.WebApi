@@ -173,10 +173,11 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                     queryable = queryable.Where(q => q.Capacity >= accommodationForm.Capacity);
                 }
 
-                //if (accommodationForm.StartTime.HasValue && accommodationForm.EndTime.HasValue)
-                //{
-                //    queryable = queryable.Where(q => !q.AccommodationUserRooms.All(c=>c.EntranceTime>= accommodationForm.EndTime));
-                //}
+                if (accommodationForm.StartTime.HasValue && accommodationForm.EndTime.HasValue)
+                {
+                    queryable = queryable.Where(q => !q.AccommodationUserRooms.All(c => ((c.EntranceTime < accommodationForm.StartTime)&& (c.EndTime > accommodationForm.StartTime))
+                                                                                      || ((c.EntranceTime < accommodationForm.EndTime) && (c.EndTime > accommodationForm.EndTime))));
+                }
 
 
                 if (accommodationForm.SortModel != null)
