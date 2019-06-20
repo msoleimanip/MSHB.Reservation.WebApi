@@ -24,11 +24,13 @@ namespace MSHB.Reservation.Layers.L02_DataLayer
         public virtual DbSet<AppLogItem> Logs { get; set; }
         public virtual DbSet<City> Citys { get; set; }
         public virtual DbSet<AccommodationRoom> AccommodationRooms { get; set; }
+        public virtual DbSet<AccommodationUserRoom> AccommodationUserRooms { get; set; }
+        public virtual DbSet<AccommodationUserAttachment> AccommodationUserAttachments { get; set; }
         public virtual DbSet<UserConfiguration> UserConfigurations { get; set; }
  
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseSqlServer(
-            @"Data Source=.;Initial Catalog=Reservation;Persist Security Info=True;User ID=sa;Password=Aa123456;");
+            @"Data Source=.;Initial Catalog=Reservation2;Persist Security Info=True;User ID=sa;Password=Aa123456;");
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
@@ -91,20 +93,29 @@ namespace MSHB.Reservation.Layers.L02_DataLayer
                          .HasForeignKey(d => d.CityId)
                          .OnDelete(DeleteBehavior.Cascade);
 
+            modelBuilder.Entity<City>()
+                          .HasOne(d => d.Parent)
+                          .WithMany(t => t.Children)
+                          .HasForeignKey(t => t.ParentId)
+                          .OnDelete(DeleteBehavior.ClientSetNull);
+            modelBuilder.Entity<City>()
+                           .HasIndex(d => d.CityName);
+
 
             modelBuilder.Entity<User>()
                   .HasMany(d => d.UserConfigurations).WithOne(d => d.User);
 
+            modelBuilder.Entity<AccommodationRoom>()
+                         .HasOne(d => d.City)
+                         .WithMany(t => t.AccommodationRooms)
+                         .HasForeignKey(d => d.CityId)
+                         .OnDelete(DeleteBehavior.ClientSetNull);
 
-            modelBuilder.Entity<City>()                       
-                            .HasOne(d => d.Parent)
-                            .WithMany(t => t.Children)
-                            .HasForeignKey(t => t.ParentId)                            
-                            .OnDelete(DeleteBehavior.ClientSetNull);
-            modelBuilder.Entity<City>()
-                           .HasIndex(d => d.CityName);
 
-           
+            modelBuilder.Entity<AccommodationRoom>().HasIndex(c => c.RoomNumber);
+
+
+
 
 
             modelBuilder.Entity<GroupAuthRole>()
@@ -128,7 +139,13 @@ namespace MSHB.Reservation.Layers.L02_DataLayer
             modelBuilder.Entity<City>()
                     .Property(c => c.CreationDate).HasDefaultValueSql("getdate()");
 
+            modelBuilder.Entity<AccommodationUserRoom>(entity =>
+            {               
+                entity.HasIndex(e => e.NationalCode);
+                entity.HasIndex(e => e.PhoneNumber);
+                entity.HasIndex(e => e.SystemCode);
 
+            });
 
 
         }

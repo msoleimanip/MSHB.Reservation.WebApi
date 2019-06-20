@@ -18,10 +18,14 @@ namespace MSHB.Reservation.Layers.L01_Entities.Models
 
         public long? ParentId { get; set; }
 
+        public bool? IsActivated { get; set; }
+        public DateTime? DeactiveStartTime { get; set; }
+
         [ForeignKey("ParentId")]
         public virtual City Parent { get; set; }
 
         public virtual ICollection<City> Children { get; set; }
         public virtual ICollection<User> Users { get; set; }
+        public virtual ICollection<AccommodationRoom> AccommodationRooms { get; set; }
     }
 }

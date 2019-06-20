@@ -7,7 +7,7 @@ namespace MSHB.Reservation.Layers.L04_ViewModels.InputForms
 {
     public class EditcityFormModel : AddcityFormModel
     {
-        [Required(ErrorMessage = "شناسه شهر وارد نشده است")]
+        [Required(ErrorMessage = "شناسه اقامتگاه وارد نشده است")]
         public long CityId { get; set; }
     }
 }

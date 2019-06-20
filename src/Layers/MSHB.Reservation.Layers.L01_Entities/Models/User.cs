@@ -78,8 +78,11 @@ namespace MSHB.Reservation.Layers.L01_Entities.Models
         public long? UserConfigurationId { get; set; }
 
         public virtual ICollection<UserConfiguration> UserConfigurations { get; set; }
+        public virtual ICollection<AccommodationUserRoom> AccommodationUserRoomAssigns { get; set; }
 
- 
+        
+
+
 
 
 

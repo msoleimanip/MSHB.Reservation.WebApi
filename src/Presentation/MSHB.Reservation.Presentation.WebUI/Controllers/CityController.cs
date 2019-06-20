@@ -41,7 +41,7 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
         }
 
         [HttpGet("[action]"), HttpPost("[action]")]
-        public async Task<IActionResult> GetUserCityazinationForUser([FromQuery] Guid userId)
+        public async Task<IActionResult> GetUserCityForUser([FromQuery] Guid userId)
         {
             var Citys = await _CityService.GetUserCityForUserAsync(HttpContext.GetUser(), userId);
             return Ok(GetRequestResult(Citys));
@@ -62,8 +62,15 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
         }
 
         [HttpGet("[action]"), HttpPost("[action]")]
+        public async Task<IActionResult> DeactivateCity([FromBody] DeactivateCityFormModel cityForm)
+        {
+            var Citys = await _CityService.DeactivateCityAsync(HttpContext.GetUser(), cityForm);
+            return Ok(GetRequestResult(Citys));
+        }
+
+        [HttpGet("[action]"), HttpPost("[action]")]
         public async Task<IActionResult> DeleteCity([FromBody]
-        [Required(ErrorMessage = "لیست شهر های ارسال شده برای حذف نامعتبر است")]List<long> CityIds)
+        [Required(ErrorMessage = "لیست اقامتگاه های ارسال شده برای حذف نامعتبر است")]List<long> CityIds)
         {
             var Citys = await _CityService.DeleteCityAsync(HttpContext.GetUser(),CityIds);
             return Ok(GetRequestResult(Citys));

@@ -18,7 +18,9 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
                     Description = table.Column<string>(nullable: true),
                     CreationDate = table.Column<DateTime>(nullable: true, defaultValueSql: "getdate()"),
                     LastUpdateDate = table.Column<DateTime>(nullable: true),
-                    ParentId = table.Column<long>(nullable: true)
+                    ParentId = table.Column<long>(nullable: true),
+                    IsActivated = table.Column<bool>(nullable: true),
+                    DeactiveStartTime = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -77,6 +79,34 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Role_T", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AccommodationRooms",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    RoomNumber = table.Column<string>(nullable: true),
+                    RoomPrice = table.Column<string>(nullable: true),
+                    BedRoom = table.Column<int>(nullable: true),
+                    RoomType = table.Column<int>(nullable: false),
+                    Rank = table.Column<int>(nullable: false),
+                    Bed = table.Column<int>(nullable: false),
+                    IsActivated = table.Column<bool>(nullable: true),
+                    Capacity = table.Column<int>(nullable: false),
+                    Description = table.Column<string>(nullable: true),
+                    CityId = table.Column<long>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AccommodationRooms", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AccommodationRooms_City_T_CityId",
+                        column: x => x.CityId,
+                        principalTable: "City_T",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -149,6 +179,45 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "AccommodationUserRooms",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    AccommodationRoomId = table.Column<long>(nullable: false),
+                    CreationDate = table.Column<DateTime>(nullable: false),
+                    LastUpdateDate = table.Column<DateTime>(nullable: false),
+                    EntranceTime = table.Column<DateTime>(nullable: true),
+                    EndTime = table.Column<DateTime>(nullable: true),
+                    NationalCode = table.Column<string>(maxLength: 12, nullable: true),
+                    PhoneNumber = table.Column<string>(maxLength: 15, nullable: true),
+                    GenderType = table.Column<int>(nullable: false),
+                    PersonalCode = table.Column<string>(nullable: true),
+                    SystemCode = table.Column<long>(nullable: true),
+                    GuestCounts = table.Column<int>(nullable: false),
+                    Description = table.Column<long>(nullable: false),
+                    PriceAccommodation = table.Column<long>(nullable: false),
+                    PaymentType = table.Column<int>(nullable: false),
+                    UserId = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AccommodationUserRooms", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AccommodationUserRooms_AccommodationRooms_AccommodationRoomId",
+                        column: x => x.AccommodationRoomId,
+                        principalTable: "AccommodationRooms",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_AccommodationUserRooms_User_T_UserId",
+                        column: x => x.UserId,
+                        principalTable: "User_T",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "UserConfiguration_T",
                 columns: table => new
                 {
@@ -215,6 +284,64 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "AccommodationUserAttachments",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    AccommodationUserRoomId = table.Column<long>(nullable: false),
+                    GenderType = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    Relative = table.Column<string>(nullable: true),
+                    Age = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AccommodationUserAttachments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AccommodationUserAttachments_AccommodationUserRooms_AccommodationUserRoomId",
+                        column: x => x.AccommodationUserRoomId,
+                        principalTable: "AccommodationUserRooms",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AccommodationRooms_CityId",
+                table: "AccommodationRooms",
+                column: "CityId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AccommodationUserAttachments_AccommodationUserRoomId",
+                table: "AccommodationUserAttachments",
+                column: "AccommodationUserRoomId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AccommodationUserRooms_AccommodationRoomId",
+                table: "AccommodationUserRooms",
+                column: "AccommodationRoomId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AccommodationUserRooms_NationalCode",
+                table: "AccommodationUserRooms",
+                column: "NationalCode");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AccommodationUserRooms_PhoneNumber",
+                table: "AccommodationUserRooms",
+                column: "PhoneNumber");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AccommodationUserRooms_SystemCode",
+                table: "AccommodationUserRooms",
+                column: "SystemCode");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AccommodationUserRooms_UserId",
+                table: "AccommodationUserRooms",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_City_T_CityName",
@@ -292,6 +419,9 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "AccommodationUserAttachments");
+
+            migrationBuilder.DropTable(
                 name: "GroupAuthRole_T");
 
             migrationBuilder.DropTable(
@@ -307,7 +437,13 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
                 name: "UserToken_T");
 
             migrationBuilder.DropTable(
+                name: "AccommodationUserRooms");
+
+            migrationBuilder.DropTable(
                 name: "Role_T");
+
+            migrationBuilder.DropTable(
+                name: "AccommodationRooms");
 
             migrationBuilder.DropTable(
                 name: "User_T");

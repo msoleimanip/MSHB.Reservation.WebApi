@@ -249,5 +249,26 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
             }
         }
 
+        public async  Task<bool> DeactivateCityAsync(User user, DeactivateCityFormModel cityForm)
+        {
+            try
+            {
+                City City = null;
+                City = _context.Citys.FirstOrDefault(c => c.Id == cityForm.CityId);
+                if (City != null)
+                {
+                    City.DeactiveStartTime = cityForm.DeactiveStartTime;
+                    City.IsActivated = cityForm.IsActivated;
+                    _context.Citys.Update(City);
+                    await _context.SaveChangesAsync();
+                }
+                throw new ReservationGlobalException(CityServiceErrors.EditCityNotExistError);
+            }
+            catch (Exception ex)
+            {
+
+                throw new ReservationGlobalException(CityServiceErrors.ChangeStatusError, ex);
+            }
+        }
     }
 }

@@ -64,8 +64,9 @@ namespace MSHB.Reservation.Presentation.WebUI
             services.AddTransient<ITokenValidatorService, TokenValidatorService>();
             services.AddTransient<IGroupAuthenticationService, GroupAuthenticationService>();
             services.AddTransient<ICityService, CityService>();
-            
+            services.AddTransient<IAccommodationService, AccommodationService>();
 
+            
 
             services.AddDbContext<ReservationDbContext>(options =>
             {
