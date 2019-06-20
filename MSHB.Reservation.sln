@@ -1,0 +1,81 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.645
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B902F76E-F206-495F-B203-119A8EA80F15}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "layers", "layers", "{855CD8D4-95AD-492F-8467-588B973B68F5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{4B1B9827-88F6-403D-9D43-C72B8F73886C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{BC787822-BFFA-4228-B2EF-9EE5BC73FC66}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MSHB.Reservation.Layers.L00_BaseModels", "src\Layers\MSHB.Reservation.Layers.L00_BaseModels\MSHB.Reservation.Layers.L00_BaseModels.csproj", "{6870076E-CBE8-4985-BA6F-61947683A7B1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MSHB.Reservation.Layers.L01_Entities", "src\Layers\MSHB.Reservation.Layers.L01_Entities\MSHB.Reservation.Layers.L01_Entities.csproj", "{F7803C74-E84E-4B61-9A15-580E54748C5F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MSHB.Reservation.Layers.L02_DataLayer", "src\Layers\MSHB.Reservation.Layers.L02_DataLayer\MSHB.Reservation.Layers.L02_DataLayer.csproj", "{C366C4F4-91C9-430B-A913-6F893198FA9F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MSHB.Reservation.Layers.L03_Services", "src\Layers\MSHB.Reservation.Layers.L03_Services\MSHB.Reservation.Layers.L03_Services.csproj", "{2A9DAA28-98C6-40E0-95DE-04E2E6E96FAD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MSHB.Reservation.Layers.L04_ViewModels", "src\Layers\MSHB.Reservation.Layers.L04_ViewModels\MSHB.Reservation.Layers.L04_ViewModels.csproj", "{30FED441-6682-4910-BA03-29B05F6DA426}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MSHB.Reservation.Presentation.WebUI", "src\Presentation\MSHB.Reservation.Presentation.WebUI\MSHB.Reservation.Presentation.WebUI.csproj", "{99EB9C57-2F52-4D2A-8D32-B7186C68E1F8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MSHB.Reservation.Shared.Common", "src\Shared\MSHB.Reservation.Shared.Common\MSHB.Reservation.Shared.Common.csproj", "{B3C3BEA2-BEEA-412F-ADE6-71EFABDFFD77}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6870076E-CBE8-4985-BA6F-61947683A7B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6870076E-CBE8-4985-BA6F-61947683A7B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6870076E-CBE8-4985-BA6F-61947683A7B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6870076E-CBE8-4985-BA6F-61947683A7B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7803C74-E84E-4B61-9A15-580E54748C5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7803C74-E84E-4B61-9A15-580E54748C5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7803C74-E84E-4B61-9A15-580E54748C5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7803C74-E84E-4B61-9A15-580E54748C5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C366C4F4-91C9-430B-A913-6F893198FA9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C366C4F4-91C9-430B-A913-6F893198FA9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C366C4F4-91C9-430B-A913-6F893198FA9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C366C4F4-91C9-430B-A913-6F893198FA9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A9DAA28-98C6-40E0-95DE-04E2E6E96FAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A9DAA28-98C6-40E0-95DE-04E2E6E96FAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A9DAA28-98C6-40E0-95DE-04E2E6E96FAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A9DAA28-98C6-40E0-95DE-04E2E6E96FAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30FED441-6682-4910-BA03-29B05F6DA426}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30FED441-6682-4910-BA03-29B05F6DA426}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30FED441-6682-4910-BA03-29B05F6DA426}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30FED441-6682-4910-BA03-29B05F6DA426}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99EB9C57-2F52-4D2A-8D32-B7186C68E1F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99EB9C57-2F52-4D2A-8D32-B7186C68E1F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99EB9C57-2F52-4D2A-8D32-B7186C68E1F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99EB9C57-2F52-4D2A-8D32-B7186C68E1F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3C3BEA2-BEEA-412F-ADE6-71EFABDFFD77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3C3BEA2-BEEA-412F-ADE6-71EFABDFFD77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3C3BEA2-BEEA-412F-ADE6-71EFABDFFD77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3C3BEA2-BEEA-412F-ADE6-71EFABDFFD77}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{855CD8D4-95AD-492F-8467-588B973B68F5} = {B902F76E-F206-495F-B203-119A8EA80F15}
+		{4B1B9827-88F6-403D-9D43-C72B8F73886C} = {B902F76E-F206-495F-B203-119A8EA80F15}
+		{BC787822-BFFA-4228-B2EF-9EE5BC73FC66} = {B902F76E-F206-495F-B203-119A8EA80F15}
+		{6870076E-CBE8-4985-BA6F-61947683A7B1} = {855CD8D4-95AD-492F-8467-588B973B68F5}
+		{F7803C74-E84E-4B61-9A15-580E54748C5F} = {855CD8D4-95AD-492F-8467-588B973B68F5}
+		{C366C4F4-91C9-430B-A913-6F893198FA9F} = {855CD8D4-95AD-492F-8467-588B973B68F5}
+		{2A9DAA28-98C6-40E0-95DE-04E2E6E96FAD} = {855CD8D4-95AD-492F-8467-588B973B68F5}
+		{30FED441-6682-4910-BA03-29B05F6DA426} = {855CD8D4-95AD-492F-8467-588B973B68F5}
+		{99EB9C57-2F52-4D2A-8D32-B7186C68E1F8} = {4B1B9827-88F6-403D-9D43-C72B8F73886C}
+		{B3C3BEA2-BEEA-412F-ADE6-71EFABDFFD77} = {BC787822-BFFA-4228-B2EF-9EE5BC73FC66}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0DB77F11-3EC0-4A22-8336-37A052E66E6F}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,14 @@
+{
+  "ProjectFilePath": "e:\\project\\MSHB.ExperienceManagement.WebApi\\src\\Layers\\MSHB.ExperienceManagement.Layers.L04_ViewModels\\MSHB.ExperienceManagement.Layers.L04_ViewModels.csproj",
+  "TargetFramework": "netcoreapp2.2",
+  "TagHelpers": [],
+  "Configuration": {
+    "ConfigurationName": "UnsupportedRazor",
+    "LanguageVersion": "1.0",
+    "Extensions": [
+      {
+        "ExtensionName": "UnsupportedRazorExtension"
+      }
+    ]
+  }
+}
