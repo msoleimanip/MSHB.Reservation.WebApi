@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
 {
     [DbContext(typeof(ReservationDbContext))]
-    [Migration("20190621074527_mig1")]
+    [Migration("20190621083634_mig1")]
     partial class mig1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -409,13 +409,11 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
 
                     b.HasOne("MSHB.Reservation.Layers.L01_Entities.Models.City", "City")
                         .WithMany("AccommodationUserRooms")
-                        .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("CityId");
 
                     b.HasOne("MSHB.Reservation.Layers.L01_Entities.Models.User", "User")
-                        .WithMany("AccommodationUserRoomAssigns")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .WithMany("AccommodationUserRooms")
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("MSHB.Reservation.Layers.L01_Entities.Models.City", b =>

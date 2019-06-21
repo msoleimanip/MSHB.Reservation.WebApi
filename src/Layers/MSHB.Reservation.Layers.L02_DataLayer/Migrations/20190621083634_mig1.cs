@@ -219,13 +219,13 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
                         column: x => x.CityId,
                         principalTable: "City_T",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_AccommodationUserRooms_User_T_UserId",
                         column: x => x.UserId,
                         principalTable: "User_T",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(

@@ -407,13 +407,11 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
 
                     b.HasOne("MSHB.Reservation.Layers.L01_Entities.Models.City", "City")
                         .WithMany("AccommodationUserRooms")
-                        .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("CityId");
 
                     b.HasOne("MSHB.Reservation.Layers.L01_Entities.Models.User", "User")
-                        .WithMany("AccommodationUserRoomAssigns")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .WithMany("AccommodationUserRooms")
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("MSHB.Reservation.Layers.L01_Entities.Models.City", b =>
