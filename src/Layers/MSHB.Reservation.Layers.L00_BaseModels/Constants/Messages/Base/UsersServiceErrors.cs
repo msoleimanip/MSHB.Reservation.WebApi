@@ -25,16 +25,8 @@ namespace MSHB.Reservation.Layers.L00_BaseModels.Constants.Messages.Base
         public static readonly ReservationErrorMessage ChangePasswordError =
            new ReservationErrorMessage("AUE-1008", "در تغییر پسورد خطایی رخ داده است.");
 
-
-        
-
-
-
-
-
-
-
-
+        public static ReservationErrorMessage GetUserListError = 
+            new ReservationErrorMessage("AUE-1009", "در دریافت لیست کاربران خطایی رخ داده است.");
 
     }
 

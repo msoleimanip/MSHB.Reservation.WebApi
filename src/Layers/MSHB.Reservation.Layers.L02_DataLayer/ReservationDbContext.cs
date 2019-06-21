@@ -114,9 +114,10 @@ namespace MSHB.Reservation.Layers.L02_DataLayer
 
             modelBuilder.Entity<AccommodationRoom>().HasIndex(c => c.RoomNumber);
 
+            modelBuilder.HasSequence<long>("SystemCodeSequence").StartsAt(1000);
 
-
-
+            modelBuilder.Entity<AccommodationUserRoom>().Property(e => e.SystemCode)
+                .HasDefaultValueSql("NEXT VALUE FOR SystemCodeSequence");
 
             modelBuilder.Entity<GroupAuthRole>()
                      .HasKey(t => new { t.GroupAuthId, t.RoleId });

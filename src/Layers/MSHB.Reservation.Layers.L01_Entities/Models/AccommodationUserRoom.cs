@@ -14,8 +14,12 @@ namespace MSHB.Reservation.Layers.L01_Entities.Models
         public long AccommodationRoomId { get; set; }
         [ForeignKey("AccommodationRoomId")]
         public virtual AccommodationRoom AccommodationRoom { get; set; }
+
+        public long CityId { get; set; }
+        [ForeignKey("CityId")]
+        public virtual City City { get; set; }
         public DateTime CreationDate { get; set; }
-        public DateTime LastUpdateDate { get; set; }
+        public DateTime? LastUpdateDate { get; set; }
         public DateTime? EntranceTime { get; set; }
         public DateTime? EndTime { get; set; }
         [MaxLength(12)]
@@ -24,7 +28,8 @@ namespace MSHB.Reservation.Layers.L01_Entities.Models
         public string PhoneNumber { get; set; }
         public GenderType GenderType { get; set; }
         public string PersonalCode { get; set; }
-        public Guid? SystemCode { get; set; }
+        
+        public long SystemCode { get; set; }
         public int GuestCounts { get; set; }
         public long Description { get; set; }
         public long PriceAccommodation { get; set; }

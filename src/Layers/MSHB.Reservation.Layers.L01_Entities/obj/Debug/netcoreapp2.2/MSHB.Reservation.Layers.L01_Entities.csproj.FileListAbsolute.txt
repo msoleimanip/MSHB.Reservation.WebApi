@@ -9,3 +9,14 @@ C:\Csharp\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L01_Entitie
 C:\Csharp\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L01_Entities\obj\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.dll
 C:\Csharp\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L01_Entities\obj\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.pdb
 C:\Csharp\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L01_Entities\obj\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.csprojAssemblyReference.cache
+E:\project\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L01_Entities\bin\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.deps.json
+E:\project\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L01_Entities\bin\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.runtimeconfig.json
+E:\project\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L01_Entities\bin\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.runtimeconfig.dev.json
+E:\project\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L01_Entities\bin\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.dll
+E:\project\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L01_Entities\bin\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.pdb
+E:\project\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L01_Entities\obj\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.csprojAssemblyReference.cache
+E:\project\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L01_Entities\obj\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.csproj.CoreCompileInputs.cache
+E:\project\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L01_Entities\obj\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.AssemblyInfoInputs.cache
+E:\project\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L01_Entities\obj\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.AssemblyInfo.cs
+E:\project\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L01_Entities\obj\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.dll
+E:\project\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L01_Entities\obj\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.pdb

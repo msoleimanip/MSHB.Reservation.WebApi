@@ -1,5 +1,5 @@
 {
-  "FilePath": "e:\\project\\MSHB.ExperienceManagement.WebApi\\src\\Presentation\\MSHB.ExperienceManagement.Presentation.WebUI\\MSHB.ExperienceManagement.Presentation.WebUI.csproj",
+  "FilePath": "e:\\project\\MSHB.Reservation.WebApi\\src\\Presentation\\MSHB.Reservation.Presentation.WebUI\\MSHB.Reservation.Presentation.WebUI.csproj",
   "Configuration": {
     "ConfigurationName": "MVC-2.1",
     "LanguageVersion": "2.1",
@@ -1005,6 +1005,20 @@
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "BaseHref"
+            },
+            "BoundAttributeParameters": []
+          },
+          {
+            "Kind": "ITagHelper",
+            "Name": "cs-preserve-ambient-querystring",
+            "TypeName": "System.Boolean",
+            "IsEnum": false,
+            "IndexerNamePrefix": null,
+            "IndexerTypeName": null,
+            "Documentation": null,
+            "Diagnostics": [],
+            "Metadata": {
+              "Common.PropertyName": "PreserveAmbientQueryString"
             },
             "BoundAttributeParameters": []
           }
@@ -3857,7 +3871,7 @@
         "Kind": "ITagHelper",
         "Name": "Microsoft.AspNetCore.SpaServices.Prerendering.PrerenderTagHelper",
         "AssemblyName": "Microsoft.AspNetCore.SpaServices",
-        "Documentation": null,
+        "Documentation": "\n            <summary>\n            A tag helper for prerendering JavaScript applications on the server.\n            </summary>\n        ",
         "TagOutputHint": null,
         "TagMatchingRules": [
           {
@@ -3885,7 +3899,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            Specifies the path to the JavaScript module containing prerendering code.\n            </summary>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "ModuleName"
@@ -3927,7 +3941,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": null,
+            "Documentation": "\n            <summary>\n            The maximum duration to wait for prerendering to complete.\n            </summary>\n        ",
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "TimeoutMillisecondsParameter"
@@ -3944,8 +3958,8 @@
       },
       {
         "Kind": "ITagHelper",
-        "Name": "MSHB.ExperienceManagement.Shared.Common.Captcha.CaptchaTagHelper",
-        "AssemblyName": "MSHB.ExperienceManagement.Shared.Common",
+        "Name": "MSHB.Reservation.Shared.Common.Captcha.CaptchaTagHelper",
+        "AssemblyName": "MSHB.Reservation.Shared.Common",
         "Documentation": null,
         "TagOutputHint": null,
         "TagMatchingRules": [
@@ -3965,7 +3979,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "<member name=\"P:MSHB.ExperienceManagement.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.BackColor\">\r\n    <summary>\r\n    The back-color of the captcha. It's default value is string.Empty.\r\n    </summary>\r\n</member>\r\n",
+            "Documentation": "<member name=\"P:MSHB.Reservation.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.BackColor\">\r\n    <summary>\r\n    The back-color of the captcha. It's default value is string.Empty.\r\n    </summary>\r\n</member>\r\n",
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "BackColor"
@@ -3979,7 +3993,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "<member name=\"P:MSHB.ExperienceManagement.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.FontName\">\r\n    <summary>\r\n    The font-name of the captcha. It's default value is Tahoma.\r\n    </summary>\r\n</member>\r\n",
+            "Documentation": "<member name=\"P:MSHB.Reservation.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.FontName\">\r\n    <summary>\r\n    The font-name of the captcha. It's default value is Tahoma.\r\n    </summary>\r\n</member>\r\n",
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "FontName"
@@ -3993,7 +4007,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "<member name=\"P:MSHB.ExperienceManagement.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.FontSize\">\r\n    <summary>\r\n    The font-size of the captcha. It's default value is 12.\r\n    </summary>\r\n</member>\r\n",
+            "Documentation": "<member name=\"P:MSHB.Reservation.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.FontSize\">\r\n    <summary>\r\n    The font-size of the captcha. It's default value is 12.\r\n    </summary>\r\n</member>\r\n",
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "FontSize"
@@ -4007,7 +4021,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "<member name=\"P:MSHB.ExperienceManagement.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.ForeColor\">\r\n    <summary>\r\n    The fore-color of the captcha. It's default value is #1B0172.\r\n    </summary>\r\n</member>\r\n",
+            "Documentation": "<member name=\"P:MSHB.Reservation.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.ForeColor\">\r\n    <summary>\r\n    The fore-color of the captcha. It's default value is #1B0172.\r\n    </summary>\r\n</member>\r\n",
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "ForeColor"
@@ -4017,11 +4031,11 @@
           {
             "Kind": "ITagHelper",
             "Name": "asp-captcha-generator-language",
-            "TypeName": "MSHB.ExperienceManagement.Shared.Common.Captcha.Providers.Language",
+            "TypeName": "MSHB.Reservation.Shared.Common.Captcha.Providers.Language",
             "IsEnum": true,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "<member name=\"P:MSHB.ExperienceManagement.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.Language\">\r\n    <summary>\r\n    The language of the captcha. It's default value is Persian.\r\n    </summary>\r\n</member>\r\n",
+            "Documentation": "<member name=\"P:MSHB.Reservation.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.Language\">\r\n    <summary>\r\n    The language of the captcha. It's default value is Persian.\r\n    </summary>\r\n</member>\r\n",
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "Language"
@@ -4035,7 +4049,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "<member name=\"P:MSHB.ExperienceManagement.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.Max\">\r\n    <summary>\r\n    The max value of the captcha. It's default value is 9000.\r\n    </summary>\r\n</member>\r\n",
+            "Documentation": "<member name=\"P:MSHB.Reservation.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.Max\">\r\n    <summary>\r\n    The max value of the captcha. It's default value is 9000.\r\n    </summary>\r\n</member>\r\n",
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "Max"
@@ -4045,11 +4059,11 @@
           {
             "Kind": "ITagHelper",
             "Name": "asp-captcha-generator-output-type",
-            "TypeName": "MSHB.ExperienceManagement.Shared.Common.Captcha.Providers.OutputType",
+            "TypeName": "MSHB.Reservation.Shared.Common.Captcha.Providers.OutputType",
             "IsEnum": true,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "<member name=\"P:MSHB.ExperienceManagement.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.OutputType\">\r\n    <summary>\r\n    نوع خروجی به صورت عددی یا حروفی باشد\r\n    </summary>\r\n</member>\r\n",
+            "Documentation": "<member name=\"P:MSHB.Reservation.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.OutputType\">\r\n    <summary>\r\n    نوع خروجی به صورت عددی یا حروفی باشد\r\n    </summary>\r\n</member>\r\n",
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "OutputType"
@@ -4063,7 +4077,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "<member name=\"P:MSHB.ExperienceManagement.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.ImageOnly\">\r\n    <summary>\r\n    فقط قسمت تصویر را بسازد و باکس ورودی و دکمه ی رفرش نسازد\r\n    </summary>\r\n</member>\r\n",
+            "Documentation": "<member name=\"P:MSHB.Reservation.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.ImageOnly\">\r\n    <summary>\r\n    فقط قسمت تصویر را بسازد و باکس ورودی و دکمه ی رفرش نسازد\r\n    </summary>\r\n</member>\r\n",
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "ImageOnly"
@@ -4077,7 +4091,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "<member name=\"P:MSHB.ExperienceManagement.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.Min\">\r\n    <summary>\r\n    The min value of the captcha. It's default value is 1.\r\n    </summary>\r\n</member>\r\n",
+            "Documentation": "<member name=\"P:MSHB.Reservation.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.Min\">\r\n    <summary>\r\n    The min value of the captcha. It's default value is 1.\r\n    </summary>\r\n</member>\r\n",
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "Min"
@@ -4091,7 +4105,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "<member name=\"P:MSHB.ExperienceManagement.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.Placeholder\">\r\n    <summary>\r\n    The placeholder value of the captcha. It's default value is `کد امنیتی به رقم`.\r\n    </summary>\r\n</member>\r\n",
+            "Documentation": "<member name=\"P:MSHB.Reservation.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.Placeholder\">\r\n    <summary>\r\n    The placeholder value of the captcha. It's default value is `کد امنیتی به رقم`.\r\n    </summary>\r\n</member>\r\n",
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "Placeholder"
@@ -4105,7 +4119,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "<member name=\"P:MSHB.ExperienceManagement.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.TextBoxClass\">\r\n    <summary>\r\n    The css class of the captcha. It's default value is `text-box single-line form-control col-md-4`.\r\n    </summary>\r\n</member>\r\n",
+            "Documentation": "<member name=\"P:MSHB.Reservation.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.TextBoxClass\">\r\n    <summary>\r\n    The css class of the captcha. It's default value is `text-box single-line form-control col-md-4`.\r\n    </summary>\r\n</member>\r\n",
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "TextBoxClass"
@@ -4119,7 +4133,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "<member name=\"P:MSHB.ExperienceManagement.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.TextBoxTemplate\">\r\n    <summary>\r\n    The text-box-template of the captcha. It's default value is `<div class='input-group col-md-4'><span class='input-group-addon'><span class='glyphicon glyphicon-lock'></span></span>{0}</div>`.\r\n    </summary>\r\n</member>\r\n",
+            "Documentation": "<member name=\"P:MSHB.Reservation.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.TextBoxTemplate\">\r\n    <summary>\r\n    The text-box-template of the captcha. It's default value is `<div class='input-group col-md-4'><span class='input-group-addon'><span class='glyphicon glyphicon-lock'></span></span>{0}</div>`.\r\n    </summary>\r\n</member>\r\n",
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "TextBoxTemplate"
@@ -4133,7 +4147,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "<member name=\"P:MSHB.ExperienceManagement.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.ValidationErrorMessage\">\r\n    <summary>\r\n    The validation-error-message of the captcha. It's default value is `لطفا کد امنیتی را به رقم وارد نمائید`.\r\n    </summary>\r\n</member>\r\n",
+            "Documentation": "<member name=\"P:MSHB.Reservation.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.ValidationErrorMessage\">\r\n    <summary>\r\n    The validation-error-message of the captcha. It's default value is `لطفا کد امنیتی را به رقم وارد نمائید`.\r\n    </summary>\r\n</member>\r\n",
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "ValidationErrorMessage"
@@ -4147,7 +4161,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "<member name=\"P:MSHB.ExperienceManagement.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.ValidationMessageClass\">\r\n    <summary>\r\n    The validation-message-class of the captcha. It's default value is `text-danger`.\r\n    </summary>\r\n</member>\r\n",
+            "Documentation": "<member name=\"P:MSHB.Reservation.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.ValidationMessageClass\">\r\n    <summary>\r\n    The validation-message-class of the captcha. It's default value is `text-danger`.\r\n    </summary>\r\n</member>\r\n",
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "ValidationMessageClass"
@@ -4161,7 +4175,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "<member name=\"P:MSHB.ExperienceManagement.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.RefreshButtonClass\">\r\n    <summary>\r\n    The refresh-button-class of the captcha. It's default value is `glyphicon glyphicon-refresh btn-sm`.\r\n    </summary>\r\n</member>\r\n",
+            "Documentation": "<member name=\"P:MSHB.Reservation.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.RefreshButtonClass\">\r\n    <summary>\r\n    The refresh-button-class of the captcha. It's default value is `glyphicon glyphicon-refresh btn-sm`.\r\n    </summary>\r\n</member>\r\n",
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "RefreshButtonClass"
@@ -4173,12 +4187,12 @@
         "Diagnostics": [],
         "Metadata": {
           "Runtime.Name": "ITagHelper",
-          "Common.TypeName": "MSHB.ExperienceManagement.Shared.Common.Captcha.CaptchaTagHelper"
+          "Common.TypeName": "MSHB.Reservation.Shared.Common.Captcha.CaptchaTagHelper"
         }
       }
     ],
     "CSharpLanguageVersion": 703
   },
-  "RootNamespace": "MSHB.ExperienceManagement.Presentation.WebUI",
+  "RootNamespace": "MSHB.Reservation.Presentation.WebUI",
   "Documents": []
 }

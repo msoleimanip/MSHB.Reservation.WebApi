@@ -1,4 +1,5 @@
-﻿using MSHB.Reservation.Layers.L00_BaseModels.Constants.Messages.Base;
+﻿using Microsoft.EntityFrameworkCore;
+using MSHB.Reservation.Layers.L00_BaseModels.Constants.Messages.Base;
 using MSHB.Reservation.Layers.L00_BaseModels.exceptions;
 using MSHB.Reservation.Layers.L01_Entities.Models;
 using MSHB.Reservation.Layers.L02_DataLayer;
@@ -40,6 +41,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                     var accommodationUserRoom = new AccommodationUserRoom()
                     {
                         CreationDate = DateTime.Now,
+                        LastUpdateDate=DateTime.Now,
                         AccommodationRoomId=accommodationRoom.Id,
                         GenderType= reservationForm.GenderType,
                         Description= reservationForm.Description,
@@ -48,8 +50,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                         NationalCode= reservationForm.NationalCode,
                         GuestCounts= reservationForm.GuestCounts,
                         PersonalCode= reservationForm.PersonalCode,
-                        UserId=user.Id,
-                        SystemCode=Guid.NewGuid(),
+                        UserId=user.Id,                        
                         PriceAccommodation=  accommodationRoom.RoomPrice,
                         PhoneNumber= reservationForm.PhoneNumber
                     };
@@ -137,9 +138,124 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
             }
         }
 
-        public Task<SearchReservationRoomViewModel> GetUserReservationRoomForUserAsync(User user, ReservationRoomSearchFormModel reservationForm)
+        public async Task<SearchReservationRoomViewModel> GetUserReservationRoomForUserAsync(User user, ReservationRoomSearchFormModel reservationForm)
         {
-            throw new NotImplementedException();
+            try
+            {
+        
+            var queryable = _context.AccommodationUserRooms.Include(c=>c.AccommodationRoom).Include(d=>d.User).Where(c=>c.CityId==reservationForm.CityId).AsQueryable();
+
+            if (reservationForm.AccommodationUserRoomId.Count>0)
+            {
+                queryable = queryable.Where(q => reservationForm.AccommodationUserRoomId.Contains(q.Id));
+            }
+           
+            if (!string.IsNullOrEmpty(reservationForm.NationalCode))
+            {
+                queryable = queryable.Where(q => q.NationalCode.Contains(reservationForm.NationalCode));
+            }
+
+            if (!string.IsNullOrEmpty(reservationForm.PhoneNumber))
+            {
+                queryable = queryable.Where(q => q.PhoneNumber.Contains(reservationForm.PhoneNumber));
+            }
+            if (!string.IsNullOrEmpty(reservationForm.PersonalCode))
+            {
+                queryable = queryable.Where(q => q.PersonalCode.Contains(reservationForm.PersonalCode));
+            }
+            if (reservationForm.CreationDate.HasValue)
+            {
+                queryable = queryable.Where(q => q.CreationDate>=reservationForm.CreationDate.Value);
+            }
+            if (reservationForm.EntranceTime.HasValue)
+            {
+                queryable = queryable.Where(q => q.EntranceTime>=reservationForm.EntranceTime.Value);
+            }
+            if (reservationForm.EndTime.HasValue)
+            {
+                queryable = queryable.Where(q => q.EndTime>=reservationForm.EndTime.Value);
+            }
+            if (reservationForm.SystemCode.HasValue)
+            {
+                queryable = queryable.Where(q => q.SystemCode.ToString().Contains(reservationForm.SystemCode.HasValue.ToString()));
+            }
+
+            
+            if (reservationForm.SortModel!=null)         
+            switch (reservationForm.SortModel.Col+"|"+reservationForm.SortModel.Sort)
+            {
+                case "entrancetime|asc":
+                    queryable = queryable.OrderBy(x => x.EntranceTime);
+                    break;
+                case "entrancetime|desc":
+                    queryable = queryable.OrderByDescending(x => x.EntranceTime);
+                    break;
+                case "endtime|asc":
+                    queryable = queryable.OrderBy(x => x.EndTime);
+                    break;
+                case "endtime|desc":
+                    queryable = queryable.OrderByDescending(x => x.EndTime);
+                    break;
+                case "lastupdatedate|asc":
+                    queryable = queryable.OrderBy(x => x.LastUpdateDate);
+                    break;
+                case "lastupdatedate|desc":
+                    queryable = queryable.OrderByDescending(x => x.LastUpdateDate);
+                    break;
+                case "creationdate|asc":
+                    queryable = queryable.OrderBy(x => x.CreationDate);
+                    break;
+                case "creationdate|desc":
+                    queryable = queryable.OrderByDescending(x => x.CreationDate);
+                    break;
+                default:
+                    queryable = queryable.OrderBy(x => x.CreationDate);
+                    break;
+            }
+            else
+                queryable = queryable.OrderBy(x => x.CreationDate);
+            var response = await queryable.Skip((reservationForm.PageIndex - 1) * reservationForm.PageSize).Take(reservationForm.PageSize).ToListAsync();
+            var count = await queryable.CountAsync();
+            var searchViewModel = new SearchReservationRoomViewModel();
+                                                             
+            searchViewModel.searchReservationRoomViewModels= response.Select(selector: resp => new ReservationRoomViewModel()
+            {
+                AccommodationRoomId=resp.AccommodationRoomId,
+                Bed=resp.AccommodationRoom.Bed,
+                BedRoom=resp.AccommodationRoom.BedRoom,
+                CityId=resp.CityId,
+                Capacity=resp.AccommodationRoom.Capacity,
+                CreationDate=resp.CreationDate,
+                Description=resp.Description,
+                EndTime=resp.EndTime,
+                EntranceTime=resp.EntranceTime,
+                GenderType=resp.GenderType,
+                GuestCounts=resp.GuestCounts,
+                IsActivated=resp.AccommodationRoom.IsActivated,
+                LastUpdateDate=resp.LastUpdateDate,
+                NationalCode=resp.NationalCode,
+                PersonalCode=resp.PersonalCode,
+                PhoneNumber=resp.PhoneNumber,
+                Rank=resp.AccommodationRoom.Rank,
+                RoomNumber=resp.AccommodationRoom.RoomNumber,
+                RoomPrice=resp.AccommodationRoom.RoomPrice,
+                RoomType=resp.AccommodationRoom.RoomType,
+                PriceAccommodation=resp.PriceAccommodation,
+                SystemCode=resp.SystemCode,
+                UsernameAssignment=resp.User.Username
+
+            }).ToList();
+            searchViewModel.PageIndex = reservationForm.PageIndex;
+            searchViewModel.PageSize = reservationForm.PageSize;
+            searchViewModel.TotalCount = count;
+            return searchViewModel;
+            }
+            catch (Exception ex)
+            {
+                
+                throw new ReservationGlobalException(UsersServiceErrors.GetUserListError, ex);
+            }
+           
         }
     }
 }
