@@ -25,7 +25,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
             _context.CheckArgumentIsNull(nameof(_context));
         }
 
-        public async Task<long> AddReservationRoom(User user, AddReservationRoomFormModel reservationForm)
+        public async Task<long> AddReservationRoomAsync(User user, AddReservationRoomFormModel reservationForm)
         {
             try
             {
@@ -68,7 +68,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
             }
         }
 
-        public async  Task<bool> DeleteReservationRoom(User user, List<long> reservationFormIds)
+        public async  Task<bool> DeleteReservationRoomAsync(User user, List<long> reservationFormIds)
         {
             try
             {
@@ -89,7 +89,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
             }
         }
 
-        public async Task<bool> EditReservationRoom(User user, EditReservationRoomFormModel reservationForm)
+        public async Task<bool> EditReservationRoomAsync(User user, EditReservationRoomFormModel reservationForm)
         {
             try
             {

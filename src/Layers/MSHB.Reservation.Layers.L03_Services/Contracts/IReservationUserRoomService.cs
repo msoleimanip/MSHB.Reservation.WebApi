@@ -10,9 +10,9 @@ namespace MSHB.Reservation.Layers.L03_Services.Contracts
 {
     public interface IReservationUserRoomService
     {
-        Task<long> AddReservationRoom(User user, AddReservationRoomFormModel reservationForm);
-        Task<bool> EditReservationRoom(User user, EditReservationRoomFormModel reservationForm);
-        Task<bool> DeleteReservationRoom(User user, List<long> reservationFormIds);
+        Task<long> AddReservationRoomAsync(User user, AddReservationRoomFormModel reservationForm);
+        Task<bool> EditReservationRoomAsync(User user, EditReservationRoomFormModel reservationForm);
+        Task<bool> DeleteReservationRoomAsync(User user, List<long> reservationFormIds);
         Task<SearchReservationRoomViewModel> GetUserReservationRoomForUserAsync(User user, ReservationRoomSearchFormModel reservationForm);
     }
 }
