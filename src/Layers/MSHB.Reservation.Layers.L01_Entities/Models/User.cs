@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MSHB.Reservation.Layers.L01_Entities.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -57,7 +58,7 @@ namespace MSHB.Reservation.Layers.L01_Entities.Models
         [MaxLength(200)]
         public string SajadUserName { get; set; }
 
-        public int? IsPresident { get; set; }
+        public PresidentType IsPresident { get; set; }
 
         [ForeignKey("GroupAuthId")]
         public long? GroupAuthId { get; set; }

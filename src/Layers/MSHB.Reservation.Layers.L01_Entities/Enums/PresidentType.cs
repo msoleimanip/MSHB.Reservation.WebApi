@@ -4,16 +4,11 @@ using System.Text;
 
 namespace MSHB.Reservation.Layers.L01_Entities.Enums
 {
-    public enum RoomType
+    public enum PresidentType
     {
-        Suit,
-        Room,
-        Villa,
-        Appartment,
-        Other
+        Admin = 1,
+        Welfare,
+        AccommodationUser
+
     }
-   
-
-
-
 }

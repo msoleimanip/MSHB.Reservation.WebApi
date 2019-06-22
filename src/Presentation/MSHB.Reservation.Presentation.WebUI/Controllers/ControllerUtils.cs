@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using DNTPersianUtils.Core;
 using Microsoft.AspNetCore.Http;
-using MSHB.Reservation.Layers.L00_BaseModels.Constants.Authority;
 using MSHB.Reservation.Layers.L00_BaseModels.Constants.Messages.Base;
 using MSHB.Reservation.Layers.L00_BaseModels.exceptions;
+using MSHB.Reservation.Layers.L01_Entities.Enums;
 using MSHB.Reservation.Layers.L01_Entities.Models;
 using SubPro.WebUI.Shared.Common.IdentityToolkit;
 
@@ -41,7 +41,7 @@ namespace MSHB.Reservation.Presentation.WebCore
                     FirstName = context.User.Identity.GetUserFirstName(),
                     LastName = context.User.Identity.GetUserLastName(),
                     Id = context.User.Identity.GetUserId<Guid>(),
-                    IsPresident = context.User.Identity.GetUserPresident<int>()
+                    IsPresident = context.User.Identity.GetUserPresident<PresidentType>()
                 };
 
                 return user;
@@ -53,11 +53,11 @@ namespace MSHB.Reservation.Presentation.WebCore
             }
         }
 
-        public static AuthorityKeys GetUserPresident(this HttpContext context)
+        public static PresidentType GetUserPresident(this HttpContext context)
         {
             try
             {
-                var IsPresident = (AuthorityKeys)context.User.Identity.GetUserPresident<int>();
+                var IsPresident = (PresidentType)context.User.Identity.GetUserPresident<PresidentType>();
                 return IsPresident;
             }
 

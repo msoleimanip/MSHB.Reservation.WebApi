@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MSHB.Reservation.Layers.L01_Entities.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
@@ -30,7 +31,7 @@ namespace MSHB.Reservation.Layers.L04_ViewModels.InputForms
 
         public bool IsActive { get; set; }
 
-        public int? IsPresident { get; set; }
+        public PresidentType IsPresident { get; set; }
 
         [Required(ErrorMessage = "باید گروه دسترسی کاربر مشخص گردد")]
         public long GroupAuthId { get; set; }

@@ -8,6 +8,7 @@ using MSHB.Reservation.Shared.Common.GuardToolkit;
 using MSHB.Reservation.Layers.L01_Entities.Models;
 using MSHB.Reservation.Layers.L02_DataLayer;
 using MSHB.Reservation.Layers.L03_Services.Contracts;
+using MSHB.Reservation.Layers.L01_Entities.Enums;
 
 namespace MSHB.Reservation.Layers.L03_Services.Initialization
 {
@@ -86,7 +87,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Initialization
                             FirstName = "Mohammad",
                             LastName = "Soleimani",
                             IsActive = true,
-                            IsPresident = 1,
+                            IsPresident = PresidentType.Admin,
                             LastLoggedIn = null,
                             Password = _securityService.GetSha256Hash("1234"),
                             SerialNumber = Guid.NewGuid().ToString("N"),
