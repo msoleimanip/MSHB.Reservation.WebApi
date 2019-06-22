@@ -15,7 +15,6 @@ namespace MSHB.Reservation.Layers.L04_ViewModels.ViewModels
         public RoomType RoomType { get; set; }
         public int Rank { get; set; }
         public int Bed { get; set; }
-        public bool? IsEmpty { get; set; } = true;
         public bool? IsActivated { get; set; } = true;
         public int? Capacity { get; set; }
         public string Description { get; set; }

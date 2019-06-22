@@ -8,9 +8,8 @@ namespace MSHB.Reservation.Layers.L04_ViewModels.InputForms
 {
     public class AccommodationRoomSearchFormModel: SearchModel
     {
-        public bool? IsEmpty { get; set; }
-        [Required(ErrorMessage = "وضعیت فعال بودن بایستی ارسال گردد")]
-        public bool IsActivated { get; set; }
+       
+        public bool? IsActivated { get; set; }
         public DateTime? StartTime { get; set; }
         public DateTime? EndTime { get; set; }
         public int? BedRoom { get; set; }     

@@ -69,7 +69,7 @@ namespace MSHB.Reservation.Presentation.WebUI
             services.AddTransient<IReportService, ReportService>();
 
 
-
+            services.AddMemoryCache();
 
 
 
