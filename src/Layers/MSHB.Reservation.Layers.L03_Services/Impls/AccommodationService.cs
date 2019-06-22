@@ -156,6 +156,14 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                 var queryable = _context.AccommodationRooms.AsQueryable();
                 if (accommodationForm.IsActivated.HasValue)
                     queryable = queryable.Where(q => q.IsActivated == accommodationForm.IsActivated);
+                if (string.IsNullOrEmpty(accommodationForm.RoomNumber))
+                {
+                    queryable = queryable.Where(q => q.RoomNumber == accommodationForm.RoomNumber);
+                }
+                if (accommodationForm.RoomType.HasValue)
+                {
+                    queryable = queryable.Where(q => q.RoomType == accommodationForm.RoomType);
+                }
                 if (accommodationForm.BedRoom.HasValue)
                 {
                     queryable = queryable.Where(q => q.BedRoom == accommodationForm.BedRoom);
