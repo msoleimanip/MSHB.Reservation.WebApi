@@ -30,7 +30,7 @@ namespace MSHB.Reservation.Layers.L02_DataLayer
  
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseSqlServer(
-            @"Data Source=.;Initial Catalog=Reservation;Persist Security Info=True;User ID=sa;Password=Aa123456;");
+            @"Data Source=103.215.222.35;Initial Catalog=ir_Reservation;Persist Security Info=True;User ID=ir_reservation;Password=Aa123456;");
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
@@ -111,12 +111,24 @@ namespace MSHB.Reservation.Layers.L02_DataLayer
                          .HasForeignKey(d => d.CityId)
                          .OnDelete(DeleteBehavior.ClientSetNull);
 
+                         modelBuilder.Entity<AccommodationUserRoom>()
+                         .HasOne(d => d.City)
+                         .WithMany(t => t.AccommodationUserRooms)
+                         .HasForeignKey(d => d.CityId)
+                         .OnDelete(DeleteBehavior.ClientSetNull);
+
+                          modelBuilder.Entity<AccommodationUserRoom>()
+                         .HasOne(d => d.User)
+                         .WithMany(t => t.AccommodationUserRooms)
+                         .HasForeignKey(d => d.UserId)
+                         .OnDelete(DeleteBehavior.ClientSetNull);
 
             modelBuilder.Entity<AccommodationRoom>().HasIndex(c => c.RoomNumber);
 
+            modelBuilder.HasSequence<long>("SystemCodeSequence").StartsAt(1000);
 
-
-
+            modelBuilder.Entity<AccommodationUserRoom>().Property(e => e.SystemCode)
+                .HasDefaultValueSql("NEXT VALUE FOR SystemCodeSequence");
 
             modelBuilder.Entity<GroupAuthRole>()
                      .HasKey(t => new { t.GroupAuthId, t.RoleId });

@@ -270,6 +270,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                     City.IsActivated = cityForm.IsActivated;
                     _context.Citys.Update(City);
                     await _context.SaveChangesAsync();
+                    return true;
                 }
                 throw new ReservationGlobalException(CityServiceErrors.EditCityNotExistError);
             }

@@ -8,6 +8,7 @@ namespace MSHB.Reservation.Layers.L01_Entities.Enums
     {
         Suit,
         Room,
+        Villa,
         Appartment,
         Other
     }

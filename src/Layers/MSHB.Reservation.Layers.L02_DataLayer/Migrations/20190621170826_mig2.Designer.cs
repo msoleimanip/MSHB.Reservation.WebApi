@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
 {
     [DbContext(typeof(ReservationDbContext))]
-    [Migration("20190620121510_mig3")]
-    partial class mig3
+    [Migration("20190621170826_mig2")]
+    partial class mig2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -19,6 +19,7 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
+                .HasAnnotation("Relational:Sequence:.SystemCodeSequence", "'SystemCodeSequence', '', '1000', '1', '', '', 'Int64', 'False'")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("MSHB.Reservation.Layers.L01_Entities.Models.AccommodationRoom", b =>
@@ -71,6 +72,9 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
 
                     b.Property<string>("Name");
 
+                    b.Property<string>("NationalCode")
+                        .HasMaxLength(20);
+
                     b.Property<string>("Relative");
 
                     b.HasKey("Id");
@@ -88,6 +92,8 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
 
                     b.Property<long>("AccommodationRoomId");
 
+                    b.Property<long>("CityId");
+
                     b.Property<DateTime>("CreationDate");
 
                     b.Property<long>("Description");
@@ -100,7 +106,7 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
 
                     b.Property<int>("GuestCounts");
 
-                    b.Property<DateTime>("LastUpdateDate");
+                    b.Property<DateTime?>("LastUpdateDate");
 
                     b.Property<string>("NationalCode")
                         .HasMaxLength(12);
@@ -114,13 +120,17 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
 
                     b.Property<long>("PriceAccommodation");
 
-                    b.Property<Guid?>("SystemCode");
+                    b.Property<long>("SystemCode")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("NEXT VALUE FOR SystemCodeSequence");
 
                     b.Property<Guid>("UserId");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AccommodationRoomId");
+
+                    b.HasIndex("CityId");
 
                     b.HasIndex("NationalCode");
 
@@ -400,10 +410,13 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
                         .HasForeignKey("AccommodationRoomId")
                         .OnDelete(DeleteBehavior.Cascade);
 
+                    b.HasOne("MSHB.Reservation.Layers.L01_Entities.Models.City", "City")
+                        .WithMany("AccommodationUserRooms")
+                        .HasForeignKey("CityId");
+
                     b.HasOne("MSHB.Reservation.Layers.L01_Entities.Models.User", "User")
-                        .WithMany("AccommodationUserRoomAssigns")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .WithMany("AccommodationUserRooms")
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("MSHB.Reservation.Layers.L01_Entities.Models.City", b =>

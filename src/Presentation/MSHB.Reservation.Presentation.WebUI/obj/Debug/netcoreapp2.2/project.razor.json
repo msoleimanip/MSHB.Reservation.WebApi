@@ -1,5 +1,5 @@
 {
-  "FilePath": "e:\\project\\MSHB.ExperienceManagement.WebApi\\src\\Presentation\\MSHB.ExperienceManagement.Presentation.WebUI\\MSHB.ExperienceManagement.Presentation.WebUI.csproj",
+  "FilePath": "e:\\project\\MSHB.Reservation.WebApi\\src\\Presentation\\MSHB.Reservation.Presentation.WebUI\\MSHB.Reservation.Presentation.WebUI.csproj",
   "Configuration": {
     "ConfigurationName": "MVC-2.1",
     "LanguageVersion": "2.1",
@@ -1007,6 +1007,20 @@
               "Common.PropertyName": "BaseHref"
             },
             "BoundAttributeParameters": []
+          },
+          {
+            "Kind": "ITagHelper",
+            "Name": "cs-preserve-ambient-querystring",
+            "TypeName": "System.Boolean",
+            "IsEnum": false,
+            "IndexerNamePrefix": null,
+            "IndexerTypeName": null,
+            "Documentation": null,
+            "Diagnostics": [],
+            "Metadata": {
+              "Common.PropertyName": "PreserveAmbientQueryString"
+            },
+            "BoundAttributeParameters": []
           }
         ],
         "AllowedChildTags": [],
@@ -1812,7 +1826,7 @@
         "Kind": "ITagHelper",
         "Name": "Microsoft.AspNetCore.Mvc.TagHelpers.FormActionTagHelper",
         "AssemblyName": "Microsoft.AspNetCore.Mvc.TagHelpers",
-        "Documentation": "\n            <summary>\n            <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" /> implementation targeting &lt;button&gt; elements and &lt;input&gt; elements with\n            their <c>type</c> attribute set to <c>image</c> or <c>submit</c>.\n            </summary>\n        ",
+        "Documentation": null,
         "TagOutputHint": null,
         "TagMatchingRules": [
           {
@@ -2517,7 +2531,7 @@
         "Kind": "ITagHelper",
         "Name": "Microsoft.AspNetCore.Mvc.TagHelpers.FormTagHelper",
         "AssemblyName": "Microsoft.AspNetCore.Mvc.TagHelpers",
-        "Documentation": "\n            <summary>\n            <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" /> implementation targeting &lt;form&gt; elements.\n            </summary>\n        ",
+        "Documentation": null,
         "TagOutputHint": null,
         "TagMatchingRules": [
           {
@@ -2536,7 +2550,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            The name of the action method.\n            </summary>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "Action"
@@ -2550,7 +2564,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            The name of the controller.\n            </summary>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "Controller"
@@ -2564,7 +2578,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            The name of the area.\n            </summary>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "Area"
@@ -2578,7 +2592,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            The name of the page.\n            </summary>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "Page"
@@ -2592,7 +2606,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            The name of the page handler.\n            </summary>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "PageHandler"
@@ -2606,7 +2620,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            Whether the antiforgery token should be generated.\n            </summary>\n            <value>Defaults to <c>false</c> if user provides an <c>action</c> attribute\n            or if the <c>method</c> is <see cref=\"F:Microsoft.AspNetCore.Mvc.Rendering.FormMethod.Get\" />; <c>true</c> otherwise.</value>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "Antiforgery"
@@ -2620,7 +2634,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            Gets or sets the URL fragment.\n            </summary>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "Fragment"
@@ -2634,7 +2648,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            Name of the route.\n            </summary>\n            <remarks>\n            Must be <c>null</c> if <see cref=\"P:Microsoft.AspNetCore.Mvc.TagHelpers.FormTagHelper.Action\" /> or <see cref=\"P:Microsoft.AspNetCore.Mvc.TagHelpers.FormTagHelper.Controller\" /> is non-<c>null</c>.\n            </remarks>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "Route"
@@ -2648,7 +2662,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": "asp-route-",
             "IndexerTypeName": "System.String",
-            "Documentation": "\n            <summary>\n            Additional parameters for the route.\n            </summary>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "RouteValues"
@@ -2667,7 +2681,7 @@
         "Kind": "ITagHelper",
         "Name": "Microsoft.AspNetCore.Mvc.TagHelpers.ImageTagHelper",
         "AssemblyName": "Microsoft.AspNetCore.Mvc.TagHelpers",
-        "Documentation": "\n            <summary>\n            <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" /> implementation targeting &lt;img&gt; elements that supports file versioning.\n            </summary>\n            <remarks>\n            The tag helper won't process for cases with just the 'src' attribute.\n            </remarks>\n        ",
+        "Documentation": null,
         "TagOutputHint": null,
         "TagMatchingRules": [
           {
@@ -2703,7 +2717,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            Source of the image.\n            </summary>\n            <remarks>\n            Passed through to the generated HTML in all cases.\n            </remarks>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "Src"
@@ -2717,7 +2731,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            Value indicating if file version should be appended to the src urls.\n            </summary>\n            <remarks>\n            If <c>true</c> then a query string \"v\" with the encoded content of the file is added.\n            </remarks>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "AppendVersion"
@@ -2736,7 +2750,7 @@
         "Kind": "ITagHelper",
         "Name": "Microsoft.AspNetCore.Mvc.TagHelpers.InputTagHelper",
         "AssemblyName": "Microsoft.AspNetCore.Mvc.TagHelpers",
-        "Documentation": "\n            <summary>\n            <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" /> implementation targeting &lt;input&gt; elements with an <c>asp-for</c> attribute.\n            </summary>\n        ",
+        "Documentation": null,
         "TagOutputHint": null,
         "TagMatchingRules": [
           {
@@ -2764,7 +2778,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            An expression to be evaluated against the current model.\n            </summary>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "For"
@@ -2778,7 +2792,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            The format string (see https://msdn.microsoft.com/en-us/library/txafckwd.aspx) used to format the\n            <see cref=\"P:Microsoft.AspNetCore.Mvc.TagHelpers.InputTagHelper.For\" /> result. Sets the generated \"value\" attribute to that formatted string.\n            </summary>\n            <remarks>\n            Not used if the provided (see <see cref=\"P:Microsoft.AspNetCore.Mvc.TagHelpers.InputTagHelper.InputTypeName\" />) or calculated \"type\" attribute value is\n            <c>checkbox</c>, <c>password</c>, or <c>radio</c>. That is, <see cref=\"P:Microsoft.AspNetCore.Mvc.TagHelpers.InputTagHelper.Format\" /> is used when calling\n            <see cref=\"M:Microsoft.AspNetCore.Mvc.ViewFeatures.IHtmlGenerator.GenerateTextBox(Microsoft.AspNetCore.Mvc.Rendering.ViewContext,Microsoft.AspNetCore.Mvc.ViewFeatures.ModelExplorer,System.String,System.Object,System.String,System.Object)\" />.\n            </remarks>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "Format"
@@ -2792,7 +2806,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            The type of the &lt;input&gt; element.\n            </summary>\n            <remarks>\n            Passed through to the generated HTML in all cases. Also used to determine the <see cref=\"T:Microsoft.AspNetCore.Mvc.ViewFeatures.IHtmlGenerator\" />\n            helper to call and the default <see cref=\"P:Microsoft.AspNetCore.Mvc.TagHelpers.InputTagHelper.Format\" /> value. A default <see cref=\"P:Microsoft.AspNetCore.Mvc.TagHelpers.InputTagHelper.Format\" /> is not calculated\n            if the provided (see <see cref=\"P:Microsoft.AspNetCore.Mvc.TagHelpers.InputTagHelper.InputTypeName\" />) or calculated \"type\" attribute value is <c>checkbox</c>,\n            <c>hidden</c>, <c>password</c>, or <c>radio</c>.\n            </remarks>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "InputTypeName"
@@ -2806,7 +2820,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            The name of the &lt;input&gt; element.\n            </summary>\n            <remarks>\n            Passed through to the generated HTML in all cases. Also used to determine whether <see cref=\"P:Microsoft.AspNetCore.Mvc.TagHelpers.InputTagHelper.For\" /> is\n            valid with an empty <see cref=\"P:Microsoft.AspNetCore.Mvc.ViewFeatures.ModelExpression.Name\" />.\n            </remarks>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "Name"
@@ -2820,7 +2834,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            The value of the &lt;input&gt; element.\n            </summary>\n            <remarks>\n            Passed through to the generated HTML in all cases. Also used to determine the generated \"checked\" attribute\n            if <see cref=\"P:Microsoft.AspNetCore.Mvc.TagHelpers.InputTagHelper.InputTypeName\" /> is \"radio\". Must not be <c>null</c> in that case.\n            </remarks>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "Value"
@@ -2839,7 +2853,7 @@
         "Kind": "ITagHelper",
         "Name": "Microsoft.AspNetCore.Mvc.TagHelpers.LabelTagHelper",
         "AssemblyName": "Microsoft.AspNetCore.Mvc.TagHelpers",
-        "Documentation": "\n            <summary>\n            <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" /> implementation targeting &lt;label&gt; elements with an <c>asp-for</c> attribute.\n            </summary>\n        ",
+        "Documentation": null,
         "TagOutputHint": null,
         "TagMatchingRules": [
           {
@@ -2867,7 +2881,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            An expression to be evaluated against the current model.\n            </summary>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "For"
@@ -2886,7 +2900,7 @@
         "Kind": "ITagHelper",
         "Name": "Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper",
         "AssemblyName": "Microsoft.AspNetCore.Mvc.TagHelpers",
-        "Documentation": "\n            <summary>\n            <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" /> implementation targeting &lt;link&gt; elements that supports fallback href paths.\n            </summary>\n            <remarks>\n            The tag helper won't process for cases with just the 'href' attribute.\n            </remarks>\n        ",
+        "Documentation": null,
         "TagOutputHint": null,
         "TagMatchingRules": [
           {
@@ -3042,7 +3056,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            Address of the linked resource.\n            </summary>\n            <remarks>\n            Passed through to the generated HTML in all cases.\n            </remarks>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "Href"
@@ -3056,7 +3070,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            A comma separated list of globbed file patterns of CSS stylesheets to load.\n            The glob patterns are assessed relative to the application's 'webroot' setting.\n            </summary>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "HrefInclude"
@@ -3070,7 +3084,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            A comma separated list of globbed file patterns of CSS stylesheets to exclude from loading.\n            The glob patterns are assessed relative to the application's 'webroot' setting.\n            Must be used in conjunction with <see cref=\"P:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper.HrefInclude\" />.\n            </summary>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "HrefExclude"
@@ -3084,7 +3098,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            The URL of a CSS stylesheet to fallback to in the case the primary one fails.\n            </summary>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "FallbackHref"
@@ -3098,7 +3112,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            Boolean value that determines if an integrity hash will be compared with <see cref=\"P:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper.FallbackHref\" /> value.\n            </summary>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "SuppressFallbackIntegrity"
@@ -3112,7 +3126,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            Value indicating if file version should be appended to the href urls.\n            </summary>\n            <remarks>\n            If <c>true</c> then a query string \"v\" with the encoded content of the file is added.\n            </remarks>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "AppendVersion"
@@ -3126,7 +3140,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            A comma separated list of globbed file patterns of CSS stylesheets to fallback to in the case the primary\n            one fails.\n            The glob patterns are assessed relative to the application's 'webroot' setting.\n            </summary>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "FallbackHrefInclude"
@@ -3140,7 +3154,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            A comma separated list of globbed file patterns of CSS stylesheets to exclude from the fallback list, in\n            the case the primary one fails.\n            The glob patterns are assessed relative to the application's 'webroot' setting.\n            Must be used in conjunction with <see cref=\"P:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper.FallbackHrefInclude\" />.\n            </summary>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "FallbackHrefExclude"
@@ -3154,7 +3168,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            The class name defined in the stylesheet to use for the fallback test.\n            Must be used in conjunction with <see cref=\"P:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper.FallbackTestProperty\" /> and <see cref=\"P:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper.FallbackTestValue\" />,\n            and either <see cref=\"P:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper.FallbackHref\" /> or <see cref=\"P:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper.FallbackHrefInclude\" />.\n            </summary>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "FallbackTestClass"
@@ -3168,7 +3182,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            The CSS property name to use for the fallback test.\n            Must be used in conjunction with <see cref=\"P:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper.FallbackTestClass\" /> and <see cref=\"P:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper.FallbackTestValue\" />,\n            and either <see cref=\"P:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper.FallbackHref\" /> or <see cref=\"P:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper.FallbackHrefInclude\" />.\n            </summary>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "FallbackTestProperty"
@@ -3182,7 +3196,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            The CSS property value to use for the fallback test.\n            Must be used in conjunction with <see cref=\"P:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper.FallbackTestClass\" /> and <see cref=\"P:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper.FallbackTestProperty\" />,\n            and either <see cref=\"P:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper.FallbackHref\" /> or <see cref=\"P:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper.FallbackHrefInclude\" />.\n            </summary>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "FallbackTestValue"
@@ -3201,7 +3215,7 @@
         "Kind": "ITagHelper",
         "Name": "Microsoft.AspNetCore.Mvc.TagHelpers.OptionTagHelper",
         "AssemblyName": "Microsoft.AspNetCore.Mvc.TagHelpers",
-        "Documentation": "\n            <summary>\n            <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" /> implementation targeting &lt;option&gt; elements.\n            </summary>\n            <remarks>\n            This <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" /> works in conjunction with <see cref=\"T:Microsoft.AspNetCore.Mvc.TagHelpers.SelectTagHelper\" />. It reads elements\n            content but does not modify that content. The only modification it makes is to add a <c>selected</c> attribute\n            in some cases.\n            </remarks>\n        ",
+        "Documentation": null,
         "TagOutputHint": null,
         "TagMatchingRules": [
           {
@@ -3220,7 +3234,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            Specifies a value for the &lt;option&gt; element.\n            </summary>\n            <remarks>\n            Passed through to the generated HTML in all cases.\n            </remarks>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "Value"
@@ -3239,7 +3253,7 @@
         "Kind": "ITagHelper",
         "Name": "Microsoft.AspNetCore.Mvc.TagHelpers.PartialTagHelper",
         "AssemblyName": "Microsoft.AspNetCore.Mvc.TagHelpers",
-        "Documentation": "\n            <summary>\n            Renders a partial view.\n            </summary>\n        ",
+        "Documentation": null,
         "TagOutputHint": null,
         "TagMatchingRules": [
           {
@@ -3267,7 +3281,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            The name or path of the partial view that is rendered to the response.\n            </summary>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "Name"
@@ -3281,7 +3295,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            An expression to be evaluated against the current model. Cannot be used together with <see cref=\"P:Microsoft.AspNetCore.Mvc.TagHelpers.PartialTagHelper.Model\" />.\n            </summary>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "For"
@@ -3295,7 +3309,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            The model to pass into the partial view. Cannot be used together with <see cref=\"P:Microsoft.AspNetCore.Mvc.TagHelpers.PartialTagHelper.For\" />.\n            </summary>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "Model"
@@ -3309,7 +3323,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            When optional, executing the tag helper will no-op if the view cannot be located. \n            Otherwise will throw stating the view could not be found.\n            </summary>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "Optional"
@@ -3323,7 +3337,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            View to lookup if the view specified by <see cref=\"P:Microsoft.AspNetCore.Mvc.TagHelpers.PartialTagHelper.Name\" /> cannot be located.\n            </summary>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "FallbackName"
@@ -3337,7 +3351,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": "view-data-",
             "IndexerTypeName": "System.Object",
-            "Documentation": "\n            <summary>\n            A <see cref=\"T:Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary\" /> to pass into the partial view.\n            </summary>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "ViewData"
@@ -3356,7 +3370,7 @@
         "Kind": "ITagHelper",
         "Name": "Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper",
         "AssemblyName": "Microsoft.AspNetCore.Mvc.TagHelpers",
-        "Documentation": "\n            <summary>\n            <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" /> implementation targeting &lt;script&gt; elements that supports fallback src paths.\n            </summary>\n            <remarks>\n            The tag helper won't process for cases with just the 'src' attribute.\n            </remarks>\n        ",
+        "Documentation": null,
         "TagOutputHint": null,
         "TagMatchingRules": [
           {
@@ -3480,7 +3494,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            Address of the external script to use.\n            </summary>\n            <remarks>\n            Passed through to the generated HTML in all cases.\n            </remarks>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "Src"
@@ -3494,7 +3508,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            A comma separated list of globbed file patterns of JavaScript scripts to load.\n            The glob patterns are assessed relative to the application's 'webroot' setting.\n            </summary>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "SrcInclude"
@@ -3508,7 +3522,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            A comma separated list of globbed file patterns of JavaScript scripts to exclude from loading.\n            The glob patterns are assessed relative to the application's 'webroot' setting.\n            Must be used in conjunction with <see cref=\"P:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.SrcInclude\" />.\n            </summary>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "SrcExclude"
@@ -3522,7 +3536,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            The URL of a Script tag to fallback to in the case the primary one fails.\n            </summary>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "FallbackSrc"
@@ -3536,7 +3550,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            Boolean value that determines if an integrity hash will be compared with <see cref=\"P:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.FallbackSrc\" /> value.\n            </summary>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "SuppressFallbackIntegrity"
@@ -3550,7 +3564,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            Value indicating if file version should be appended to src urls.\n            </summary>\n            <remarks>\n            A query string \"v\" with the encoded content of the file is added.\n            </remarks>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "AppendVersion"
@@ -3564,7 +3578,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            A comma separated list of globbed file patterns of JavaScript scripts to fallback to in the case the\n            primary one fails.\n            The glob patterns are assessed relative to the application's 'webroot' setting.\n            </summary>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "FallbackSrcInclude"
@@ -3578,7 +3592,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            A comma separated list of globbed file patterns of JavaScript scripts to exclude from the fallback list, in\n            the case the primary one fails.\n            The glob patterns are assessed relative to the application's 'webroot' setting.\n            Must be used in conjunction with <see cref=\"P:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.FallbackSrcInclude\" />.\n            </summary>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "FallbackSrcExclude"
@@ -3592,7 +3606,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            The script method defined in the primary script to use for the fallback test.\n            </summary>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "FallbackTestExpression"
@@ -3611,7 +3625,7 @@
         "Kind": "ITagHelper",
         "Name": "Microsoft.AspNetCore.Mvc.TagHelpers.SelectTagHelper",
         "AssemblyName": "Microsoft.AspNetCore.Mvc.TagHelpers",
-        "Documentation": "\n            <summary>\n            <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" /> implementation targeting &lt;select&gt; elements with <c>asp-for</c> and/or\n            <c>asp-items</c> attribute(s).\n            </summary>\n        ",
+        "Documentation": null,
         "TagOutputHint": null,
         "TagMatchingRules": [
           {
@@ -3655,7 +3669,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            An expression to be evaluated against the current model.\n            </summary>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "For"
@@ -3669,7 +3683,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            A collection of <see cref=\"T:Microsoft.AspNetCore.Mvc.Rendering.SelectListItem\" /> objects used to populate the &lt;select&gt; element with\n            &lt;optgroup&gt; and &lt;option&gt; elements.\n            </summary>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "Items"
@@ -3683,7 +3697,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            The name of the &lt;input&gt; element.\n            </summary>\n            <remarks>\n            Passed through to the generated HTML in all cases. Also used to determine whether <see cref=\"P:Microsoft.AspNetCore.Mvc.TagHelpers.SelectTagHelper.For\" /> is\n            valid with an empty <see cref=\"P:Microsoft.AspNetCore.Mvc.ViewFeatures.ModelExpression.Name\" />.\n            </remarks>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "Name"
@@ -3702,7 +3716,7 @@
         "Kind": "ITagHelper",
         "Name": "Microsoft.AspNetCore.Mvc.TagHelpers.TextAreaTagHelper",
         "AssemblyName": "Microsoft.AspNetCore.Mvc.TagHelpers",
-        "Documentation": "\n            <summary>\n            <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" /> implementation targeting &lt;textarea&gt; elements with an <c>asp-for</c> attribute.\n            </summary>\n        ",
+        "Documentation": null,
         "TagOutputHint": null,
         "TagMatchingRules": [
           {
@@ -3730,7 +3744,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            An expression to be evaluated against the current model.\n            </summary>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "For"
@@ -3744,7 +3758,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            The name of the &lt;input&gt; element.\n            </summary>\n            <remarks>\n            Passed through to the generated HTML in all cases. Also used to determine whether <see cref=\"P:Microsoft.AspNetCore.Mvc.TagHelpers.TextAreaTagHelper.For\" /> is\n            valid with an empty <see cref=\"P:Microsoft.AspNetCore.Mvc.ViewFeatures.ModelExpression.Name\" />.\n            </remarks>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "Name"
@@ -3763,7 +3777,7 @@
         "Kind": "ITagHelper",
         "Name": "Microsoft.AspNetCore.Mvc.TagHelpers.ValidationMessageTagHelper",
         "AssemblyName": "Microsoft.AspNetCore.Mvc.TagHelpers",
-        "Documentation": "\n            <summary>\n            <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" /> implementation targeting any HTML element with an <c>asp-validation-for</c>\n            attribute.\n            </summary>\n        ",
+        "Documentation": null,
         "TagOutputHint": null,
         "TagMatchingRules": [
           {
@@ -3810,7 +3824,7 @@
         "Kind": "ITagHelper",
         "Name": "Microsoft.AspNetCore.Mvc.TagHelpers.ValidationSummaryTagHelper",
         "AssemblyName": "Microsoft.AspNetCore.Mvc.TagHelpers",
-        "Documentation": "\n            <summary>\n            <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" /> implementation targeting any HTML element with an <c>asp-validation-summary</c>\n            attribute.\n            </summary>\n        ",
+        "Documentation": null,
         "TagOutputHint": null,
         "TagMatchingRules": [
           {
@@ -3838,7 +3852,7 @@
             "IsEnum": true,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "\n            <summary>\n            If <see cref=\"F:Microsoft.AspNetCore.Mvc.Rendering.ValidationSummary.All\" /> or <see cref=\"F:Microsoft.AspNetCore.Mvc.Rendering.ValidationSummary.ModelOnly\" />, appends a validation\n            summary. Otherwise (<see cref=\"F:Microsoft.AspNetCore.Mvc.Rendering.ValidationSummary.None\" />, the default), this tag helper does nothing.\n            </summary>\n            <exception cref=\"T:System.ArgumentException\">\n            Thrown if setter is called with an undefined <see cref=\"P:Microsoft.AspNetCore.Mvc.TagHelpers.ValidationSummaryTagHelper.ValidationSummary\" /> value e.g.\n            <c>(ValidationSummary)23</c>.\n            </exception>\n        ",
+            "Documentation": null,
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "ValidationSummary"
@@ -3857,7 +3871,7 @@
         "Kind": "ITagHelper",
         "Name": "Microsoft.AspNetCore.SpaServices.Prerendering.PrerenderTagHelper",
         "AssemblyName": "Microsoft.AspNetCore.SpaServices",
-        "Documentation": null,
+        "Documentation": "\n            <summary>\n            A tag helper for prerendering JavaScript applications on the server.\n            </summary>\n        ",
         "TagOutputHint": null,
         "TagMatchingRules": [
           {
@@ -3899,7 +3913,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": null,
+            "Documentation": "\n            <summary>\n            If set, specifies the name of the CommonJS export that is the prerendering function to execute.\n            If not set, the JavaScript module's default CommonJS export must itself be the prerendering function.\n            </summary>\n        ",
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "ExportName"
@@ -3913,7 +3927,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": null,
+            "Documentation": "\n            <summary>\n            An optional JSON-serializable parameter to be supplied to the prerendering code.\n            </summary>\n        ",
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "CustomDataParameter"
@@ -3927,7 +3941,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": null,
+            "Documentation": "\n            <summary>\n            The maximum duration to wait for prerendering to complete.\n            </summary>\n        ",
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "TimeoutMillisecondsParameter"
@@ -3944,8 +3958,8 @@
       },
       {
         "Kind": "ITagHelper",
-        "Name": "MSHB.ExperienceManagement.Shared.Common.Captcha.CaptchaTagHelper",
-        "AssemblyName": "MSHB.ExperienceManagement.Shared.Common",
+        "Name": "MSHB.Reservation.Shared.Common.Captcha.CaptchaTagHelper",
+        "AssemblyName": "MSHB.Reservation.Shared.Common",
         "Documentation": null,
         "TagOutputHint": null,
         "TagMatchingRules": [
@@ -3965,7 +3979,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "<member name=\"P:MSHB.ExperienceManagement.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.BackColor\">\r\n    <summary>\r\n    The back-color of the captcha. It's default value is string.Empty.\r\n    </summary>\r\n</member>\r\n",
+            "Documentation": "<member name=\"P:MSHB.Reservation.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.BackColor\">\r\n    <summary>\r\n    The back-color of the captcha. It's default value is string.Empty.\r\n    </summary>\r\n</member>\r\n",
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "BackColor"
@@ -3979,7 +3993,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "<member name=\"P:MSHB.ExperienceManagement.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.FontName\">\r\n    <summary>\r\n    The font-name of the captcha. It's default value is Tahoma.\r\n    </summary>\r\n</member>\r\n",
+            "Documentation": "<member name=\"P:MSHB.Reservation.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.FontName\">\r\n    <summary>\r\n    The font-name of the captcha. It's default value is Tahoma.\r\n    </summary>\r\n</member>\r\n",
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "FontName"
@@ -3993,7 +4007,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "<member name=\"P:MSHB.ExperienceManagement.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.FontSize\">\r\n    <summary>\r\n    The font-size of the captcha. It's default value is 12.\r\n    </summary>\r\n</member>\r\n",
+            "Documentation": "<member name=\"P:MSHB.Reservation.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.FontSize\">\r\n    <summary>\r\n    The font-size of the captcha. It's default value is 12.\r\n    </summary>\r\n</member>\r\n",
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "FontSize"
@@ -4007,7 +4021,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "<member name=\"P:MSHB.ExperienceManagement.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.ForeColor\">\r\n    <summary>\r\n    The fore-color of the captcha. It's default value is #1B0172.\r\n    </summary>\r\n</member>\r\n",
+            "Documentation": "<member name=\"P:MSHB.Reservation.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.ForeColor\">\r\n    <summary>\r\n    The fore-color of the captcha. It's default value is #1B0172.\r\n    </summary>\r\n</member>\r\n",
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "ForeColor"
@@ -4017,11 +4031,11 @@
           {
             "Kind": "ITagHelper",
             "Name": "asp-captcha-generator-language",
-            "TypeName": "MSHB.ExperienceManagement.Shared.Common.Captcha.Providers.Language",
+            "TypeName": "MSHB.Reservation.Shared.Common.Captcha.Providers.Language",
             "IsEnum": true,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "<member name=\"P:MSHB.ExperienceManagement.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.Language\">\r\n    <summary>\r\n    The language of the captcha. It's default value is Persian.\r\n    </summary>\r\n</member>\r\n",
+            "Documentation": "<member name=\"P:MSHB.Reservation.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.Language\">\r\n    <summary>\r\n    The language of the captcha. It's default value is Persian.\r\n    </summary>\r\n</member>\r\n",
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "Language"
@@ -4035,7 +4049,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "<member name=\"P:MSHB.ExperienceManagement.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.Max\">\r\n    <summary>\r\n    The max value of the captcha. It's default value is 9000.\r\n    </summary>\r\n</member>\r\n",
+            "Documentation": "<member name=\"P:MSHB.Reservation.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.Max\">\r\n    <summary>\r\n    The max value of the captcha. It's default value is 9000.\r\n    </summary>\r\n</member>\r\n",
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "Max"
@@ -4045,11 +4059,11 @@
           {
             "Kind": "ITagHelper",
             "Name": "asp-captcha-generator-output-type",
-            "TypeName": "MSHB.ExperienceManagement.Shared.Common.Captcha.Providers.OutputType",
+            "TypeName": "MSHB.Reservation.Shared.Common.Captcha.Providers.OutputType",
             "IsEnum": true,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "<member name=\"P:MSHB.ExperienceManagement.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.OutputType\">\r\n    <summary>\r\n    نوع خروجی به صورت عددی یا حروفی باشد\r\n    </summary>\r\n</member>\r\n",
+            "Documentation": "<member name=\"P:MSHB.Reservation.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.OutputType\">\r\n    <summary>\r\n    نوع خروجی به صورت عددی یا حروفی باشد\r\n    </summary>\r\n</member>\r\n",
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "OutputType"
@@ -4063,7 +4077,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "<member name=\"P:MSHB.ExperienceManagement.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.ImageOnly\">\r\n    <summary>\r\n    فقط قسمت تصویر را بسازد و باکس ورودی و دکمه ی رفرش نسازد\r\n    </summary>\r\n</member>\r\n",
+            "Documentation": "<member name=\"P:MSHB.Reservation.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.ImageOnly\">\r\n    <summary>\r\n    فقط قسمت تصویر را بسازد و باکس ورودی و دکمه ی رفرش نسازد\r\n    </summary>\r\n</member>\r\n",
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "ImageOnly"
@@ -4077,7 +4091,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "<member name=\"P:MSHB.ExperienceManagement.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.Min\">\r\n    <summary>\r\n    The min value of the captcha. It's default value is 1.\r\n    </summary>\r\n</member>\r\n",
+            "Documentation": "<member name=\"P:MSHB.Reservation.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.Min\">\r\n    <summary>\r\n    The min value of the captcha. It's default value is 1.\r\n    </summary>\r\n</member>\r\n",
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "Min"
@@ -4091,7 +4105,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "<member name=\"P:MSHB.ExperienceManagement.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.Placeholder\">\r\n    <summary>\r\n    The placeholder value of the captcha. It's default value is `کد امنیتی به رقم`.\r\n    </summary>\r\n</member>\r\n",
+            "Documentation": "<member name=\"P:MSHB.Reservation.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.Placeholder\">\r\n    <summary>\r\n    The placeholder value of the captcha. It's default value is `کد امنیتی به رقم`.\r\n    </summary>\r\n</member>\r\n",
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "Placeholder"
@@ -4105,7 +4119,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "<member name=\"P:MSHB.ExperienceManagement.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.TextBoxClass\">\r\n    <summary>\r\n    The css class of the captcha. It's default value is `text-box single-line form-control col-md-4`.\r\n    </summary>\r\n</member>\r\n",
+            "Documentation": "<member name=\"P:MSHB.Reservation.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.TextBoxClass\">\r\n    <summary>\r\n    The css class of the captcha. It's default value is `text-box single-line form-control col-md-4`.\r\n    </summary>\r\n</member>\r\n",
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "TextBoxClass"
@@ -4119,7 +4133,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "<member name=\"P:MSHB.ExperienceManagement.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.TextBoxTemplate\">\r\n    <summary>\r\n    The text-box-template of the captcha. It's default value is `<div class='input-group col-md-4'><span class='input-group-addon'><span class='glyphicon glyphicon-lock'></span></span>{0}</div>`.\r\n    </summary>\r\n</member>\r\n",
+            "Documentation": "<member name=\"P:MSHB.Reservation.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.TextBoxTemplate\">\r\n    <summary>\r\n    The text-box-template of the captcha. It's default value is `<div class='input-group col-md-4'><span class='input-group-addon'><span class='glyphicon glyphicon-lock'></span></span>{0}</div>`.\r\n    </summary>\r\n</member>\r\n",
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "TextBoxTemplate"
@@ -4133,7 +4147,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "<member name=\"P:MSHB.ExperienceManagement.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.ValidationErrorMessage\">\r\n    <summary>\r\n    The validation-error-message of the captcha. It's default value is `لطفا کد امنیتی را به رقم وارد نمائید`.\r\n    </summary>\r\n</member>\r\n",
+            "Documentation": "<member name=\"P:MSHB.Reservation.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.ValidationErrorMessage\">\r\n    <summary>\r\n    The validation-error-message of the captcha. It's default value is `لطفا کد امنیتی را به رقم وارد نمائید`.\r\n    </summary>\r\n</member>\r\n",
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "ValidationErrorMessage"
@@ -4147,7 +4161,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "<member name=\"P:MSHB.ExperienceManagement.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.ValidationMessageClass\">\r\n    <summary>\r\n    The validation-message-class of the captcha. It's default value is `text-danger`.\r\n    </summary>\r\n</member>\r\n",
+            "Documentation": "<member name=\"P:MSHB.Reservation.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.ValidationMessageClass\">\r\n    <summary>\r\n    The validation-message-class of the captcha. It's default value is `text-danger`.\r\n    </summary>\r\n</member>\r\n",
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "ValidationMessageClass"
@@ -4161,7 +4175,7 @@
             "IsEnum": false,
             "IndexerNamePrefix": null,
             "IndexerTypeName": null,
-            "Documentation": "<member name=\"P:MSHB.ExperienceManagement.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.RefreshButtonClass\">\r\n    <summary>\r\n    The refresh-button-class of the captcha. It's default value is `glyphicon glyphicon-refresh btn-sm`.\r\n    </summary>\r\n</member>\r\n",
+            "Documentation": "<member name=\"P:MSHB.Reservation.Shared.Common.Captcha.CaptchaTagHelperHtmlAttributes.RefreshButtonClass\">\r\n    <summary>\r\n    The refresh-button-class of the captcha. It's default value is `glyphicon glyphicon-refresh btn-sm`.\r\n    </summary>\r\n</member>\r\n",
             "Diagnostics": [],
             "Metadata": {
               "Common.PropertyName": "RefreshButtonClass"
@@ -4173,12 +4187,12 @@
         "Diagnostics": [],
         "Metadata": {
           "Runtime.Name": "ITagHelper",
-          "Common.TypeName": "MSHB.ExperienceManagement.Shared.Common.Captcha.CaptchaTagHelper"
+          "Common.TypeName": "MSHB.Reservation.Shared.Common.Captcha.CaptchaTagHelper"
         }
       }
     ],
     "CSharpLanguageVersion": 703
   },
-  "RootNamespace": "MSHB.ExperienceManagement.Presentation.WebUI",
+  "RootNamespace": "MSHB.Reservation.Presentation.WebUI",
   "Documents": []
 }

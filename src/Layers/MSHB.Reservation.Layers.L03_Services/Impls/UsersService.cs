@@ -157,7 +157,9 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
         }
         public async Task<SearchUserViewModel> GetUsersAsync(SearchUserFormModel searchUserForm)
         {
-            var queryable = _context.Users.AsQueryable();
+            try
+            {
+                 var queryable = _context.Users.AsQueryable();
 
             if (!string.IsNullOrEmpty(searchUserForm.FirstName))
             {
@@ -233,6 +235,13 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
             searchViewModel.PageSize = searchUserForm.PageSize;
             searchViewModel.TotalCount = count;
             return searchViewModel;
+            }
+            catch (Exception ex)
+            {
+                
+                throw new ReservationGlobalException(UsersServiceErrors.GetUserListError, ex);
+            }
+           
         }
         public async Task UpdateUserLastActivityDateAsync(Guid userId)
         {

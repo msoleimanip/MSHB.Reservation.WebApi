@@ -28,20 +28,20 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
         [HttpGet("[action]"), HttpPost("[action]")]
         public async Task<IActionResult> AddReservationRoom([FromBody] AddReservationRoomFormModel reservationForm)
         {
-            var resp = await _reservationService.AddReservationRoom(HttpContext.GetUser(), reservationForm);
+            var resp = await _reservationService.AddReservationRoomAsync(HttpContext.GetUser(), reservationForm);
             return Ok(GetRequestResult(resp));
         }
 
         [HttpGet("[action]"), HttpPost("[action]")]
         public async Task<IActionResult> EditReservationRoom([FromBody] EditReservationRoomFormModel reservationForm)
         {
-            var resp = await _reservationService.EditReservationRoom(HttpContext.GetUser(), reservationForm);
+            var resp = await _reservationService.EditReservationRoomAsync(HttpContext.GetUser(), reservationForm);
             return Ok(GetRequestResult(resp));
         }
         [HttpGet("[action]"), HttpPost("[action]")]
         public async Task<IActionResult> DeleteReservationRoom([FromBody]  [Required(ErrorMessage = "لیست رزروهای اقامتگاه ارسال شده برای حذف نامعتبر است")]List<long> reservationFormIds)
         {
-            var resp = await _reservationService.DeleteReservationRoom(HttpContext.GetUser(), reservationFormIds);
+            var resp = await _reservationService.DeleteReservationRoomAsync(HttpContext.GetUser(), reservationFormIds);
             return Ok(GetRequestResult(resp));
         }
 

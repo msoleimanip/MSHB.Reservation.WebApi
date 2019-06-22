@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
 {
     [DbContext(typeof(ReservationDbContext))]
-    [Migration("20190620072619_mig1")]
+    [Migration("20190621083634_mig1")]
     partial class mig1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -19,6 +19,7 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
+                .HasAnnotation("Relational:Sequence:.SystemCodeSequence", "'SystemCodeSequence', '', '1000', '1', '', '', 'Int64', 'False'")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("MSHB.Reservation.Layers.L01_Entities.Models.AccommodationRoom", b =>
@@ -31,7 +32,7 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
 
                     b.Property<int?>("BedRoom");
 
-                    b.Property<int>("Capacity");
+                    b.Property<int?>("Capacity");
 
                     b.Property<long?>("CityId");
 
@@ -41,15 +42,18 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
 
                     b.Property<int>("Rank");
 
-                    b.Property<string>("RoomNumber");
+                    b.Property<string>("RoomNumber")
+                        .HasMaxLength(20);
 
-                    b.Property<string>("RoomPrice");
+                    b.Property<long>("RoomPrice");
 
                     b.Property<int>("RoomType");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CityId");
+
+                    b.HasIndex("RoomNumber");
 
                     b.ToTable("AccommodationRooms");
                 });
@@ -85,6 +89,8 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
 
                     b.Property<long>("AccommodationRoomId");
 
+                    b.Property<long>("CityId");
+
                     b.Property<DateTime>("CreationDate");
 
                     b.Property<long>("Description");
@@ -97,7 +103,7 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
 
                     b.Property<int>("GuestCounts");
 
-                    b.Property<DateTime>("LastUpdateDate");
+                    b.Property<DateTime?>("LastUpdateDate");
 
                     b.Property<string>("NationalCode")
                         .HasMaxLength(12);
@@ -111,13 +117,17 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
 
                     b.Property<long>("PriceAccommodation");
 
-                    b.Property<long?>("SystemCode");
+                    b.Property<long>("SystemCode")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("NEXT VALUE FOR SystemCodeSequence");
 
                     b.Property<Guid>("UserId");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AccommodationRoomId");
+
+                    b.HasIndex("CityId");
 
                     b.HasIndex("NationalCode");
 
@@ -393,14 +403,17 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
             modelBuilder.Entity("MSHB.Reservation.Layers.L01_Entities.Models.AccommodationUserRoom", b =>
                 {
                     b.HasOne("MSHB.Reservation.Layers.L01_Entities.Models.AccommodationRoom", "AccommodationRoom")
-                        .WithMany()
+                        .WithMany("AccommodationUserRooms")
                         .HasForeignKey("AccommodationRoomId")
                         .OnDelete(DeleteBehavior.Cascade);
 
+                    b.HasOne("MSHB.Reservation.Layers.L01_Entities.Models.City", "City")
+                        .WithMany("AccommodationUserRooms")
+                        .HasForeignKey("CityId");
+
                     b.HasOne("MSHB.Reservation.Layers.L01_Entities.Models.User", "User")
-                        .WithMany("AccommodationUserRoomAssigns")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .WithMany("AccommodationUserRooms")
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("MSHB.Reservation.Layers.L01_Entities.Models.City", b =>

@@ -27,5 +27,6 @@ namespace MSHB.Reservation.Layers.L01_Entities.Models
         public virtual ICollection<City> Children { get; set; }
         public virtual ICollection<User> Users { get; set; }
         public virtual ICollection<AccommodationRoom> AccommodationRooms { get; set; }
+        public virtual ICollection<AccommodationUserRoom> AccommodationUserRooms { get; set; }
     }
 }

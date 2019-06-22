@@ -10,9 +10,13 @@ namespace MSHB.Reservation.Layers.L04_ViewModels.InputForms
     {
         [Required(ErrorMessage = "شناسه اقامتگاه وارد نشده است")]
         public long? CityId { get; set; }
+        public List<long> AccommodationUserRoomId{get;set;}
         public string NationalCode { get; set; }
         public string PhoneNumber { get; set; }
-        public long? SystemCode { get; set; }
+        public Guid? SystemCode { get; set; }
         public string PersonalCode { get; set; }
+        public DateTime? CreationDate { get; set; }
+        public DateTime? EntranceTime { get; set; }
+        public DateTime? EndTime { get; set; }
     }
 }

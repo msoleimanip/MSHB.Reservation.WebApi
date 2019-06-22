@@ -16,6 +16,8 @@ namespace MSHB.Reservation.Layers.L01_Entities.Models
         public virtual AccommodationUserRoom AccommodationUserRoom { get; set; }
         public GenderType GenderType { get; set; }
         public string Name { get; set; }
+        [MaxLength(20)]
+        public string NationalCode { get; set; }
         public string Relative { get; set; }
         public int? Age { get; set; }
 

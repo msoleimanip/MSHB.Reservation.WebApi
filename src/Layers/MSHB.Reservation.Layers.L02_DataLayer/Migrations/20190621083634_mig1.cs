@@ -8,6 +8,10 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateSequence(
+                name: "SystemCodeSequence",
+                startValue: 1000L);
+
             migrationBuilder.CreateTable(
                 name: "City_T",
                 columns: table => new
@@ -87,14 +91,14 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    RoomNumber = table.Column<string>(nullable: true),
-                    RoomPrice = table.Column<string>(nullable: true),
+                    RoomNumber = table.Column<string>(maxLength: 20, nullable: true),
+                    RoomPrice = table.Column<long>(nullable: false),
                     BedRoom = table.Column<int>(nullable: true),
                     RoomType = table.Column<int>(nullable: false),
                     Rank = table.Column<int>(nullable: false),
                     Bed = table.Column<int>(nullable: false),
                     IsActivated = table.Column<bool>(nullable: true),
-                    Capacity = table.Column<int>(nullable: false),
+                    Capacity = table.Column<int>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     CityId = table.Column<long>(nullable: true)
                 },
@@ -185,15 +189,16 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     AccommodationRoomId = table.Column<long>(nullable: false),
+                    CityId = table.Column<long>(nullable: false),
                     CreationDate = table.Column<DateTime>(nullable: false),
-                    LastUpdateDate = table.Column<DateTime>(nullable: false),
+                    LastUpdateDate = table.Column<DateTime>(nullable: true),
                     EntranceTime = table.Column<DateTime>(nullable: true),
                     EndTime = table.Column<DateTime>(nullable: true),
                     NationalCode = table.Column<string>(maxLength: 12, nullable: true),
                     PhoneNumber = table.Column<string>(maxLength: 15, nullable: true),
                     GenderType = table.Column<int>(nullable: false),
                     PersonalCode = table.Column<string>(nullable: true),
-                    SystemCode = table.Column<long>(nullable: true),
+                    SystemCode = table.Column<long>(nullable: false, defaultValueSql: "NEXT VALUE FOR SystemCodeSequence"),
                     GuestCounts = table.Column<int>(nullable: false),
                     Description = table.Column<long>(nullable: false),
                     PriceAccommodation = table.Column<long>(nullable: false),
@@ -210,11 +215,17 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
+                        name: "FK_AccommodationUserRooms_City_T_CityId",
+                        column: x => x.CityId,
+                        principalTable: "City_T",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
                         name: "FK_AccommodationUserRooms_User_T_UserId",
                         column: x => x.UserId,
                         principalTable: "User_T",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -314,6 +325,11 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
                 column: "CityId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_AccommodationRooms_RoomNumber",
+                table: "AccommodationRooms",
+                column: "RoomNumber");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_AccommodationUserAttachments_AccommodationUserRoomId",
                 table: "AccommodationUserAttachments",
                 column: "AccommodationUserRoomId");
@@ -322,6 +338,11 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
                 name: "IX_AccommodationUserRooms_AccommodationRoomId",
                 table: "AccommodationUserRooms",
                 column: "AccommodationRoomId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AccommodationUserRooms_CityId",
+                table: "AccommodationUserRooms",
+                column: "CityId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AccommodationUserRooms_NationalCode",
@@ -453,6 +474,9 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
 
             migrationBuilder.DropTable(
                 name: "GroupAuth_T");
+
+            migrationBuilder.DropSequence(
+                name: "SystemCodeSequence");
         }
     }
 }
