@@ -71,7 +71,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                     JsTreeNode parentNode = new JsTreeNode();
                     parentNode.id = or.Id.ToString();
                     parentNode.text = or.CityName;
-                    parentNode = FillChild(cities, parentNode, or.Id, null);
+                    parentNode = FillChild(cities, parentNode, or.Id, null,false);
                     Citynodes.Add(parentNode);
                 }
 
@@ -93,10 +93,12 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                 cities = await _context.Citys.Where(x => x.ParentId == user.CityId).SelectMany(x => x.Children).ToListAsync();
             }
             var citynodes = new List<JsTreeNode>();
+            
             cities.ForEach(or =>
             {
                 if (or.ParentId == null)
                 {
+                    var flagHasIcon = false;
                     JsTreeNode parentNode = new JsTreeNode();
                     parentNode.id = or.Id.ToString();
                     parentNode.text = or.CityName;
@@ -108,8 +110,9 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                     if (or.IsActivated.HasValue && !or.IsActivated.Value)
                     {
                         parentNode.icon = "glyphicon glyphicon-flash";
+                        flagHasIcon = true;
                     }
-                    parentNode = FillChild(cities, parentNode, or.Id, UserCityId);
+                    parentNode = FillChild(cities, parentNode, or.Id, UserCityId,flagHasIcon);
                     citynodes.Add(parentNode);
                 }
 
@@ -117,7 +120,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
             return citynodes;
         }
 
-        private JsTreeNode FillChild(List<City> Citys, JsTreeNode parentNode, long Id, long? UserCityId)
+        private JsTreeNode FillChild(List<City> Citys, JsTreeNode parentNode, long Id, long? UserCityId,bool FlagHasIcon)
         {
             if (Citys.Count > 0)
             {
@@ -133,12 +136,13 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                             parentNodeChild.state.selected = true;
                            
                         }
-                        if (or.IsActivated.HasValue && !or.IsActivated.Value)
+                        if ((or.IsActivated.HasValue && !or.IsActivated.Value)|| FlagHasIcon)
                         {
                             parentNodeChild.icon = "glyphicon glyphicon-flash";
-                    }
+                            FlagHasIcon = true;
+                        }
                         parentNode.children.Add(parentNodeChild);
-                        FillChild(Citys, parentNodeChild, or.Id, UserCityId);
+                        FillChild(Citys, parentNodeChild, or.Id, UserCityId,FlagHasIcon);
                     }
                 });
             }
