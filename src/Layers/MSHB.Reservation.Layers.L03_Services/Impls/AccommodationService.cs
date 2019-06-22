@@ -203,6 +203,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                 var searchViewModel = new SearchAccommodationRoomViewModel();
                 searchViewModel.searchAccommodationRoomViewModels = resp.Select( response => new AccommodationRoomViewModel()
                 {
+                    Id=response.Id,
                     AccommodationRoomId = response.Id,
                     RoomNumber = response.RoomNumber,
                     RoomPrice = response.RoomPrice,

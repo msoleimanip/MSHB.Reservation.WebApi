@@ -25,24 +25,154 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
             _context.CheckArgumentIsNull(nameof(_context));
         }
 
-        public Task<long> AddReservationUserAttachmentRoomAsync(User user, AddReservationUserAttachmentFormModel reservationForm)
+        public async Task<long> AddReservationUserAttachmentRoomAsync(User user, AddReservationUserAttachmentFormModel reservationForm)
         {
-            throw new NotImplementedException();
+            try
+            {
+                AccommodationUserRoom accommodationUserRoom = null;
+                if (reservationForm.AccommodationUserRoomId != null)
+                    accommodationUserRoom = _context.AccommodationUserRooms.FirstOrDefault(c => c.Id == reservationForm.AccommodationUserRoomId);
+                if (accommodationUserRoom is null)
+                {
+                    throw new ReservationGlobalException(AccommodationUserAttachmentServiceErrors.ReservationUserNotExistError);
+                }
+                var isDuplicateAccommodationUserAttachment = _context.AccommodationUserAttachments.Any(c => c.AccommodationUserRoomId == reservationForm.AccommodationUserRoomId && c.GenderType==reservationForm.GenderType&&c.NationalCode==c.NationalCode);
+                if (!isDuplicateAccommodationUserAttachment)
+                {
+                    var accommodationUserAt = new AccommodationUserAttachment()
+                    {
+                        AccommodationUserRoomId= accommodationUserRoom.Id,
+                        Age= reservationForm.Age,
+                        GenderType=reservationForm.GenderType,
+                        Name=reservationForm.Name,
+                        NationalCode=reservationForm.NationalCode,
+                        Relative=reservationForm.Relative
+                    };
+
+                    await _context.AccommodationUserAttachments.AddAsync(accommodationUserAt);
+                    await _context.SaveChangesAsync();
+                    return accommodationUserAt.Id;
+                }
+                throw new ReservationGlobalException(AccommodationUserAttachmentServiceErrors.AddDuplicateAccommodationUserAttachmentError);
+
+            }
+            catch (Exception ex)
+            {
+                throw new ReservationGlobalException(AccommodationUserAttachmentServiceErrors.AddAccommodationUserAttachmentError, ex);
+            }
         }
 
-        public Task<bool> DeleteReservationUserAttachmentAsync(User user, List<long> reservationFormIds)
+        public async Task<bool> DeleteReservationUserAttachmentAsync(User user, List<long> reservationFormIds)
         {
-            throw new NotImplementedException();
+            try
+            {
+
+                foreach (var acid in reservationFormIds)
+                {
+                    
+                    var accommodationUserAt = await _context.AccommodationUserAttachments.FindAsync(acid);
+                    _context.AccommodationUserAttachments.Remove(accommodationUserAt);
+                }
+                await _context.SaveChangesAsync();
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                throw new ReservationGlobalException(AccommodationUserAttachmentServiceErrors.DeleteAccommodationUserAttachmentError, ex);
+            }
         }
 
-        public Task<bool> EditReservationUserAttachmentRoomAsync(User user, EditReservationUserAttachmentFormModel reservationForm)
+        public async Task<bool> EditReservationUserAttachmentRoomAsync(User user, EditReservationUserAttachmentFormModel reservationForm)
         {
-            throw new NotImplementedException();
+            try
+            {
+                AccommodationUserAttachment accommodationUserAttachment = null;
+                if (reservationForm.AccommodationUserAttachmentId != null)
+                    accommodationUserAttachment = _context.AccommodationUserAttachments.FirstOrDefault(c => c.Id == reservationForm.AccommodationUserAttachmentId);
+                if (accommodationUserAttachment is null)
+                {
+                    throw new ReservationGlobalException(AccommodationUserAttachmentServiceErrors.EditAccommodationUserAttachmentNotExistError);
+                }
+                var isDuplicateAccommodationUserAttachment = _context.AccommodationUserAttachments.Any(c => c.AccommodationUserRoomId == reservationForm.AccommodationUserRoomId && c.GenderType == reservationForm.GenderType && c.NationalCode == c.NationalCode&& c.Id!=reservationForm.AccommodationUserAttachmentId);
+                if (!isDuplicateAccommodationUserAttachment)
+                {
+                    accommodationUserAttachment.Name = reservationForm.Name;
+                    accommodationUserAttachment.GenderType = reservationForm.GenderType;
+                    accommodationUserAttachment.NationalCode = accommodationUserAttachment.NationalCode;
+                    accommodationUserAttachment.Relative = accommodationUserAttachment.Relative;
+
+
+                    _context.AccommodationUserAttachments.Update(accommodationUserAttachment);
+                    await _context.SaveChangesAsync();
+                    return true;
+                }
+                throw new ReservationGlobalException(AccommodationUserAttachmentServiceErrors.EditDuplicateAccommodationUserAttachmentError);
+
+            }
+            catch (Exception ex)
+            {
+                throw new ReservationGlobalException(AccommodationUserAttachmentServiceErrors.EditAccommodationUserAttachmentError, ex);
+            }
         }
 
-        public Task<SearchReservationUserAttachmentViewModel> GetReservationUserAttachmentAsync(User user, ReservationUserAttachmentSearchFormModel reservationForm)
+        public async Task<SearchReservationUserAttachmentViewModel> GetReservationUserAttachmentAsync(User user, ReservationUserAttachmentSearchFormModel reservationForm)
         {
-            throw new NotImplementedException();
+            try
+            {
+
+                var queryable = _context.AccommodationUserAttachments.Where(c => c.Id == reservationForm.AccommodationUserAttachmentId).AsQueryable();
+
+               
+
+                if (!string.IsNullOrEmpty(reservationForm.NationalCode))
+                {
+                    queryable = queryable.Where(q => q.NationalCode.Contains(reservationForm.NationalCode));
+                }
+
+
+                if (reservationForm.SortModel != null)
+                    switch (reservationForm.SortModel.Col + "|" + reservationForm.SortModel.Sort)
+                    {
+                        
+                        case "creationdate|asc":
+                            queryable = queryable.OrderBy(x => x.CreationDate);
+                            break;
+                        case "creationdate|desc":
+                            queryable = queryable.OrderByDescending(x => x.CreationDate);
+                            break;
+                        default:
+                            queryable = queryable.OrderBy(x => x.CreationDate);
+                            break;
+                    }
+                else
+                    queryable = queryable.OrderBy(x => x.CreationDate);
+                var response = await queryable.Skip((reservationForm.PageIndex - 1) * reservationForm.PageSize).Take(reservationForm.PageSize).ToListAsync();
+                var count = await queryable.CountAsync();
+                var searchViewModel = new SearchReservationUserAttachmentViewModel();
+
+                searchViewModel.searchReservationUserAttachmentViewModel = response.Select(selector: resp => new ReservationUserAttachmentViewModel()
+                {
+                    Id=resp.Id,
+                    Age=resp.Age,
+                    AccommodationUserRoomId=resp.AccommodationUserRoomId,
+                    CreationDate=resp.CreationDate,
+                    GenderType=resp.GenderType,
+                    Name=resp.Name,
+                    NationalCode=resp.NationalCode,
+                    Relative=resp.Relative
+
+                }).ToList();
+                searchViewModel.PageIndex = reservationForm.PageIndex;
+                searchViewModel.PageSize = reservationForm.PageSize;
+                searchViewModel.TotalCount = count;
+                return searchViewModel;
+            }
+            catch (Exception ex)
+            {
+
+                throw new ReservationGlobalException(AccommodationUserAttachmentServiceErrors.GetAccommodationUserAttachmentError, ex);
+            }
         }
     }
 }

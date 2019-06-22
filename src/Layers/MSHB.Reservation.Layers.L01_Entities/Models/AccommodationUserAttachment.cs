@@ -18,6 +18,7 @@ namespace MSHB.Reservation.Layers.L01_Entities.Models
         public string Name { get; set; }
         [MaxLength(20)]
         public string NationalCode { get; set; }
+        public DateTime? CreationDate { get; set; }
         public string Relative { get; set; }
         public int? Age { get; set; }
 

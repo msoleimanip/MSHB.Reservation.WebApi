@@ -7,7 +7,7 @@ namespace MSHB.Reservation.Layers.L04_ViewModels.ViewModels
 {
     public class ReservationRoomViewModel
     {
-        
+        public long Id { get; set; }
         public string RoomNumber { get; set; }
         public long RoomPrice { get; set; }
         public int? BedRoom { get; set; }

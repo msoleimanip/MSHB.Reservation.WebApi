@@ -150,6 +150,8 @@ namespace MSHB.Reservation.Layers.L02_DataLayer
            
             modelBuilder.Entity<City>()
                     .Property(c => c.CreationDate).HasDefaultValueSql("getdate()");
+            modelBuilder.Entity<AccommodationUserAttachment>()
+                   .Property(c => c.CreationDate).HasDefaultValueSql("getdate()");
 
             modelBuilder.Entity<AccommodationUserRoom>(entity =>
             {               

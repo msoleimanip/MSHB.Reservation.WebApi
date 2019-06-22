@@ -7,6 +7,7 @@ namespace MSHB.Reservation.Layers.L04_ViewModels.ViewModels
 {
     public class AccommodationRoomViewModel
     {
+        public long Id { get; set; }
         public long AccommodationRoomId { get; set; }
         public string RoomNumber { get; set; }
         public long RoomPrice { get; set; }

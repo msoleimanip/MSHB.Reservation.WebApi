@@ -20,5 +20,8 @@ namespace MSHB.Reservation.Layers.L00_BaseModels.Constants.Messages.Base
       
         public static readonly ReservationErrorMessage GetAccommodationUserAttachmentError =
          new ReservationErrorMessage("AAUM-1008", "دریافت اطلاعات از همراهان خطا رخ داده است");
+
+        public static ReservationErrorMessage ReservationUserNotExistError =
+            new ReservationErrorMessage("AAUM-1009", "رزروی با این مشخصات وجود ندارد که همراه اضافه کنیم");
     }
 }

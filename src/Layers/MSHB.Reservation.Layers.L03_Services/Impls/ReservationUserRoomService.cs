@@ -220,6 +220,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                                                              
             searchViewModel.searchReservationRoomViewModels= response.Select(selector: resp => new ReservationRoomViewModel()
             {
+                Id=resp.Id,
                 AccommodationRoomId=resp.AccommodationRoomId,
                 Bed=resp.AccommodationRoom.Bed,
                 BedRoom=resp.AccommodationRoom.BedRoom,
