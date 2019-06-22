@@ -150,7 +150,12 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
             }
            
             var refreshTokenIdHash = _securityService.GetSha256Hash(refreshToken);
-            return _tokens.Include(x => x.User).FirstOrDefaultAsync(x => x.RefreshTokenIdHash == refreshTokenIdHash);
+            var token = _tokens.Include(x => x.User).FirstOrDefaultAsync(x => x.RefreshTokenIdHash == refreshTokenIdHash);
+            if (token==null)
+            {
+                throw new ReservationGlobalException(UsersServiceErrors.RefreshToken);
+            }
+            return token;
         }
 
         public async Task InvalidateUserTokensAsync(Guid userId)
@@ -194,7 +199,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                 new Claim(ClaimTypes.Name, user.Username),
                 new Claim(ClaimTypes.Surname, user.LastName),
                 new Claim(ClaimTypes.GivenName, user.FirstName),
-                new Claim("IsPresident", user.IsPresident?.ToString()),
+                new Claim("IsPresident", user.IsPresident.HasValue ? user.IsPresident.ToString():""),
                 new Claim("DisplayName", user.FirstName ?? ""+" "+ user.LastName ?? ""),
             
             // to invalidate the cookie

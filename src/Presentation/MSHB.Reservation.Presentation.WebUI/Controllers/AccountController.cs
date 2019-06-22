@@ -55,14 +55,7 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
         public async Task<IActionResult> RefreshToken([FromBody]JToken jsonBody)
         {
             var refreshToken = jsonBody.Value<string>("refreshToken");
-            
-
             var token = await _tokenStoreService.FindTokenLoginAsync(refreshToken);
-            if (token == null)
-            {
-                return Unauthorized();
-            }
-
             var (accessToken, newRefreshToken) = await _tokenStoreService.CreateJwtTokens(token.User, refreshToken);
             return Ok(GetRequestResult(new { access_token = accessToken, refresh_token = newRefreshToken }));
         }

@@ -35,7 +35,6 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                 var cityCount = string.Empty;
                 var userCount = string.Empty;
 
-
                 if (!_cache.TryGetValue(CacheKeys.AccommodationCount, out accommodationCount))
                 {
                     MemoryCacheEntryOptions cacheExpirationOptions = new MemoryCacheEntryOptions();
