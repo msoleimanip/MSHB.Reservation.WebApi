@@ -55,7 +55,6 @@ namespace MSHB.Reservation.Presentation.WebUI
             });
 
             services.Configure<BearerTokensOptions>(options => Configuration.GetSection("BearerTokens").Bind(options));
-
             services.AddTransient<IUsersService, UsersService>();
             services.AddTransient<IRolesService, RolesService>();
             services.AddTransient<ISecurityService, SecurityService>();
@@ -66,8 +65,10 @@ namespace MSHB.Reservation.Presentation.WebUI
             services.AddTransient<ICityService, CityService>();
             services.AddTransient<IAccommodationService, AccommodationService>();
             services.AddTransient<IReservationUserRoomService, ReservationUserRoomService>();
+            services.AddTransient<IAccommodationUserAttachmentService, AccommodationUserAttachmentService>();
+            services.AddTransient<IReportService, ReportService>();
 
-            
+
 
 
 

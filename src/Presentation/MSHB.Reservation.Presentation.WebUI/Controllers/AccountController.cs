@@ -41,15 +41,9 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
         [HttpPost("[action]")]
         public async Task<IActionResult> Login([FromBody]  LoginViewModels loginUser)
         {
-            if (loginUser == null)
-            {
-                return BadRequest("user is not set.");
-            } 
-            var user = await _usersService.FindUserAsync(loginUser.UserName, loginUser.Password);
-            if (user == null || !user.IsActive)
-            {
-                return Unauthorized();
-            }
+           
+            var user = await _usersService.FindUserLoginAsync(loginUser.UserName, loginUser.Password);
+            
 
             var (accessToken, refreshToken) = await _tokenStoreService.CreateJwtTokens(user, refreshTokenSource: null);
             return Ok(GetRequestResult(new { access_token = accessToken, refresh_token = refreshToken }));
@@ -61,12 +55,9 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
         public async Task<IActionResult> RefreshToken([FromBody]JToken jsonBody)
         {
             var refreshToken = jsonBody.Value<string>("refreshToken");
-            if (string.IsNullOrWhiteSpace(refreshToken))
-            {
-                return BadRequest("refreshToken is not set.");
-            }
+            
 
-            var token = await _tokenStoreService.FindTokenAsync(refreshToken);
+            var token = await _tokenStoreService.FindTokenLoginAsync(refreshToken);
             if (token == null)
             {
                 return Unauthorized();

@@ -13,6 +13,8 @@ using MSHB.Reservation.Shared.Common.GuardToolkit;
 using MSHB.Reservation.Layers.L02_DataLayer;
 using MSHB.Reservation.Layers.L03_Services.Contracts;
 using MSHB.Reservation.Layers.L00_BaseModels.Security;
+using MSHB.Reservation.Layers.L00_BaseModels.exceptions;
+using MSHB.Reservation.Layers.L00_BaseModels.Constants.Messages.Base;
 
 namespace MSHB.Reservation.Layers.L03_Services.Impls
 {
@@ -136,6 +138,17 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
             {
                 return null;
             }
+            var refreshTokenIdHash = _securityService.GetSha256Hash(refreshToken);
+            return _tokens.Include(x => x.User).FirstOrDefaultAsync(x => x.RefreshTokenIdHash == refreshTokenIdHash);
+        }
+
+        public Task<UserToken> FindTokenLoginAsync(string refreshToken)
+        {
+            if (string.IsNullOrWhiteSpace(refreshToken))
+            {
+                throw new ReservationGlobalException(UsersServiceErrors.RefreshToken);
+            }
+           
             var refreshTokenIdHash = _securityService.GetSha256Hash(refreshToken);
             return _tokens.Include(x => x.User).FirstOrDefaultAsync(x => x.RefreshTokenIdHash == refreshTokenIdHash);
         }

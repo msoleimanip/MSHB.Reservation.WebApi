@@ -12,6 +12,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Contracts
     {
         Task<string> GetSerialNumberAsync(Guid userId);
         Task<User> FindUserAsync(string username, string password);
+        Task<User> FindUserLoginAsync(string username, string password);
         Task<User> FindUserAsync(Guid userId);
         Task UpdateUserLastActivityDateAsync(Guid userId);
         Task<Guid> AddUserAsync(User user, AddUserFormModel userForm);

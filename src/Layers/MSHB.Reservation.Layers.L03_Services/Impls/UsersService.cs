@@ -271,7 +271,17 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
             var passwordHash = _securityService.GetSha256Hash(password);
             return await _context.Users.FirstOrDefaultAsync(x => x.Username == username && x.Password == passwordHash);
         }
-
+        public async Task<User> FindUserLoginAsync(string username, string password)
+        {
+            var passwordHash = _securityService.GetSha256Hash(password);
+            var resp= await _context.Users.FirstOrDefaultAsync(x => x.Username == username && x.Password == passwordHash);
+            if (resp == null || !resp.IsActive)
+            {
+                throw new ReservationGlobalException(UsersServiceErrors.Unauthorized);
+                
+            }
+            return resp;
+        }
         public async Task<string> GetSerialNumberAsync(Guid userId)
         {
             var user = await FindUserAsync(userId);

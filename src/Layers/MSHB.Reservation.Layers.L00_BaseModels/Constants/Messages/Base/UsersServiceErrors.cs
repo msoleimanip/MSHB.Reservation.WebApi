@@ -28,6 +28,11 @@ namespace MSHB.Reservation.Layers.L00_BaseModels.Constants.Messages.Base
         public static ReservationErrorMessage GetUserListError = 
             new ReservationErrorMessage("AUE-1009", "در دریافت لیست کاربران خطایی رخ داده است.");
 
+        public static ReservationErrorMessage Unauthorized=
+             new ReservationErrorMessage("AUE-1010", "نام کاربری و شناسه کاربری درست نمی باشد.");
+
+        public static ReservationErrorMessage RefreshToken =
+            new ReservationErrorMessage("AUE-1011", "مشکل در کد دریافت دوباره سطح دسترسی.");
     }
 
 }
