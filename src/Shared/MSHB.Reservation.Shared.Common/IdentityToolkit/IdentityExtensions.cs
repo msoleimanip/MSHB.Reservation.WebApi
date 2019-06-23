@@ -59,9 +59,9 @@ namespace SubPro.WebUI.Shared.Common.IdentityToolkit
         {
             var isPresident=identity?.GetUserClaimValue("IsPresident");
             return isPresident != null
-                ? (T)Convert.ChangeType(isPresident, typeof(T), CultureInfo.InvariantCulture)
+                ? (T)TypeDescriptor.GetConverter(typeof(T)).ConvertFromInvariantString(isPresident)
                 : default(T);
-           
+
         }
         public static string GetUserLastName(this IIdentity identity)
         {

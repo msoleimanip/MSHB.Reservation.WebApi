@@ -11,7 +11,7 @@ namespace MSHB.Reservation.Layers.L00_BaseModels.Extensions
     {
         public static bool IsAdmin(this User user)
         {
-            return user.IsPresident!=null && user.IsPresident == PresidentType.Admin ? true : false;
+            return user.IsPresident != null && user.IsPresident == PresidentType.Admin ? true : false;
         }
     }
 }

@@ -30,7 +30,7 @@ namespace MSHB.Reservation.Layers.L02_DataLayer
  
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseSqlServer(
-            @"Data Source=103.215.222.35;Initial Catalog=ir_Reservation;Persist Security Info=True;User ID=ir_reservation;Password=Aa123456;");
+            @"Data Source=.;Initial Catalog=ir_Reservation;Persist Security Info=True;User ID=sa;Password=Aa123456;");
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 

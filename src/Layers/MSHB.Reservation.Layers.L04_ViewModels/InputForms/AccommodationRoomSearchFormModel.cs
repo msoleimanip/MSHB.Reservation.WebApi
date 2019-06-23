@@ -18,6 +18,6 @@ namespace MSHB.Reservation.Layers.L04_ViewModels.InputForms
         public int? Bed { get; set; }
         public int? Capacity { get; set; }
         [Required(ErrorMessage = "بایستی ابتدا اقامتگاه مشخص شود")]
-        public long CityId { get; set; }
+        public long? CityId { get; set; }
     }
 }

@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using MSHB.Reservation.Layers.L03_Services.Contracts;
 using MSHB.Reservation.Layers.L04_ViewModels.InputForms;
 using MSHB.Reservation.Presentation.WebCore;
+using MSHB.Reservation.Presentation.WebUI.filters;
 using MSHB.Reservation.Shared.Common.GuardToolkit;
 
 namespace MSHB.Reservation.Presentation.WebUI.Controllers
@@ -46,7 +47,8 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
         }
 
         [HttpGet("[action]"), HttpPost("[action]")]
-        public async Task<IActionResult> GetUserAccommodationRoomForUser([FromQuery] AccommodationRoomSearchFormModel accommodationForm)
+        [ValidateModelAttribute]
+        public async Task<IActionResult> GetUserAccommodationRoomForUser([FromBody] AccommodationRoomSearchFormModel accommodationForm)
         {
             var resp = await _accommodationService.GetUserAccommodationRoomForUserAsync(HttpContext.GetUser(), accommodationForm);
             return Ok(GetRequestResult(resp));

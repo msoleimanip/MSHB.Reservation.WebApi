@@ -6,7 +6,7 @@ namespace MSHB.Reservation.Layers.L01_Entities.Enums
 {
     public enum RoomType
     {
-        Suit,
+        Suit=1,
         Room,
         Villa,
         Appartment,

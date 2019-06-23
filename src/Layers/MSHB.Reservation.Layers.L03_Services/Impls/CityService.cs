@@ -40,8 +40,8 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                         CityName = city.CityName,
                         Description = city.Description,
                         ParentId = city.ParentId,
-                        DeactiveStartTime=city.DeactiveStartTime,
-                        IsActivated=city.IsActivated
+                        DeactiveStartTime = city.DeactiveStartTime,
+                        IsActivated = city.IsActivated
                     };
                 }
                 throw new ReservationGlobalException(CityServiceErrors.CityNotFoundError);
@@ -55,24 +55,41 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
         public async Task<List<JsTreeNode>> GetCityByUserAsync(User user)
         {
             var cities = new List<City>();
+            bool flagFilterTree = true;
             if (user.IsAdmin())
             {
+                flagFilterTree = false;
                 cities = await _context.Citys.ToListAsync();
             }
             else
             {
-                cities = await _context.Citys.Where(x => x.ParentId == user.CityId).SelectMany(x => x.Children).ToListAsync();
+                user.CityId = (await _context.Users.FirstAsync(u => u.Id == user.Id)).CityId;
+                cities = await _context.Citys.Where(x => x.Id == user.CityId).SelectMany(x => x.Children).ToListAsync();
             }
             var Citynodes = new List<JsTreeNode>();
             cities.ForEach(or =>
             {
-                if (or.ParentId == null)
+                if (!flagFilterTree)
                 {
-                    JsTreeNode parentNode = new JsTreeNode();
-                    parentNode.id = or.Id.ToString();
-                    parentNode.text = or.CityName;
-                    parentNode = FillChild(cities, parentNode, or.Id, null,false);
-                    Citynodes.Add(parentNode);
+                    if (or.ParentId == null)
+                    {
+                        JsTreeNode parentNode = new JsTreeNode();
+                        parentNode.id = or.Id.ToString();
+                        parentNode.text = or.CityName;
+                        parentNode = FillChild(cities, parentNode, or.Id, null, false);
+                        Citynodes.Add(parentNode);
+                    }
+                }
+                else
+                {
+                    if (or.ParentId == user.CityId)
+                    {
+                        JsTreeNode parentNode = new JsTreeNode();
+                        parentNode.id = or.Id.ToString();
+                        parentNode.text = or.CityName;
+                        parentNode = FillChild(or.Children.ToList(), parentNode, or.Id, null, false);
+                        Citynodes.Add(parentNode);
+                    }
                 }
 
             });
@@ -82,45 +99,71 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
         public async Task<List<JsTreeNode>> GetUserCityForUserAsync(User user, Guid userId)
         {
             var UserCityId = (await _context.Users.FindAsync(userId))?.CityId;
+            bool flagFilterTree = true;
 
             var cities = new List<City>();
             if (user.IsAdmin())
             {
+                flagFilterTree = false;
                 cities = await _context.Citys.ToListAsync();
             }
             else
             {
-                cities = await _context.Citys.Where(x => x.ParentId == user.CityId).SelectMany(x => x.Children).ToListAsync();
+                cities = await _context.Citys.Where(x => x.ParentId == UserCityId).SelectMany(x => x.Children).ToListAsync();
             }
             var citynodes = new List<JsTreeNode>();
-            
+
             cities.ForEach(or =>
             {
-                if (or.ParentId == null)
+                if (flagFilterTree)
                 {
-                    var flagHasIcon = false;
-                    JsTreeNode parentNode = new JsTreeNode();
-                    parentNode.id = or.Id.ToString();
-                    parentNode.text = or.CityName;
-                    if (UserCityId.HasValue && or.Id == UserCityId.Value)
+                    if (or.ParentId == null)
                     {
-                        parentNode.state.selected = true;
-                       
-                    }
-                    if (or.IsActivated.HasValue && !or.IsActivated.Value)
-                    {
-                        parentNode.icon = "glyphicon glyphicon-flash";
-                        flagHasIcon = true;
-                    }
-                    parentNode = FillChild(cities, parentNode, or.Id, UserCityId,flagHasIcon);
-                    citynodes.Add(parentNode);
-                }
+                        var flagHasIcon = false;
+                        JsTreeNode parentNode = new JsTreeNode();
+                        parentNode.id = or.Id.ToString();
+                        parentNode.text = or.CityName;
+                        if (UserCityId.HasValue && or.Id == UserCityId.Value)
+                        {
+                            parentNode.state.selected = true;
 
+                        }
+                        if (or.IsActivated.HasValue && !or.IsActivated.Value)
+                        {
+                            parentNode.icon = "glyphicon glyphicon-flash";
+                            flagHasIcon = true;
+                        }
+                        parentNode = FillChild(or.Children.ToList(), parentNode, or.Id, UserCityId, flagHasIcon);
+                        citynodes.Add(parentNode);
+                    }
+                }
+                else
+                {
+                    if (or.ParentId == UserCityId)
+                    {
+                        var flagHasIcon = false;
+                        JsTreeNode parentNode = new JsTreeNode();
+                        parentNode.id = or.Id.ToString();
+                        parentNode.text = or.CityName;
+                        if (UserCityId.HasValue && or.Id == UserCityId.Value)
+                        {
+                            parentNode.state.selected = true;
+
+                        }
+                        if (or.IsActivated.HasValue && !or.IsActivated.Value)
+                        {
+                            parentNode.icon = "glyphicon glyphicon-flash";
+                            flagHasIcon = true;
+                        }
+                        parentNode = FillChild(or.Children.ToList(), parentNode, or.Id, UserCityId, flagHasIcon);
+                        citynodes.Add(parentNode);
+                    }
+                }
             });
             return citynodes;
         }
 
-        private JsTreeNode FillChild(List<City> Citys, JsTreeNode parentNode, long Id, long? UserCityId,bool FlagHasIcon)
+        private JsTreeNode FillChild(List<City> Citys, JsTreeNode parentNode, long Id, long? UserCityId, bool FlagHasIcon)
         {
             if (Citys.Count > 0)
             {
@@ -134,15 +177,15 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                         if (UserCityId.HasValue && or.Id == UserCityId.Value)
                         {
                             parentNodeChild.state.selected = true;
-                           
+
                         }
-                        if ((or.IsActivated.HasValue && !or.IsActivated.Value)|| FlagHasIcon)
+                        if ((or.IsActivated.HasValue && !or.IsActivated.Value) || FlagHasIcon)
                         {
                             parentNodeChild.icon = "glyphicon glyphicon-flash";
                             FlagHasIcon = true;
                         }
                         parentNode.children.Add(parentNodeChild);
-                        FillChild(Citys, parentNodeChild, or.Id, UserCityId,FlagHasIcon);
+                        FillChild(or.Children.ToList(), parentNodeChild, or.Id, UserCityId, FlagHasIcon);
                     }
                 });
             }
@@ -262,7 +305,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                 _context.Citys.Remove(child);
             }
         }
-        public async  Task<bool> DeactivateCityAsync(User user, DeactivateCityFormModel cityForm)
+        public async Task<bool> DeactivateCityAsync(User user, DeactivateCityFormModel cityForm)
         {
             try
             {

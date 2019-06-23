@@ -10,6 +10,7 @@ using MSHB.Reservation.Layers.L03_Services.Contracts;
 using MSHB.Reservation.Layers.L04_ViewModels.InputForms;
 using MSHB.Reservation.Layers.L04_ViewModels.ViewModels;
 using MSHB.Reservation.Presentation.WebCore;
+using MSHB.Reservation.Presentation.WebUI.filters;
 using MSHB.Reservation.Shared.Common.GuardToolkit;
 using Newtonsoft.Json.Linq;
 
@@ -39,6 +40,7 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
 
         [AllowAnonymous]
         [HttpPost("[action]")]
+        [ValidateModelAttribute]
         public async Task<IActionResult> Login([FromBody]  LoginViewModels loginUser)
         {
            

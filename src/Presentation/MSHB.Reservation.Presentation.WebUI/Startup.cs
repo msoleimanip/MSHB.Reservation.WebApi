@@ -27,6 +27,7 @@ using MSHB.Reservation.Layers.L03_Services.Contracts;
 using MSHB.Reservation.Layers.L03_Services.Impls;
 using MSHB.Reservation.Layers.L03_Services.Initialization;
 using MSHB.Reservation.Presentation.WebUI.Utils;
+using MSHB.Reservation.Shared.Common.PersianToolkit;
 using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Swagger;
 
@@ -166,7 +167,9 @@ namespace MSHB.Reservation.Presentation.WebUI
             services.AddMvc(options =>
             {
                 options.UseYeKeModelBinder();
-                options.AllowEmptyInputInBodyModelBinding = true;
+                options.UseCustomStringModelBinder();
+
+
                 // options.Filters.Add(new NoBrowserCacheAttribute());
             }).AddJsonOptions(jsonOptions =>
             {
