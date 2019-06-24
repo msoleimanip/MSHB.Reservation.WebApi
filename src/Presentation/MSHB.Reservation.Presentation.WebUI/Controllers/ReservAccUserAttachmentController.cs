@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using MSHB.Reservation.Layers.L03_Services.Contracts;
 using MSHB.Reservation.Layers.L04_ViewModels.InputForms;
 using MSHB.Reservation.Presentation.WebCore;
+using MSHB.Reservation.Presentation.WebUI.filters;
 using MSHB.Reservation.Shared.Common.GuardToolkit;
 
 namespace MSHB.Reservation.Presentation.WebUI.Controllers
@@ -25,6 +26,7 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
         }
 
            [HttpGet("[action]"), HttpPost("[action]")]
+        [ValidateModelAttribute]
         public async Task<IActionResult> AddReservationUserAttachmentRoom([FromBody] AddReservationUserAttachmentFormModel reservationForm)
         {
             var resp = await _accommodationUserAttachmentServiceService.AddReservationUserAttachmentRoomAsync(HttpContext.GetUser(), reservationForm);
@@ -32,12 +34,14 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
         }
 
         [HttpGet("[action]"), HttpPost("[action]")]
+        [ValidateModelAttribute]
         public async Task<IActionResult> EditReservationUserAttachmentRoom([FromBody] EditReservationUserAttachmentFormModel reservationForm)
         {
             var resp = await _accommodationUserAttachmentServiceService.EditReservationUserAttachmentRoomAsync(HttpContext.GetUser(), reservationForm);
             return Ok(GetRequestResult(resp));
         }
         [HttpGet("[action]"), HttpPost("[action]")]
+        [ValidateModelAttribute]
         public async Task<IActionResult> DeleteReservationUserAttachmentRoom([FromBody]  [Required(ErrorMessage = "لیست همراهان ارسال شده برای حذف نامعتبر است")]List<long> reservationFormIds)
         {
             var resp = await _accommodationUserAttachmentServiceService.DeleteReservationUserAttachmentAsync(HttpContext.GetUser(), reservationFormIds);
@@ -45,6 +49,7 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
         }
 
         [HttpGet("[action]"), HttpPost("[action]")]
+        [ValidateModelAttribute]
         public async Task<IActionResult> GetReservationUserAttachment([FromQuery] ReservationUserAttachmentSearchFormModel reservationForm)
         {
             var resp = await _accommodationUserAttachmentServiceService.GetReservationUserAttachmentAsync(HttpContext.GetUser(), reservationForm);

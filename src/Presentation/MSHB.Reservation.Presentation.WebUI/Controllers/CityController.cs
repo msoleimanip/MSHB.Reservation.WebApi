@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using MSHB.Reservation.Layers.L03_Services.Contracts;
 using MSHB.Reservation.Layers.L04_ViewModels.InputForms;
 using MSHB.Reservation.Presentation.WebCore;
+using MSHB.Reservation.Presentation.WebUI.filters;
 using MSHB.Reservation.Shared.Common.GuardToolkit;
 
 namespace MSHB.Reservation.Presentation.WebUI.Controllers
@@ -27,6 +28,8 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
         }
 
         [HttpGet("[action]")]
+        [ValidateModelAttribute]
+
         public async Task<IActionResult> Get([FromQuery] long Id)
         {
             return Ok(GetRequestResult(await _CityService.GetAsync(HttpContext.GetUser(),Id)));
@@ -34,6 +37,7 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
 
 
         [HttpGet("[action]"), HttpPost("[action]")]
+        [ValidateModelAttribute]
         public async Task<IActionResult> GetCityByUser()
         {           
             var Citys =await _CityService.GetCityByUserAsync(HttpContext.GetUser());
@@ -41,6 +45,7 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
         }
 
         [HttpGet("[action]"), HttpPost("[action]")]
+        [ValidateModelAttribute]
         public async Task<IActionResult> GetUserCityForUser([FromQuery] Guid userId)
         {
             var Citys = await _CityService.GetUserCityForUserAsync(HttpContext.GetUser(), userId);
@@ -48,6 +53,7 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
         }
 
         [HttpGet("[action]"), HttpPost("[action]")]
+        [ValidateModelAttribute]
         public async Task<IActionResult> AddCity([FromBody] AddcityFormModel cityForm)
         {            
             var Citys = await _CityService.AddCityAsync(HttpContext.GetUser(), cityForm);
@@ -55,6 +61,7 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
         }
 
         [HttpGet("[action]"), HttpPost("[action]")]
+        [ValidateModelAttribute]
         public async Task<IActionResult> EditCity([FromBody] EditcityFormModel cityForm)
         {
             var Citys = await _CityService.EditCityAsync(HttpContext.GetUser(),cityForm);
@@ -62,6 +69,7 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
         }
 
         [HttpGet("[action]"), HttpPost("[action]")]
+        [ValidateModelAttribute]
         public async Task<IActionResult> DeactivateCity([FromBody] DeactivateCityFormModel cityForm)
         {
             var Citys = await _CityService.DeactivateCityAsync(HttpContext.GetUser(), cityForm);
@@ -69,6 +77,7 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
         }
 
         [HttpGet("[action]"), HttpPost("[action]")]
+        [ValidateModelAttribute]
         public async Task<IActionResult> DeleteCity([FromBody]
         [Required(ErrorMessage = "لیست اقامتگاه های ارسال شده برای حذف نامعتبر است")]List<long> CityIds)
         {

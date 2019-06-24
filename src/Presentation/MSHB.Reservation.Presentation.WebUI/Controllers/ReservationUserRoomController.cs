@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using MSHB.Reservation.Layers.L03_Services.Contracts;
 using MSHB.Reservation.Layers.L04_ViewModels.InputForms;
 using MSHB.Reservation.Presentation.WebCore;
+using MSHB.Reservation.Presentation.WebUI.filters;
 using MSHB.Reservation.Shared.Common.GuardToolkit;
 
 namespace MSHB.Reservation.Presentation.WebUI.Controllers
@@ -26,6 +27,7 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
         }
 
         [HttpGet("[action]"), HttpPost("[action]")]
+        [ValidateModelAttribute]
         public async Task<IActionResult> AddReservationRoom([FromBody] AddReservationRoomFormModel reservationForm)
         {
             var resp = await _reservationService.AddReservationRoomAsync(HttpContext.GetUser(), reservationForm);
@@ -33,12 +35,14 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
         }
 
         [HttpGet("[action]"), HttpPost("[action]")]
+        [ValidateModelAttribute]
         public async Task<IActionResult> EditReservationRoom([FromBody] EditReservationRoomFormModel reservationForm)
         {
             var resp = await _reservationService.EditReservationRoomAsync(HttpContext.GetUser(), reservationForm);
             return Ok(GetRequestResult(resp));
         }
         [HttpGet("[action]"), HttpPost("[action]")]
+        [ValidateModelAttribute]
         public async Task<IActionResult> DeleteReservationRoom([FromBody]  [Required(ErrorMessage = "لیست رزروهای اقامتگاه ارسال شده برای حذف نامعتبر است")]List<long> reservationFormIds)
         {
             var resp = await _reservationService.DeleteReservationRoomAsync(HttpContext.GetUser(), reservationFormIds);
@@ -46,6 +50,7 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
         }
 
         [HttpGet("[action]"), HttpPost("[action]")]
+        [ValidateModelAttribute]
         public async Task<IActionResult> GetUsereservationRoomForUser([FromQuery] ReservationRoomSearchFormModel reservationForm)
         {
             var resp = await _reservationService.GetUserReservationRoomForUserAsync(HttpContext.GetUser(), reservationForm);

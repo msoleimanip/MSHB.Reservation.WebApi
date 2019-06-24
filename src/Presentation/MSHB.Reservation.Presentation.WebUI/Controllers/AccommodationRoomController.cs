@@ -27,6 +27,7 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
         }
 
         [HttpGet("[action]"), HttpPost("[action]")]
+        [ValidateModelAttribute]
         public async Task<IActionResult> AddAccommodationRoom([FromBody] AddAccommodationRoomFormModel accommodationForm)
         {
             var resp = await _accommodationService.AddAccommodationRoom(HttpContext.GetUser(), accommodationForm);
@@ -34,12 +35,14 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
         }
 
         [HttpGet("[action]"), HttpPost("[action]")]
+        [ValidateModelAttribute]
         public async Task<IActionResult> EditAccommodationRoom([FromBody] EditAccommodationRoomFormModel accommodationForm)
         {
             var resp = await _accommodationService.EditAccommodationRoom(HttpContext.GetUser(), accommodationForm);
             return Ok(GetRequestResult(resp));
         }
         [HttpGet("[action]"), HttpPost("[action]")]
+        [ValidateModelAttribute]
         public async Task<IActionResult> DeleteAccommodationRoom([FromBody]  [Required(ErrorMessage = "لیست مکان های اقامتگاه ارسال شده برای حذف نامعتبر است")]List<long> accommodationFormIds)
         {
             var resp = await _accommodationService.DeleteAccommodationRoom(HttpContext.GetUser(), accommodationFormIds);
@@ -55,6 +58,7 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
         }
 
         [HttpGet("[action]"), HttpPost("[action]")]
+        [ValidateModelAttribute]
         public async Task<IActionResult> DeactivateAccommodationRoom([FromBody] DeactivateAccommodationRoomFormModel accommodationForm)
         {
             var resp = await _accommodationService.DeactivateAccommodationRoomAsync(HttpContext.GetUser(), accommodationForm);

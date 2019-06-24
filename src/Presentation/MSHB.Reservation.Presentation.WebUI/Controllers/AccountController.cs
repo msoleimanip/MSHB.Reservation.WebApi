@@ -54,6 +54,7 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
         [AllowAnonymous]
        
         [HttpPost("[action]")]
+
         public async Task<IActionResult> RefreshToken([FromBody]JToken jsonBody)
         {
             var refreshToken = jsonBody.Value<string>("refreshToken");
@@ -63,6 +64,7 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
         }
 
         [AllowAnonymous]
+        [ValidateModelAttribute]
         public async Task<IActionResult> Logout([FromBody]string refreshToken)
         {
             var claimsIdentity = this.User.Identity as ClaimsIdentity;
@@ -78,7 +80,8 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
 
 
         [HttpGet("[action]"), HttpPost("[action]")]
-        
+        [ValidateModelAttribute]
+
         public async Task<IActionResult> AddUser([FromBody] AddUserFormModel userForm)
         {
             var user = await _usersService.AddUserAsync(HttpContext.GetUser(), userForm);
@@ -86,6 +89,7 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
         }
 
         [HttpGet("[action]"), HttpPost("[action]")]
+        [ValidateModelAttribute]
         public async Task<IActionResult> EditUser([FromBody]  EditUserFormModel userForm)
         {
             var user = await _usersService.EditUserAsync(HttpContext.GetUser(), userForm);
@@ -93,6 +97,7 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
         }
 
         [HttpGet("[action]"), HttpPost("[action]")]
+        [ValidateModelAttribute]
         public async Task<IActionResult> ChangeActivateUser([FromBody]
                                                                 ChangeActivationFormModel userForm)
         {
@@ -101,6 +106,7 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
         }
 
         [HttpGet("[action]"), HttpPost("[action]")]
+        [ValidateModelAttribute]
         public async Task<IActionResult> ChangePassword([FromBody]
                                                                 ChangePasswordFormModel userForm)
         {
@@ -109,6 +115,7 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
         }
 
         [HttpGet("[action]"), HttpPost("[action]")]
+        [ValidateModelAttribute]
         public async Task<IActionResult> GetUsers([FromBody] SearchUserFormModel searchUserForm)
         {
             return Ok(GetRequestResult(await _usersService.GetUsersAsync(searchUserForm)));
@@ -116,6 +123,7 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
         }
 
         [HttpGet("[action]"), HttpPost("[action]")]
+        [ValidateModelAttribute]
         public async Task<IActionResult> UserCityAssign([FromBody]  UserCityAssignFormModel userCityAssignForm)
         {
             var userCityAssign = await _usersService.UserCityAssignAsync(HttpContext.GetUser(), userCityAssignForm);
@@ -125,6 +133,7 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
        
 
         [HttpGet("[action]")]
+        [ValidateModelAttribute]
         public async Task<IActionResult> GetUserById([FromQuery] Guid Id)
         {
             return Ok(GetRequestResult(await _usersService.GetUserById(HttpContext.GetUser(), Id)));
