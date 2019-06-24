@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MSHB.Reservation.Layers.L01_Entities.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
@@ -13,7 +14,7 @@ namespace MSHB.Reservation.Layers.L04_ViewModels.InputForms
         public long RoomPrice { get; set; }       
         public int? BedRoom { get; set; }
         
-        public int RoomType { get; set; }
+        public RoomType RoomType { get; set; }
         public int Rank { get; set; }
         [Required(ErrorMessage = "باید برای مکان اقامتگاه، تعداد تخت لحاظ کنید.")]
         public int Bed { get; set; }
