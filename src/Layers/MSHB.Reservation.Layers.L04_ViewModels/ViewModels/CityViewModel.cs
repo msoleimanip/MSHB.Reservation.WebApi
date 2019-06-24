@@ -14,6 +14,8 @@ namespace MSHB.Reservation.Layers.L04_ViewModels.ViewModels
         public long? ParentId { get; set; }
 
         public bool? IsActivated { get; set; }
+        public double? Longitude { get; set; }
+        public double? Latitude { get; set; }
         public DateTime? DeactiveStartTime { get; set; }
     }
 }

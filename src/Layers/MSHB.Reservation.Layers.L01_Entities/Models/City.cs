@@ -18,6 +18,9 @@ namespace MSHB.Reservation.Layers.L01_Entities.Models
 
         public long? ParentId { get; set; }
 
+        public double? Longitude { get; set; }
+        public double? Latitude { get; set; }
+
         public bool? IsActivated { get; set; }
         public DateTime? DeactiveStartTime { get; set; }
 

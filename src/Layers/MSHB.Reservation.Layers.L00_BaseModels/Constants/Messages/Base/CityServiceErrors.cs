@@ -29,5 +29,10 @@ namespace MSHB.Reservation.Layers.L00_BaseModels.Constants.Messages.Base
 
         public static ReservationErrorMessage ChangeStatusError=
             new ReservationErrorMessage("ONE-1010", "در تغییر وضعیت اقامتگاه خطایی رخ داده است");
+        public static ReservationErrorMessage CityLocationError =
+           new ReservationErrorMessage("ONE-1011", "در تنظیم موقعیت مکانی خطایی رخ داده است");
+
+
+        
     }
 }

@@ -41,7 +41,10 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                         Description = city.Description,
                         ParentId = city.ParentId,
                         DeactiveStartTime = city.DeactiveStartTime,
-                        IsActivated = city.IsActivated
+                        IsActivated = city.IsActivated,
+                        Latitude=city.Latitude,
+                        Longitude=city.Longitude
+                        
                     };
                 }
                 throw new ReservationGlobalException(CityServiceErrors.CityNotFoundError);
@@ -205,7 +208,9 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                     {
                         Description = cityForm.Description,
                         CityName = cityForm.CityName,
-                        ParentId = cityForm.ParentId
+                        ParentId = cityForm.ParentId,
+                        
+
                     };
                     await _context.Citys.AddAsync(City);
                     await _context.SaveChangesAsync();
@@ -236,6 +241,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                         City.Description = cityForm.Description;
                         City.CityName = cityForm.CityName;
                         City.ParentId = cityForm.ParentId;
+                        
                         City.LastUpdateDate = DateTime.Now;
                         _context.Citys.Update(City);
                         await _context.SaveChangesAsync();
@@ -325,6 +331,29 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
             {
 
                 throw new ReservationGlobalException(CityServiceErrors.ChangeStatusError, ex);
+            }
+        }
+
+        public async Task<bool> SetCityLocationAsync(User user, CityLocationFormModel cityLocationForm)
+        {
+            try
+            {
+                City City = null;
+                City = _context.Citys.FirstOrDefault(c => c.Id == cityLocationForm.CityId);
+                if (City != null)
+                {
+                    City.Longitude = cityLocationForm.Longitude;
+                    City.Latitude = cityLocationForm.Latitude;
+                    _context.Citys.Update(City);
+                    await _context.SaveChangesAsync();
+                    return true;
+                }
+                throw new ReservationGlobalException(CityServiceErrors.EditCityNotExistError);
+            }
+            catch (Exception ex)
+            {
+
+                throw new ReservationGlobalException(CityServiceErrors.CityLocationError, ex);
             }
         }
     }

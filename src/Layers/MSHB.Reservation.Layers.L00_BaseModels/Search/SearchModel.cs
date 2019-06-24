@@ -8,7 +8,7 @@ namespace MSHB.Reservation.Layers.L00_BaseModels.Search
     {
         public SortModel SortModel { get; set; }
         public int PageIndex { get; set; }
-        [Required,MinLength(1)]
+        [Required]
         public int PageSize { get; set; }
     }
 

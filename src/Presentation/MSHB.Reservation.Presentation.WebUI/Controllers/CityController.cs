@@ -84,5 +84,13 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
             var Citys = await _CityService.DeleteCityAsync(HttpContext.GetUser(),CityIds);
             return Ok(GetRequestResult(Citys));
         }
+        [HttpGet("[action]"), HttpPost("[action]")]
+        [ValidateModelAttribute]
+        public async Task<IActionResult> SetCityLocation([FromBody] CityLocationFormModel cityLocationForm
+        )
+        {
+            var Citys = await _CityService.SetCityLocationAsync(HttpContext.GetUser(), cityLocationForm);
+            return Ok(GetRequestResult(Citys));
+        }
     }
 }
