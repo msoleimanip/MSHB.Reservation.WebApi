@@ -31,8 +31,19 @@ namespace MSHB.Reservation.Layers.L00_BaseModels.Constants.Messages.Base
             new ReservationErrorMessage("ONE-1010", "در تغییر وضعیت اقامتگاه خطایی رخ داده است");
         public static ReservationErrorMessage CityLocationError =
            new ReservationErrorMessage("ONE-1011", "در تنظیم موقعیت مکانی خطایی رخ داده است");
+        public static readonly ReservationErrorMessage UploadFileError =
+          new ReservationErrorMessage("ONE-1012", "هنگام آپلود فایل خطایی رخ داده است.");
+        public static readonly ReservationErrorMessage UploadFileValidError =
+          new ReservationErrorMessage("ONE-1013", "فایل ارسالی بایستی معتبر باشد.");
+        public static readonly ReservationErrorMessage ChangeToThumbnailError =
+         new ReservationErrorMessage("ONE-1014", "خطا در تغییر سایز تصویر");
+        public static readonly ReservationErrorMessage NotExistFileAddresstError =
+         new ReservationErrorMessage("ONE-1015", "فایل در پایگاه داده یافت نشد.");
+        public static readonly ReservationErrorMessage FileNotFoundError =
+         new ReservationErrorMessage("ONE-1015", "فایل یافت نشد.");
 
 
-        
+
+
     }
 }

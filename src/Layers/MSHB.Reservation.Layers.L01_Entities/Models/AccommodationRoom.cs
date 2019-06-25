@@ -19,12 +19,15 @@ namespace MSHB.Reservation.Layers.L01_Entities.Models
         public bool? IsActivated { get; set; } = true;
         public int? Capacity { get; set; }
         public string Description { get; set; }
+        public string DeliveryTime { get; set; }
+        public string EvacuationTime { get; set; }
        
         public long? CityId { get; set; }
         [ForeignKey("CityId")]
         public virtual City City { get; set; }
 
         public virtual ICollection<AccommodationUserRoom> AccommodationUserRooms { get; set; }
+       
 
 
     }

@@ -27,7 +27,10 @@ namespace MSHB.Reservation.Layers.L02_DataLayer
         public virtual DbSet<AccommodationUserRoom> AccommodationUserRooms { get; set; }
         public virtual DbSet<AccommodationUserAttachment> AccommodationUserAttachments { get; set; }
         public virtual DbSet<UserConfiguration> UserConfigurations { get; set; }
- 
+        public virtual DbSet<CityAttachment> CityAttachments { get; set; }
+        public virtual DbSet<FileAddress> FileAddresses { get; set; }
+
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseSqlServer(
             @"Data Source=.;Initial Catalog=ir_Reservation;Persist Security Info=True;User ID=sa;Password=Aa123456;");
@@ -160,7 +163,8 @@ namespace MSHB.Reservation.Layers.L02_DataLayer
                 entity.HasIndex(e => e.SystemCode);
 
             });
-
+            modelBuilder.Entity<FileAddress>().HasKey(x => x.FileId);
+            modelBuilder.Entity<FileAddress>().Property(x => x.FileId).HasDefaultValueSql("NEWID()");
 
         }
 

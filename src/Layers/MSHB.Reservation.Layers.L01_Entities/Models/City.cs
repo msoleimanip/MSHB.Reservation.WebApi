@@ -20,6 +20,8 @@ namespace MSHB.Reservation.Layers.L01_Entities.Models
 
         public double? Longitude { get; set; }
         public double? Latitude { get; set; }
+        [MaxLength(250)]
+        public string ImageAddress { get; set; }
 
         public bool? IsActivated { get; set; }
         public DateTime? DeactiveStartTime { get; set; }
@@ -31,5 +33,6 @@ namespace MSHB.Reservation.Layers.L01_Entities.Models
         public virtual ICollection<User> Users { get; set; }
         public virtual ICollection<AccommodationRoom> AccommodationRooms { get; set; }
         public virtual ICollection<AccommodationUserRoom> AccommodationUserRooms { get; set; }
+        public virtual ICollection<CityAttachment> CityAttachments { get; set; }
     }
 }

@@ -5,13 +5,10 @@ using System.Text;
 
 namespace MSHB.Reservation.Layers.L04_ViewModels.InputForms
 {
-    public class CityLocationFormModel
+    public class CityImagesFormModel
     {
         [Required(ErrorMessage = "شناسه اقامتگاه وارد نشده است")]
         public long CityId { get; set; }
-        [Required(ErrorMessage = "وارد کردن طول و عرض جغرافیایی الزامیست.")]
-        public double? Longitude { get; set; }
-        [Required(ErrorMessage = "وارد کردن طول و عرض جغرافیایی الزامیست.")]
-        public double? Latitude { get; set; }
+        public List<Guid> UploadFiles { get; set; }
     }
 }

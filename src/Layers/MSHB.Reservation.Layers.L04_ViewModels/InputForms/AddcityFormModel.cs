@@ -12,6 +12,7 @@ namespace MSHB.Reservation.Layers.L04_ViewModels.InputForms
         public string CityName { get; set; }
         public string Description { get; set; }       
         public long? ParentId { get; set; }
+        public Guid? ImageId { get; set; }
 
     }
 }

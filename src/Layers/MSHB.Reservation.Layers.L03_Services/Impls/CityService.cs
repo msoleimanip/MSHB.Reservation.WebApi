@@ -14,27 +14,35 @@ using MSHB.Reservation.Layers.L02_DataLayer;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using MSHB.Reservation.Layers.L00_BaseModels.Extensions;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Options;
+using MSHB.Reservation.Layers.L00_BaseModels.Settings;
+using System.IO;
+using System.Drawing;
 
 namespace MSHB.Reservation.Layers.L03_Services.Impls
 {
     public class CityService : ICityService
     {
         private readonly ReservationDbContext _context;
+        private readonly IOptionsSnapshot<SiteSettings> _siteSettings;
 
-        public CityService(ReservationDbContext context)
+        public CityService(ReservationDbContext context, IOptionsSnapshot<SiteSettings> siteSettings)
         {
             _context = context;
             _context.CheckArgumentIsNull(nameof(_context));
+            _siteSettings = siteSettings;
+            _siteSettings.CheckArgumentIsNull(nameof(_siteSettings));
         }
 
         public async Task<CityViewModel> GetAsync(User user, long Id)
         {
             try
             {
-                var city = await _context.Citys.FindAsync(Id);
+                var city = await _context.Citys.Include(c=>c.CityAttachments).FirstOrDefaultAsync(c=>c.Id==Id);
                 if (city != null)
                 {
-                    return new CityViewModel()
+                    var cityViewModel= new CityViewModel()
                     {
                         Id = city.Id,
                         CityName = city.CityName,
@@ -42,10 +50,26 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                         ParentId = city.ParentId,
                         DeactiveStartTime = city.DeactiveStartTime,
                         IsActivated = city.IsActivated,
-                        Latitude=city.Latitude,
-                        Longitude=city.Longitude
-                        
+                        Latitude = city.Latitude,
+                        Longitude = city.Longitude,
+                        ImageAddress = new System.Uri(city.ImageAddress).AbsoluteUri,
                     };
+                    city.CityAttachments.ToList().ForEach(c =>
+                    {
+                        var cAtt = new CityAttachmentViewModel()
+                        {
+                            FileSize = c.FileSize,
+                            FileType = c.FileType,
+                            UrlFile = new System.Uri(c.FilePath).AbsoluteUri,
+                            CityId = c.CityId,
+                            Id = c.Id,
+                        };
+                        cityViewModel.CityDetailAttachments.Add(cAtt);
+
+                    });
+                    return cityViewModel;
+
+
                 }
                 throw new ReservationGlobalException(CityServiceErrors.CityNotFoundError);
             }
@@ -212,6 +236,34 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                         
 
                     };
+                    FileAddress fileAddress;
+                    if (cityForm.ImageId != null)
+                    {
+                        fileAddress = await _context.FileAddresses.FindAsync(cityForm.ImageId);
+                        if (fileAddress == null)
+                        {
+                            throw new ReservationGlobalException(CityServiceErrors.NotExistFileAddresstError);
+                        }
+                        try
+                        {
+                            if (!File.Exists(fileAddress.FilePath))
+                            {
+                                throw new ReservationGlobalException(CityServiceErrors.FileNotFoundError);
+                               
+                            }
+                            Image image = Image.FromFile(fileAddress.FilePath);
+                            Image thumb = image.GetThumbnailImage(120, 120, () => false, IntPtr.Zero);
+                            var newPath = Path.ChangeExtension(fileAddress.FilePath, "thumb");
+                            thumb.Save(newPath);
+                            City.ImageAddress = newPath;
+                        }
+                        catch (Exception ex)
+                        {
+
+                            throw new ReservationGlobalException(CityServiceErrors.ChangeToThumbnailError, ex);
+                        }
+
+                    }
                     await _context.Citys.AddAsync(City);
                     await _context.SaveChangesAsync();
                     return City.Id;
@@ -243,6 +295,34 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                         City.ParentId = cityForm.ParentId;
                         
                         City.LastUpdateDate = DateTime.Now;
+                        FileAddress fileAddress;
+                        if (cityForm.ImageId != null)
+                        {
+                            fileAddress = await _context.FileAddresses.FindAsync(cityForm.ImageId);
+                            if (fileAddress == null)
+                            {
+                                throw new ReservationGlobalException(CityServiceErrors.NotExistFileAddresstError);
+                            }
+                            try
+                            {
+                                if (!File.Exists(fileAddress.FilePath))
+                                {
+                                    throw new ReservationGlobalException(CityServiceErrors.FileNotFoundError);
+
+                                }
+                                Image image = Image.FromFile(fileAddress.FilePath);
+                                Image thumb = image.GetThumbnailImage(120, 120, () => false, IntPtr.Zero);
+                                var newPath = Path.ChangeExtension(fileAddress.FilePath, "thumb");
+                                thumb.Save(newPath);
+                                City.ImageAddress = newPath;
+                            }
+                            catch (Exception ex)
+                            {
+
+                                throw new ReservationGlobalException(CityServiceErrors.ChangeToThumbnailError, ex);
+                            }
+
+                        }
                         _context.Citys.Update(City);
                         await _context.SaveChangesAsync();
                         return true;
@@ -354,6 +434,94 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
             {
 
                 throw new ReservationGlobalException(CityServiceErrors.CityLocationError, ex);
+            }
+        }
+
+        public async Task<Guid> UploadFileAsync(User user, IFormFile file)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(file.FileName) || file.Length == 0)
+                {
+                    throw new ReservationGlobalException(CityServiceErrors.UploadFileValidError);
+                }
+                var extension = file.FileName.Split('.')[file.FileName.Split('.').Length - 1];
+                var fileName = Guid.NewGuid().ToString() + extension;
+                var path = Path.Combine(_siteSettings.Value.UserAttachedFile.PhysicalPath, "." + fileName);
+
+                using (var bits = new FileStream(path, FileMode.Create))
+                {
+                    await file.CopyToAsync(bits);
+                }
+                var uploadFile = new FileAddress()
+                {
+                    FilePath = path,
+                    FileType = extension,
+                    UserId = user.Id,
+                    FileSize = file.Length,
+                    CreationDate = DateTime.Now
+                };
+                await _context.FileAddresses.AddAsync(uploadFile);
+                await _context.SaveChangesAsync();
+
+                return uploadFile.FileId;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new ReservationGlobalException(CityServiceErrors.UploadFileError, ex);
+            }
+        }
+
+        public async Task<bool> SetCityImagesAsync(User user, CityImagesFormModel cityLocationForm)
+        {
+            try
+            {
+                City City = null;
+                City = _context.Citys.FirstOrDefault(c => c.Id == cityLocationForm.CityId);
+                if (City != null)
+                {
+                    if (cityLocationForm.UploadFiles != null && cityLocationForm.UploadFiles.Count > 0)
+                    {
+                        var notFoundFiles = 0;
+                        var filesAddress = new List<FileAddress>();
+                        cityLocationForm.UploadFiles.ForEach(uf =>
+                        {
+                            var fileAddress = _context.FileAddresses.Find(uf);
+                            if (fileAddress == null)
+                            {
+                                notFoundFiles++;
+                            }
+                            filesAddress.Add(fileAddress);
+                        });
+                        if (notFoundFiles > 0)
+                        {
+                            throw new ReservationGlobalException(CityServiceErrors.NotExistFileAddresstError);
+                        }
+
+                        filesAddress.ForEach(async fa =>
+                        {
+                            var cityAttachment = new CityAttachment()
+                            {
+                                CityId = City.Id,
+                                FilePath = fa.FilePath,
+                                FileSize = fa.FileSize,
+                                FileType = fa.FileType,
+                            };
+                            await _context.CityAttachments.AddAsync(cityAttachment);
+                        });
+                        await _context.SaveChangesAsync();
+                    }
+                    return true;
+                }
+                throw new ReservationGlobalException(CityServiceErrors.EditCityNotExistError);
+
+
+            }
+            catch (Exception ex)
+            {
+                throw new ReservationGlobalException(CityServiceErrors.AddCityError, ex);
             }
         }
     }

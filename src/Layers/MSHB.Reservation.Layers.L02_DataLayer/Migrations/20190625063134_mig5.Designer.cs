@@ -4,14 +4,16 @@ using MSHB.Reservation.Layers.L02_DataLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
 {
     [DbContext(typeof(ReservationDbContext))]
-    partial class ReservationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190625063134_mig5")]
+    partial class mig5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -19,6 +21,28 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("Relational:Sequence:.SystemCodeSequence", "'SystemCodeSequence', '', '1000', '1', '', '', 'Int64', 'False'")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("MSHB.Reservation.Layers.L01_Entities.Models.AccommodationAttachment", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<long>("AccommodationRoomId");
+
+                    b.Property<string>("FilePath");
+
+                    b.Property<long?>("FileSize");
+
+                    b.Property<string>("FileType")
+                        .HasMaxLength(20);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccommodationRoomId");
+
+                    b.ToTable("AccommodationAttachments");
+                });
 
             modelBuilder.Entity("MSHB.Reservation.Layers.L01_Entities.Models.AccommodationRoom", b =>
                 {
@@ -39,6 +63,9 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
                     b.Property<string>("Description");
 
                     b.Property<string>("EvacuationTime");
+
+                    b.Property<string>("ImageAddress")
+                        .HasMaxLength(250);
 
                     b.Property<bool?>("IsActivated");
 
@@ -192,9 +219,6 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
 
                     b.Property<string>("Description");
 
-                    b.Property<string>("ImageAddress")
-                        .HasMaxLength(250);
-
                     b.Property<bool?>("IsActivated");
 
                     b.Property<DateTime?>("LastUpdateDate");
@@ -212,52 +236,6 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
                     b.HasIndex("ParentId");
 
                     b.ToTable("City_T");
-                });
-
-            modelBuilder.Entity("MSHB.Reservation.Layers.L01_Entities.Models.CityAttachment", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<long>("CityId");
-
-                    b.Property<string>("FilePath");
-
-                    b.Property<long?>("FileSize");
-
-                    b.Property<string>("FileType")
-                        .HasMaxLength(20);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CityId");
-
-                    b.ToTable("CityAttachments");
-                });
-
-            modelBuilder.Entity("MSHB.Reservation.Layers.L01_Entities.Models.FileAddress", b =>
-                {
-                    b.Property<Guid>("FileId")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValueSql("NEWID()");
-
-                    b.Property<DateTime>("CreationDate");
-
-                    b.Property<string>("FilePath");
-
-                    b.Property<long?>("FileSize");
-
-                    b.Property<string>("FileType")
-                        .HasMaxLength(20);
-
-                    b.Property<Guid>("UserId");
-
-                    b.HasKey("FileId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("FileAddresses");
                 });
 
             modelBuilder.Entity("MSHB.Reservation.Layers.L01_Entities.Models.GroupAuth", b =>
@@ -447,6 +425,14 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
                     b.ToTable("UserToken_T");
                 });
 
+            modelBuilder.Entity("MSHB.Reservation.Layers.L01_Entities.Models.AccommodationAttachment", b =>
+                {
+                    b.HasOne("MSHB.Reservation.Layers.L01_Entities.Models.AccommodationRoom", "AccommodationRoom")
+                        .WithMany("AccommodationAttachments")
+                        .HasForeignKey("AccommodationRoomId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("MSHB.Reservation.Layers.L01_Entities.Models.AccommodationRoom", b =>
                 {
                     b.HasOne("MSHB.Reservation.Layers.L01_Entities.Models.City", "City")
@@ -483,22 +469,6 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
                     b.HasOne("MSHB.Reservation.Layers.L01_Entities.Models.City", "Parent")
                         .WithMany("Children")
                         .HasForeignKey("ParentId");
-                });
-
-            modelBuilder.Entity("MSHB.Reservation.Layers.L01_Entities.Models.CityAttachment", b =>
-                {
-                    b.HasOne("MSHB.Reservation.Layers.L01_Entities.Models.City", "City")
-                        .WithMany("CityAttachments")
-                        .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("MSHB.Reservation.Layers.L01_Entities.Models.FileAddress", b =>
-                {
-                    b.HasOne("MSHB.Reservation.Layers.L01_Entities.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("MSHB.Reservation.Layers.L01_Entities.Models.GroupAuthRole", b =>

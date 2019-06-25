@@ -1,4 +1,5 @@
-﻿using MSHB.Reservation.Layers.L01_Entities.Models;
+﻿using Microsoft.AspNetCore.Http;
+using MSHB.Reservation.Layers.L01_Entities.Models;
 using MSHB.Reservation.Layers.L04_ViewModels.InputForms;
 using MSHB.Reservation.Layers.L04_ViewModels.Tree;
 using MSHB.Reservation.Layers.L04_ViewModels.ViewModels;
@@ -19,5 +20,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Contracts
         Task<bool> DeleteCityAsync(User user, List<long> CityIds);
         Task<bool> DeactivateCityAsync(User user, DeactivateCityFormModel cityForm);
         Task<bool> SetCityLocationAsync(User user, CityLocationFormModel cityLocationForm);
+        Task<Guid> UploadFileAsync(User user, IFormFile file);
+        Task<bool> SetCityImagesAsync(User user, CityImagesFormModel cityLocationForm);
     }
 }

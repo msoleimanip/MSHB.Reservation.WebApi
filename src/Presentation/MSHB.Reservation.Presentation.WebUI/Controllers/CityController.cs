@@ -92,5 +92,20 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
             var Citys = await _CityService.SetCityLocationAsync(HttpContext.GetUser(), cityLocationForm);
             return Ok(GetRequestResult(Citys));
         }
+
+        [HttpGet("[action]"), HttpPost("[action]")]
+        public async Task<IActionResult> UploadFile(IFormFile file)
+        {
+            return Ok(GetRequestResult(await _CityService.UploadFileAsync(HttpContext.GetUser(), file)));
+        }
+
+        [HttpGet("[action]"), HttpPost("[action]")]
+        [ValidateModelAttribute]
+        public async Task<IActionResult> SetCityImages([FromBody] CityImagesFormModel cityImageForm
+        )
+        {
+            var Citys = await _CityService.SetCityImagesAsync(HttpContext.GetUser(), cityImageForm);
+            return Ok(GetRequestResult(Citys));
+        }
     }
 }

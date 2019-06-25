@@ -4,14 +4,16 @@ using MSHB.Reservation.Layers.L02_DataLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
 {
     [DbContext(typeof(ReservationDbContext))]
-    partial class ReservationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190625065423_mig7")]
+    partial class mig7
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -488,7 +490,7 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
             modelBuilder.Entity("MSHB.Reservation.Layers.L01_Entities.Models.CityAttachment", b =>
                 {
                     b.HasOne("MSHB.Reservation.Layers.L01_Entities.Models.City", "City")
-                        .WithMany("CityAttachments")
+                        .WithMany("AccommodationAttachments")
                         .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
