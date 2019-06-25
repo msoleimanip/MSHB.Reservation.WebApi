@@ -6,6 +6,10 @@ namespace MSHB.Reservation.Layers.L04_ViewModels.ViewModels
 {
     public class CityViewModel
     {
+        public CityViewModel()
+        {
+            CityDetailAttachments = new List<CityAttachmentViewModel>();
+        }
         public long Id { get; set; }
         public string CityName { get; set; }
 
