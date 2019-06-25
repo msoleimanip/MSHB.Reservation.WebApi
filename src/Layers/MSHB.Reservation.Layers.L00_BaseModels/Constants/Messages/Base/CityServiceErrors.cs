@@ -41,6 +41,10 @@ namespace MSHB.Reservation.Layers.L00_BaseModels.Constants.Messages.Base
          new ReservationErrorMessage("ONE-1015", "فایل در پایگاه داده یافت نشد.");
         public static readonly ReservationErrorMessage FileNotFoundError =
          new ReservationErrorMessage("ONE-1015", "فایل یافت نشد.");
+        public static readonly ReservationErrorMessage DeleteAttachmentCityError =
+         new ReservationErrorMessage("ONE-1016", "خطا در حذف ضمیمه های اقامتگاه.");
+
+        
 
 
 

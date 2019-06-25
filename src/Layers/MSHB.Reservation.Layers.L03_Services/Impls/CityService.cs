@@ -524,5 +524,27 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                 throw new ReservationGlobalException(CityServiceErrors.AddCityError, ex);
             }
         }
+
+        public async Task<bool> DeleteAttachmentCityAsync(User user, List<long> deleteAttachmentCityIds)
+        {
+            try
+            {
+
+                foreach (var deleteAttachmentCityId in deleteAttachmentCityIds)
+                {
+                    
+                    var attCity = await _context.CityAttachments.FirstOrDefaultAsync(p => p.Id == deleteAttachmentCityId);
+                    if (attCity!=null)                   
+                    _context.CityAttachments.Remove(attCity);
+                }
+                await _context.SaveChangesAsync();
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                throw new ReservationGlobalException(CityServiceErrors.DeleteAttachmentCityError, ex);
+            }
+        }
     }
 }

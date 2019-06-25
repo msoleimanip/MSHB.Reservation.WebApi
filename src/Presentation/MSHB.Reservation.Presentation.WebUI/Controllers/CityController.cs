@@ -107,5 +107,14 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
             var Citys = await _CityService.SetCityImagesAsync(HttpContext.GetUser(), cityImageForm);
             return Ok(GetRequestResult(Citys));
         }
+
+        [HttpGet("[action]"), HttpPost("[action]")]
+        [ValidateModelAttribute]
+        public async Task<IActionResult> DeleteAttachmentCity([FromBody]
+        [Required(ErrorMessage = "لیست تصاویر ارسال شده برای حذف نامعتبر است")]List<long> deleteAttachmentCityId)
+        {
+            var Citys = await _CityService.DeleteAttachmentCityAsync(HttpContext.GetUser(), deleteAttachmentCityId);
+            return Ok(GetRequestResult(Citys));
+        }
     }
 }
