@@ -36,8 +36,8 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                     throw new ReservationGlobalException(UploadServiceErrors.UploadFileValidError);
                 }
                 var extension = file.FileName.Split('.')[file.FileName.Split('.').Length - 1];
-                var fileName = Guid.NewGuid().ToString() + extension;
-                var path = Path.Combine(_siteSettings.Value.UserAttachedFile.PhysicalPath, "." + fileName);
+                var fileName = Guid.NewGuid().ToString()+"."+ extension;
+                var path = Path.Combine(_siteSettings.Value.UserAttachedFile.PhysicalPath,  fileName);
 
                 using (var bits = new FileStream(path, FileMode.Create))
                 {
@@ -49,7 +49,8 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                     FileType = extension,
                     UserId = user.Id,
                     FileSize = file.Length,
-                    CreationDate = DateTime.Now
+                    CreationDate = DateTime.Now,
+                    
                 };
                 await _context.FileAddresses.AddAsync(uploadFile);
                 await _context.SaveChangesAsync();

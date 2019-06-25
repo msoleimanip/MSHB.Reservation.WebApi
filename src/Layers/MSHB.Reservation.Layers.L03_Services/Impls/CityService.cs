@@ -25,23 +25,22 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
     public class CityService : ICityService
     {
         private readonly ReservationDbContext _context;
-        
+
 
         public CityService(ReservationDbContext context)
         {
             _context = context;
             _context.CheckArgumentIsNull(nameof(_context));
-    
-        }
 
+        }
         public async Task<CityViewModel> GetAsync(User user, long Id)
         {
             try
             {
-                var city = await _context.Citys.Include(c=>c.CityAttachments).FirstOrDefaultAsync(c=>c.Id==Id);
+                var city = await _context.Citys.Include(c => c.CityAttachments).FirstOrDefaultAsync(c => c.Id == Id);
                 if (city != null)
                 {
-                    var cityViewModel= new CityViewModel()
+                    var cityViewModel = new CityViewModel()
                     {
                         Id = city.Id,
                         CityName = city.CityName,
@@ -51,7 +50,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                         IsActivated = city.IsActivated,
                         Latitude = city.Latitude,
                         Longitude = city.Longitude,
-                        ImageAddress = !string.IsNullOrEmpty(city.ImageAddress)?new System.Uri(city.ImageAddress).AbsoluteUri:"",
+                        ImageAddress = !string.IsNullOrEmpty(city.ImageAddress) ? new System.Uri(city.ImageAddress).AbsoluteUri : "",
                     };
                     city.CityAttachments.ToList().ForEach(c =>
                     {
@@ -77,7 +76,6 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                 throw new ReservationGlobalException(CityServiceErrors.GetCityError, ex);
             }
         }
-
         public async Task<List<JsTreeNode>> GetCityByUserAsync(User user)
         {
             var cities = new List<City>();
@@ -121,7 +119,6 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
             });
             return Citynodes;
         }
-
         public async Task<List<JsTreeNode>> GetUserCityForUserAsync(User user, Guid userId)
         {
             var UserCityId = (await _context.Users.FindAsync(userId))?.CityId;
@@ -188,7 +185,6 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
             });
             return citynodes;
         }
-
         private JsTreeNode FillChild(List<City> Citys, JsTreeNode parentNode, long Id, long? UserCityId, bool FlagHasIcon)
         {
             if (Citys.Count > 0)
@@ -232,7 +228,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                         Description = cityForm.Description,
                         CityName = cityForm.CityName,
                         ParentId = cityForm.ParentId,
-                        
+
 
                     };
                     FileAddress fileAddress;
@@ -248,7 +244,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                             if (!File.Exists(fileAddress.FilePath))
                             {
                                 throw new ReservationGlobalException(CityServiceErrors.FileNotFoundError);
-                               
+
                             }
                             Image image = Image.FromFile(fileAddress.FilePath);
                             Image thumb = image.GetThumbnailImage(120, 120, () => false, IntPtr.Zero);
@@ -277,7 +273,6 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
 
 
         }
-
         public async Task<bool> EditCityAsync(User user, EditcityFormModel cityForm)
         {
             try
@@ -292,7 +287,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                         City.Description = cityForm.Description;
                         City.CityName = cityForm.CityName;
                         City.ParentId = cityForm.ParentId;
-                        
+
                         City.LastUpdateDate = DateTime.Now;
                         FileAddress fileAddress;
                         if (cityForm.ImageId != null)
@@ -336,7 +331,6 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                 throw new ReservationGlobalException(CityServiceErrors.EditCityError, ex);
             }
         }
-
         public async Task<bool> DeleteCityAsync(User user, List<long> CityIds)
         {
             try
@@ -412,7 +406,6 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                 throw new ReservationGlobalException(CityServiceErrors.ChangeStatusError, ex);
             }
         }
-
         public async Task<bool> SetCityLocationAsync(User user, CityLocationFormModel cityLocationForm)
         {
             try
@@ -435,9 +428,6 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                 throw new ReservationGlobalException(CityServiceErrors.CityLocationError, ex);
             }
         }
-
-  
-
         public async Task<bool> SetCityImagesAsync(User user, CityImagesFormModel cityLocationForm)
         {
             try
@@ -488,7 +478,6 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                 throw new ReservationGlobalException(CityServiceErrors.AddCityError, ex);
             }
         }
-
         public async Task<bool> DeleteAttachmentCityAsync(User user, List<long> deleteAttachmentCityIds)
         {
             try
@@ -496,10 +485,10 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
 
                 foreach (var deleteAttachmentCityId in deleteAttachmentCityIds)
                 {
-                    
+
                     var attCity = await _context.CityAttachments.FirstOrDefaultAsync(p => p.Id == deleteAttachmentCityId);
-                    if (attCity!=null)                   
-                    _context.CityAttachments.Remove(attCity);
+                    if (attCity != null)
+                        _context.CityAttachments.Remove(attCity);
                 }
                 await _context.SaveChangesAsync();
                 return true;
