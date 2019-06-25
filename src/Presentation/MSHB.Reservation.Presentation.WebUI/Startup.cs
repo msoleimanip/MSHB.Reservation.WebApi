@@ -68,6 +68,7 @@ namespace MSHB.Reservation.Presentation.WebUI
             services.AddTransient<IReservationUserRoomService, ReservationUserRoomService>();
             services.AddTransient<IAccommodationUserAttachmentService, AccommodationUserAttachmentService>();
             services.AddTransient<IReportService, ReportService>();
+            services.AddTransient<IUploadService, UploadService>();
 
 
             services.AddMemoryCache();

@@ -25,14 +25,13 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
     public class CityService : ICityService
     {
         private readonly ReservationDbContext _context;
-        private readonly IOptionsSnapshot<SiteSettings> _siteSettings;
+        
 
-        public CityService(ReservationDbContext context, IOptionsSnapshot<SiteSettings> siteSettings)
+        public CityService(ReservationDbContext context)
         {
             _context = context;
             _context.CheckArgumentIsNull(nameof(_context));
-            _siteSettings = siteSettings;
-            _siteSettings.CheckArgumentIsNull(nameof(_siteSettings));
+    
         }
 
         public async Task<CityViewModel> GetAsync(User user, long Id)
@@ -52,7 +51,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                         IsActivated = city.IsActivated,
                         Latitude = city.Latitude,
                         Longitude = city.Longitude,
-                        ImageAddress = new System.Uri(city.ImageAddress).AbsoluteUri,
+                        ImageAddress = !string.IsNullOrEmpty(city.ImageAddress)?new System.Uri(city.ImageAddress).AbsoluteUri:"",
                     };
                     city.CityAttachments.ToList().ForEach(c =>
                     {
@@ -60,7 +59,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                         {
                             FileSize = c.FileSize,
                             FileType = c.FileType,
-                            UrlFile = new System.Uri(c.FilePath).AbsoluteUri,
+                            UrlFile = !string.IsNullOrEmpty(c.FilePath) ? new System.Uri(c.FilePath).AbsoluteUri : "",
                             CityId = c.CityId,
                             Id = c.Id,
                         };
@@ -437,42 +436,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
             }
         }
 
-        public async Task<Guid> UploadFileAsync(User user, IFormFile file)
-        {
-            try
-            {
-                if (string.IsNullOrEmpty(file.FileName) || file.Length == 0)
-                {
-                    throw new ReservationGlobalException(CityServiceErrors.UploadFileValidError);
-                }
-                var extension = file.FileName.Split('.')[file.FileName.Split('.').Length - 1];
-                var fileName = Guid.NewGuid().ToString() + extension;
-                var path = Path.Combine(_siteSettings.Value.UserAttachedFile.PhysicalPath, "." + fileName);
-
-                using (var bits = new FileStream(path, FileMode.Create))
-                {
-                    await file.CopyToAsync(bits);
-                }
-                var uploadFile = new FileAddress()
-                {
-                    FilePath = path,
-                    FileType = extension,
-                    UserId = user.Id,
-                    FileSize = file.Length,
-                    CreationDate = DateTime.Now
-                };
-                await _context.FileAddresses.AddAsync(uploadFile);
-                await _context.SaveChangesAsync();
-
-                return uploadFile.FileId;
-
-            }
-            catch (Exception ex)
-            {
-
-                throw new ReservationGlobalException(CityServiceErrors.UploadFileError, ex);
-            }
-        }
+  
 
         public async Task<bool> SetCityImagesAsync(User user, CityImagesFormModel cityLocationForm)
         {

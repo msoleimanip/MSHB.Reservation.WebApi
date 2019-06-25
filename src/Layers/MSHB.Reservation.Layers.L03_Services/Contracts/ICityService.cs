@@ -19,8 +19,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Contracts
         Task<bool> EditCityAsync(User user, EditcityFormModel cityForm);
         Task<bool> DeleteCityAsync(User user, List<long> CityIds);
         Task<bool> DeactivateCityAsync(User user, DeactivateCityFormModel cityForm);
-        Task<bool> SetCityLocationAsync(User user, CityLocationFormModel cityLocationForm);
-        Task<Guid> UploadFileAsync(User user, IFormFile file);
+        Task<bool> SetCityLocationAsync(User user, CityLocationFormModel cityLocationForm);       
         Task<bool> SetCityImagesAsync(User user, CityImagesFormModel cityLocationForm);
         Task<bool> DeleteAttachmentCityAsync(User user, List<long> deleteAttachmentCityIds);
     }

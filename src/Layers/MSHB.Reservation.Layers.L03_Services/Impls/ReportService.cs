@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace MSHB.Reservation.Layers.L03_Services.Impls
 {
-    public class ReportService: IReportService
+    public class ReportService : IReportService
     {
         private readonly ReservationDbContext _context;
         private IMemoryCache _cache;
@@ -43,7 +43,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                     var accCount = await _context.AccommodationRooms.CountAsync();
                     accommodationCount = accCount.ToString();
                     _cache.Set<string>(CacheKeys.AccommodationCount, accCount.ToString(), cacheExpirationOptions);
-    
+
                 }
                 if (!_cache.TryGetValue(CacheKeys.AccommodationUserCount, out accommodationUserCount))
                 {
@@ -60,7 +60,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                     MemoryCacheEntryOptions cacheExpirationOptions = new MemoryCacheEntryOptions();
                     cacheExpirationOptions.AbsoluteExpiration = DateTime.Now.AddMinutes(20);
                     cacheExpirationOptions.Priority = CacheItemPriority.Normal;
-                    var cCount = await _context.Citys.Where(c=>c.ParentId==null).CountAsync();
+                    var cCount = await _context.Citys.Where(c => c.ParentId == null).CountAsync();
                     cityCount = cCount.ToString();
                     _cache.Set<string>(CacheKeys.CityCount, cCount.ToString(), cacheExpirationOptions);
 
