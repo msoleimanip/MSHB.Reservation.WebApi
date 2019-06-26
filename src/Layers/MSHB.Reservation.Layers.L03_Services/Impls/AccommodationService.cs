@@ -47,7 +47,8 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                         Capacity = accommodationForm.Capacity,
                         CityId = accommodationForm.CityId,
                         RoomPrice = accommodationForm.RoomPrice,
-
+                        DeliveryTime= accommodationForm.DeliveryTime,
+                        EvacuationTime= accommodationForm.EvacuationTime,
                         RoomType = (RoomType)accommodationForm.RoomType,
                     };
 
@@ -129,6 +130,8 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                         accommodationRoom.Description = accommodationForm.Description;
                         accommodationRoom.Rank = accommodationForm.Rank;
                         accommodationRoom.Capacity = accommodationForm.Capacity;
+                        accommodationRoom.DeliveryTime = accommodationForm.DeliveryTime;
+                        accommodationRoom.EvacuationTime = accommodationForm.EvacuationTime;
 
                         accommodationRoom.RoomPrice = accommodationForm.RoomPrice;
                         accommodationRoom.RoomType = (RoomType)accommodationForm.RoomType;
