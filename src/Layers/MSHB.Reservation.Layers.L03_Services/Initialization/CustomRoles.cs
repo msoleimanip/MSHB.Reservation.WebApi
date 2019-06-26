@@ -21,8 +21,9 @@ namespace MSHB.Reservation.Layers.L03_Services.Initialization
         {
             var initRoles = new List<Role>
             {
-                DefineIntRole("Upload", "Upload"),
-                DefineIntRole("Upload-UploadFile", "Upload-UploadFile"),
+                DefineIntRole("File", "File"),
+                DefineIntRole("File-UploadFile", "File-UploadFile"),
+                DefineIntRole("File-DownloadFile", "File-DownloadFile"),
 
 
                 DefineIntRole("Reservation", "Reservation"),

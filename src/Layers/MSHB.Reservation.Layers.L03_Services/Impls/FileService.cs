@@ -2,11 +2,13 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using MSHB.Reservation.Layers.L00_BaseModels.Constants.Messages.Base;
+using MSHB.Reservation.Layers.L00_BaseModels.ContentType;
 using MSHB.Reservation.Layers.L00_BaseModels.exceptions;
 using MSHB.Reservation.Layers.L00_BaseModels.Settings;
 using MSHB.Reservation.Layers.L01_Entities.Models;
 using MSHB.Reservation.Layers.L02_DataLayer;
 using MSHB.Reservation.Layers.L03_Services.Contracts;
+using MSHB.Reservation.Layers.L04_ViewModels.ViewModels;
 using MSHB.Reservation.Shared.Common.GuardToolkit;
 using System;
 using System.Collections.Generic;
@@ -16,19 +18,54 @@ using System.Threading.Tasks;
 
 namespace MSHB.Reservation.Layers.L03_Services.Impls
 {
-    public class UploadService: IUploadService
+    public class FileService: IFileService
     {
         private readonly ReservationDbContext _context;
         private readonly IOptionsSnapshot<SiteSettings> _siteSettings;
 
-        public UploadService(ReservationDbContext context, IOptionsSnapshot<SiteSettings> siteSettings)
+        public FileService(ReservationDbContext context, IOptionsSnapshot<SiteSettings> siteSettings)
         {
             _context = context;
             _context.CheckArgumentIsNull(nameof(_context));
             _siteSettings = siteSettings;
             _siteSettings.CheckArgumentIsNull(nameof(_siteSettings));
         }
-        public async Task<Guid> UploadFileAsync(User user, IFormFile file)
+
+        public async  Task<DownloadViewModel> DownloadAsync(User user, Guid fileId)
+        {
+            try
+            {
+                var fileAddress=await _context.FileAddresses.FindAsync(fileId);
+                var downloadViewModel = new DownloadViewModel();
+                
+                if (fileAddress!=null)
+                {
+                    if (File.Exists(fileAddress.FilePath))
+                    {
+                        var memory = new MemoryStream();
+                        using (var stream = new FileStream(fileAddress.FilePath, FileMode.Open))
+                        {
+                            await stream.CopyToAsync(memory);
+                        }
+                        memory.Position = 0;
+                        downloadViewModel.ContentType = ContentType.GetContentType(fileAddress.FilePath);
+                        downloadViewModel.FileName = Path.GetFileName(fileAddress.FilePath);
+                        downloadViewModel.Memory = memory;                                            
+                    }                 
+
+                }
+                return downloadViewModel;
+
+            }
+            catch (Exception ex)
+            {
+                throw new ReservationGlobalException(UploadServiceErrors.FileDownloadError,ex);
+            }
+           
+        }
+     
+
+        public async Task<Guid> UploadAsync(User user, IFormFile file)
         {
             try
             {
@@ -66,20 +103,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
             }
         }
 
-        //public async Task<IActionResult> Download(Guid fileId)
-        //{
-        
-
-            
-
-        //    var memory = new MemoryStream();
-        //    using (var stream = new FileStream(path, FileMode.Open))
-        //    {
-        //        await stream.CopyToAsync(memory);
-        //    }
-        //    memory.Position = 0;
-        //    return File(memory, GetContentType(path));
-        //}
+     
 
     }
 }

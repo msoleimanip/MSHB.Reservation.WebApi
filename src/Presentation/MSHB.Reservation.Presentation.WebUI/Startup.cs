@@ -69,7 +69,7 @@ namespace MSHB.Reservation.Presentation.WebUI
             services.AddTransient<IReservationUserRoomService, ReservationUserRoomService>();
             services.AddTransient<IAccommodationUserAttachmentService, AccommodationUserAttachmentService>();
             services.AddTransient<IReportService, ReportService>();
-            services.AddTransient<IUploadService, UploadService>();
+            services.AddTransient<IFileService, FileService>();
             services.AddSingleton<IFileProvider>(
                 new PhysicalFileProvider(
                     Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
