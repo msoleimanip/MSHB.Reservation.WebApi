@@ -15,5 +15,6 @@ namespace MSHB.Reservation.Layers.L03_Services.Contracts
         Task<bool> DeleteAccommodationRoom(User user, List<long> accommodationFormIds);   
         Task<bool> DeactivateAccommodationRoomAsync(User user, DeactivateAccommodationRoomFormModel accommodationForm);
         Task <SearchAccommodationRoomViewModel> GetUserAccommodationRoomForUserAsync(User user, AccommodationRoomSearchFormModel accommodationForm);
+        Task<AccommodationRoomViewModel> GetAccommodationByIdAsync(User user, long id);
     }
 }

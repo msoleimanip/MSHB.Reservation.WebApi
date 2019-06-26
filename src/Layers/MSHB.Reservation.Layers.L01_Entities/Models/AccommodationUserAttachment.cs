@@ -22,5 +22,6 @@ namespace MSHB.Reservation.Layers.L01_Entities.Models
         public string Relative { get; set; }
         public int? Age { get; set; }
 
+
     }
 }

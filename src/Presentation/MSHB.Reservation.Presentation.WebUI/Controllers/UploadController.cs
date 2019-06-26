@@ -14,6 +14,7 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
 {
     [Route("api/[controller]")]
     [EnableCors("CorsPolicy")]
+    [Authorize(Roles = "Upload")]
     public class UploadController : BaseController
     {
 
@@ -26,7 +27,7 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
         }
 
         [HttpGet("[action]"), HttpPost("[action]")]
-        [Authorize]
+        [Authorize(Roles = "Upload-UploadFile")]
         public async Task<IActionResult> UploadFile(IFormFile file)
         {
             return Ok(GetRequestResult(await _uploadService.UploadFileAsync(HttpContext.GetUser(), file)));

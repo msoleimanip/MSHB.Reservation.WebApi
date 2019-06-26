@@ -14,6 +14,8 @@ namespace MSHB.Reservation.Layers.L00_BaseModels.Constants.Messages.Base
           new ReservationErrorMessage("AAE-1002", "تغییر در  مکان  اقامتگاه منجر به مکان  اقامتگاه تکراری می شود");
         public static readonly ReservationErrorMessage EditAccommodationNotExistError =
           new ReservationErrorMessage("AAE-1003", "مکان  اقامتگاه ی که به دنبال تغییر هستید وجود ندارد");
+        public static readonly ReservationErrorMessage GetAccommodationNotExistError =
+          new ReservationErrorMessage("AAE-1009", "مکان  اقامتگاه ی که به دنبال دریافت هستید وجود ندارد");
         public static readonly ReservationErrorMessage EditAccommodationError =
         new ReservationErrorMessage("AAE-1004", "هنگام تغییر دادن مکان  اقامتگاه خطایی رخ داده  است.");
         public static ReservationErrorMessage ChangeStatusError =

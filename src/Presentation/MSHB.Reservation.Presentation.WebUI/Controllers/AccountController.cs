@@ -19,6 +19,7 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
 {
     [Route("api/[controller]")]
     [EnableCors("CorsPolicy")]
+    [Authorize(Roles = "Account")]
     public class AccountController : BaseController
     {
         private readonly IUsersService _usersService;
@@ -50,9 +51,9 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
             var (accessToken, refreshToken) = await _tokenStoreService.CreateJwtTokens(user, refreshTokenSource: null);
             return Ok(GetRequestResult(new { access_token = accessToken, refresh_token = refreshToken }));
         }
-       
-        [AllowAnonymous]
-       
+
+        [Authorize(Roles = "Account-RefreshToken")]
+
         [HttpPost("[action]")]
 
         public async Task<IActionResult> RefreshToken([FromBody]JToken jsonBody)
@@ -81,7 +82,7 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
 
         [HttpGet("[action]"), HttpPost("[action]")]
         [ValidateModelAttribute]
-
+        [Authorize(Roles = "Account-AddUser")]
         public async Task<IActionResult> AddUser([FromBody] AddUserFormModel userForm)
         {
             var user = await _usersService.AddUserAsync(HttpContext.GetUser(), userForm);
@@ -90,6 +91,7 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
 
         [HttpGet("[action]"), HttpPost("[action]")]
         [ValidateModelAttribute]
+        [Authorize(Roles = "Account-EditUser")]
         public async Task<IActionResult> EditUser([FromBody]  EditUserFormModel userForm)
         {
             var user = await _usersService.EditUserAsync(HttpContext.GetUser(), userForm);
@@ -98,6 +100,7 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
 
         [HttpGet("[action]"), HttpPost("[action]")]
         [ValidateModelAttribute]
+        [Authorize(Roles = "Account-ChangeActivateUser")]
         public async Task<IActionResult> ChangeActivateUser([FromBody]
                                                                 ChangeActivationFormModel userForm)
         {
@@ -107,6 +110,7 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
 
         [HttpGet("[action]"), HttpPost("[action]")]
         [ValidateModelAttribute]
+        [Authorize(Roles = "Account-ChangePassword")]
         public async Task<IActionResult> ChangePassword([FromBody]
                                                                 ChangePasswordFormModel userForm)
         {
@@ -116,6 +120,7 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
 
         [HttpGet("[action]"), HttpPost("[action]")]
         [ValidateModelAttribute]
+        [Authorize(Roles = "Account-GetUsers")]
         public async Task<IActionResult> GetUsers([FromBody] SearchUserFormModel searchUserForm)
         {
             return Ok(GetRequestResult(await _usersService.GetUsersAsync(searchUserForm)));
@@ -124,6 +129,7 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
 
         [HttpGet("[action]"), HttpPost("[action]")]
         [ValidateModelAttribute]
+        [Authorize(Roles = "Account-UserCityAssign")]
         public async Task<IActionResult> UserCityAssign([FromBody]  UserCityAssignFormModel userCityAssignForm)
         {
             var userCityAssign = await _usersService.UserCityAssignAsync(HttpContext.GetUser(), userCityAssignForm);
@@ -134,6 +140,7 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
 
         [HttpGet("[action]")]
         [ValidateModelAttribute]
+        [Authorize(Roles = "Account-GetUserById")]
         public async Task<IActionResult> GetUserById([FromQuery] Guid Id)
         {
             return Ok(GetRequestResult(await _usersService.GetUserById(HttpContext.GetUser(), Id)));

@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -17,6 +18,7 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
 {
     [Route("api/[controller]")]
     [EnableCors("CorsPolicy")]
+    [Authorize(Roles = "City")]
     public class CityController : BaseController
     {
         private ICityService _CityService;
@@ -29,7 +31,7 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
 
         [HttpGet("[action]")]
         [ValidateModelAttribute]
-
+        [Authorize(Roles = "City-Get")]
         public async Task<IActionResult> Get([FromQuery] long Id)
         {
             return Ok(GetRequestResult(await _CityService.GetAsync(HttpContext.GetUser(),Id)));
@@ -38,6 +40,7 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
 
         [HttpGet("[action]"), HttpPost("[action]")]
         [ValidateModelAttribute]
+        [Authorize(Roles = "City-GetCityByUser")]
         public async Task<IActionResult> GetCityByUser()
         {           
             var Citys =await _CityService.GetCityByUserAsync(HttpContext.GetUser());
@@ -46,6 +49,7 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
 
         [HttpGet("[action]"), HttpPost("[action]")]
         [ValidateModelAttribute]
+        [Authorize(Roles = "City-GetUserCityForUser")]
         public async Task<IActionResult> GetUserCityForUser([FromQuery] Guid userId)
         {
             var Citys = await _CityService.GetUserCityForUserAsync(HttpContext.GetUser(), userId);
@@ -54,6 +58,7 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
 
         [HttpGet("[action]"), HttpPost("[action]")]
         [ValidateModelAttribute]
+        [Authorize(Roles = "City-AddCity")]
         public async Task<IActionResult> AddCity([FromBody] AddcityFormModel cityForm)
         {            
             var Citys = await _CityService.AddCityAsync(HttpContext.GetUser(), cityForm);
@@ -62,6 +67,7 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
 
         [HttpGet("[action]"), HttpPost("[action]")]
         [ValidateModelAttribute]
+        [Authorize(Roles = "City-EditCity")]
         public async Task<IActionResult> EditCity([FromBody] EditcityFormModel cityForm)
         {
             var Citys = await _CityService.EditCityAsync(HttpContext.GetUser(),cityForm);
@@ -70,6 +76,7 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
 
         [HttpGet("[action]"), HttpPost("[action]")]
         [ValidateModelAttribute]
+        [Authorize(Roles = "City-DeactivateCity")]
         public async Task<IActionResult> DeactivateCity([FromBody] DeactivateCityFormModel cityForm)
         {
             var Citys = await _CityService.DeactivateCityAsync(HttpContext.GetUser(), cityForm);
@@ -78,6 +85,7 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
 
         [HttpGet("[action]"), HttpPost("[action]")]
         [ValidateModelAttribute]
+        [Authorize(Roles = "City-DeleteCity")]
         public async Task<IActionResult> DeleteCity([FromBody]
         [Required(ErrorMessage = "لیست اقامتگاه های ارسال شده برای حذف نامعتبر است")]List<long> CityIds)
         {
@@ -86,6 +94,7 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
         }
         [HttpGet("[action]"), HttpPost("[action]")]
         [ValidateModelAttribute]
+        [Authorize(Roles = "City-SetCityLocation")]
         public async Task<IActionResult> SetCityLocation([FromBody] CityLocationFormModel cityLocationForm
         )
         {
@@ -95,6 +104,7 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
     
         [HttpGet("[action]"), HttpPost("[action]")]
         [ValidateModelAttribute]
+        [Authorize(Roles = "City-SetCityImages")]
         public async Task<IActionResult> SetCityImages([FromBody] CityImagesFormModel cityImageForm
         )
         {
@@ -104,6 +114,7 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
 
         [HttpGet("[action]"), HttpPost("[action]")]
         [ValidateModelAttribute]
+        [Authorize(Roles = "City-DeleteAttachmentCity")]
         public async Task<IActionResult> DeleteAttachmentCity([FromBody]
         [Required(ErrorMessage = "لیست تصاویر ارسال شده برای حذف نامعتبر است")]List<long> deleteAttachmentCityId)
         {

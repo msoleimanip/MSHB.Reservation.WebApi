@@ -47,7 +47,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                         Capacity = accommodationForm.Capacity,
                         CityId = accommodationForm.CityId,
                         RoomPrice = accommodationForm.RoomPrice,
-                       
+
                         RoomType = (RoomType)accommodationForm.RoomType,
                     };
 
@@ -129,7 +129,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                         accommodationRoom.Description = accommodationForm.Description;
                         accommodationRoom.Rank = accommodationForm.Rank;
                         accommodationRoom.Capacity = accommodationForm.Capacity;
-                        
+
                         accommodationRoom.RoomPrice = accommodationForm.RoomPrice;
                         accommodationRoom.RoomType = (RoomType)accommodationForm.RoomType;
                         _context.AccommodationRooms.Update(accommodationRoom);
@@ -147,16 +147,55 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
             }
         }
 
+        public async Task<AccommodationRoomViewModel> GetAccommodationByIdAsync(User user, long id)
+        {
+            try
+            {
+
+
+                var accommodation = await _context.AccommodationRooms.FirstOrDefaultAsync(c => c.Id == id);
+                if (accommodation!=null)
+                {
+                    var resp = new AccommodationRoomViewModel()
+                    {
+                        Id = accommodation.Id,
+                        AccommodationRoomId = accommodation.Id,
+                        RoomNumber = accommodation.RoomNumber,
+                        RoomPrice = accommodation.RoomPrice,
+                        BedRoom = accommodation.BedRoom,
+                        RoomType = accommodation.RoomType,
+                        Rank = accommodation.Rank,
+                        Bed = accommodation.Bed,
+                        DeliveryTime = accommodation.DeliveryTime,
+                        EvacuationTime = accommodation.EvacuationTime,
+                        IsActivated = accommodation.IsActivated,
+                        Capacity = accommodation.Capacity,
+                        Description = accommodation.Description,
+                        CityId = accommodation.CityId
+
+                    };
+                    return resp;
+                }
+                throw new ReservationGlobalException(AccommodationRoomServiceErrors.GetAccommodationNotExistError);
+               
+            }
+            catch (Exception ex)
+            {
+
+                throw new ReservationGlobalException(AccommodationRoomServiceErrors.GetAccommodationError, ex);
+            }
+        }
+
         public async Task<SearchAccommodationRoomViewModel> GetUserAccommodationRoomForUserAsync(User user, AccommodationRoomSearchFormModel accommodationForm)
         {
             try
             {
 
 
-                var queryable = _context.AccommodationRooms.Where(c=>c.CityId== accommodationForm.CityId).AsQueryable();
+                var queryable = _context.AccommodationRooms.Where(c => c.CityId == accommodationForm.CityId).AsQueryable();
                 if (accommodationForm.IsActivated.HasValue)
                     queryable = queryable.Where(q => q.IsActivated == accommodationForm.IsActivated);
-                
+
                 if (!string.IsNullOrEmpty(accommodationForm.RoomNumber))
                 {
                     queryable = queryable.Where(q => q.RoomNumber == accommodationForm.RoomNumber);
@@ -180,7 +219,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
 
                 if (accommodationForm.StartTime.HasValue && accommodationForm.EndTime.HasValue)
                 {
-                    queryable = queryable.Where(q => !q.AccommodationUserRooms.All(c => ((c.EntranceTime < accommodationForm.StartTime)&& (c.EndTime > accommodationForm.StartTime))
+                    queryable = queryable.Where(q => !q.AccommodationUserRooms.All(c => ((c.EntranceTime < accommodationForm.StartTime) && (c.EndTime > accommodationForm.StartTime))
                                                                                       || ((c.EntranceTime < accommodationForm.EndTime) && (c.EndTime > accommodationForm.EndTime))));
                 }
 
@@ -194,7 +233,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                         case "roomprice|desc":
                             queryable = queryable.OrderByDescending(x => x.RoomPrice);
                             break;
-                      
+
                         case "isactivated|asc":
                             queryable = queryable.OrderBy(x => x.IsActivated);
                             break;
@@ -210,9 +249,9 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                 var resp = await queryable.Skip((accommodationForm.PageIndex - 1) * accommodationForm.PageSize).Take(accommodationForm.PageSize).ToListAsync();
                 var count = await queryable.CountAsync();
                 var searchViewModel = new SearchAccommodationRoomViewModel();
-                searchViewModel.searchAccommodationRoomViewModels = resp.Select( response => new AccommodationRoomViewModel()
+                searchViewModel.searchAccommodationRoomViewModels = resp.Select(response => new AccommodationRoomViewModel()
                 {
-                    Id=response.Id,
+                    Id = response.Id,
                     AccommodationRoomId = response.Id,
                     RoomNumber = response.RoomNumber,
                     RoomPrice = response.RoomPrice,
@@ -220,7 +259,8 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                     RoomType = response.RoomType,
                     Rank = response.Rank,
                     Bed = response.Bed,
-                   
+                    DeliveryTime = response.DeliveryTime,
+                    EvacuationTime = response.EvacuationTime,
                     IsActivated = response.IsActivated,
                     Capacity = response.Capacity,
                     Description = response.Description,

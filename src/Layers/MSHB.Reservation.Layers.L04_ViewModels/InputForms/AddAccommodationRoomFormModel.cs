@@ -23,5 +23,9 @@ namespace MSHB.Reservation.Layers.L04_ViewModels.InputForms
         public string Description { get; set; }
         [Required(ErrorMessage = "باید اقامتگاه  گردد.")]
         public long? CityId { get; set; }
+        [Required(ErrorMessage = "زمان تحویل اتاق باید مشخص شود")]
+        public string DeliveryTime { get; set; }
+        [Required(ErrorMessage = "زمان تخلیه اتاق بایستی مشخص شود .")]
+        public string EvacuationTime { get; set; }
     }
 }

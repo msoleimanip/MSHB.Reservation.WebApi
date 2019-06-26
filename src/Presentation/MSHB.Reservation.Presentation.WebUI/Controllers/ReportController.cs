@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,11 +14,11 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
 {
     [Route("api/[controller]")]
     [EnableCors("CorsPolicy")]
+    [Authorize(Roles = "Report")]
     public class ReportController : BaseController
     {
         private IReportService _reportService;
        
-
         public ReportController(IReportService reportService)
         {
             _reportService = reportService;
@@ -25,6 +26,7 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
            
         }
         [HttpGet("[action]"), HttpPost("[action]")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetDashboardReport()
         {            
             return Ok(GetRequestResult(await _reportService.GetDashboardReport()));
