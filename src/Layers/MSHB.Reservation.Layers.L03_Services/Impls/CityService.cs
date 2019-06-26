@@ -50,7 +50,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                         IsActivated = city.IsActivated,
                         Latitude = city.Latitude,
                         Longitude = city.Longitude,
-                        ImageAddress = !string.IsNullOrEmpty(city.ImageAddress) ? new System.Uri(city.ImageAddress).AbsoluteUri : "",
+                        FileId =city.FileId,
                     };
                     city.CityAttachments.ToList().ForEach(c =>
                     {
@@ -58,7 +58,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                         {
                             FileSize = c.FileSize,
                             FileType = c.FileType,
-                            UrlFile = !string.IsNullOrEmpty(c.FilePath) ? new System.Uri(c.FilePath).AbsoluteUri : "",
+                            FileId = c.FileId,
                             CityId = c.CityId,
                             Id = c.Id,
                         };
@@ -250,7 +250,10 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                             Image thumb = image.GetThumbnailImage(120, 120, () => false, IntPtr.Zero);
                             var newPath = Path.ChangeExtension(fileAddress.FilePath, "thumb");
                             thumb.Save(newPath);
-                            City.ImageAddress = newPath;
+                            fileAddress.FilePath = newPath;
+                            fileAddress.FileType = "thumb";
+                             _context.FileAddresses.Update(fileAddress);
+                            City.FileId = fileAddress.FileId;
                         }
                         catch (Exception ex)
                         {
@@ -308,7 +311,10 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                                 Image thumb = image.GetThumbnailImage(120, 120, () => false, IntPtr.Zero);
                                 var newPath = Path.ChangeExtension(fileAddress.FilePath, "thumb");
                                 thumb.Save(newPath);
-                                City.ImageAddress = newPath;
+                                City.FileId = fileAddress.FileId;
+                                fileAddress.FilePath = newPath;
+                                fileAddress.FileType = "thumb";
+                                _context.FileAddresses.Update(fileAddress);
                             }
                             catch (Exception ex)
                             {
@@ -459,7 +465,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                             var cityAttachment = new CityAttachment()
                             {
                                 CityId = City.Id,
-                                FilePath = fa.FilePath,
+                                FileId = fa.FileId,
                                 FileSize = fa.FileSize,
                                 FileType = fa.FileType,
                             };

@@ -21,5 +21,6 @@ namespace MSHB.Reservation.Layers.L04_ViewModels.ViewModels
         public long? CityId { get; set; }
         public string DeliveryTime { get; set; }
         public string EvacuationTime { get; set; }
+        public Guid? FileId { get; set; }
     }
 }

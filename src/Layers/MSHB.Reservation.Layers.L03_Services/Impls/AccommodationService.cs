@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using MSHB.Reservation.Layers.L00_BaseModels.Constants.Messages.Base;
 using MSHB.Reservation.Layers.L00_BaseModels.exceptions;
 using MSHB.Reservation.Layers.L01_Entities.Enums;
@@ -10,6 +11,7 @@ using MSHB.Reservation.Layers.L04_ViewModels.ViewModels;
 using MSHB.Reservation.Shared.Common.GuardToolkit;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,11 +21,14 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
     public class AccommodationService : IAccommodationService
     {
         private readonly ReservationDbContext _context;
+        private IHostingEnvironment _hostingEnvironment;
 
-        public AccommodationService(ReservationDbContext context)
+
+        public AccommodationService(ReservationDbContext context, IHostingEnvironment environment)
         {
             _context = context;
             _context.CheckArgumentIsNull(nameof(_context));
+            _hostingEnvironment = environment;
         }
 
         public async Task<long> AddAccommodationRoom(User user, AddAccommodationRoomFormModel accommodationForm)
@@ -154,9 +159,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
         {
             try
             {
-
-
-                var accommodation = await _context.AccommodationRooms.FirstOrDefaultAsync(c => c.Id == id);
+                var accommodation = await _context.AccommodationRooms.Include(c=>c.City).FirstOrDefaultAsync(c => c.Id == id);
                 if (accommodation!=null)
                 {
                     var resp = new AccommodationRoomViewModel()
@@ -174,13 +177,13 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                         IsActivated = accommodation.IsActivated,
                         Capacity = accommodation.Capacity,
                         Description = accommodation.Description,
-                        CityId = accommodation.CityId
+                        CityId = accommodation.CityId,
+                        FileId = accommodation.City.FileId,
 
                     };
                     return resp;
                 }
-                throw new ReservationGlobalException(AccommodationRoomServiceErrors.GetAccommodationNotExistError);
-               
+                throw new ReservationGlobalException(AccommodationRoomServiceErrors.GetAccommodationNotExistError);              
             }
             catch (Exception ex)
             {
@@ -188,14 +191,13 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                 throw new ReservationGlobalException(AccommodationRoomServiceErrors.GetAccommodationError, ex);
             }
         }
-
         public async Task<SearchAccommodationRoomViewModel> GetUserAccommodationRoomForUserAsync(User user, AccommodationRoomSearchFormModel accommodationForm)
         {
             try
-            {
+             {
 
 
-                var queryable = _context.AccommodationRooms.Where(c => c.CityId == accommodationForm.CityId).AsQueryable();
+                var queryable = _context.AccommodationRooms.Include(c=>c.City).Where(c => c.CityId == accommodationForm.CityId).AsQueryable();
                 if (accommodationForm.IsActivated.HasValue)
                     queryable = queryable.Where(q => q.IsActivated == accommodationForm.IsActivated);
 
@@ -252,6 +254,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                 var resp = await queryable.Skip((accommodationForm.PageIndex - 1) * accommodationForm.PageSize).Take(accommodationForm.PageSize).ToListAsync();
                 var count = await queryable.CountAsync();
                 var searchViewModel = new SearchAccommodationRoomViewModel();
+             
                 searchViewModel.searchAccommodationRoomViewModels = resp.Select(response => new AccommodationRoomViewModel()
                 {
                     Id = response.Id,
@@ -267,7 +270,9 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                     IsActivated = response.IsActivated,
                     Capacity = response.Capacity,
                     Description = response.Description,
-                    CityId = response.CityId
+                    CityId = response.CityId,
+                    FileId= response.City.FileId,
+
 
                 }).ToList();
                 searchViewModel.PageIndex = accommodationForm.PageIndex;

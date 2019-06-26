@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using MSHB.Reservation.Layers.L00_BaseModels.Constants.Messages.Base;
 using MSHB.Reservation.Layers.L00_BaseModels.exceptions;
@@ -64,5 +65,21 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                 throw new ReservationGlobalException(UploadServiceErrors.UploadFileError, ex);
             }
         }
+
+        //public async Task<IActionResult> Download(Guid fileId)
+        //{
+        
+
+            
+
+        //    var memory = new MemoryStream();
+        //    using (var stream = new FileStream(path, FileMode.Open))
+        //    {
+        //        await stream.CopyToAsync(memory);
+        //    }
+        //    memory.Position = 0;
+        //    return File(memory, GetContentType(path));
+        //}
+
     }
 }

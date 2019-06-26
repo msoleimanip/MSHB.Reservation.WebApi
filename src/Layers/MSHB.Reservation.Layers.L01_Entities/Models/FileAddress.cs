@@ -17,5 +17,7 @@ namespace MSHB.Reservation.Layers.L01_Entities.Models
         public Guid UserId { get; set; }
         [ForeignKey("UserId")]
         public virtual User User { get; set; }
+
+
     }
 }

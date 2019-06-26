@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using MSHB.Reservation.Layers.L00_BaseModels.Security;
@@ -69,6 +70,9 @@ namespace MSHB.Reservation.Presentation.WebUI
             services.AddTransient<IAccommodationUserAttachmentService, AccommodationUserAttachmentService>();
             services.AddTransient<IReportService, ReportService>();
             services.AddTransient<IUploadService, UploadService>();
+            services.AddSingleton<IFileProvider>(
+                new PhysicalFileProvider(
+                    Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
 
 
             services.AddMemoryCache();

@@ -192,8 +192,7 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
 
                     b.Property<string>("Description");
 
-                    b.Property<string>("ImageAddress")
-                        .HasMaxLength(250);
+                    b.Property<Guid?>("FileId");
 
                     b.Property<bool?>("IsActivated");
 
@@ -222,7 +221,7 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
 
                     b.Property<long>("CityId");
 
-                    b.Property<string>("FilePath");
+                    b.Property<Guid?>("FileId");
 
                     b.Property<long?>("FileSize");
 

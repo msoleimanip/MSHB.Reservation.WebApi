@@ -23,6 +23,9 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
                     CreationDate = table.Column<DateTime>(nullable: true, defaultValueSql: "getdate()"),
                     LastUpdateDate = table.Column<DateTime>(nullable: true),
                     ParentId = table.Column<long>(nullable: true),
+                    Longitude = table.Column<double>(nullable: true),
+                    Latitude = table.Column<double>(nullable: true),
+                    FileId = table.Column<Guid>(nullable: true),
                     IsActivated = table.Column<bool>(nullable: true),
                     DeactiveStartTime = table.Column<DateTime>(nullable: true)
                 },
@@ -100,6 +103,8 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
                     IsActivated = table.Column<bool>(nullable: true),
                     Capacity = table.Column<int>(nullable: true),
                     Description = table.Column<string>(nullable: true),
+                    DeliveryTime = table.Column<string>(nullable: true),
+                    EvacuationTime = table.Column<string>(nullable: true),
                     CityId = table.Column<long>(nullable: true)
                 },
                 constraints: table =>
@@ -111,6 +116,28 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
                         principalTable: "City_T",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CityAttachments",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    CityId = table.Column<long>(nullable: false),
+                    FileType = table.Column<string>(maxLength: 20, nullable: true),
+                    FileSize = table.Column<long>(nullable: true),
+                    FileId = table.Column<Guid>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CityAttachments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CityAttachments_City_T_CityId",
+                        column: x => x.CityId,
+                        principalTable: "City_T",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -133,7 +160,7 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
                     LastLoggedIn = table.Column<DateTimeOffset>(nullable: true),
                     SerialNumber = table.Column<string>(maxLength: 450, nullable: true),
                     SajadUserName = table.Column<string>(maxLength: 200, nullable: true),
-                    IsPresident = table.Column<int>(nullable: true),
+                    IsPresident = table.Column<int>(nullable: false),
                     GroupAuthId = table.Column<long>(nullable: true),
                     CityId = table.Column<long>(nullable: true),
                     UserConfigurationId = table.Column<long>(nullable: true)
@@ -229,6 +256,28 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "FileAddresses",
+                columns: table => new
+                {
+                    FileId = table.Column<Guid>(nullable: false, defaultValueSql: "NEWID()"),
+                    FileType = table.Column<string>(maxLength: 20, nullable: true),
+                    FileSize = table.Column<long>(nullable: true),
+                    FilePath = table.Column<string>(nullable: true),
+                    CreationDate = table.Column<DateTime>(nullable: false),
+                    UserId = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FileAddresses", x => x.FileId);
+                    table.ForeignKey(
+                        name: "FK_FileAddresses_User_T_UserId",
+                        column: x => x.UserId,
+                        principalTable: "User_T",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "UserConfiguration_T",
                 columns: table => new
                 {
@@ -305,6 +354,8 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
                     AccommodationUserRoomId = table.Column<long>(nullable: false),
                     GenderType = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true),
+                    NationalCode = table.Column<string>(maxLength: 20, nullable: true),
+                    CreationDate = table.Column<DateTime>(nullable: true, defaultValueSql: "getdate()"),
                     Relative = table.Column<string>(nullable: true),
                     Age = table.Column<int>(nullable: true)
                 },
@@ -375,6 +426,16 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
                 column: "ParentId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_CityAttachments_CityId",
+                table: "CityAttachments",
+                column: "CityId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_FileAddresses_UserId",
+                table: "FileAddresses",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_GroupAuthRole_T_RoleId",
                 table: "GroupAuthRole_T",
                 column: "RoleId");
@@ -441,6 +502,12 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
         {
             migrationBuilder.DropTable(
                 name: "AccommodationUserAttachments");
+
+            migrationBuilder.DropTable(
+                name: "CityAttachments");
+
+            migrationBuilder.DropTable(
+                name: "FileAddresses");
 
             migrationBuilder.DropTable(
                 name: "GroupAuthRole_T");

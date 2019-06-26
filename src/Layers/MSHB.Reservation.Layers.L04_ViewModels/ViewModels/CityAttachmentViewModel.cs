@@ -10,6 +10,6 @@ namespace MSHB.Reservation.Layers.L04_ViewModels.ViewModels
         public long CityId { get; set; }
         public string FileType { get; set; }
         public long? FileSize { get; set; }
-        public string UrlFile { get; set; }
+        public Guid? FileId { get; set; }
     }
 }

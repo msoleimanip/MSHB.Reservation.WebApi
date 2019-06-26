@@ -126,6 +126,9 @@ namespace MSHB.Reservation.Layers.L02_DataLayer
                          .HasForeignKey(d => d.UserId)
                          .OnDelete(DeleteBehavior.ClientSetNull);
 
+
+        
+
             modelBuilder.Entity<AccommodationRoom>().HasIndex(c => c.RoomNumber);
 
             modelBuilder.HasSequence<long>("SystemCodeSequence").StartsAt(1000);
@@ -165,6 +168,9 @@ namespace MSHB.Reservation.Layers.L02_DataLayer
             });
             modelBuilder.Entity<FileAddress>().HasKey(x => x.FileId);
             modelBuilder.Entity<FileAddress>().Property(x => x.FileId).HasDefaultValueSql("NEWID()");
+
+           
+           
 
         }
 

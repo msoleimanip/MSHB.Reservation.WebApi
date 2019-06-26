@@ -13,8 +13,7 @@ namespace MSHB.Reservation.Layers.L01_Entities.Models
         [MaxLength(20)]
         public string FileType { get; set; }
         public long? FileSize { get; set; }
-        public string FilePath { get; set; }
-        [ForeignKey("CityId")]
+        public Guid? FileId { get; set; }       
         public virtual City City { get; set; }
     }
 }

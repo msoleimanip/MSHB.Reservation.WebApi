@@ -20,14 +20,16 @@ namespace MSHB.Reservation.Layers.L01_Entities.Models
 
         public double? Longitude { get; set; }
         public double? Latitude { get; set; }
-        [MaxLength(250)]
-        public string ImageAddress { get; set; }
+       
+        public Guid? FileId { get; set; }
 
         public bool? IsActivated { get; set; }
         public DateTime? DeactiveStartTime { get; set; }
 
         [ForeignKey("ParentId")]
         public virtual City Parent { get; set; }
+      
+    
 
         public virtual ICollection<City> Children { get; set; }
         public virtual ICollection<User> Users { get; set; }
