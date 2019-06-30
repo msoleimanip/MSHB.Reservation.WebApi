@@ -6,8 +6,8 @@ namespace MSHB.Reservation.Layers.L01_Entities.Enums
 {
     public enum GenderType
     {
-        Woman,
-        Man,
-        Child
+        Woman = 1,
+        Man = 2,
+        Child = 3
     }
 }

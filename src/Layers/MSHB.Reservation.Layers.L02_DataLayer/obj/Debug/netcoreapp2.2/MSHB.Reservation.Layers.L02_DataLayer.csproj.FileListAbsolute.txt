@@ -26,3 +26,17 @@ E:\project\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L02_DataLa
 E:\project\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L02_DataLayer\obj\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L02_DataLayer.csproj.CopyComplete
 E:\project\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L02_DataLayer\obj\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L02_DataLayer.dll
 E:\project\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L02_DataLayer\obj\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L02_DataLayer.pdb
+C:\Users\me\Desktop\hamedPro\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L02_DataLayer\bin\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L02_DataLayer.deps.json
+C:\Users\me\Desktop\hamedPro\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L02_DataLayer\bin\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L02_DataLayer.runtimeconfig.json
+C:\Users\me\Desktop\hamedPro\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L02_DataLayer\bin\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L02_DataLayer.runtimeconfig.dev.json
+C:\Users\me\Desktop\hamedPro\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L02_DataLayer\bin\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L02_DataLayer.dll
+C:\Users\me\Desktop\hamedPro\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L02_DataLayer\bin\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L02_DataLayer.pdb
+C:\Users\me\Desktop\hamedPro\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L02_DataLayer\bin\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.dll
+C:\Users\me\Desktop\hamedPro\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L02_DataLayer\bin\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.pdb
+C:\Users\me\Desktop\hamedPro\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L02_DataLayer\obj\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L02_DataLayer.csprojAssemblyReference.cache
+C:\Users\me\Desktop\hamedPro\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L02_DataLayer\obj\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L02_DataLayer.csproj.CoreCompileInputs.cache
+C:\Users\me\Desktop\hamedPro\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L02_DataLayer\obj\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L02_DataLayer.AssemblyInfoInputs.cache
+C:\Users\me\Desktop\hamedPro\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L02_DataLayer\obj\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L02_DataLayer.AssemblyInfo.cs
+C:\Users\me\Desktop\hamedPro\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L02_DataLayer\obj\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L02_DataLayer.csproj.CopyComplete
+C:\Users\me\Desktop\hamedPro\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L02_DataLayer\obj\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L02_DataLayer.dll
+C:\Users\me\Desktop\hamedPro\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L02_DataLayer\obj\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L02_DataLayer.pdb

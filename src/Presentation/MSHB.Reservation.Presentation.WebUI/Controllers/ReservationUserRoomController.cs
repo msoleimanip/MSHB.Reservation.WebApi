@@ -57,7 +57,7 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
         [HttpGet("[action]"), HttpPost("[action]")]
         [ValidateModelAttribute]
         [Authorize(Roles = "Reservation-GetUserReservation")]
-        public async Task<IActionResult> GetUserReservationRoomForUser([FromQuery] ReservationRoomSearchFormModel reservationForm)
+        public async Task<IActionResult> GetUserReservationRoomForUser([FromBody] ReservationRoomSearchFormModel reservationForm)
         {
             var resp = await _reservationService.GetUserReservationRoomForUserAsync(HttpContext.GetUser(), reservationForm);
             return Ok(GetRequestResult(resp));

@@ -36,8 +36,18 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
         public async Task<IActionResult> GetGroupAuthentication()
         {
             return Ok(GetRequestResult(await _groupAuthenticationService.GetGroupAuthenticationAsync()));
-          
+
         }
+
+
+        [HttpGet("[action]"), HttpPost("[action]")]
+        [Authorize(Roles = "GroupAuthentication-GetGroupAuthenticationById")]
+        public async Task<IActionResult> GetGroupAuthenticationById([FromQuery] long Id)
+        {
+            return Ok(GetRequestResult(await _groupAuthenticationService.GetGroupAuthenticationByIdAsync(Id)));
+
+        }
+
         [HttpGet("[action]")]
         [ValidateModelAttribute]
         [Authorize(Roles = "GroupAuthentication-GetGroupRole")]

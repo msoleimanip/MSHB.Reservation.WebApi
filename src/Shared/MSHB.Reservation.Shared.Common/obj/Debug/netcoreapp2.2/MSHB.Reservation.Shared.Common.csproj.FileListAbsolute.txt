@@ -10,3 +10,15 @@ C:\Csharp\MSHB.Reservation.WebApi\src\Shared\MSHB.Reservation.Shared.Common\obj\
 C:\Csharp\MSHB.Reservation.WebApi\src\Shared\MSHB.Reservation.Shared.Common\obj\Debug\netcoreapp2.2\MSHB.Reservation.Shared.Common.csproj.CopyComplete
 C:\Csharp\MSHB.Reservation.WebApi\src\Shared\MSHB.Reservation.Shared.Common\obj\Debug\netcoreapp2.2\MSHB.Reservation.Shared.Common.dll
 C:\Csharp\MSHB.Reservation.WebApi\src\Shared\MSHB.Reservation.Shared.Common\obj\Debug\netcoreapp2.2\MSHB.Reservation.Shared.Common.pdb
+C:\Users\me\Desktop\hamedPro\MSHB.Reservation.WebApi\src\Shared\MSHB.Reservation.Shared.Common\bin\Debug\netcoreapp2.2\MSHB.Reservation.Shared.Common.deps.json
+C:\Users\me\Desktop\hamedPro\MSHB.Reservation.WebApi\src\Shared\MSHB.Reservation.Shared.Common\bin\Debug\netcoreapp2.2\MSHB.Reservation.Shared.Common.dll
+C:\Users\me\Desktop\hamedPro\MSHB.Reservation.WebApi\src\Shared\MSHB.Reservation.Shared.Common\bin\Debug\netcoreapp2.2\MSHB.Reservation.Shared.Common.pdb
+C:\Users\me\Desktop\hamedPro\MSHB.Reservation.WebApi\src\Shared\MSHB.Reservation.Shared.Common\bin\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.dll
+C:\Users\me\Desktop\hamedPro\MSHB.Reservation.WebApi\src\Shared\MSHB.Reservation.Shared.Common\bin\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.pdb
+C:\Users\me\Desktop\hamedPro\MSHB.Reservation.WebApi\src\Shared\MSHB.Reservation.Shared.Common\obj\Debug\netcoreapp2.2\MSHB.Reservation.Shared.Common.csprojAssemblyReference.cache
+C:\Users\me\Desktop\hamedPro\MSHB.Reservation.WebApi\src\Shared\MSHB.Reservation.Shared.Common\obj\Debug\netcoreapp2.2\MSHB.Reservation.Shared.Common.csproj.CoreCompileInputs.cache
+C:\Users\me\Desktop\hamedPro\MSHB.Reservation.WebApi\src\Shared\MSHB.Reservation.Shared.Common\obj\Debug\netcoreapp2.2\MSHB.Reservation.Shared.Common.AssemblyInfoInputs.cache
+C:\Users\me\Desktop\hamedPro\MSHB.Reservation.WebApi\src\Shared\MSHB.Reservation.Shared.Common\obj\Debug\netcoreapp2.2\MSHB.Reservation.Shared.Common.AssemblyInfo.cs
+C:\Users\me\Desktop\hamedPro\MSHB.Reservation.WebApi\src\Shared\MSHB.Reservation.Shared.Common\obj\Debug\netcoreapp2.2\MSHB.Reservation.Shared.Common.csproj.CopyComplete
+C:\Users\me\Desktop\hamedPro\MSHB.Reservation.WebApi\src\Shared\MSHB.Reservation.Shared.Common\obj\Debug\netcoreapp2.2\MSHB.Reservation.Shared.Common.dll
+C:\Users\me\Desktop\hamedPro\MSHB.Reservation.WebApi\src\Shared\MSHB.Reservation.Shared.Common\obj\Debug\netcoreapp2.2\MSHB.Reservation.Shared.Common.pdb

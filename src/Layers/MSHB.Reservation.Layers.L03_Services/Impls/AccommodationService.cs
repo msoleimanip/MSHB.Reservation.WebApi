@@ -197,7 +197,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
              {
 
 
-                var queryable = _context.AccommodationRooms.Include(c=>c.City).Where(c => c.CityId == accommodationForm.CityId).AsQueryable();
+                var queryable = _context.AccommodationRooms.Include(c=>c.AccommodationUserRooms).Include(c=>c.City).Where(c => c.CityId == accommodationForm.CityId).AsQueryable();
                 if (accommodationForm.IsActivated.HasValue)
                     queryable = queryable.Where(q => q.IsActivated == accommodationForm.IsActivated);
 
@@ -224,10 +224,12 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
 
                 if (accommodationForm.StartTime.HasValue && accommodationForm.EndTime.HasValue)
                 {
-                    queryable = queryable.Where(q => !q.AccommodationUserRooms.All(c => ((c.EntranceTime < accommodationForm.StartTime) && (c.EndTime > accommodationForm.StartTime))
-                                                                                      || ((c.EntranceTime < accommodationForm.EndTime) && (c.EndTime > accommodationForm.EndTime))));
+                    var result = _context.AccommodationUserRooms.Where(c => ((c.EntranceTime < accommodationForm.StartTime) && (c.EndTime > accommodationForm.StartTime))
+                                                                                        || ((c.EntranceTime < accommodationForm.EndTime) && (c.EndTime > accommodationForm.EndTime))).Select(c=>c.CityId).ToList();
+                    queryable = queryable.Where(q => !result.Contains((long)q.CityId));
                 }
 
+              
 
                 if (accommodationForm.SortModel != null)
                     switch (accommodationForm.SortModel.Col + "|" + accommodationForm.SortModel.Sort)

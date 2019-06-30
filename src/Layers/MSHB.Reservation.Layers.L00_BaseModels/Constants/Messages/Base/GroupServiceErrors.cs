@@ -28,8 +28,8 @@ namespace MSHB.Reservation.Layers.L00_BaseModels.Constants.Messages.Base
           new ReservationErrorMessage("GRE-1009", "بخشی یا کل رول ها در لیست انتخابی وجود ندارد");
         public static readonly ReservationErrorMessage EditGroupNotExistError =
           new ReservationErrorMessage("GRE-1010", "گروهی که می خواهید  تغییر دهید وجود ندارد");
-     
-
+        public static readonly ReservationErrorMessage GetGroupAuthenticationByIdError =
+          new ReservationErrorMessage("GRE-1011", "گروه مربوط به شناسه ارسالی در سامانه وجود ندارد");
     }
-    
+
 }

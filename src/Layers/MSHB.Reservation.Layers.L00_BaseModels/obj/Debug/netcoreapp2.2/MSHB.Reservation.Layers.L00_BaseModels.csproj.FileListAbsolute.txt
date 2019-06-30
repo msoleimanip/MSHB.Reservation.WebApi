@@ -12,3 +12,17 @@ C:\Csharp\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L00_BaseMod
 C:\Csharp\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L00_BaseModels\obj\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L00_BaseModels.csproj.CopyComplete
 C:\Csharp\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L00_BaseModels\obj\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L00_BaseModels.dll
 C:\Csharp\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L00_BaseModels\obj\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L00_BaseModels.pdb
+C:\Users\me\Desktop\hamedPro\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L00_BaseModels\bin\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L00_BaseModels.deps.json
+C:\Users\me\Desktop\hamedPro\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L00_BaseModels\bin\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L00_BaseModels.dll
+C:\Users\me\Desktop\hamedPro\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L00_BaseModels\bin\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L00_BaseModels.pdb
+C:\Users\me\Desktop\hamedPro\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L00_BaseModels\bin\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.dll
+C:\Users\me\Desktop\hamedPro\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L00_BaseModels\bin\Debug\netcoreapp2.2\MSHB.Reservation.Shared.Common.dll
+C:\Users\me\Desktop\hamedPro\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L00_BaseModels\bin\Debug\netcoreapp2.2\MSHB.Reservation.Shared.Common.pdb
+C:\Users\me\Desktop\hamedPro\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L00_BaseModels\bin\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.pdb
+C:\Users\me\Desktop\hamedPro\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L00_BaseModels\obj\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L00_BaseModels.csprojAssemblyReference.cache
+C:\Users\me\Desktop\hamedPro\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L00_BaseModels\obj\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L00_BaseModels.csproj.CoreCompileInputs.cache
+C:\Users\me\Desktop\hamedPro\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L00_BaseModels\obj\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L00_BaseModels.AssemblyInfoInputs.cache
+C:\Users\me\Desktop\hamedPro\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L00_BaseModels\obj\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L00_BaseModels.AssemblyInfo.cs
+C:\Users\me\Desktop\hamedPro\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L00_BaseModels\obj\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L00_BaseModels.csproj.CopyComplete
+C:\Users\me\Desktop\hamedPro\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L00_BaseModels\obj\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L00_BaseModels.dll
+C:\Users\me\Desktop\hamedPro\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L00_BaseModels\obj\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L00_BaseModels.pdb

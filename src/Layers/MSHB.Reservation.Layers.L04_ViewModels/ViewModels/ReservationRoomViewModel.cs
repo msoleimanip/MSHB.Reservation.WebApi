@@ -30,7 +30,7 @@ namespace MSHB.Reservation.Layers.L04_ViewModels.ViewModels
         public int GuestCounts { get; set; }
         public long Description { get; set; }
         public long PriceAccommodation { get; set; }           
-        public string UsernameAssignment { get; set; }
+        public string UsernameAssignment { get; set; }        
 
     }
 }

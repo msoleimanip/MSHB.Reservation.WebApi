@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace MSHB.Reservation.Layers.L03_Services.Impls
 {
-    public class ReservationUserRoomService: IReservationUserRoomService
+    public class ReservationUserRoomService : IReservationUserRoomService
     {
         private readonly ReservationDbContext _context;
 
@@ -41,20 +41,20 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                     var accommodationUserRoom = new AccommodationUserRoom()
                     {
                         CreationDate = DateTime.Now,
-                        LastUpdateDate=DateTime.Now,
-                        AccommodationRoomId=accommodationRoom.Id,
-                        GenderType= reservationForm.GenderType,
-                        Description= reservationForm.Description,
-                        EntranceTime= reservationForm.EntranceTime,
-                        EndTime= reservationForm.EndTime,
-                        NationalCode= reservationForm.NationalCode,
-                        GuestCounts= reservationForm.GuestCounts,
-                        PersonalCode= reservationForm.PersonalCode,
-                        UserId=user.Id,                        
-                        PriceAccommodation=  accommodationRoom.RoomPrice,
-                        PhoneNumber= reservationForm.PhoneNumber
+                        LastUpdateDate = DateTime.Now,
+                        AccommodationRoomId = accommodationRoom.Id,
+                        GenderType = reservationForm.GenderType,
+                        Description = reservationForm.Description,
+                        EntranceTime = reservationForm.EntranceTime,
+                        EndTime = reservationForm.EndTime,
+                        NationalCode = reservationForm.NationalCode,
+                        GuestCounts = reservationForm.GuestCounts,
+                        PersonalCode = reservationForm.PersonalCode,
+                        UserId = user.Id,
+                        PriceAccommodation = accommodationRoom.RoomPrice,
+                        PhoneNumber = reservationForm.PhoneNumber
                     };
-                    
+
                     await _context.AccommodationUserRooms.AddAsync(accommodationUserRoom);
                     await _context.SaveChangesAsync();
                     return accommodationUserRoom.Id;
@@ -68,14 +68,14 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
             }
         }
 
-        public async  Task<bool> DeleteReservationRoomAsync(User user, List<long> reservationFormIds)
+        public async Task<bool> DeleteReservationRoomAsync(User user, List<long> reservationFormIds)
         {
             try
             {
 
                 foreach (var acid in reservationFormIds)
                 {
-                    
+
                     var accommodationUser = await _context.AccommodationUserRooms.FindAsync(acid);
                     _context.AccommodationUserRooms.Remove(accommodationUser);
                 }
@@ -98,12 +98,12 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                     accommodationRoom = _context.AccommodationRooms.FirstOrDefault(c => c.Id == reservationForm.AccommodationRoomId);
 
 
-                var accommodationUserRooms =await _context.AccommodationUserRooms.FindAsync( reservationForm.AccommodationUserRoomId);
+                var accommodationUserRooms = await _context.AccommodationUserRooms.FindAsync(reservationForm.AccommodationUserRoomId);
 
-                
+
                 if (accommodationUserRooms != null)
                 {
-                    var isDuplicateAccommodation = _context.AccommodationUserRooms.Any(c =>c.Id!= reservationForm.AccommodationRoomId&& c.AccommodationRoomId == reservationForm.AccommodationRoomId &&
+                    var isDuplicateAccommodation = _context.AccommodationUserRooms.Any(c => c.Id != reservationForm.AccommodationRoomId && c.AccommodationRoomId == reservationForm.AccommodationRoomId &&
                                                     (((c.EntranceTime < reservationForm.EntranceTime) && (c.EndTime > reservationForm.EntranceTime))
                                                  || ((c.EntranceTime < reservationForm.EndTime) && (c.EndTime > reservationForm.EndTime))));
                     if (!isDuplicateAccommodation)
@@ -121,9 +121,9 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                         accommodationUserRooms.UserId = user.Id;
                         accommodationUserRooms.PriceAccommodation = accommodationRoom.RoomPrice;
                         accommodationUserRooms.PhoneNumber = reservationForm.PhoneNumber;
-                        
 
-                         _context.AccommodationUserRooms.Update(accommodationUserRooms);
+
+                        _context.AccommodationUserRooms.Update(accommodationUserRooms);
                         await _context.SaveChangesAsync();
                         return true;
                     }
@@ -142,121 +142,121 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
         {
             try
             {
-        
-            var queryable = _context.AccommodationUserRooms.Include(c=>c.AccommodationRoom).Include(d=>d.User).Where(c=>c.CityId==reservationForm.CityId).AsQueryable();
 
-            if (reservationForm.AccommodationUserRoomId.Count>0)
-            {
-                queryable = queryable.Where(q => reservationForm.AccommodationUserRoomId.Contains(q.Id));
-            }
-           
-            if (!string.IsNullOrEmpty(reservationForm.NationalCode))
-            {
-                queryable = queryable.Where(q => q.NationalCode.Contains(reservationForm.NationalCode));
-            }
+                var queryable = _context.AccommodationUserRooms.Include(c => c.AccommodationRoom).Include(d => d.User).Where(c => c.CityId == reservationForm.CityId).AsQueryable();
 
-            if (!string.IsNullOrEmpty(reservationForm.PhoneNumber))
-            {
-                queryable = queryable.Where(q => q.PhoneNumber.Contains(reservationForm.PhoneNumber));
-            }
-            if (!string.IsNullOrEmpty(reservationForm.PersonalCode))
-            {
-                queryable = queryable.Where(q => q.PersonalCode.Contains(reservationForm.PersonalCode));
-            }
-            if (reservationForm.CreationDate.HasValue)
-            {
-                queryable = queryable.Where(q => q.CreationDate>=reservationForm.CreationDate.Value);
-            }
-            if (reservationForm.EntranceTime.HasValue)
-            {
-                queryable = queryable.Where(q => q.EntranceTime>=reservationForm.EntranceTime.Value);
-            }
-            if (reservationForm.EndTime.HasValue)
-            {
-                queryable = queryable.Where(q => q.EndTime>=reservationForm.EndTime.Value);
-            }
-            if (reservationForm.SystemCode.HasValue)
-            {
-                queryable = queryable.Where(q => q.SystemCode.ToString().Contains(reservationForm.SystemCode.HasValue.ToString()));
-            }
+                if (reservationForm.AccommodationUserRoomId != null && reservationForm.AccommodationUserRoomId.Count > 0)
+                {
+                    queryable = queryable.Where(q => reservationForm.AccommodationUserRoomId.Contains(q.Id));
+                }
 
-            
-            if (reservationForm.SortModel!=null)         
-            switch (reservationForm.SortModel.Col+"|"+reservationForm.SortModel.Sort)
-            {
-                case "entrancetime|asc":
-                    queryable = queryable.OrderBy(x => x.EntranceTime);
-                    break;
-                case "entrancetime|desc":
-                    queryable = queryable.OrderByDescending(x => x.EntranceTime);
-                    break;
-                case "endtime|asc":
-                    queryable = queryable.OrderBy(x => x.EndTime);
-                    break;
-                case "endtime|desc":
-                    queryable = queryable.OrderByDescending(x => x.EndTime);
-                    break;
-                case "lastupdatedate|asc":
-                    queryable = queryable.OrderBy(x => x.LastUpdateDate);
-                    break;
-                case "lastupdatedate|desc":
-                    queryable = queryable.OrderByDescending(x => x.LastUpdateDate);
-                    break;
-                case "creationdate|asc":
+                if (!string.IsNullOrEmpty(reservationForm.NationalCode))
+                {
+                    queryable = queryable.Where(q => q.NationalCode.Contains(reservationForm.NationalCode));
+                }
+
+                if (!string.IsNullOrEmpty(reservationForm.PhoneNumber))
+                {
+                    queryable = queryable.Where(q => q.PhoneNumber.Contains(reservationForm.PhoneNumber));
+                }
+                if (!string.IsNullOrEmpty(reservationForm.PersonalCode))
+                {
+                    queryable = queryable.Where(q => q.PersonalCode.Contains(reservationForm.PersonalCode));
+                }
+                if (reservationForm.CreationDate.HasValue)
+                {
+                    queryable = queryable.Where(q => q.CreationDate >= reservationForm.CreationDate.Value);
+                }
+                if (reservationForm.EntranceTime.HasValue)
+                {
+                    queryable = queryable.Where(q => q.EntranceTime >= reservationForm.EntranceTime.Value);
+                }
+                if (reservationForm.EndTime.HasValue)
+                {
+                    queryable = queryable.Where(q => q.EndTime >= reservationForm.EndTime.Value);
+                }
+                if (reservationForm.SystemCode.HasValue)
+                {
+                    queryable = queryable.Where(q => q.SystemCode.ToString().Contains(reservationForm.SystemCode.HasValue.ToString()));
+                }
+
+
+                if (reservationForm.SortModel != null)
+                    switch (reservationForm.SortModel.Col + "|" + reservationForm.SortModel.Sort)
+                    {
+                        case "entrancetime|asc":
+                            queryable = queryable.OrderBy(x => x.EntranceTime);
+                            break;
+                        case "entrancetime|desc":
+                            queryable = queryable.OrderByDescending(x => x.EntranceTime);
+                            break;
+                        case "endtime|asc":
+                            queryable = queryable.OrderBy(x => x.EndTime);
+                            break;
+                        case "endtime|desc":
+                            queryable = queryable.OrderByDescending(x => x.EndTime);
+                            break;
+                        case "lastupdatedate|asc":
+                            queryable = queryable.OrderBy(x => x.LastUpdateDate);
+                            break;
+                        case "lastupdatedate|desc":
+                            queryable = queryable.OrderByDescending(x => x.LastUpdateDate);
+                            break;
+                        case "creationdate|asc":
+                            queryable = queryable.OrderBy(x => x.CreationDate);
+                            break;
+                        case "creationdate|desc":
+                            queryable = queryable.OrderByDescending(x => x.CreationDate);
+                            break;
+                        default:
+                            queryable = queryable.OrderBy(x => x.CreationDate);
+                            break;
+                    }
+                else
                     queryable = queryable.OrderBy(x => x.CreationDate);
-                    break;
-                case "creationdate|desc":
-                    queryable = queryable.OrderByDescending(x => x.CreationDate);
-                    break;
-                default:
-                    queryable = queryable.OrderBy(x => x.CreationDate);
-                    break;
-            }
-            else
-                queryable = queryable.OrderBy(x => x.CreationDate);
-            var response = await queryable.Skip((reservationForm.PageIndex - 1) * reservationForm.PageSize).Take(reservationForm.PageSize).ToListAsync();
-            var count = await queryable.CountAsync();
-            var searchViewModel = new SearchReservationRoomViewModel();
-                                                             
-            searchViewModel.searchReservationRoomViewModels= response.Select(selector: resp => new ReservationRoomViewModel()
-            {
-                Id=resp.Id,
-                AccommodationRoomId=resp.AccommodationRoomId,
-                Bed=resp.AccommodationRoom.Bed,
-                BedRoom=resp.AccommodationRoom.BedRoom,
-                CityId=resp.CityId,
-                Capacity=resp.AccommodationRoom.Capacity,
-                CreationDate=resp.CreationDate,
-                Description=resp.Description,
-                EndTime=resp.EndTime,
-                EntranceTime=resp.EntranceTime,
-                GenderType=resp.GenderType,
-                GuestCounts=resp.GuestCounts,
-                IsActivated=resp.AccommodationRoom.IsActivated,
-                LastUpdateDate=resp.LastUpdateDate,
-                NationalCode=resp.NationalCode,
-                PersonalCode=resp.PersonalCode,
-                PhoneNumber=resp.PhoneNumber,
-                Rank=resp.AccommodationRoom.Rank,
-                RoomNumber=resp.AccommodationRoom.RoomNumber,
-                RoomPrice=resp.AccommodationRoom.RoomPrice,
-                RoomType=resp.AccommodationRoom.RoomType,
-                PriceAccommodation=resp.PriceAccommodation,
-                SystemCode=resp.SystemCode,
-                UsernameAssignment=resp.User.Username
+                var response = await queryable.Skip((reservationForm.PageIndex - 1) * reservationForm.PageSize).Take(reservationForm.PageSize).ToListAsync();
+                var count = await queryable.CountAsync();
+                var searchViewModel = new SearchReservationRoomViewModel();
 
-            }).ToList();
-            searchViewModel.PageIndex = reservationForm.PageIndex;
-            searchViewModel.PageSize = reservationForm.PageSize;
-            searchViewModel.TotalCount = count;
-            return searchViewModel;
+                searchViewModel.searchReservationRoomViewModels = response.Select(selector: resp => new ReservationRoomViewModel()
+                {
+                    Id = resp.Id,
+                    AccommodationRoomId = resp.AccommodationRoomId,
+                    Bed = resp.AccommodationRoom.Bed,
+                    BedRoom = resp.AccommodationRoom.BedRoom,
+                    CityId = resp.CityId,
+                    Capacity = resp.AccommodationRoom.Capacity,
+                    CreationDate = resp.CreationDate,
+                    Description = resp.Description,
+                    EndTime = resp.EndTime,
+                    EntranceTime = resp.EntranceTime,
+                    GenderType = resp.GenderType,
+                    GuestCounts = resp.GuestCounts,
+                    IsActivated = resp.AccommodationRoom.IsActivated,
+                    LastUpdateDate = resp.LastUpdateDate,
+                    NationalCode = resp.NationalCode,
+                    PersonalCode = resp.PersonalCode,
+                    PhoneNumber = resp.PhoneNumber,
+                    Rank = resp.AccommodationRoom.Rank,
+                    RoomNumber = resp.AccommodationRoom.RoomNumber,
+                    RoomPrice = resp.AccommodationRoom.RoomPrice,
+                    RoomType = resp.AccommodationRoom.RoomType,
+                    PriceAccommodation = resp.PriceAccommodation,
+                    SystemCode = resp.SystemCode,
+                    UsernameAssignment = resp.User.Username
+
+                }).ToList();
+                searchViewModel.PageIndex = reservationForm.PageIndex;
+                searchViewModel.PageSize = reservationForm.PageSize;
+                searchViewModel.TotalCount = count;
+                return searchViewModel;
             }
             catch (Exception ex)
             {
-                
+
                 throw new ReservationGlobalException(UsersServiceErrors.GetUserListError, ex);
             }
-           
+
         }
     }
 }
