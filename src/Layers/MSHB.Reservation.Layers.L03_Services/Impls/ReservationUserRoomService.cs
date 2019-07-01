@@ -44,8 +44,8 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                         CreationDate = DateTime.Now,
                         LastUpdateDate = DateTime.Now,
                         AccommodationRoomId = accommodationRoom.Id,
-                        GenderType = reservationForm.GenderType,                       
-                        Description = reservationForm.Description,                   
+                        GenderType = reservationForm.GenderType,
+                        Description = reservationForm.Description,
                         EntranceTime = reservationForm.EntranceTime,
                         EndTime = reservationForm.EndTime,
                         NationalCode = reservationForm.NationalCode,
@@ -54,9 +54,9 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                         UserId = user.Id,
                         PriceAccommodation = accommodationRoom.RoomPrice,
                         PhoneNumber = reservationForm.PhoneNumber,
-                        CityId= (long)accommodationRoom.CityId,
-                        Status=StatusReservationType.Registered
-                       
+                        CityId = (long)accommodationRoom.CityId,
+                        Status = StatusReservationType.Registered
+
 
                     };
 
@@ -117,7 +117,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                         accommodationUserRooms.LastUpdateDate = DateTime.Now;
                         accommodationUserRooms.AccommodationRoomId = accommodationRoom.Id;
                         accommodationUserRooms.GenderType = reservationForm.GenderType;
-                        accommodationUserRooms.Description = reservationForm.Description; 
+                        accommodationUserRooms.Description = reservationForm.Description;
                         accommodationUserRooms.EntranceTime = reservationForm.EntranceTime;
                         accommodationUserRooms.EndTime = reservationForm.EndTime;
                         accommodationUserRooms.NationalCode = reservationForm.NationalCode;
@@ -126,8 +126,8 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                         accommodationUserRooms.UserId = user.Id;
                         accommodationUserRooms.PriceAccommodation = accommodationRoom.RoomPrice;
                         accommodationUserRooms.PhoneNumber = reservationForm.PhoneNumber;
-                        
-                        
+
+
 
 
                         _context.AccommodationUserRooms.Update(accommodationUserRooms);
@@ -150,7 +150,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
             try
             {
 
-                var queryable = _context.AccommodationUserRooms.Include(c => c.AccommodationRoom).Include(d => d.User).Where(c => c.CityId == reservationForm.CityId).AsQueryable();
+                var queryable = _context.AccommodationUserRooms.Include(c => c.AccommodationRoom).Include(d => d.User).Include(x => x.City).Where(c => c.CityId == reservationForm.CityId).AsQueryable();
 
                 if (reservationForm.AccommodationUserRoomId != null && reservationForm.AccommodationUserRoomId.Count > 0)
                 {
@@ -251,7 +251,8 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                     PriceAccommodation = resp.PriceAccommodation,
                     SystemCode = resp.SystemCode,
                     UsernameAssignment = resp.User.Username,
-                    Status=resp.Status
+                    Status = resp.Status,
+                    FileId = resp.City.FileId
 
                 }).ToList();
                 searchViewModel.PageIndex = reservationForm.PageIndex;
