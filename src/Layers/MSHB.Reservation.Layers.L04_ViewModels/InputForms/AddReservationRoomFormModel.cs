@@ -20,6 +20,6 @@ namespace MSHB.Reservation.Layers.L04_ViewModels.InputForms
         public GenderType GenderType { get; set; }
         public string PersonalCode { get; set; }
         public int GuestCounts { get; set; }
-        public long Description { get; set; }
+        public string Description { get; set; }
     }
 }

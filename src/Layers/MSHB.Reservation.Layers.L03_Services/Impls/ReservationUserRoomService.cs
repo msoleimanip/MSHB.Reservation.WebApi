@@ -44,7 +44,9 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                         LastUpdateDate = DateTime.Now,
                         AccommodationRoomId = accommodationRoom.Id,
                         GenderType = reservationForm.GenderType,
-                        Description = reservationForm.Description,
+
+                        Description = 0,
+                        //Description = reservationForm.Description,         ----> Must update Db
                         EntranceTime = reservationForm.EntranceTime,
                         EndTime = reservationForm.EndTime,
                         NationalCode = reservationForm.NationalCode,
@@ -112,7 +114,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                         accommodationUserRooms.LastUpdateDate = DateTime.Now;
                         accommodationUserRooms.AccommodationRoomId = accommodationRoom.Id;
                         accommodationUserRooms.GenderType = reservationForm.GenderType;
-                        accommodationUserRooms.Description = reservationForm.Description;
+                        //accommodationUserRooms.Description = reservationForm.Description;  Must update Db
                         accommodationUserRooms.EntranceTime = reservationForm.EntranceTime;
                         accommodationUserRooms.EndTime = reservationForm.EndTime;
                         accommodationUserRooms.NationalCode = reservationForm.NationalCode;
