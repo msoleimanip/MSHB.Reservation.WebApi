@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MSHB.Reservation.Layers.L00_BaseModels.Constants.Messages.Base;
 using MSHB.Reservation.Layers.L00_BaseModels.exceptions;
+using MSHB.Reservation.Layers.L01_Entities.Enums;
 using MSHB.Reservation.Layers.L01_Entities.Models;
 using MSHB.Reservation.Layers.L02_DataLayer;
 using MSHB.Reservation.Layers.L03_Services.Contracts;
@@ -34,8 +35,8 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                     accommodationRoom = _context.AccommodationRooms.FirstOrDefault(c => c.Id == reservationForm.AccommodationRoomId);
 
                 var isDuplicateAccommodation = _context.AccommodationUserRooms.Any(c => c.AccommodationRoomId == reservationForm.AccommodationRoomId &&
-                                                    (((c.EntranceTime < reservationForm.EntranceTime) && (c.EndTime > reservationForm.EntranceTime))
-                                                 || ((c.EntranceTime < reservationForm.EndTime) && (c.EndTime > reservationForm.EndTime))));
+                                                    (((c.EntranceTime <= reservationForm.EntranceTime) && (c.EndTime > reservationForm.EntranceTime))
+                                                 || ((c.EntranceTime < reservationForm.EndTime) && (c.EndTime >= reservationForm.EndTime))));
                 if (!isDuplicateAccommodation)
                 {
                     var accommodationUserRoom = new AccommodationUserRoom()
@@ -43,10 +44,8 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                         CreationDate = DateTime.Now,
                         LastUpdateDate = DateTime.Now,
                         AccommodationRoomId = accommodationRoom.Id,
-                        GenderType = reservationForm.GenderType,
-
-                        Description = 0,
-                        //Description = reservationForm.Description,         ----> Must update Db
+                        GenderType = reservationForm.GenderType,                       
+                        Description = reservationForm.Description,                   
                         EntranceTime = reservationForm.EntranceTime,
                         EndTime = reservationForm.EndTime,
                         NationalCode = reservationForm.NationalCode,
@@ -54,7 +53,11 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                         PersonalCode = reservationForm.PersonalCode,
                         UserId = user.Id,
                         PriceAccommodation = accommodationRoom.RoomPrice,
-                        PhoneNumber = reservationForm.PhoneNumber
+                        PhoneNumber = reservationForm.PhoneNumber,
+                        CityId= (long)accommodationRoom.CityId,
+                        Status=StatusReservationType.Registered
+                       
+
                     };
 
                     await _context.AccommodationUserRooms.AddAsync(accommodationUserRoom);
@@ -114,7 +117,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                         accommodationUserRooms.LastUpdateDate = DateTime.Now;
                         accommodationUserRooms.AccommodationRoomId = accommodationRoom.Id;
                         accommodationUserRooms.GenderType = reservationForm.GenderType;
-                        //accommodationUserRooms.Description = reservationForm.Description;  Must update Db
+                        accommodationUserRooms.Description = reservationForm.Description; 
                         accommodationUserRooms.EntranceTime = reservationForm.EntranceTime;
                         accommodationUserRooms.EndTime = reservationForm.EndTime;
                         accommodationUserRooms.NationalCode = reservationForm.NationalCode;
@@ -123,6 +126,8 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                         accommodationUserRooms.UserId = user.Id;
                         accommodationUserRooms.PriceAccommodation = accommodationRoom.RoomPrice;
                         accommodationUserRooms.PhoneNumber = reservationForm.PhoneNumber;
+                        
+                        
 
 
                         _context.AccommodationUserRooms.Update(accommodationUserRooms);
@@ -245,7 +250,8 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                     RoomType = resp.AccommodationRoom.RoomType,
                     PriceAccommodation = resp.PriceAccommodation,
                     SystemCode = resp.SystemCode,
-                    UsernameAssignment = resp.User.Username
+                    UsernameAssignment = resp.User.Username,
+                    Status=resp.Status
 
                 }).ToList();
                 searchViewModel.PageIndex = reservationForm.PageIndex;

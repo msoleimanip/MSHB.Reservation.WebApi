@@ -28,9 +28,10 @@ namespace MSHB.Reservation.Layers.L04_ViewModels.ViewModels
         public string PersonalCode { get; set; }   
         public long SystemCode { get; set; }
         public int GuestCounts { get; set; }
-        public long Description { get; set; }
+        public string Description { get; set; }
         public long PriceAccommodation { get; set; }           
-        public string UsernameAssignment { get; set; }        
+        public string UsernameAssignment { get; set; }
+        public StatusReservationType Status { get; set; }
 
     }
 }

@@ -224,8 +224,8 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
 
                 if (accommodationForm.StartTime.HasValue && accommodationForm.EndTime.HasValue)
                 {
-                    var result = _context.AccommodationUserRooms.Where(c => ((c.EntranceTime < accommodationForm.StartTime) && (c.EndTime > accommodationForm.StartTime))
-                                                                                        || ((c.EntranceTime < accommodationForm.EndTime) && (c.EndTime > accommodationForm.EndTime))).Select(c=>c.CityId).ToList();
+                    var result = _context.AccommodationUserRooms.Where(c => ((c.EntranceTime <= accommodationForm.StartTime) && (c.EndTime >accommodationForm.StartTime))
+                                                                                        || ((c.EntranceTime < accommodationForm.EndTime) && (c.EndTime >= accommodationForm.EndTime))).Select(c=>c.CityId).ToList();
                     queryable = queryable.Where(q => !result.Contains((long)q.CityId));
                 }
 
@@ -256,7 +256,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                 var resp = await queryable.Skip((accommodationForm.PageIndex - 1) * accommodationForm.PageSize).Take(accommodationForm.PageSize).ToListAsync();
                 var count = await queryable.CountAsync();
                 var searchViewModel = new SearchAccommodationRoomViewModel();
-             
+
                 searchViewModel.searchAccommodationRoomViewModels = resp.Select(response => new AccommodationRoomViewModel()
                 {
                     Id = response.Id,
@@ -273,7 +273,8 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                     Capacity = response.Capacity,
                     Description = response.Description,
                     CityId = response.CityId,
-                    FileId= response.City.FileId,
+                    FileId = response.City.FileId,
+                    TotalRoomPrice = accommodationForm.EndTime.HasValue?(long)(response.RoomPrice * (accommodationForm.EndTime.Value.Subtract(accommodationForm.StartTime.Value).TotalDays)): response.RoomPrice,
 
 
                 }).ToList();

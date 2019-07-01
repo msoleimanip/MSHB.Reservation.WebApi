@@ -28,10 +28,10 @@ namespace MSHB.Reservation.Layers.L01_Entities.Models
         public string PhoneNumber { get; set; }
         public GenderType GenderType { get; set; }
         public string PersonalCode { get; set; }
-
         public long SystemCode { get; set; }
         public int GuestCounts { get; set; }
-        public long Description { get; set; }
+        public string Description { get; set; }
+        public StatusReservationType Status { get; set; }
         public long PriceAccommodation { get; set; }
         public PaymentType PaymentType { get; set; }             
         public Guid UserId { get; set; }
