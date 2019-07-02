@@ -12,6 +12,6 @@ namespace MSHB.Reservation.Layers.L03_Services.Contracts
         Task<SearchReservationUserAttachmentViewModel> GetReservationUserAttachmentAsync(User user, ReservationUserAttachmentSearchFormModel reservationForm);
         Task<bool> DeleteReservationUserAttachmentAsync(User user, List<long> reservationFormIds);
         Task<bool> EditReservationUserAttachmentRoomAsync(User user, EditReservationUserAttachmentFormModel reservationForm);
-        Task<long> AddReservationUserAttachmentRoomAsync(User user, AddReservationUserAttachmentFormModel reservationForm);
+        Task<bool> AddReservationUserAttachmentRoomAsync(User user, List<AddReservationUserAttachmentFormModel> reservationForm);
     }
 }

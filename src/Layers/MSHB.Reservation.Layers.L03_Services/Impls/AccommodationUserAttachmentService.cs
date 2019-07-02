@@ -25,35 +25,44 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
             _context.CheckArgumentIsNull(nameof(_context));
         }
 
-        public async Task<long> AddReservationUserAttachmentRoomAsync(User user, AddReservationUserAttachmentFormModel reservationForm)
+        public async Task<bool> AddReservationUserAttachmentRoomAsync(User user, List<AddReservationUserAttachmentFormModel> reservationForms)
         {
             try
             {
-                AccommodationUserRoom accommodationUserRoom = null;
-                if (reservationForm.AccommodationUserRoomId != null)
-                    accommodationUserRoom = _context.AccommodationUserRooms.FirstOrDefault(c => c.Id == reservationForm.AccommodationUserRoomId);
-                if (accommodationUserRoom is null)
+                foreach (var reservationForm in reservationForms)
                 {
-                    throw new ReservationGlobalException(AccommodationUserAttachmentServiceErrors.ReservationUserNotExistError);
-                }
-                var isDuplicateAccommodationUserAttachment = _context.AccommodationUserAttachments.Any(c => c.AccommodationUserRoomId == reservationForm.AccommodationUserRoomId && c.GenderType==reservationForm.GenderType&&c.NationalCode==c.NationalCode);
-                if (!isDuplicateAccommodationUserAttachment)
-                {
-                    var accommodationUserAt = new AccommodationUserAttachment()
+                    AccommodationUserRoom accommodationUserRoom = null;
+                    if (reservationForm.AccommodationUserRoomId != null)
+                        accommodationUserRoom = _context.AccommodationUserRooms.FirstOrDefault(c => c.Id == reservationForm.AccommodationUserRoomId);
+                    if (accommodationUserRoom is null)
                     {
-                        AccommodationUserRoomId= accommodationUserRoom.Id,
-                        Age= reservationForm.Age,
-                        GenderType=reservationForm.GenderType,
-                        Name=reservationForm.Name,
-                        NationalCode=reservationForm.NationalCode,
-                        Relative=reservationForm.Relative
-                    };
+                        throw new ReservationGlobalException(AccommodationUserAttachmentServiceErrors.ReservationUserNotExistError);
+                    }
+                    var isDuplicateAccommodationUserAttachment = _context.AccommodationUserAttachments.Any(c => c.AccommodationUserRoomId == reservationForm.AccommodationUserRoomId && c.GenderType == reservationForm.GenderType && c.NationalCode == c.NationalCode);
+                    if (!isDuplicateAccommodationUserAttachment)
+                    {
+                        var accommodationUserAt = new AccommodationUserAttachment()
+                        {
+                            AccommodationUserRoomId = accommodationUserRoom.Id,
+                            Age = reservationForm.Age,
+                            GenderType = reservationForm.GenderType,
+                            Name = reservationForm.Name,
+                            NationalCode = reservationForm.NationalCode,
+                            Relative = reservationForm.Relative
+                        };
 
-                    await _context.AccommodationUserAttachments.AddAsync(accommodationUserAt);
-                    await _context.SaveChangesAsync();
-                    return accommodationUserAt.Id;
+                        await _context.AccommodationUserAttachments.AddAsync(accommodationUserAt);                      
+                        
+                    }
+                    else
+                    {
+                        throw new ReservationGlobalException(AccommodationUserAttachmentServiceErrors.AddDuplicateAccommodationUserAttachmentError);
+                    }
+                   
+                   
                 }
-                throw new ReservationGlobalException(AccommodationUserAttachmentServiceErrors.AddDuplicateAccommodationUserAttachmentError);
+                await _context.SaveChangesAsync();
+                return true;
 
             }
             catch (Exception ex)

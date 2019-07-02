@@ -225,8 +225,8 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                 if (accommodationForm.StartTime.HasValue && accommodationForm.EndTime.HasValue)
                 {
                     var result = _context.AccommodationUserRooms.Where(c => ((c.EntranceTime <= accommodationForm.StartTime) && (c.EndTime >accommodationForm.StartTime))
-                                                                                        || ((c.EntranceTime < accommodationForm.EndTime) && (c.EndTime >= accommodationForm.EndTime))).Select(c=>c.CityId).ToList();
-                    queryable = queryable.Where(q => !result.Contains((long)q.CityId));
+                                                                                        || ((c.EntranceTime < accommodationForm.EndTime) && (c.EndTime >= accommodationForm.EndTime))).Select(c=>c.AccommodationRoomId).ToList();
+                    queryable = queryable.Where(q => !result.Contains((long)q.Id));
                 }
 
               

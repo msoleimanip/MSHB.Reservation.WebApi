@@ -30,7 +30,7 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
            [HttpGet("[action]"), HttpPost("[action]")]
         [ValidateModelAttribute]
         [Authorize(Roles = "ReservationUserAttachment-AddReservationUserAttachment")]
-        public async Task<IActionResult> AddReservationUserAttachmentRoom([FromBody] AddReservationUserAttachmentFormModel reservationForm)
+        public async Task<IActionResult> AddReservationUserAttachmentRoom([FromBody] List<AddReservationUserAttachmentFormModel> reservationForm)
         {
             var resp = await _accommodationUserAttachmentServiceService.AddReservationUserAttachmentRoomAsync(HttpContext.GetUser(), reservationForm);
             return Ok(GetRequestResult(resp));
