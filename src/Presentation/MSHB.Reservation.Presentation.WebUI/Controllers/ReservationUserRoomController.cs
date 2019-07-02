@@ -71,5 +71,21 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
             var resp = await _reservationService.GetUserReservationRoomForUserAsync(HttpContext.GetUser(), reservationForm);
             return Ok(GetRequestResult(resp));
         }
+
+        [HttpGet("[action]"), HttpPost("[action]")]
+        [ValidateModelAttribute]
+        public async Task<IActionResult> UserReservationRoomPaied([FromBody] ReservationRoomPaiedFormModel reservationForm)
+        {
+            var resp = await _reservationService.UserReservationRoomPaiedAsync(HttpContext.GetUser(), reservationForm);
+            return Ok(GetRequestResult(resp));
+        }
+        [HttpGet("[action]"), HttpPost("[action]")]
+        [ValidateModelAttribute]
+       
+        public async Task<IActionResult> GetUserReservationRoomById([FromQuery] long Id)
+        {
+            var resp = await _reservationService.GetUserReservationRoomByIdAsync(HttpContext.GetUser(), Id);
+            return Ok(GetRequestResult(resp));
+        }
     }
 }

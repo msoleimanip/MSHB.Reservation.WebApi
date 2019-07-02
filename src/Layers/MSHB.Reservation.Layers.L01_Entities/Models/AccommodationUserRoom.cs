@@ -29,6 +29,7 @@ namespace MSHB.Reservation.Layers.L01_Entities.Models
         public GenderType GenderType { get; set; }
         public string PersonalCode { get; set; }
         public long SystemCode { get; set; }
+        public bool? IsPaied { get; set; }
         public int GuestCounts { get; set; }
         public string Description { get; set; }
         public StatusReservationType Status { get; set; }

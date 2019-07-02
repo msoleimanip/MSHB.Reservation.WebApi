@@ -15,5 +15,8 @@ namespace MSHB.Reservation.Layers.L03_Services.Contracts
         Task<bool> DeleteReservationRoomAsync(User user, List<long> reservationFormIds);
         Task<SearchReservationRoomViewModel> GetUserReservationRoomForUserAsync(User user, ReservationRoomSearchFormModel reservationForm);
         Task<bool> ChangeStatusReservationRoomAsync(User user, ChangeStatusReservationRoom changeStatusReservationRoom);
+        Task<bool> ReceiveContentAsync(MessageContent messageContent);
+        Task<bool> UserReservationRoomPaiedAsync(User user, ReservationRoomPaiedFormModel reservationForm);
+        Task<ReservationRoomViewModel> GetUserReservationRoomByIdAsync(User user, long id);
     }
 }

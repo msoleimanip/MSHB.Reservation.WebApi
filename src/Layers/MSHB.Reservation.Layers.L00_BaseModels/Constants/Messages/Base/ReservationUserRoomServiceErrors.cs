@@ -22,8 +22,10 @@ namespace MSHB.Reservation.Layers.L00_BaseModels.Constants.Messages.Base
 
         public static readonly ReservationErrorMessage GetReservationError =
          new ReservationErrorMessage("RUR-1008", "دریافت اطلاعات رزرو خطا رخ داده است");
+        public static readonly ReservationErrorMessage UserReservationRoomPaied =
+         new ReservationErrorMessage("RUR-1009", "در هنگام تصویه خطایی رخ داده است.");
 
-
-        
+        public static ReservationErrorMessage StatusReservationTypeError =
+         new ReservationErrorMessage("RUR-1010", "امکان تغییر وضعیت برای موارد تخلیه و کنسلی وجود ندارد در صورت نیاز دوباره رزرو کنید.");
     }
 }

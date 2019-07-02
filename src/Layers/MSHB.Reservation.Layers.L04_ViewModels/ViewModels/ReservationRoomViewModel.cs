@@ -23,6 +23,7 @@ namespace MSHB.Reservation.Layers.L04_ViewModels.ViewModels
         public DateTime? EntranceTime { get; set; }
         public DateTime? EndTime { get; set; }
         public string NationalCode { get; set; }
+        public bool? IsPaied { get; set; }       
         public string PhoneNumber { get; set; }
         public GenderType GenderType { get; set; }
         public string PersonalCode { get; set; }
@@ -33,6 +34,7 @@ namespace MSHB.Reservation.Layers.L04_ViewModels.ViewModels
         public string UsernameAssignment { get; set; }
         public StatusReservationType Status { get; set; }
         public Guid? FileId { get; set; }
-
+        public long TotalRoomPrice { get; set; }
+        public PaymentType PaymentType { get; set; }
     }
 }

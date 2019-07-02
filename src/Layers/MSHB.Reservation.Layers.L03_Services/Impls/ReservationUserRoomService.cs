@@ -52,6 +52,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                         GuestCounts = reservationForm.GuestCounts,
                         PersonalCode = reservationForm.PersonalCode,
                         UserId = user.Id,
+                        IsPaied = false,
                         PriceAccommodation = accommodationRoom.RoomPrice,
                         PhoneNumber = reservationForm.PhoneNumber,
                         CityId = (long)accommodationRoom.CityId,
@@ -80,7 +81,13 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                 var accommodationUserRooms = await _context.AccommodationUserRooms.FindAsync(changeStatusReservationRoom.AccommodationUserRoomId);
                 if (accommodationUserRooms!=null)
                 {
+                    if (accommodationUserRooms.Status==StatusReservationType.Cancel|| accommodationUserRooms.Status == StatusReservationType.CheckOut)
+                    {
+                        throw new ReservationGlobalException(ReservationUserRoomServiceErrors.StatusReservationTypeError);
+                    }
                     accommodationUserRooms.Status = changeStatusReservationRoom.Status;
+                   await _context.SaveChangesAsync();
+                    return true;
                 }
                 throw new ReservationGlobalException(ReservationUserRoomServiceErrors.EditReservationNotExistError);
 
@@ -129,7 +136,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                 {
                     var isDuplicateAccommodation = _context.AccommodationUserRooms.Any(c => c.Id != reservationForm.AccommodationRoomId && c.AccommodationRoomId == reservationForm.AccommodationRoomId &&
                                                     (((c.EntranceTime < reservationForm.EntranceTime) && (c.EndTime > reservationForm.EntranceTime))
-                                                 || ((c.EntranceTime < reservationForm.EndTime) && (c.EndTime > reservationForm.EndTime))));
+                                                 || ((c.EntranceTime < reservationForm.EndTime) && (c.EndTime > reservationForm.EndTime))) && (c.Status != StatusReservationType.Cancel && c.Status != StatusReservationType.CheckOut));
                     if (!isDuplicateAccommodation)
                     {
 
@@ -162,6 +169,57 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
             {
                 throw new ReservationGlobalException(ReservationUserRoomServiceErrors.EditReservationError, ex);
             }
+        }
+
+        public async Task<ReservationRoomViewModel> GetUserReservationRoomByIdAsync(User user, long id)
+        {
+            try
+            {
+
+                var resp = await _context.AccommodationUserRooms.Include(c => c.AccommodationRoom).Include(d => d.User).Include(x => x.City).FirstOrDefaultAsync(c => c.Id == id);
+
+                var result = new ReservationRoomViewModel()
+                {
+                    Id = resp.Id,
+                    AccommodationRoomId = resp.AccommodationRoomId,
+                    Bed = resp.AccommodationRoom.Bed,
+                    BedRoom = resp.AccommodationRoom.BedRoom,
+                    CityId = resp.CityId,
+                    Capacity = resp.AccommodationRoom.Capacity,
+                    CreationDate = resp.CreationDate,
+                    Description = resp.Description,
+                    EndTime = resp.EndTime,
+                    EntranceTime = resp.EntranceTime,
+                    GenderType = resp.GenderType,
+                    GuestCounts = resp.GuestCounts,
+                    IsActivated = resp.AccommodationRoom.IsActivated,
+                    LastUpdateDate = resp.LastUpdateDate,
+                    NationalCode = resp.NationalCode,
+                    PersonalCode = resp.PersonalCode,
+                    PhoneNumber = resp.PhoneNumber,
+                    Rank = resp.AccommodationRoom.Rank,
+                    RoomNumber = resp.AccommodationRoom.RoomNumber,
+                    RoomPrice = resp.AccommodationRoom.RoomPrice,
+                    RoomType = resp.AccommodationRoom.RoomType,
+                    PriceAccommodation = resp.PriceAccommodation,
+                    SystemCode = resp.SystemCode,
+                    UsernameAssignment = resp.User.Username,
+                    Status = resp.Status,
+                    FileId = resp.City.FileId,
+                    IsPaied = resp.IsPaied,
+                    PaymentType = resp.PaymentType,
+                    TotalRoomPrice = resp.EndTime.HasValue ? (long)(resp.AccommodationRoom.RoomPrice * (resp.EndTime.Value.Subtract(resp.EntranceTime.Value).TotalDays)) : resp.AccommodationRoom.RoomPrice,
+
+                };
+               
+                return result;
+            }
+            catch (Exception ex)
+            {
+
+                throw new ReservationGlobalException(ReservationUserRoomServiceErrors.GetReservationError, ex);
+            }
+
         }
 
         public async Task<SearchReservationRoomViewModel> GetUserReservationRoomForUserAsync(User user, ReservationRoomSearchFormModel reservationForm)
@@ -271,7 +329,10 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                     SystemCode = resp.SystemCode,
                     UsernameAssignment = resp.User.Username,
                     Status = resp.Status,
-                    FileId = resp.City.FileId
+                    FileId = resp.City.FileId,
+                    IsPaied=resp.IsPaied,
+                    PaymentType=resp.PaymentType,
+                    TotalRoomPrice = resp.EndTime.HasValue ? (long)(resp.AccommodationRoom.RoomPrice * (resp.EndTime.Value.Subtract(resp.EntranceTime.Value).TotalDays)) : resp.AccommodationRoom.RoomPrice,
 
                 }).ToList();
                 searchViewModel.PageIndex = reservationForm.PageIndex;
@@ -282,9 +343,64 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
             catch (Exception ex)
             {
 
-                throw new ReservationGlobalException(UsersServiceErrors.GetUserListError, ex);
+                throw new ReservationGlobalException(ReservationUserRoomServiceErrors.GetReservationError, ex);
             }
 
+        }
+
+        public async Task<bool> ReceiveContentAsync(MessageContent messageContent)
+        {
+            try
+            {
+                //if (messageContent.Type!=0&&messageContent.Number!=0)
+                //{                 
+                //    if ((long)StatusReservationType.Cancel== messageContent.Type)
+                //    {
+                //        var accommodationUserRooms = await _context.AccommodationUserRooms.FindAsync(changeStatusReservationRoom.AccommodationUserRoomId);
+                //        if (accommodationUserRooms != null)
+                //        {
+                //            accommodationUserRooms.Status = changeStatusReservationRoom.Status;
+                //        }
+                //    }
+
+                //}
+                return true;
+               
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new ReservationGlobalException(AccommodationRoomServiceErrors.ChangeStatusError, ex);
+            }
+
+        }
+
+        public async Task<bool> UserReservationRoomPaiedAsync(User user, ReservationRoomPaiedFormModel reservationForm)
+        {
+            try
+            {
+                var accommodationUserRooms = await _context.AccommodationUserRooms.FindAsync(reservationForm.ReservationUserRoomId);
+
+
+                if (accommodationUserRooms != null)
+                {
+                    accommodationUserRooms.IsPaied = reservationForm.IsPaied;
+                    accommodationUserRooms.PaymentType = reservationForm.PaymentType;
+                    accommodationUserRooms.PriceAccommodation = reservationForm.PriceAccommodation;
+                    accommodationUserRooms.Description = reservationForm.Description;
+                    _context.AccommodationUserRooms.Update(accommodationUserRooms);
+                    await _context.SaveChangesAsync();
+                    return true;
+
+                }
+                throw new ReservationGlobalException(ReservationUserRoomServiceErrors.EditReservationNotExistError);
+            }
+            catch (Exception ex)
+            {
+                throw new ReservationGlobalException(ReservationUserRoomServiceErrors.UserReservationRoomPaied);
+
+            }
         }
     }
 }

@@ -6,7 +6,7 @@ namespace MSHB.Reservation.Layers.L01_Entities.Enums
 {
     public enum PaymentType
     {
-        Cash,
-        Credit
+        Cash = 1,
+        Credit = 2
     }
 }

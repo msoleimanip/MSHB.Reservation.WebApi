@@ -43,9 +43,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                     {
                         throw new ReservationGlobalException(AccommodationUserAttachmentServiceErrors.ReservationUserNotExistError);
                     }
-                    var isDuplicateAccommodationUserAttachment = _context.AccommodationUserAttachments.Any(c => c.AccommodationUserRoomId == reservationForm.AccommodationUserRoomId && c.GenderType == reservationForm.GenderType && c.NationalCode == c.NationalCode);
-                    if (!isDuplicateAccommodationUserAttachment)
-                    {
+                   
                         var accommodationUserAt = new AccommodationUserAttachment()
                         {
                             AccommodationUserRoomId = accommodationUserRoom.Id,
@@ -57,13 +55,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                         };
 
                         await _context.AccommodationUserAttachments.AddAsync(accommodationUserAt);                      
-                        
-                    }
-                    else
-                    {
-                        throw new ReservationGlobalException(AccommodationUserAttachmentServiceErrors.AddDuplicateAccommodationUserAttachmentError);
-                    }
-                   
+                     
                    
                 }
                 await _context.SaveChangesAsync();
