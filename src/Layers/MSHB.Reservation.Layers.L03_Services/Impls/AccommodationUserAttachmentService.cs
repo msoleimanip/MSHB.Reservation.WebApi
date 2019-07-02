@@ -29,6 +29,11 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
         {
             try
             {
+                var accRoomId = reservationForms.FirstOrDefault().AccommodationUserRoomId;
+                var userAttachments = _context.AccommodationUserAttachments.Where(c => c.AccommodationUserRoomId == accRoomId).ToList();
+                
+                _context.AccommodationUserAttachments.RemoveRange(userAttachments);
+                
                 foreach (var reservationForm in reservationForms)
                 {
                     AccommodationUserRoom accommodationUserRoom = null;
@@ -130,7 +135,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
             try
             {
 
-                var queryable = _context.AccommodationUserAttachments.Where(c => c.Id == reservationForm.AccommodationUserAttachmentId).AsQueryable();
+                var queryable = _context.AccommodationUserAttachments.Where(c => c.AccommodationUserRoomId == reservationForm.AccommodationUserId).AsQueryable();
 
                
 

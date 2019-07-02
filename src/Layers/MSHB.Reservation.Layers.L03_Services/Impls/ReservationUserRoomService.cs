@@ -36,7 +36,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
 
                 var isDuplicateAccommodation = _context.AccommodationUserRooms.Any(c => c.AccommodationRoomId == reservationForm.AccommodationRoomId &&
                                                     (((c.EntranceTime <= reservationForm.EntranceTime) && (c.EndTime > reservationForm.EntranceTime))
-                                                 || ((c.EntranceTime < reservationForm.EndTime) && (c.EndTime >= reservationForm.EndTime))));
+                                                 || ((c.EntranceTime < reservationForm.EndTime) && (c.EndTime >= reservationForm.EndTime))) && (c.Status != StatusReservationType.Cancel && c.Status != StatusReservationType.CheckOut));
                 if (!isDuplicateAccommodation)
                 {
                     var accommodationUserRoom = new AccommodationUserRoom()
@@ -73,6 +73,25 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
             }
         }
 
+        public async  Task<bool> ChangeStatusReservationRoomAsync(User user, ChangeStatusReservationRoom changeStatusReservationRoom)
+        {
+            try
+            {
+                var accommodationUserRooms = await _context.AccommodationUserRooms.FindAsync(changeStatusReservationRoom.AccommodationUserRoomId);
+                if (accommodationUserRooms!=null)
+                {
+                    accommodationUserRooms.Status = changeStatusReservationRoom.Status;
+                }
+                throw new ReservationGlobalException(ReservationUserRoomServiceErrors.EditReservationNotExistError);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new ReservationGlobalException(AccommodationRoomServiceErrors.ChangeStatusError, ex);
+            }
+        }
+
         public async Task<bool> DeleteReservationRoomAsync(User user, List<long> reservationFormIds)
         {
             try
@@ -90,7 +109,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
             }
             catch (Exception ex)
             {
-                throw new ReservationGlobalException(AccommodationRoomServiceErrors.DeleteAccommodationError, ex);
+                throw new ReservationGlobalException(ReservationUserRoomServiceErrors.DeleteReservationError, ex);
             }
         }
 

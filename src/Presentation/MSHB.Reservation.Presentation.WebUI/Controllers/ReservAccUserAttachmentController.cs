@@ -56,7 +56,7 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
         [HttpGet("[action]"), HttpPost("[action]")]
         [ValidateModelAttribute]
         [Authorize(Roles = "ReservationUserAttachment-GetReservationUserAttachment")]
-        public async Task<IActionResult> GetReservationUserAttachment([FromQuery] ReservationUserAttachmentSearchFormModel reservationForm)
+        public async Task<IActionResult> GetReservationUserAttachment([FromBody] ReservationUserAttachmentSearchFormModel reservationForm)
         {
             var resp = await _accommodationUserAttachmentServiceService.GetReservationUserAttachmentAsync(HttpContext.GetUser(), reservationForm);
             return Ok(GetRequestResult(resp));
