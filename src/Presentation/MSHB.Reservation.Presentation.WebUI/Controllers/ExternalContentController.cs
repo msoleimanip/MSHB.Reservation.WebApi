@@ -21,8 +21,9 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
         {
             _reservationUserRoomService = reservationUserRoomService;
             _reservationUserRoomService.CheckArgumentIsNull(nameof(_reservationUserRoomService));
+        
         }
-
+        [HttpGet("[action]"), HttpPost("[action]")]
         public async Task<IActionResult> ReceiveContent([FromBody] MessageContent messageContent)
         {
             var resp = await _reservationUserRoomService.ReceiveContentAsync(messageContent);

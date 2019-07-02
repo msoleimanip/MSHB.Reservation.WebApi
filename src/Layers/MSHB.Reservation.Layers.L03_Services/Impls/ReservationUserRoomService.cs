@@ -352,20 +352,49 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
         {
             try
             {
-                //if (messageContent.Type!=0&&messageContent.Number!=0)
-                //{                 
-                //    if ((long)StatusReservationType.Cancel== messageContent.Type)
-                //    {
-                //        var accommodationUserRooms = await _context.AccommodationUserRooms.FindAsync(changeStatusReservationRoom.AccommodationUserRoomId);
-                //        if (accommodationUserRooms != null)
-                //        {
-                //            accommodationUserRooms.Status = changeStatusReservationRoom.Status;
-                //        }
-                //    }
+                if (!string.IsNullOrEmpty(messageContent.Content) && messageContent.Number!=0)
+                {       
+                    long systemCode;          
+                       if (long.TryParse(messageContent.Content,out systemCode))
+                       {
+                            var accommodationUserRooms = await _context.AccommodationUserRooms.FirstOrDefaultAsync(c=>c.SystemCode==systemCode);
+                            if (accommodationUserRooms != null)
+                            {
+                                var phonenumber=messageContent.Number.ToString();
+                                var phonenumber2=messageContent.Number.ToString();
+                                var phonenumber3=messageContent.Number.ToString();
 
-                //}
-                return true;
-               
+                                if (phonenumber.StartsWith("989"))
+                                {
+                                    phonenumber2="0"+phonenumber.Substring(2);
+                                    phonenumber3=phonenumber.Substring(2);
+                                }
+                                   
+                                else if (phonenumber.StartsWith("0"))
+                                {
+                                    phonenumber2="98"+phonenumber.Substring(1);
+                                    phonenumber3=phonenumber.Substring(1);
+                                }
+                                   
+                                else if (!phonenumber.StartsWith("0") && !phonenumber.StartsWith("98") && phonenumber.Length==10)
+                                {
+                                    phonenumber2="0"+phonenumber;
+                                    phonenumber3="98"+phonenumber;
+                                }
+                                   
+                                if (accommodationUserRooms.PhoneNumber==phonenumber||accommodationUserRooms.PhoneNumber==phonenumber2||accommodationUserRooms.PhoneNumber==phonenumber3)
+                                {
+                                    accommodationUserRooms.Status = StatusReservationType.Cancel;
+                                    _context.AccommodationUserRooms.Update(accommodationUserRooms);
+                                    await _context.SaveChangesAsync();
+                                }
+
+                                
+                            }                              
+                       }                                     
+
+                }
+                return true;              
 
             }
             catch (Exception ex)

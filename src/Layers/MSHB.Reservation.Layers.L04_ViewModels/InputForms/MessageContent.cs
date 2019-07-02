@@ -8,5 +8,6 @@ namespace MSHB.Reservation.Layers.L04_ViewModels.InputForms
     {
         public long Number { get; set; }
         public long Type { get; set; }
+        public string Content { get; set; }
     }
 }
