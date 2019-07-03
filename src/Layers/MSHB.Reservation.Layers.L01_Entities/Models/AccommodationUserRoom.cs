@@ -32,6 +32,7 @@ namespace MSHB.Reservation.Layers.L01_Entities.Models
         public bool? IsPaied { get; set; }
         public int GuestCounts { get; set; }
         public string Description { get; set; }
+        public bool IsCancelSmsSend { get; set; }
         public StatusReservationType Status { get; set; }
         public long PriceAccommodation { get; set; }
         public PaymentType PaymentType { get; set; }             

@@ -201,11 +201,11 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
         {
             try
             {
-                var accommodationUserRooms = await _context.AccommodationUserRooms.Where(c=> c.EntranceTime>=DateTime.Now && c.Status==StatusReservationType.Registered).ToListAsync();
+                var accommodationUserRooms = await _context.AccommodationUserRooms.Where(c=> c.IsCancelSmsSend==false&&c.EntranceTime<=DateTime.Now  && c.Status==StatusReservationType.Registered).ToListAsync();
                 var reservationFails = new List<ReservationFailViewModel>();
                 accommodationUserRooms.ForEach(au =>
                 {
-                    if (string.IsNullOrEmpty(au.PhoneNumber) && au.PhoneNumber.Length>3)
+                    if (!string.IsNullOrEmpty(au.PhoneNumber) && au.PhoneNumber.Length>3)
                     {
                         var number = au.PhoneNumber;
                         if (au.PhoneNumber.StartsWith("98"))
@@ -224,10 +224,14 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                                 Content = "کاربر گرامی با توجه به عدم حضور جناب عالی تا کنون در اقامتگاه جهت کنسل کردن اقامتگاه کد پیگیری زیر را ارسال نمایید."
                                 + "\n" + au.SystemCode.ToString()
                          });
-                    }
-                    
+                        au.IsCancelSmsSend = true;
+                       _context.AccommodationUserRooms.Update(au);
+                        
+
+                    }                   
 
                 });
+                await _context.SaveChangesAsync();
                 return reservationFails;
             }
             catch (Exception ex)
