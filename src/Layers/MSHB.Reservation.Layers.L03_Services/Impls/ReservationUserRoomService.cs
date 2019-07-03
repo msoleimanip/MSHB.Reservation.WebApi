@@ -201,7 +201,10 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
         {
             try
             {
-                var accommodationUserRooms = await _context.AccommodationUserRooms.Where(c=> c.IsCancelSmsSend==false&&c.EntranceTime<=DateTime.Now  && c.Status==StatusReservationType.Registered).ToListAsync();
+                var time = DateTime.Now;
+                var dt = new DateTime(time.Year, time.Month, time.Day, 0, 0, 0);
+
+                var accommodationUserRooms = await _context.AccommodationUserRooms.Where(c=> c.IsCancelSmsSend==false&& c.EntranceTime.Value==dt && c.EntranceTime.Value.AddHours(11)<=DateTime.Now &&  c.Status==StatusReservationType.Registered).ToListAsync();
                 var reservationFails = new List<ReservationFailViewModel>();
                 accommodationUserRooms.ForEach(au =>
                 {

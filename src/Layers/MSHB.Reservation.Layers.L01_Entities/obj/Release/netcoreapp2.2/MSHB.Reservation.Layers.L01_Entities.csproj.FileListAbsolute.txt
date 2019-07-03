@@ -1,0 +1,11 @@
+C:\Csharp\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L01_Entities\bin\Release\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.deps.json
+C:\Csharp\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L01_Entities\bin\Release\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.runtimeconfig.json
+C:\Csharp\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L01_Entities\bin\Release\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.runtimeconfig.dev.json
+C:\Csharp\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L01_Entities\bin\Release\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.dll
+C:\Csharp\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L01_Entities\bin\Release\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.pdb
+C:\Csharp\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L01_Entities\obj\Release\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.csprojAssemblyReference.cache
+C:\Csharp\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L01_Entities\obj\Release\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.csproj.CoreCompileInputs.cache
+C:\Csharp\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L01_Entities\obj\Release\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.AssemblyInfoInputs.cache
+C:\Csharp\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L01_Entities\obj\Release\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.AssemblyInfo.cs
+C:\Csharp\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L01_Entities\obj\Release\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.dll
+C:\Csharp\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L01_Entities\obj\Release\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.pdb

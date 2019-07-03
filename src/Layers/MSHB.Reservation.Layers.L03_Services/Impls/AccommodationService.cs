@@ -99,7 +99,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
 
                 foreach (var acid in accommodationFormIds)
                 {
-                    if (_context.AccommodationUserRooms.Any(c => c.AccommodationRoomId == acid))
+                    if (_context.AccommodationUserRooms.Any(c => c.AccommodationRoomId == acid && (c.Status==StatusReservationType.Registered|| c.Status == StatusReservationType.Checkin)))
                     {
                         throw new ReservationGlobalException(AccommodationRoomServiceErrors.UserInAccommodationExistError);
                     }
