@@ -18,5 +18,6 @@ namespace MSHB.Reservation.Layers.L03_Services.Contracts
         Task<bool> ReceiveContentAsync(MessageContent messageContent);
         Task<bool> UserReservationRoomPaiedAsync(User user, ReservationRoomPaiedFormModel reservationForm);
         Task<ReservationRoomViewModel> GetUserReservationRoomByIdAsync(User user, long id);
+        Task<List<ReservationFailViewModel>> GetReservationFailsAsync();
     }
 }

@@ -171,6 +171,46 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
             }
         }
 
+        public async Task<List<ReservationFailViewModel>> GetReservationFailsAsync()
+        {
+            try
+            {
+                var accommodationUserRooms = await _context.AccommodationUserRooms.Where(c=> c.EntranceTime>=DateTime.Now && c.Status==StatusReservationType.Registered).ToListAsync();
+                var reservationFails = new List<ReservationFailViewModel>();
+                accommodationUserRooms.ForEach(au =>
+                {
+                    if (string.IsNullOrEmpty(au.PhoneNumber) && au.PhoneNumber.Length>3)
+                    {
+                        var number = au.PhoneNumber;
+                        if (au.PhoneNumber.StartsWith("98"))
+                        {
+                            number = au.PhoneNumber.Substring(2);
+                        }
+                        else if (au.PhoneNumber.StartsWith("0"))
+                        {
+                            number= au.PhoneNumber.Substring(1);
+                        }
+                        long numberPhone;
+                        if (long.TryParse(number, out numberPhone))
+                            reservationFails.Add(new ReservationFailViewModel()
+                            {
+                                Number = numberPhone,
+                                Content = "کاربر گرامی با توجه به عدم حضور جناب عالی تا کنون در اقامتگاه جهت کنسل کردن اقامتگاه کد پیگیری زیر را ارسال نمایید."
+                                + "\n" + au.SystemCode.ToString()
+                         });
+                    }
+                    
+
+                });
+                return reservationFails;
+            }
+            catch (Exception ex)
+            {
+
+                throw new ReservationGlobalException(ReservationUserRoomServiceErrors.GetReservationFailsError,ex);
+            }
+        }
+
         public async Task<ReservationRoomViewModel> GetUserReservationRoomByIdAsync(User user, long id)
         {
             try

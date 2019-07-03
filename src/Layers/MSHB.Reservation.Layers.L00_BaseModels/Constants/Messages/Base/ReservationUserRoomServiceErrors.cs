@@ -27,5 +27,7 @@ namespace MSHB.Reservation.Layers.L00_BaseModels.Constants.Messages.Base
 
         public static ReservationErrorMessage StatusReservationTypeError =
          new ReservationErrorMessage("RUR-1010", "امکان تغییر وضعیت برای موارد تخلیه و کنسلی وجود ندارد در صورت نیاز دوباره رزرو کنید.");
+        public static ReservationErrorMessage GetReservationFailsError=
+            new ReservationErrorMessage("RUR-1011", "خطا در دریافت رزروهای وارد نشده.");
     }
 }

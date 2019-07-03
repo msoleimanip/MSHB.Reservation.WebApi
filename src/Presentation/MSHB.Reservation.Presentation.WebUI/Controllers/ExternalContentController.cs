@@ -29,5 +29,12 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
             var resp = await _reservationUserRoomService.ReceiveContentAsync(messageContent);
             return Ok();
         }
+
+        [HttpGet("[action]"), HttpPost("[action]")]
+        public async Task<IActionResult> GetReservationFails()
+        {
+            var resp = await _reservationUserRoomService.GetReservationFailsAsync();
+            return Ok(resp);
+        }
     }
 }
