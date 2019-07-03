@@ -13,18 +13,16 @@ namespace MSHB.Reservation.Presentation.WebUI
         public static void Main(string[] args)
         {
             var host = BuildWebHost(args);
-  
 
-            
+           
+
             using (var scope = host.Services.CreateScope())
-            {
-                var services = scope.ServiceProvider;
+            {                
                 try
                 {
-                    var dbInitializer = scope.ServiceProvider.GetService<IDbInitializerService>();
-                    dbInitializer.Initialize();
+                    var dbInitializer = scope.ServiceProvider.GetRequiredService<IDbInitializerService>();                  
+                    dbInitializer.Initialize();                  
                     dbInitializer.SeedData();
-
                 }
                 catch (Exception e)
                 {
@@ -51,7 +49,7 @@ namespace MSHB.Reservation.Presentation.WebUI
                  logging.AddLog4Net();
                  logging.SetMinimumLevel(LogLevel.Debug);
              })
-                .UseIISIntegration() 
+                .UseIISIntegration().UseIIS()
                 .UseUrls("http://0.0.0.0:5000")
                 .Build();
     }

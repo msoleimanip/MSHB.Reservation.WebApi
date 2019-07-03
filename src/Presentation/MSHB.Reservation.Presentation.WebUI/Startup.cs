@@ -93,6 +93,7 @@ namespace MSHB.Reservation.Presentation.WebUI
                         serverDbContextOptionsBuilder.CommandTimeout(minutes);
                         serverDbContextOptionsBuilder.EnableRetryOnFailure();
                     });
+                
             });
            
 
@@ -201,45 +202,12 @@ namespace MSHB.Reservation.Presentation.WebUI
             try
             {
 
-         
-            
-         
-            loggerFactory.AddLog4Net();
-            loggerFactory.AddDbLogger(serviceProvider: app.ApplicationServices, scopeFactory: app.ApplicationServices.GetRequiredService<IServiceScopeFactory>(), minLevel: LogLevel.Warning);
-            app.UseGlobalExceptionHandler(loggerFactory);
+                loggerFactory.AddLog4Net();
+                loggerFactory.AddDbLogger(serviceProvider: app.ApplicationServices, scopeFactory: app.ApplicationServices.GetRequiredService<IServiceScopeFactory>(), minLevel: LogLevel.Warning);
+                app.UseGlobalExceptionHandler(loggerFactory);
 
-            app.UseAngularAntifCityeryToken();
-            //app.UseExceptionHandler(appBuilder =>
-            //{
-            //    appBuilder.Use(async (context, next) =>
-            //    {
-            //        var error = context.Features[typeof(IExceptionHandlerFeature)] as IExceptionHandlerFeature;
-            //        if (error != null && error.Error is SecurityTokenExpiredException)
-            //        {
-            //            context.Response.StatusCode = 401;
-            //            context.Response.ContentType = "application/json";
-            //            await context.Response.WriteAsync(JsonConvert.SerializeObject(new
-            //            {
-            //                State = 401,
-            //                Msg = "token expired"
-            //            }));
-            //        }
-            //        else if (error != null && error.Error != null)
-            //        {
-            //            context.Response.StatusCode = 500;
-            //            context.Response.ContentType = "application/json";
-            //            await context.Response.WriteAsync(JsonConvert.SerializeObject(new
-            //            {
-            //                State = 500,
-            //                Msg = error.Error.Message
-            //            }));
-            //        }
-            //        else
-            //        {
-            //            await next();
-            //        }
-            //    });
-            //});
+                app.UseAngularAntifCityeryToken();
+          
             app.UseAuthentication();
 
           

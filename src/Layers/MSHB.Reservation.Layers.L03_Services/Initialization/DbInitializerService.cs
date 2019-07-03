@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,50 +30,46 @@ namespace MSHB.Reservation.Layers.L03_Services.Initialization
     {
         private readonly IServiceScopeFactory _scopeFactory;
         private readonly ISecurityService _securityService;
+        private readonly ReservationDbContext _context;
 
         public DbInitializerService(
             IServiceScopeFactory scopeFactory,
-            ISecurityService securityService)
+            ISecurityService securityService, ReservationDbContext context)
         {
             _scopeFactory = scopeFactory;
             _scopeFactory.CheckArgumentIsNull(nameof(_scopeFactory));
 
             _securityService = securityService;
             _securityService.CheckArgumentIsNull(nameof(_securityService));
+            _context = context;
+            _context.CheckArgumentIsNull(nameof(_context));
         }
 
         public void Initialize()
         {
-            using (var serviceScope = _scopeFactory.CreateScope())
-            {
-                using (var context = serviceScope.ServiceProvider.GetService<ReservationDbContext>())
-                {
-                    context.Database.Migrate();
-                }
-            }
+            
+                    _context.Database.Migrate();       
         }
 
         public void SeedData()
         {
 
-            using (var serviceScope = _scopeFactory.CreateScope())
-            {
-                using (var context = serviceScope.ServiceProvider.GetService<ReservationDbContext>())
-                {
+           
+                
 
 
                     // Add default roles
                     var adminRole = CustomRoles.GetInitialRoles();
 
-                    if (!context.Roles.Any())
+                    if (!_context.Roles.Any())
                     {
-                        context.AddRange(adminRole);
+                    _context.AddRange(adminRole);
 
-                        context.SaveChanges();
+                    _context.SaveChanges();
                     }
 
                     // Add Admin user
-                    if (!context.Users.Any())
+                    if (!_context.Users.Any())
                     {
                         var groupAuth = new GroupAuth()
                         {
@@ -83,9 +79,9 @@ namespace MSHB.Reservation.Layers.L03_Services.Initialization
 
                         var adminUser = new User
                         {
-                            Username = "MSHB",
-                            FirstName = "Mohammad",
-                            LastName = "Soleimani",
+                            Username = "admin",
+                            FirstName = "مدیر",
+                            LastName = "سیستم",
                             IsActive = true,
                             IsPresident = PresidentType.Admin,
                             LastLoggedIn = null,
@@ -94,24 +90,24 @@ namespace MSHB.Reservation.Layers.L03_Services.Initialization
                             GroupAuth = groupAuth
                         };
 
-                        context.GroupAuths.Add(groupAuth);
-                        context.Users.Add(adminUser);
+                    _context.GroupAuths.Add(groupAuth);
+                    _context.Users.Add(adminUser);
 
-                        foreach (var role in context.Roles.ToList())
+                        foreach (var role in _context.Roles.ToList())
                         {
-                            context.Add(new UserRole { Role = role, User = adminUser });
+                        _context.Add(new UserRole { Role = role, User = adminUser });
                             if (groupAuth != null)
                             {
-                                context.GroupAuthRoles.Add(new GroupAuthRole { GroupAuthId = groupAuth.Id, RoleId = role.Id });
+                            _context.GroupAuthRoles.Add(new GroupAuthRole { GroupAuthId = groupAuth.Id, RoleId = role.Id });
                             }
                         }
 
-                        context.SaveChanges();
+                    _context.SaveChanges();
 
-                    }
+                   
 
                 }
-            }
+           
         }
     }
 }

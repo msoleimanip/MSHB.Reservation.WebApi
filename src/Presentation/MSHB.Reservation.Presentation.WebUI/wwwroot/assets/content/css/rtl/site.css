@@ -1,0 +1,333 @@
+@font-face {
+  font-family: IranSans;
+  font-style: normal;
+  font-weight: 900;
+  src: url(https://cdn.alibaba.ir/dist/f5c0943b/fonts/0cbe440.eot);
+  src: url(https://cdn.alibaba.ir/dist/f5c0943b/fonts/0cbe440.eot#iefix)
+      format("embedded-opentype"),
+    url(https://cdn.alibaba.ir/dist/f5c0943b/fonts/3d58553.woff2)
+      format("woff2"),
+    url(https://cdn.alibaba.ir/dist/f5c0943b/fonts/6e6d05b.woff) format("woff"),
+    url(https://cdn.alibaba.ir/dist/f5c0943b/fonts/879c6f0.ttf)
+      format("truetype");
+}
+
+@font-face {
+  font-family: IranSans;
+  font-style: normal;
+  font-weight: 700;
+  src: url(https://cdn.alibaba.ir/dist/f5c0943b/fonts/cacb945.eot);
+  src: url(https://cdn.alibaba.ir/dist/f5c0943b/fonts/cacb945.eot#iefix)
+      format("embedded-opentype"),
+    url(https://cdn.alibaba.ir/dist/f5c0943b/fonts/924be0f.woff2)
+      format("woff2"),
+    url(https://cdn.alibaba.ir/dist/f5c0943b/fonts/6ed6ddf.woff) format("woff"),
+    url(https://cdn.alibaba.ir/dist/f5c0943b/fonts/cf91637.ttf)
+      format("truetype");
+}
+
+@font-face {
+  font-family: IranSans;
+  font-style: normal;
+  font-weight: 500;
+  src: url(https://cdn.alibaba.ir/dist/f5c0943b/fonts/5a25001.eot);
+  src: url(https://cdn.alibaba.ir/dist/f5c0943b/fonts/5a25001.eot#iefix)
+      format("embedded-opentype"),
+    url(https://cdn.alibaba.ir/dist/f5c0943b/fonts/8451859.woff2)
+      format("woff2"),
+    url(https://cdn.alibaba.ir/dist/f5c0943b/fonts/32cc237.woff) format("woff"),
+    url(https://cdn.alibaba.ir/dist/f5c0943b/fonts/caa93b1.ttf)
+      format("truetype");
+}
+
+@font-face {
+  font-family: IranSans;
+  font-style: normal;
+  font-weight: 300;
+  src: url(https://cdn.alibaba.ir/dist/f5c0943b/fonts/fe61680.eot);
+  src: url(https://cdn.alibaba.ir/dist/f5c0943b/fonts/fe61680.eot#iefix)
+      format("embedded-opentype"),
+    url(https://cdn.alibaba.ir/dist/f5c0943b/fonts/d11c490.woff2)
+      format("woff2"),
+    url(https://cdn.alibaba.ir/dist/f5c0943b/fonts/74955f1.woff) format("woff"),
+    url(https://cdn.alibaba.ir/dist/f5c0943b/fonts/1604933.ttf)
+      format("truetype");
+}
+
+@font-face {
+  font-family: IranSans;
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://cdn.alibaba.ir/dist/f5c0943b/fonts/07e13ce.eot);
+  src: url(https://cdn.alibaba.ir/dist/f5c0943b/fonts/07e13ce.eot#iefix)
+      format("embedded-opentype"),
+    url(https://cdn.alibaba.ir/dist/f5c0943b/fonts/38d4b5f.woff2)
+      format("woff2"),
+    url(https://cdn.alibaba.ir/dist/f5c0943b/fonts/d4bb655.woff) format("woff"),
+    url(https://cdn.alibaba.ir/dist/f5c0943b/fonts/a5080d9.ttf)
+      format("truetype");
+}
+
+body {
+  font-family: IRANSans !important;
+  font-size: 14px !important;
+}
+
+a {
+  font-family: IRANSans !important;
+}
+
+.dropdown-menu {
+  font-size: 14px;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: rgb(255, 255, 255);
+}
+
+.btn-Create {
+  height: 38px;
+  margin-top: -4px;
+  float: left;
+}
+
+.text-danger {
+  font-size: 10px;
+}
+
+.form-control {
+  font-size: 13px;
+}
+
+/* Table Sorting */
+th[sortable] {
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+th[sortable].desc:before,
+th[sortable].asc:before {
+  content: "";
+  display: block;
+  background: url("../../../images/sort.png") no-repeat;
+  background-size: 22px;
+  width: 22px;
+  height: 22px;
+  float: left;
+  margin-right: -22px;
+}
+
+th[sortable].desc:before {
+  transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+}
+
+.btn-calendar {
+  width: 2.75rem;
+  background-image: url("../../../images/calendar.png") !important;
+  background-repeat: no-repeat;
+  background-size: 23px;
+  background-position: center;
+}
+
+.square-icon {
+  width: 100px;
+  height: 100px;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 8px;
+  font-size: 55px;
+  margin: 0 auto;
+  padding: 12px 0 25px;
+  text-align: center;
+}
+
+.display {
+  font-size: large;
+  color: black;
+}
+
+.border-h6 {
+  margin-top: 30px;
+  margin-bottom: 20px;
+  font-size: 12pt;
+}
+
+.text-green {
+  color: #93b711;
+}
+
+.text-orange {
+  color: #f26100;
+}
+
+.text-pink {
+  color: #e23ab1;
+}
+
+.text-blue {
+  color: #0079ff;
+}
+
+.bg-green {
+  background-color: #93b711;
+  color: #fff;
+}
+
+.bg-orange {
+  background-color: #f26100;
+  color: #fff;
+}
+
+.bg-pink {
+  background-color: #e23ab1;
+  color: #fff;
+}
+
+.bg-blue {
+  background-color: #0079ff;
+  color: #fff;
+}
+
+.bg-blue:hover {
+  background-color: transparent;
+  color: #0079ff;
+  border: 1px solid #0079ff;
+}
+
+.border-green {
+  border-color: #93b711;
+}
+
+.border-orange {
+  border-color: #f26100;
+}
+
+.border-pink {
+  border-color: #e23ab1;
+}
+
+.border-blue {
+  border-color: #0079ff;
+}
+
+.nav-link {
+  cursor: pointer;
+}
+
+.star {
+  font-size: 1.5rem;
+  color: #b0c4de;
+}
+.filled {
+  color: #1e90ff;
+}
+.bad {
+  color: #deb0b0;
+}
+.filled.bad {
+  color: #ff1e1e;
+}
+
+
+/* New Css */
+
+.nav-link {
+  padding: 0 28px 0 20px;
+  /* position: relative; */
+  height: auto;
+  border-left: 1px solid #bdbdbd;
+}
+
+.nav-link-last {
+  border-left: none;
+}
+
+.dropdown-toggle::after {
+  display: none;
+}
+
+.menu-navigation__chevron-container {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.img-circle {
+  border-radius: 50%;
+}
+
+/* Begin Uploader */
+.app-title {
+  font-size: 24px;
+}
+
+.box-title {
+  font-size: 20px;
+}
+
+.box-container {
+  box-sizing: border-box;
+  width: 800px;
+  height: 500px;
+  max-width: 90%;
+  max-height: 90%;
+  padding: 24px;
+  margin: 24px auto;
+  border-radius: 4px;
+
+  color: #555;
+  background-color: #eee;
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, 0.18),
+    0 6px 6px rgba(0, 0, 0, 0.25);
+}
+
+.info-container {
+  padding: 12px 16px;
+
+  line-height: 24px;
+}
+
+.action-container,
+.content-container {
+  position: relative;
+
+  overflow: auto;
+  height: 200px;
+  min-height: 0;
+  border-radius: 4px;
+
+  background-color: #fff;
+}
+
+.vertical-container,
+.horizontal-container {
+  min-height: 0 !important;
+}
+
+.action-button {
+  box-sizing: border-box;
+  width: calc(100% - 16px);
+  min-height: 35px;
+  padding: 4px 16px;
+  margin: 8px;
+  border: 1px solid #555;
+  border-radius: 4px;
+
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 14px;
+  text-align: center;
+}
+
+.action-button:hover {
+  color: #fff;
+  background-color: #555;
+}
+
+.dropzone-container {
+  height: 100%;
+}
+/* End Uploader */

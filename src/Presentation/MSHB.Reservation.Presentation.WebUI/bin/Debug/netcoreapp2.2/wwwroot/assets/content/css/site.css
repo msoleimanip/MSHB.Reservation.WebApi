@@ -1,0 +1,137 @@
+.btn-Create {
+  height: 38px;
+  margin-top: -4px;
+  float: right;
+}
+
+.text-danger {
+  font-size: 10px;
+}
+
+/* Table Sorting */
+th[sortable] {
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+th[sortable].desc:before,
+th[sortable].asc:before {
+  content: "";
+  display: block;
+  background: url("../../images/sort.png") no-repeat;
+  background-size: 22px;
+  width: 22px;
+  height: 22px;
+  float: right;
+  margin-left: -22px;
+}
+
+th[sortable].desc:before {
+  transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+}
+
+.btn-calendar {
+  width: 2.75rem;
+  background-image: url("../../images/calendar.png") !important;
+  background-repeat: no-repeat;
+  background-size: 23px;
+  background-position: center;
+}
+
+.square-icon {
+  width: 100px;
+  height: 100px;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 8px;
+  font-size: 55px;
+  margin: 0 auto;
+  padding: 12px 0 25px;
+  text-align: center;
+}
+
+
+.display {
+  font-size: large;
+  color: black;
+}
+
+.border-h6{
+  margin-top: 30px;
+  margin-bottom: 20px;
+  font-size: 12pt;
+}
+
+.text-green {
+  color: #93b711;
+}
+
+.text-orange {
+  color: #f26100;
+}
+
+.text-pink {
+  color: #e23ab1;
+}
+
+.text-blue {
+  color: #0079ff;
+}
+
+.bg-green {
+  background-color: #93b711;
+  color: #fff;
+}
+
+.bg-orange {
+  background-color: #f26100;
+  color: #fff;
+}
+
+.bg-pink {
+  background-color: #e23ab1;
+  color: #fff;
+}
+
+.bg-blue {
+  background-color: #0079ff;
+  color: #fff;
+}
+
+  .bg-blue:hover {
+      background-color: transparent;
+      color: #0079ff;
+      border: 1px solid #0079ff;
+  }
+
+.border-green {
+  border-color: #93b711;
+}
+
+.border-orange {
+  border-color: #f26100;
+}
+
+.border-pink {
+  border-color: #e23ab1;
+}
+
+.border-blue {
+  border-color: #0079ff;
+}
+
+.star {
+  font-size: 1.5rem;
+  color: #b0c4de;
+}
+.filled {
+  color: #1e90ff;
+}
+.bad {
+  color: #deb0b0;
+}
+.filled.bad {
+  color: #ff1e1e;
+}
