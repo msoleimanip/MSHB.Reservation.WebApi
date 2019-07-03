@@ -11,7 +11,7 @@ namespace MSHB.Reservation.Layers.L00_BaseModels.Settings
         public UserAttachedFile UserAttachedFile { get; set; }
         public string SeedMode { get; set; } = "PRODUCT";
         public UserSeed AdminUserSeed { get; set; }
-    
+        public string SmsUrl { get; set; }
         public Logging Logging { get; set; }
         public Smtp Smtp { get; set; }
         public Connectionstrings ConnectionStrings { get; set; }

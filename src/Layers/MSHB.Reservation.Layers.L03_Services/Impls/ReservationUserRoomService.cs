@@ -19,11 +19,14 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
     public class ReservationUserRoomService : IReservationUserRoomService
     {
         private readonly ReservationDbContext _context;
+        private readonly ISmsService _smsService;
 
-        public ReservationUserRoomService(ReservationDbContext context)
+        public ReservationUserRoomService(ReservationDbContext context, ISmsService smsService)
         {
             _context = context;
             _context.CheckArgumentIsNull(nameof(_context));
+            _smsService = smsService;
+            _smsService.CheckArgumentIsNull(nameof(_smsService));
         }
 
         public async Task<long> AddReservationRoomAsync(User user, AddReservationRoomFormModel reservationForm)
@@ -63,6 +66,29 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
 
                     await _context.AccommodationUserRooms.AddAsync(accommodationUserRoom);
                     await _context.SaveChangesAsync();
+
+                    if (!string.IsNullOrEmpty(accommodationUserRoom.PhoneNumber) && accommodationUserRoom.PhoneNumber.Length > 3)
+                    {
+                        var number = accommodationUserRoom.PhoneNumber;
+                        if (accommodationUserRoom.PhoneNumber.StartsWith("98"))
+                        {
+                            number = accommodationUserRoom.PhoneNumber.Substring(2);
+                        }
+                        else if (accommodationUserRoom.PhoneNumber.StartsWith("0"))
+                        {
+                            number = accommodationUserRoom.PhoneNumber.Substring(1);
+                        }
+                        long numberPhone;
+                        if (long.TryParse(number, out numberPhone))
+                            await _smsService.SendSmsAsync(new SendSmsModel()
+                            {
+                                Number = numberPhone,
+                                Content = "کاربر گرامی رزرو شما با موفقیت انجام شد جهت کنسل کردن اقامتگاه کد پیگیری زیر را به ارقام انگلیسی ارسال نمایید."
+                                + "\n" + accommodationUserRoom.SystemCode.ToString()
+                            });
+                    }
+                   
+
                     return accommodationUserRoom.Id;
                 }
                 throw new ReservationGlobalException(ReservationUserRoomServiceErrors.AddDuplicateReservationError);
@@ -393,6 +419,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
             try
             {
                 if (!string.IsNullOrEmpty(messageContent.Content) && messageContent.Number!=0)
+
                 {       
                     long systemCode;          
                        if (long.TryParse(messageContent.Content,out systemCode))
@@ -427,12 +454,57 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                                     accommodationUserRooms.Status = StatusReservationType.Cancel;
                                     _context.AccommodationUserRooms.Update(accommodationUserRooms);
                                     await _context.SaveChangesAsync();
+                                
+                                    await _smsService.SendSmsAsync( new SendSmsModel()
+                                        {
+                                            Number = messageContent.Number,
+                                            Content = "کاربر گرامی رزرو شما با موفقیت کنسل  شد."
+                                            + "\n" + accommodationUserRooms.SystemCode.ToString()
+                                        });
+
                                 }
+                                else
+                                {
+                                        await _smsService.SendSmsAsync(new SendSmsModel()
+                                        {
+                                            Number = messageContent.Number,
+                                            Content = "شماره شما در سیستم یافت نشد جهت کنسلی با مرکز تماس بگیرید."
+                                                + "\n" + accommodationUserRooms.SystemCode.ToString()
+                                        });
+                                }
+                            
 
                                 
-                            }                              
-                       }                                     
+                            }
+                        else
+                        {
+                            await _smsService.SendSmsAsync(new SendSmsModel()
+                            {
+                                Number = messageContent.Number,
+                                Content = "مشکل در کد پیگیری شما وجود دارد  در سیستم وجود ندارد .",
+                                               
+                            });
+                        }
+                       }
+                    else
+                    {
+                        await _smsService.SendSmsAsync(new SendSmsModel()
+                        {
+                            Number = messageContent.Number,
+                            Content = "مشکل در کد پیگیری شما وجود دارد  به اشتباه وارد شده است.",
+                                           
+                        });
+                    }
 
+                }
+                else
+                {
+                    await _smsService.SendSmsAsync(new SendSmsModel()
+                    {
+                        Number = messageContent.Number,
+                        Content = "اطلاعات ناقص می باشد.",
+
+                    });
                 }
                 return true;              
 

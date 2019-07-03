@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using DNTCommon.Web.Core;
@@ -70,9 +71,12 @@ namespace MSHB.Reservation.Presentation.WebUI
             services.AddTransient<IAccommodationUserAttachmentService, AccommodationUserAttachmentService>();
             services.AddTransient<IReportService, ReportService>();
             services.AddTransient<IFileService, FileService>();
+            services.AddTransient<ISmsService, SmsService>();
             services.AddSingleton<IFileProvider>(
                 new PhysicalFileProvider(
                     Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
+
+            services.AddSingleton(new HttpClient());
 
 
             services.AddMemoryCache();

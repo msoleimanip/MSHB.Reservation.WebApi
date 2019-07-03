@@ -23,5 +23,16 @@ namespace MSHB.Reservation.Layers.L04_ViewModels.ViewModels
         public string DeliveryTime { get; set; }
         public string EvacuationTime { get; set; }
         public Guid? FileId { get; set; }
+        public LocationViewModel Location { get; set; }
     }
+     
+    public class LocationViewModel
+    {
+        public bool HasLocation { get; set; }
+        public string Lat { get; set; }
+        public string Long { get; set; }
+
+
+    }
+
 }

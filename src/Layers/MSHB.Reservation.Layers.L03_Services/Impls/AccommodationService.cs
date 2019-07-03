@@ -275,7 +275,12 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                     CityId = response.CityId,
                     FileId = response.City.FileId,
                     TotalRoomPrice = accommodationForm.EndTime.HasValue?(long)(response.RoomPrice * (accommodationForm.EndTime.Value.Subtract(accommodationForm.StartTime.Value).TotalDays)): response.RoomPrice,
-
+                    Location=new LocationViewModel()
+                    {
+                        HasLocation= response.City.Latitude.HasValue,
+                        Lat= response.City.Latitude.HasValue?response.City.Latitude.Value.ToString():"",
+                        Long= response.City.Longitude.HasValue ? response.City.Longitude.Value.ToString() : "",
+                    },
 
                 }).ToList();
                 searchViewModel.PageIndex = accommodationForm.PageIndex;
