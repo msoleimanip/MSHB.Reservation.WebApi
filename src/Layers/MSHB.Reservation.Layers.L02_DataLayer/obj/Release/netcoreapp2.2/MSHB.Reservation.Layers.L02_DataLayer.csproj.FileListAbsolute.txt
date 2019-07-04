@@ -12,3 +12,17 @@ C:\Csharp\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L02_DataLay
 C:\Csharp\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L02_DataLayer\obj\Release\netcoreapp2.2\MSHB.Reservation.Layers.L02_DataLayer.csproj.CopyComplete
 C:\Csharp\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L02_DataLayer\obj\Release\netcoreapp2.2\MSHB.Reservation.Layers.L02_DataLayer.dll
 C:\Csharp\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L02_DataLayer\obj\Release\netcoreapp2.2\MSHB.Reservation.Layers.L02_DataLayer.pdb
+D:\MSHB\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L02_DataLayer\bin\Release\netcoreapp2.2\MSHB.Reservation.Layers.L02_DataLayer.deps.json
+D:\MSHB\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L02_DataLayer\bin\Release\netcoreapp2.2\MSHB.Reservation.Layers.L02_DataLayer.runtimeconfig.json
+D:\MSHB\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L02_DataLayer\bin\Release\netcoreapp2.2\MSHB.Reservation.Layers.L02_DataLayer.runtimeconfig.dev.json
+D:\MSHB\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L02_DataLayer\bin\Release\netcoreapp2.2\MSHB.Reservation.Layers.L02_DataLayer.dll
+D:\MSHB\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L02_DataLayer\bin\Release\netcoreapp2.2\MSHB.Reservation.Layers.L02_DataLayer.pdb
+D:\MSHB\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L02_DataLayer\bin\Release\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.dll
+D:\MSHB\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L02_DataLayer\bin\Release\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.pdb
+D:\MSHB\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L02_DataLayer\obj\Release\netcoreapp2.2\MSHB.Reservation.Layers.L02_DataLayer.csprojAssemblyReference.cache
+D:\MSHB\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L02_DataLayer\obj\Release\netcoreapp2.2\MSHB.Reservation.Layers.L02_DataLayer.csproj.CoreCompileInputs.cache
+D:\MSHB\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L02_DataLayer\obj\Release\netcoreapp2.2\MSHB.Reservation.Layers.L02_DataLayer.AssemblyInfoInputs.cache
+D:\MSHB\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L02_DataLayer\obj\Release\netcoreapp2.2\MSHB.Reservation.Layers.L02_DataLayer.AssemblyInfo.cs
+D:\MSHB\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L02_DataLayer\obj\Release\netcoreapp2.2\MSHB.Reservation.Layers.L02_DataLayer.csproj.CopyComplete
+D:\MSHB\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L02_DataLayer\obj\Release\netcoreapp2.2\MSHB.Reservation.Layers.L02_DataLayer.dll
+D:\MSHB\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L02_DataLayer\obj\Release\netcoreapp2.2\MSHB.Reservation.Layers.L02_DataLayer.pdb

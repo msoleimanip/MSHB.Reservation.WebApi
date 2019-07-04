@@ -29,14 +29,23 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
             _CityService.CheckArgumentIsNull(nameof(_CityService));
         }
 
+        [HttpGet("[action]"), HttpPost("[action]")]      
+        [AllowAnonymous]
+        public async Task<IActionResult> GetAllCities()
+        {
+            var Citys = await _CityService.GetAllCitiesAsync();
+            return Ok(GetRequestResult(Citys));
+        }
+
+
         [HttpGet("[action]")]
         [ValidateModelAttribute]
-        [Authorize(Roles = "City-Get")]
+        //[Authorize(Roles = "City-Get")]
+        [AllowAnonymous]
         public async Task<IActionResult> Get([FromQuery] long Id)
         {
             return Ok(GetRequestResult(await _CityService.GetAsync(HttpContext.GetUser(),Id)));
         }
-
 
         [HttpGet("[action]"), HttpPost("[action]")]
         [ValidateModelAttribute]

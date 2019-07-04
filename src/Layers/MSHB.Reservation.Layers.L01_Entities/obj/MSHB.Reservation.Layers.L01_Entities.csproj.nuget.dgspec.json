@@ -1,0 +1,64 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\MSHB\\MSHB.Reservation.WebApi\\src\\Layers\\MSHB.Reservation.Layers.L01_Entities\\MSHB.Reservation.Layers.L01_Entities.csproj": {}
+  },
+  "projects": {
+    "D:\\MSHB\\MSHB.Reservation.WebApi\\src\\Layers\\MSHB.Reservation.Layers.L01_Entities\\MSHB.Reservation.Layers.L01_Entities.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\MSHB\\MSHB.Reservation.WebApi\\src\\Layers\\MSHB.Reservation.Layers.L01_Entities\\MSHB.Reservation.Layers.L01_Entities.csproj",
+        "projectName": "MSHB.Reservation.Layers.L01_Entities",
+        "projectPath": "D:\\MSHB\\MSHB.Reservation.WebApi\\src\\Layers\\MSHB.Reservation.Layers.L01_Entities\\MSHB.Reservation.Layers.L01_Entities.csproj",
+        "packagesPath": "C:\\Users\\Hamed\\.nuget\\packages\\",
+        "outputPath": "D:\\MSHB\\MSHB.Reservation.WebApi\\src\\Layers\\MSHB.Reservation.Layers.L01_Entities\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Hamed\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "dependencies": {
+            "Microsoft.AspNetCore.All": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    }
+  }
+}

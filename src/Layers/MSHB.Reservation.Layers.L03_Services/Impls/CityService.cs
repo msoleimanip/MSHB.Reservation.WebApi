@@ -50,7 +50,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                         IsActivated = city.IsActivated,
                         Latitude = city.Latitude,
                         Longitude = city.Longitude,
-                        FileId =city.FileId,
+                        FileId = city.FileId,
                     };
                     city.CityAttachments.ToList().ForEach(c =>
                     {
@@ -76,6 +76,29 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                 throw new ReservationGlobalException(CityServiceErrors.GetCityError, ex);
             }
         }
+
+        public async Task<List<JsTreeNode>> GetAllCitiesAsync()
+        {
+            var cities = new List<City>();
+
+            cities = await _context.Citys.ToListAsync();
+
+            var Citynodes = new List<JsTreeNode>();
+            cities.ForEach(or =>
+            {
+                if (or.ParentId == null)
+                {
+                    JsTreeNode parentNode = new JsTreeNode();
+                    parentNode.id = or.Id.ToString();
+                    parentNode.text = or.CityName;
+                    parentNode = FillChild(cities, parentNode, or.Id, null, false);
+                    Citynodes.Add(parentNode);
+                }
+
+            });
+            return Citynodes;
+        }
+
         public async Task<List<JsTreeNode>> GetCityByUserAsync(User user)
         {
             var cities = new List<City>();
@@ -252,7 +275,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                             thumb.Save(newPath);
                             fileAddress.FilePath = newPath;
                             fileAddress.FileType = "thumb";
-                             _context.FileAddresses.Update(fileAddress);
+                            _context.FileAddresses.Update(fileAddress);
                             City.FileId = fileAddress.FileId;
                         }
                         catch (Exception ex)

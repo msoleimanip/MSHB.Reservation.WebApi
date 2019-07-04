@@ -22,5 +22,6 @@ namespace MSHB.Reservation.Layers.L03_Services.Contracts
         Task<bool> SetCityLocationAsync(User user, CityLocationFormModel cityLocationForm);       
         Task<bool> SetCityImagesAsync(User user, CityImagesFormModel cityLocationForm);
         Task<bool> DeleteAttachmentCityAsync(User user, List<long> deleteAttachmentCityIds);
+        Task<List<JsTreeNode>> GetAllCitiesAsync();
     }
 }

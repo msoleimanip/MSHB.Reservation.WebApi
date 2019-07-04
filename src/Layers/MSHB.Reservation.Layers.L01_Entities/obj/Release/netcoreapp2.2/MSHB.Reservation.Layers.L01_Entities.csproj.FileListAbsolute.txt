@@ -9,3 +9,14 @@ C:\Csharp\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L01_Entitie
 C:\Csharp\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L01_Entities\obj\Release\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.AssemblyInfo.cs
 C:\Csharp\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L01_Entities\obj\Release\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.dll
 C:\Csharp\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L01_Entities\obj\Release\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.pdb
+D:\MSHB\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L01_Entities\bin\Release\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.deps.json
+D:\MSHB\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L01_Entities\bin\Release\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.runtimeconfig.json
+D:\MSHB\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L01_Entities\bin\Release\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.runtimeconfig.dev.json
+D:\MSHB\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L01_Entities\bin\Release\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.dll
+D:\MSHB\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L01_Entities\bin\Release\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.pdb
+D:\MSHB\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L01_Entities\obj\Release\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.csprojAssemblyReference.cache
+D:\MSHB\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L01_Entities\obj\Release\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.csproj.CoreCompileInputs.cache
+D:\MSHB\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L01_Entities\obj\Release\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.AssemblyInfoInputs.cache
+D:\MSHB\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L01_Entities\obj\Release\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.AssemblyInfo.cs
+D:\MSHB\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L01_Entities\obj\Release\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.dll
+D:\MSHB\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L01_Entities\obj\Release\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.pdb

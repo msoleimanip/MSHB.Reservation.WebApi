@@ -10,3 +10,15 @@ C:\Csharp\MSHB.Reservation.WebApi\src\Shared\MSHB.Reservation.Shared.Common\obj\
 C:\Csharp\MSHB.Reservation.WebApi\src\Shared\MSHB.Reservation.Shared.Common\obj\Release\netcoreapp2.2\MSHB.Reservation.Shared.Common.csproj.CopyComplete
 C:\Csharp\MSHB.Reservation.WebApi\src\Shared\MSHB.Reservation.Shared.Common\obj\Release\netcoreapp2.2\MSHB.Reservation.Shared.Common.dll
 C:\Csharp\MSHB.Reservation.WebApi\src\Shared\MSHB.Reservation.Shared.Common\obj\Release\netcoreapp2.2\MSHB.Reservation.Shared.Common.pdb
+D:\MSHB\MSHB.Reservation.WebApi\src\Shared\MSHB.Reservation.Shared.Common\bin\Release\netcoreapp2.2\MSHB.Reservation.Shared.Common.deps.json
+D:\MSHB\MSHB.Reservation.WebApi\src\Shared\MSHB.Reservation.Shared.Common\bin\Release\netcoreapp2.2\MSHB.Reservation.Shared.Common.dll
+D:\MSHB\MSHB.Reservation.WebApi\src\Shared\MSHB.Reservation.Shared.Common\bin\Release\netcoreapp2.2\MSHB.Reservation.Shared.Common.pdb
+D:\MSHB\MSHB.Reservation.WebApi\src\Shared\MSHB.Reservation.Shared.Common\bin\Release\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.dll
+D:\MSHB\MSHB.Reservation.WebApi\src\Shared\MSHB.Reservation.Shared.Common\bin\Release\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.pdb
+D:\MSHB\MSHB.Reservation.WebApi\src\Shared\MSHB.Reservation.Shared.Common\obj\Release\netcoreapp2.2\MSHB.Reservation.Shared.Common.csprojAssemblyReference.cache
+D:\MSHB\MSHB.Reservation.WebApi\src\Shared\MSHB.Reservation.Shared.Common\obj\Release\netcoreapp2.2\MSHB.Reservation.Shared.Common.csproj.CoreCompileInputs.cache
+D:\MSHB\MSHB.Reservation.WebApi\src\Shared\MSHB.Reservation.Shared.Common\obj\Release\netcoreapp2.2\MSHB.Reservation.Shared.Common.AssemblyInfoInputs.cache
+D:\MSHB\MSHB.Reservation.WebApi\src\Shared\MSHB.Reservation.Shared.Common\obj\Release\netcoreapp2.2\MSHB.Reservation.Shared.Common.AssemblyInfo.cs
+D:\MSHB\MSHB.Reservation.WebApi\src\Shared\MSHB.Reservation.Shared.Common\obj\Release\netcoreapp2.2\MSHB.Reservation.Shared.Common.csproj.CopyComplete
+D:\MSHB\MSHB.Reservation.WebApi\src\Shared\MSHB.Reservation.Shared.Common\obj\Release\netcoreapp2.2\MSHB.Reservation.Shared.Common.dll
+D:\MSHB\MSHB.Reservation.WebApi\src\Shared\MSHB.Reservation.Shared.Common\obj\Release\netcoreapp2.2\MSHB.Reservation.Shared.Common.pdb

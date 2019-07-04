@@ -1,0 +1,146 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\MSHB\\MSHB.Reservation.WebApi\\src\\Layers\\MSHB.Reservation.Layers.L02_DataLayer\\MSHB.Reservation.Layers.L02_DataLayer.csproj": {}
+  },
+  "projects": {
+    "D:\\MSHB\\MSHB.Reservation.WebApi\\src\\Layers\\MSHB.Reservation.Layers.L01_Entities\\MSHB.Reservation.Layers.L01_Entities.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\MSHB\\MSHB.Reservation.WebApi\\src\\Layers\\MSHB.Reservation.Layers.L01_Entities\\MSHB.Reservation.Layers.L01_Entities.csproj",
+        "projectName": "MSHB.Reservation.Layers.L01_Entities",
+        "projectPath": "D:\\MSHB\\MSHB.Reservation.WebApi\\src\\Layers\\MSHB.Reservation.Layers.L01_Entities\\MSHB.Reservation.Layers.L01_Entities.csproj",
+        "packagesPath": "C:\\Users\\Hamed\\.nuget\\packages\\",
+        "outputPath": "D:\\MSHB\\MSHB.Reservation.WebApi\\src\\Layers\\MSHB.Reservation.Layers.L01_Entities\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Hamed\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "dependencies": {
+            "Microsoft.AspNetCore.All": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    },
+    "D:\\MSHB\\MSHB.Reservation.WebApi\\src\\Layers\\MSHB.Reservation.Layers.L02_DataLayer\\MSHB.Reservation.Layers.L02_DataLayer.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\MSHB\\MSHB.Reservation.WebApi\\src\\Layers\\MSHB.Reservation.Layers.L02_DataLayer\\MSHB.Reservation.Layers.L02_DataLayer.csproj",
+        "projectName": "MSHB.Reservation.Layers.L02_DataLayer",
+        "projectPath": "D:\\MSHB\\MSHB.Reservation.WebApi\\src\\Layers\\MSHB.Reservation.Layers.L02_DataLayer\\MSHB.Reservation.Layers.L02_DataLayer.csproj",
+        "packagesPath": "C:\\Users\\Hamed\\.nuget\\packages\\",
+        "outputPath": "D:\\MSHB\\MSHB.Reservation.WebApi\\src\\Layers\\MSHB.Reservation.Layers.L02_DataLayer\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Hamed\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "projectReferences": {
+              "D:\\MSHB\\MSHB.Reservation.WebApi\\src\\Layers\\MSHB.Reservation.Layers.L01_Entities\\MSHB.Reservation.Layers.L01_Entities.csproj": {
+                "projectPath": "D:\\MSHB\\MSHB.Reservation.WebApi\\src\\Layers\\MSHB.Reservation.Layers.L01_Entities\\MSHB.Reservation.Layers.L01_Entities.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[2.2.4, )"
+            },
+            "Microsoft.EntityFrameworkCore.Proxies": {
+              "target": "Package",
+              "version": "[2.2.4, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[2.2.4, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer.Design": {
+              "target": "Package",
+              "version": "[1.1.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.4, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[2.2.3, )"
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    }
+  }
+}

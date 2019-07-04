@@ -1,0 +1,148 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\MSHB\\MSHB.Reservation.WebApi\\src\\Shared\\MSHB.Reservation.Shared.Common\\MSHB.Reservation.Shared.Common.csproj": {}
+  },
+  "projects": {
+    "D:\\MSHB\\MSHB.Reservation.WebApi\\src\\Layers\\MSHB.Reservation.Layers.L01_Entities\\MSHB.Reservation.Layers.L01_Entities.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\MSHB\\MSHB.Reservation.WebApi\\src\\Layers\\MSHB.Reservation.Layers.L01_Entities\\MSHB.Reservation.Layers.L01_Entities.csproj",
+        "projectName": "MSHB.Reservation.Layers.L01_Entities",
+        "projectPath": "D:\\MSHB\\MSHB.Reservation.WebApi\\src\\Layers\\MSHB.Reservation.Layers.L01_Entities\\MSHB.Reservation.Layers.L01_Entities.csproj",
+        "packagesPath": "C:\\Users\\Hamed\\.nuget\\packages\\",
+        "outputPath": "D:\\MSHB\\MSHB.Reservation.WebApi\\src\\Layers\\MSHB.Reservation.Layers.L01_Entities\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Hamed\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "dependencies": {
+            "Microsoft.AspNetCore.All": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    },
+    "D:\\MSHB\\MSHB.Reservation.WebApi\\src\\Shared\\MSHB.Reservation.Shared.Common\\MSHB.Reservation.Shared.Common.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\MSHB\\MSHB.Reservation.WebApi\\src\\Shared\\MSHB.Reservation.Shared.Common\\MSHB.Reservation.Shared.Common.csproj",
+        "projectName": "MSHB.Reservation.Shared.Common",
+        "projectPath": "D:\\MSHB\\MSHB.Reservation.WebApi\\src\\Shared\\MSHB.Reservation.Shared.Common\\MSHB.Reservation.Shared.Common.csproj",
+        "packagesPath": "C:\\Users\\Hamed\\.nuget\\packages\\",
+        "outputPath": "D:\\MSHB\\MSHB.Reservation.WebApi\\src\\Shared\\MSHB.Reservation.Shared.Common\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Hamed\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "projectReferences": {
+              "D:\\MSHB\\MSHB.Reservation.WebApi\\src\\Layers\\MSHB.Reservation.Layers.L01_Entities\\MSHB.Reservation.Layers.L01_Entities.csproj": {
+                "projectPath": "D:\\MSHB\\MSHB.Reservation.WebApi\\src\\Layers\\MSHB.Reservation.Layers.L01_Entities\\MSHB.Reservation.Layers.L01_Entities.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "dependencies": {
+            "CoreCompat.System.Drawing.v2": {
+              "target": "Package",
+              "version": "[5.2.0-preview1-r131, )"
+            },
+            "DNTPersianUtils.Core": {
+              "target": "Package",
+              "version": "[3.2.1, )"
+            },
+            "Handy.DotNETCore-Compatibility.ColorTranslations": {
+              "target": "Package",
+              "version": "[0.2.1, )"
+            },
+            "Microsoft.AspNetCore": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Authorization": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Mvc": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[2.2.4, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    }
+  }
+}
