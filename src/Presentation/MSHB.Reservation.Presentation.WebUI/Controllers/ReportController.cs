@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using MSHB.Reservation.Layers.L03_Services.Contracts;
+using MSHB.Reservation.Layers.L04_ViewModels.InputForms;
 using MSHB.Reservation.Shared.Common.GuardToolkit;
 
 namespace MSHB.Reservation.Presentation.WebUI.Controllers
@@ -30,6 +31,13 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
         public async Task<IActionResult> GetDashboardReport()
         {            
             return Ok(GetRequestResult(await _reportService.GetDashboardReport()));
+
+        }
+        [HttpGet("[action]"), HttpPost("[action]")]
+        [Authorize(Roles = "Report-GetReportStructure")]
+        public async Task<IActionResult> GetReportStructure([FromBody] ReportStructureFormModel reportStructureFormModel)
+        {
+            return Ok(GetRequestResult(await _reportService.GetReportStructureAsync(reportStructureFormModel)));
 
         }
     }

@@ -7,6 +7,7 @@ using System.Text;
 
 namespace MSHB.Reservation.Layers.L01_Entities.Models
 {
+    [Table("AccommodationUserAttachment_T")]
     public class AccommodationUserAttachment:BaseEntity
     {
         [Required]

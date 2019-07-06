@@ -6,6 +6,7 @@ using System.Text;
 
 namespace MSHB.Reservation.Layers.L01_Entities.Models
 {
+    [Table("FileAddress_T")]
     public class FileAddress
     {
         public Guid FileId { get; set; }

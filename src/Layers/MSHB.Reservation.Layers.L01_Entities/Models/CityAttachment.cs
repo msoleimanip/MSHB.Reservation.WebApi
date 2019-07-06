@@ -6,6 +6,7 @@ using System.Text;
 
 namespace MSHB.Reservation.Layers.L01_Entities.Models
 {
+    [Table("CityAttachment_T")]
     public class CityAttachment : BaseEntity
     {
         public long CityId { get; set; }

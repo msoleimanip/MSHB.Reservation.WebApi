@@ -7,6 +7,7 @@ using System.Text;
 
 namespace MSHB.Reservation.Layers.L01_Entities.Models
 {
+    [Table("AccommodationRoom_T")]
     public class AccommodationRoom:BaseEntity
     {
         [MaxLength(20)]

@@ -57,7 +57,7 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
 
                     b.HasIndex("RoomNumber");
 
-                    b.ToTable("AccommodationRooms");
+                    b.ToTable("AccommodationRoom_T");
                 });
 
             modelBuilder.Entity("MSHB.Reservation.Layers.L01_Entities.Models.AccommodationUserAttachment", b =>
@@ -87,7 +87,7 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
 
                     b.HasIndex("AccommodationUserRoomId");
 
-                    b.ToTable("AccommodationUserAttachments");
+                    b.ToTable("AccommodationUserAttachment_T");
                 });
 
             modelBuilder.Entity("MSHB.Reservation.Layers.L01_Entities.Models.AccommodationUserRoom", b =>
@@ -152,7 +152,7 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AccommodationUserRooms");
+                    b.ToTable("AccommodationUserRoom_T");
                 });
 
             modelBuilder.Entity("MSHB.Reservation.Layers.L01_Entities.Models.AppLogItem", b =>
@@ -238,7 +238,7 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
 
                     b.HasIndex("CityId");
 
-                    b.ToTable("CityAttachments");
+                    b.ToTable("CityAttachment_T");
                 });
 
             modelBuilder.Entity("MSHB.Reservation.Layers.L01_Entities.Models.FileAddress", b =>
@@ -262,7 +262,7 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("FileAddresses");
+                    b.ToTable("FileAddress_T");
                 });
 
             modelBuilder.Entity("MSHB.Reservation.Layers.L01_Entities.Models.GroupAuth", b =>
@@ -297,6 +297,28 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("GroupAuthRole_T");
+                });
+
+            modelBuilder.Entity("MSHB.Reservation.Layers.L01_Entities.Models.ReportStructure", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Configuration");
+
+                    b.Property<DateTime>("CreationDate");
+
+                    b.Property<DateTime>("LastUpdatedDateTime");
+
+                    b.Property<string>("ProtoType");
+
+                    b.Property<string>("ReportId")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ReportStructure_T");
                 });
 
             modelBuilder.Entity("MSHB.Reservation.Layers.L01_Entities.Models.Role", b =>

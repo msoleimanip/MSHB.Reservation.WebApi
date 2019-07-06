@@ -5,6 +5,7 @@ using MSHB.Reservation.Layers.L00_BaseModels.Constants.Messages.Base;
 using MSHB.Reservation.Layers.L00_BaseModels.exceptions;
 using MSHB.Reservation.Layers.L02_DataLayer;
 using MSHB.Reservation.Layers.L03_Services.Contracts;
+using MSHB.Reservation.Layers.L04_ViewModels.InputForms;
 using MSHB.Reservation.Layers.L04_ViewModels.ViewModels;
 using MSHB.Reservation.Shared.Common.GuardToolkit;
 using System;
@@ -88,6 +89,32 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
             {
 
                 throw new ReservationGlobalException(ReportServiceErrors.GetReportDashboard, ex);
+            }
+        }
+
+        public async Task<ReportStructureViewModel> GetReportStructureAsync(ReportStructureFormModel reportStructureFormModel)
+        {
+            try
+            {
+                var resp = await _context.ReportStructures.FirstOrDefaultAsync(c => c.ReportId == reportStructureFormModel.ReportId);
+                if (resp is null)
+                {
+                    throw new ReservationGlobalException(ReportServiceErrors.ReportStructureNotFound);
+                }
+                return new ReportStructureViewModel()
+                {
+                    ReportStructureId=resp.Id,
+                    Configuration=resp.Configuration,
+                    CreationDate=resp.CreationDate,
+                    ProtoType=resp.ProtoType,
+                    LastUpdatedDateTime=resp.LastUpdatedDateTime,
+                    ReportId=resp.ReportId
+                };
+            }
+            catch (Exception ex)
+            {
+
+                throw new ReservationGlobalException(ReportServiceErrors.GetReportStructure, ex);
             }
         }
     }

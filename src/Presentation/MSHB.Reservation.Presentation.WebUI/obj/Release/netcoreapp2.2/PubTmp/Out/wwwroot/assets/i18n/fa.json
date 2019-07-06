@@ -25,7 +25,8 @@
     "ContactUs": "تماس با ما",
     "Authentication": "مدیریت دسترسی ها",
     "Reservartion": "مدیریت رزرو ها",
-    "Registration": "مدیریت انتقالات"
+    "Registration": "مدیریت انتقالات",
+    "WebsiteVisit": "مشاهده اقامتگاه ها"
   },
   "RoomType": {
     "Suit": "سوییت",
@@ -87,7 +88,13 @@
     "SetLocationPageTitle": "تعیین موقعیت جغرافیایی روی نقشه",
     "InputisActivatedNameError": "وضعیت فعالیت میبایستی وارد انتخاب شود.",
     "BtnAddNewProvince": "ایجاد استان",
-    "NewProvince": "استان جدید"
+    "NewProvince": "استان جدید",
+    "DeleteSuccessfully": "حذف تصویر با موفقیت انجام شد.",
+    "AddImagesSuccessfully": "تصاویر با موفقیت اضافه شده اند.",
+    "SetImagePageTitle": "مدیریت تصاویر اقامتگاه",
+    "BtnSaveImage": "ذخیره تصاویر",
+    "DeleteImageFiles": "حـذف تصویر",
+    "Icon": "تصویر"
   },
   "Users": {
     "Title": "مدیریت کاربران",
@@ -249,5 +256,17 @@
     "TotalPrice": "مبلغ قابل پرداخت",
     "TotalPriceIsPaid": "کل مبلغ پرداخت شده است",
     "PaidSuccessfully": "تسویه حساب با موفقیت ثبت شد."
+  },
+  "Visit": {
+    "Title": "نمودار استانی اقامتگاه ها",
+    "TreeTitle": "اقامتگاه ها"
+  },
+  "Report": {
+    "ReportTitle": "مدیریت گزارشات",
+    "List": "لیست گزارشات",
+    "Row": "ردیف",
+    "Title": "عنوان",
+    "CreateDate": "تاریخ ایجاد",
+    "BtnEdit": "طراحی مجدد گزارش"
   }
 }

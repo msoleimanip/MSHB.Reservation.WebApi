@@ -46,11 +46,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                 {
                     throw new ReservationGlobalException(GroupServiceErrors.SameGroupExistError);
                 }
-                if (_context.Roles.Any(c => !groupForm.RoleIds.Contains(c.Id)))
-                {
-                    throw new ReservationGlobalException(GroupServiceErrors.RoleExistError);
-
-                }
+                
                 var group = new GroupAuth()
                 {
                     Name = groupForm.Name,
@@ -110,11 +106,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
             try
             {
                 GroupAuth group = null;
-                if (_context.Roles.Any(c => !groupForm.RoleIds.Contains(c.Id)))
-                {
-                    throw new ReservationGlobalException(GroupServiceErrors.RoleExistError);
-
-                }
+                
                 group = _context.GroupAuths.Include(c => c.Users).Include(c => c.GroupRoles).FirstOrDefault(c => c.Id == groupForm.GroupId);
                 if (group != null)
                 {

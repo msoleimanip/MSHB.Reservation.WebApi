@@ -47,6 +47,9 @@ namespace MSHB.Reservation.Layers.L03_Services.Initialization
                 DefineIntRole("GroupAuthentication-EditGroup", "GroupAuthentication-EditGroup"),
                 DefineIntRole("GroupAuthentication-DeleteGroup", "GroupAuthentication-DeleteGroup"),
                 DefineIntRole("GroupAuthentication-GetRoles", "GroupAuthentication-GetRoles"),
+                DefineIntRole("GroupAuthentication-GetGroupAuthenticationById", "GroupAuthentication-GetGroupAuthenticationById"),
+
+                
 
 
                 DefineIntRole("City", "City"),
@@ -84,7 +87,11 @@ namespace MSHB.Reservation.Layers.L03_Services.Initialization
 
 
                 DefineIntRole("Report", "Report"),
+                DefineIntRole("Report-GetReportStructure", "Report-GetReportStructure"),
+
+
                 
+
 
             };
 
