@@ -62,5 +62,10 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                 throw new ReservationGlobalException(AccommodationRoomServiceErrors.AddAccommodationError, ex);
             }
         }
+
+        public Task<bool> GetAsync(SearchAccommodationFormModel searchAccommodationForm)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

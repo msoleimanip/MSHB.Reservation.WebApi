@@ -5,9 +5,9 @@ using System.Text;
 
 namespace MSHB.Reservation.Layers.L04_ViewModels.InputForms
 {
-    public class EditAccommodationRoomFormModel: AddAccommodationRoomFormModel
+    public class EditAccommodationFormModel : AddAccommodationFormModel
     {
         [Required(ErrorMessage = "شناسه مکان اقامتگاه وارد نشده است")]
-        public long AccommodationRoomId { get; set; }
+        public long AccommodationId { get; set; }
     }
 }
