@@ -15,26 +15,26 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
     [EnableCors("CorsPolicy")]
     public class ExternalContentController : BaseController
     {
-        private IReservationUserRoomService _reservationUserRoomService;
+        //private IReservationUserRoomService _reservationUserRoomService;
 
-        public ExternalContentController(IReservationUserRoomService reservationUserRoomService)
-        {
-            _reservationUserRoomService = reservationUserRoomService;
-            _reservationUserRoomService.CheckArgumentIsNull(nameof(_reservationUserRoomService));
+        //public ExternalContentController(IReservationUserRoomService reservationUserRoomService)
+        //{
+        //    _reservationUserRoomService = reservationUserRoomService;
+        //    _reservationUserRoomService.CheckArgumentIsNull(nameof(_reservationUserRoomService));
         
-        }
-        [HttpGet("[action]"), HttpPost("[action]")]
-        public async Task<IActionResult> ReceiveContent([FromBody] MessageContent messageContent)
-        {
-            var resp = await _reservationUserRoomService.ReceiveContentAsync(messageContent);
-            return Ok();
-        }
+        //}
+        //[HttpGet("[action]"), HttpPost("[action]")]
+        //public async Task<IActionResult> ReceiveContent([FromBody] MessageContent messageContent)
+        //{
+        //    var resp = await _reservationUserRoomService.ReceiveContentAsync(messageContent);
+        //    return Ok();
+        //}
 
-        [HttpGet("[action]"), HttpPost("[action]")]
-        public async Task<IActionResult> GetReservationFails()
-        {
-            var resp = await _reservationUserRoomService.GetReservationFailsAsync();
-            return Ok(resp);
-        }
+        //[HttpGet("[action]"), HttpPost("[action]")]
+        //public async Task<IActionResult> GetReservationFails()
+        //{
+        //    var resp = await _reservationUserRoomService.GetReservationFailsAsync();
+        //    return Ok(resp);
+        //}
     }
 }

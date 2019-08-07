@@ -43,7 +43,7 @@ namespace MSHB.Reservation.Presentation.WebUI
         {
             Configuration = configuration;
         }
-        
+
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -67,7 +67,7 @@ namespace MSHB.Reservation.Presentation.WebUI
             services.AddTransient<IGroupAuthenticationService, GroupAuthenticationService>();
             services.AddTransient<ICityService, CityService>();
             services.AddTransient<IAccommodationService, AccommodationService>();
-            services.AddTransient<IReservationUserRoomService, ReservationUserRoomService>();
+            services.AddTransient<IProvinceService, ProvinceService>();
             services.AddTransient<IAccommodationUserAttachmentService, AccommodationUserAttachmentService>();
             services.AddTransient<IReportService, ReportService>();
             services.AddTransient<IFileService, FileService>();
@@ -93,9 +93,9 @@ namespace MSHB.Reservation.Presentation.WebUI
                         serverDbContextOptionsBuilder.CommandTimeout(minutes);
                         serverDbContextOptionsBuilder.EnableRetryOnFailure();
                     });
-                
+
             });
-           
+
 
             services.AddOData();
             try
@@ -174,6 +174,9 @@ namespace MSHB.Reservation.Presentation.WebUI
             });
 
             services.AddAntiforgery(x => x.HeaderName = "X-XSRF-TOKEN");
+
+            services.AddMemoryCache();
+
             services.AddMvc(options =>
             {
                 options.UseYeKeModelBinder();
@@ -194,10 +197,7 @@ namespace MSHB.Reservation.Presentation.WebUI
             services.AddCloudscribePagination();
         }
 
-        public void Configure(
-            ILoggerFactory loggerFactory,
-            IApplicationBuilder app,
-            IHostingEnvironment env)
+        public void Configure(ILoggerFactory loggerFactory, IApplicationBuilder app, IHostingEnvironment env)
         {
             try
             {
@@ -207,44 +207,44 @@ namespace MSHB.Reservation.Presentation.WebUI
                 app.UseGlobalExceptionHandler(loggerFactory);
 
                 app.UseAngularAntifCityeryToken();
-          
-            app.UseAuthentication();
 
-          
+                app.UseAuthentication();
 
 
-            app.UseFileServer();
-        
-            app.UseResponseCompression();
 
 
-            app.UseSwagger();
+                app.UseFileServer();
 
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/V1/swagger.json", "MSHB.Reservation API V1");
+                app.UseResponseCompression();
 
-            });
 
-            app.UseStatusCodePages();
-            app.UseDefaultFiles(); // so index.html is not required
-            app.UseStaticFiles();
+                app.UseSwagger();
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-               
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/V1/swagger.json", "MSHB.Reservation API V1");
 
-            });
-        }
+                });
+
+                app.UseStatusCodePages();
+                app.UseDefaultFiles(); // so index.html is not required
+                app.UseStaticFiles();
+
+                app.UseMvc(routes =>
+                {
+                    routes.MapRoute(
+                        name: "default",
+                        template: "{controller=Home}/{action=Index}/{id?}");
+
+
+                });
+            }
             catch (Exception e)
             {
 
                 Console.WriteLine(e);
                 throw;
             }
-}
+        }
     }
 }

@@ -4,41 +4,13 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
 {
-    public partial class mig1 : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateSequence(
                 name: "SystemCodeSequence",
                 startValue: 1000L);
-
-            migrationBuilder.CreateTable(
-                name: "City_T",
-                columns: table => new
-                {
-                    Id = table.Column<long>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    CityName = table.Column<string>(maxLength: 100, nullable: true),
-                    Description = table.Column<string>(nullable: true),
-                    CreationDate = table.Column<DateTime>(nullable: true, defaultValueSql: "getdate()"),
-                    LastUpdateDate = table.Column<DateTime>(nullable: true),
-                    ParentId = table.Column<long>(nullable: true),
-                    Longitude = table.Column<double>(nullable: true),
-                    Latitude = table.Column<double>(nullable: true),
-                    FileId = table.Column<Guid>(nullable: true),
-                    IsActivated = table.Column<bool>(nullable: true),
-                    DeactiveStartTime = table.Column<DateTime>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_City_T", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_City_T_City_T_ParentId",
-                        column: x => x.ParentId,
-                        principalTable: "City_T",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
 
             migrationBuilder.CreateTable(
                 name: "GroupAuth_T",
@@ -74,6 +46,36 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Province_T",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Title = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Province_T", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ReportStructure_T",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ReportId = table.Column<string>(maxLength: 40, nullable: false),
+                    Configuration = table.Column<string>(nullable: true),
+                    ProtoType = table.Column<string>(nullable: true),
+                    CreationDate = table.Column<DateTime>(nullable: false),
+                    LastUpdatedDateTime = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ReportStructure_T", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Role_T",
                 columns: table => new
                 {
@@ -89,95 +91,21 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AccommodationRooms",
+                name: "City_T",
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    RoomNumber = table.Column<string>(maxLength: 20, nullable: true),
-                    RoomPrice = table.Column<long>(nullable: false),
-                    BedRoom = table.Column<int>(nullable: true),
-                    RoomType = table.Column<int>(nullable: false),
-                    Rank = table.Column<int>(nullable: false),
-                    Bed = table.Column<int>(nullable: false),
-                    IsActivated = table.Column<bool>(nullable: true),
-                    Capacity = table.Column<int>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
-                    DeliveryTime = table.Column<string>(nullable: true),
-                    EvacuationTime = table.Column<string>(nullable: true),
-                    CityId = table.Column<long>(nullable: true)
+                    Title = table.Column<string>(nullable: true),
+                    ProvinceId = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AccommodationRooms", x => x.Id);
+                    table.PrimaryKey("PK_City_T", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AccommodationRooms_City_T_CityId",
-                        column: x => x.CityId,
-                        principalTable: "City_T",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CityAttachments",
-                columns: table => new
-                {
-                    Id = table.Column<long>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    CityId = table.Column<long>(nullable: false),
-                    FileType = table.Column<string>(maxLength: 20, nullable: true),
-                    FileSize = table.Column<long>(nullable: true),
-                    FileId = table.Column<Guid>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CityAttachments", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_CityAttachments_City_T_CityId",
-                        column: x => x.CityId,
-                        principalTable: "City_T",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "User_T",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(nullable: false),
-                    Username = table.Column<string>(maxLength: 450, nullable: false),
-                    Password = table.Column<string>(nullable: false),
-                    FirstName = table.Column<string>(maxLength: 500, nullable: true),
-                    LastName = table.Column<string>(maxLength: 500, nullable: true),
-                    Description = table.Column<string>(maxLength: 1000, nullable: true),
-                    Location = table.Column<string>(maxLength: 100, nullable: true),
-                    PhoneNumber = table.Column<string>(maxLength: 20, nullable: true),
-                    LastLockoutDate = table.Column<DateTime>(nullable: true),
-                    LastPasswordChangedDate = table.Column<DateTime>(nullable: true),
-                    CreationDate = table.Column<DateTime>(nullable: true),
-                    LastVisit = table.Column<DateTime>(nullable: true),
-                    IsActive = table.Column<bool>(nullable: false),
-                    LastLoggedIn = table.Column<DateTimeOffset>(nullable: true),
-                    SerialNumber = table.Column<string>(maxLength: 450, nullable: true),
-                    SajadUserName = table.Column<string>(maxLength: 200, nullable: true),
-                    IsPresident = table.Column<int>(nullable: false),
-                    GroupAuthId = table.Column<long>(nullable: true),
-                    CityId = table.Column<long>(nullable: true),
-                    UserConfigurationId = table.Column<long>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_User_T", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_User_T_City_T_CityId",
-                        column: x => x.CityId,
-                        principalTable: "City_T",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_User_T_GroupAuth_T_GroupAuthId",
-                        column: x => x.GroupAuthId,
-                        principalTable: "GroupAuth_T",
+                        name: "FK_City_T_Province_T_ProvinceId",
+                        column: x => x.ProvinceId,
+                        principalTable: "Province_T",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -210,53 +138,98 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AccommodationUserRooms",
+                name: "Accommodation_T",
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    AccommodationRoomId = table.Column<long>(nullable: false),
-                    CityId = table.Column<long>(nullable: false),
-                    CreationDate = table.Column<DateTime>(nullable: false),
-                    LastUpdateDate = table.Column<DateTime>(nullable: true),
-                    EntranceTime = table.Column<DateTime>(nullable: true),
-                    EndTime = table.Column<DateTime>(nullable: true),
-                    NationalCode = table.Column<string>(maxLength: 12, nullable: true),
-                    PhoneNumber = table.Column<string>(maxLength: 15, nullable: true),
-                    GenderType = table.Column<int>(nullable: false),
-                    PersonalCode = table.Column<string>(nullable: true),
-                    SystemCode = table.Column<long>(nullable: false, defaultValueSql: "NEXT VALUE FOR SystemCodeSequence"),
-                    GuestCounts = table.Column<int>(nullable: false),
-                    Description = table.Column<long>(nullable: false),
-                    PriceAccommodation = table.Column<long>(nullable: false),
-                    PaymentType = table.Column<int>(nullable: false),
-                    UserId = table.Column<Guid>(nullable: false)
+                    Caption = table.Column<string>(nullable: true),
+                    AccommodationType = table.Column<int>(nullable: false),
+                    Code = table.Column<string>(nullable: true),
+                    IsActivated = table.Column<bool>(nullable: false),
+                    District = table.Column<string>(nullable: true),
+                    Address = table.Column<string>(nullable: true),
+                    Number = table.Column<string>(nullable: true),
+                    FileId = table.Column<Guid>(nullable: true),
+                    CityId = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AccommodationUserRooms", x => x.Id);
+                    table.PrimaryKey("PK_Accommodation_T", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AccommodationUserRooms_AccommodationRooms_AccommodationRoomId",
-                        column: x => x.AccommodationRoomId,
-                        principalTable: "AccommodationRooms",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_AccommodationUserRooms_City_T_CityId",
+                        name: "FK_Accommodation_T_City_T_CityId",
                         column: x => x.CityId,
                         principalTable: "City_T",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_AccommodationUserRooms_User_T_UserId",
-                        column: x => x.UserId,
-                        principalTable: "User_T",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "FileAddresses",
+                name: "User_T",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Username = table.Column<string>(maxLength: 450, nullable: false),
+                    Password = table.Column<string>(nullable: false),
+                    FirstName = table.Column<string>(maxLength: 500, nullable: true),
+                    LastName = table.Column<string>(maxLength: 500, nullable: true),
+                    Description = table.Column<string>(maxLength: 1000, nullable: true),
+                    Location = table.Column<string>(maxLength: 100, nullable: true),
+                    PhoneNumber = table.Column<string>(maxLength: 20, nullable: true),
+                    LastLockoutDate = table.Column<DateTime>(nullable: true),
+                    LastPasswordChangedDate = table.Column<DateTime>(nullable: true),
+                    CreationDate = table.Column<DateTime>(nullable: true),
+                    LastVisit = table.Column<DateTime>(nullable: true),
+                    IsActive = table.Column<bool>(nullable: false),
+                    LastLoggedIn = table.Column<DateTimeOffset>(nullable: true),
+                    SerialNumber = table.Column<string>(maxLength: 450, nullable: true),
+                    IsPresident = table.Column<int>(nullable: false),
+                    GroupAuthId = table.Column<long>(nullable: true),
+                    CityId = table.Column<long>(nullable: true),
+                    UserConfigurationId = table.Column<long>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_User_T", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_User_T_City_T_CityId",
+                        column: x => x.CityId,
+                        principalTable: "City_T",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_User_T_GroupAuth_T_GroupAuthId",
+                        column: x => x.GroupAuthId,
+                        principalTable: "GroupAuth_T",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CityAttachment_T",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    CityId = table.Column<long>(nullable: false),
+                    FileType = table.Column<string>(maxLength: 20, nullable: true),
+                    FileSize = table.Column<long>(nullable: true),
+                    FileId = table.Column<Guid>(nullable: true),
+                    AccommodationId = table.Column<long>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CityAttachment_T", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CityAttachment_T_Accommodation_T_AccommodationId",
+                        column: x => x.AccommodationId,
+                        principalTable: "Accommodation_T",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "FileAddress_T",
                 columns: table => new
                 {
                     FileId = table.Column<Guid>(nullable: false, defaultValueSql: "NEWID()"),
@@ -268,9 +241,9 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_FileAddresses", x => x.FileId);
+                    table.PrimaryKey("PK_FileAddress_T", x => x.FileId);
                     table.ForeignKey(
-                        name: "FK_FileAddresses_User_T_UserId",
+                        name: "FK_FileAddress_T_User_T_UserId",
                         column: x => x.UserId,
                         principalTable: "User_T",
                         principalColumn: "Id",
@@ -345,100 +318,40 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "AccommodationUserAttachments",
-                columns: table => new
-                {
-                    Id = table.Column<long>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    AccommodationUserRoomId = table.Column<long>(nullable: false),
-                    GenderType = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
-                    NationalCode = table.Column<string>(maxLength: 20, nullable: true),
-                    CreationDate = table.Column<DateTime>(nullable: true, defaultValueSql: "getdate()"),
-                    Relative = table.Column<string>(nullable: true),
-                    Age = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AccommodationUserAttachments", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_AccommodationUserAttachments_AccommodationUserRooms_AccommodationUserRoomId",
-                        column: x => x.AccommodationUserRoomId,
-                        principalTable: "AccommodationUserRooms",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.CreateIndex(
-                name: "IX_AccommodationRooms_CityId",
-                table: "AccommodationRooms",
+                name: "IX_Accommodation_T_CityId",
+                table: "Accommodation_T",
                 column: "CityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AccommodationRooms_RoomNumber",
-                table: "AccommodationRooms",
-                column: "RoomNumber");
+                name: "IX_Accommodation_T_Code",
+                table: "Accommodation_T",
+                column: "Code");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AccommodationUserAttachments_AccommodationUserRoomId",
-                table: "AccommodationUserAttachments",
-                column: "AccommodationUserRoomId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AccommodationUserRooms_AccommodationRoomId",
-                table: "AccommodationUserRooms",
-                column: "AccommodationRoomId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AccommodationUserRooms_CityId",
-                table: "AccommodationUserRooms",
-                column: "CityId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AccommodationUserRooms_NationalCode",
-                table: "AccommodationUserRooms",
-                column: "NationalCode");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AccommodationUserRooms_PhoneNumber",
-                table: "AccommodationUserRooms",
-                column: "PhoneNumber");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AccommodationUserRooms_SystemCode",
-                table: "AccommodationUserRooms",
-                column: "SystemCode");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AccommodationUserRooms_UserId",
-                table: "AccommodationUserRooms",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_City_T_CityName",
+                name: "IX_City_T_ProvinceId",
                 table: "City_T",
-                column: "CityName");
+                column: "ProvinceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_City_T_ParentId",
-                table: "City_T",
-                column: "ParentId");
+                name: "IX_CityAttachment_T_AccommodationId",
+                table: "CityAttachment_T",
+                column: "AccommodationId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CityAttachments_CityId",
-                table: "CityAttachments",
-                column: "CityId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_FileAddresses_UserId",
-                table: "FileAddresses",
+                name: "IX_FileAddress_T_UserId",
+                table: "FileAddress_T",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_GroupAuthRole_T_RoleId",
                 table: "GroupAuthRole_T",
                 column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ReportStructure_T_ReportId",
+                table: "ReportStructure_T",
+                column: "ReportId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Role_T_Id",
@@ -501,19 +414,19 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "AccommodationUserAttachments");
+                name: "CityAttachment_T");
 
             migrationBuilder.DropTable(
-                name: "CityAttachments");
-
-            migrationBuilder.DropTable(
-                name: "FileAddresses");
+                name: "FileAddress_T");
 
             migrationBuilder.DropTable(
                 name: "GroupAuthRole_T");
 
             migrationBuilder.DropTable(
                 name: "Log_T");
+
+            migrationBuilder.DropTable(
+                name: "ReportStructure_T");
 
             migrationBuilder.DropTable(
                 name: "UserConfiguration_T");
@@ -525,13 +438,10 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
                 name: "UserToken_T");
 
             migrationBuilder.DropTable(
-                name: "AccommodationUserRooms");
+                name: "Accommodation_T");
 
             migrationBuilder.DropTable(
                 name: "Role_T");
-
-            migrationBuilder.DropTable(
-                name: "AccommodationRooms");
 
             migrationBuilder.DropTable(
                 name: "User_T");
@@ -541,6 +451,9 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
 
             migrationBuilder.DropTable(
                 name: "GroupAuth_T");
+
+            migrationBuilder.DropTable(
+                name: "Province_T");
 
             migrationBuilder.DropSequence(
                 name: "SystemCodeSequence");

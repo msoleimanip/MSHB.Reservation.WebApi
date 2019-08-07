@@ -10,11 +10,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Contracts
 {
     public interface IAccommodationService
     {
-        Task<long> AddAccommodationRoom(User user, AddAccommodationRoomFormModel accommodationForm);
-        Task<bool> EditAccommodationRoom(User user, EditAccommodationRoomFormModel accommodationForm);
-        Task<bool> DeleteAccommodationRoom(User user, List<long> accommodationFormIds);   
-        Task<bool> DeactivateAccommodationRoomAsync(User user, DeactivateAccommodationRoomFormModel accommodationForm);
-        Task <SearchAccommodationRoomViewModel> GetUserAccommodationRoomForUserAsync(User user, AccommodationRoomSearchFormModel accommodationForm);
-        Task<AccommodationRoomViewModel> GetAccommodationByIdAsync(User user, long id);
+        Task<bool> AddAsync(AddAccommodationFormModel accommodationForm);
+        Task<bool> GetAsync(SearchAccommodationFormModel searchAccommodationForm);
     }
 }

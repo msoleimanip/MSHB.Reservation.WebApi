@@ -23,21 +23,20 @@ namespace MSHB.Reservation.Layers.L02_DataLayer
         public virtual DbSet<GroupAuthRole> GroupAuthRoles { get; set; }
         public virtual DbSet<AppLogItem> Logs { get; set; }
         public virtual DbSet<City> Citys { get; set; }
-        public virtual DbSet<AccommodationRoom> AccommodationRooms { get; set; }
-        public virtual DbSet<AccommodationUserRoom> AccommodationUserRooms { get; set; }
-        public virtual DbSet<AccommodationUserAttachment> AccommodationUserAttachments { get; set; }
+        public virtual DbSet<Province> Provinces { get; set; }
+        public virtual DbSet<Accommodation> Accommodations { get; set; }
         public virtual DbSet<UserConfiguration> UserConfigurations { get; set; }
-        public virtual DbSet<CityAttachment> CityAttachments { get; set; }
+        public virtual DbSet<AccommodationAttachment> AccommodationAttachments { get; set; }
         public virtual DbSet<FileAddress> FileAddresses { get; set; }
         public virtual DbSet<ReportStructure> ReportStructures { get; set; }
 
 
-        
+
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseSqlServer(
-            @"Data Source=.;Initial Catalog=ir_reservation;Persist Security Info=True;User ID=sa;Password=Aa123456;");
+            @"Data Source=.;Initial Catalog=ir_reservation;Persist Security Info=True;User ID=sa;Password=hamed224;");
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
@@ -63,7 +62,7 @@ namespace MSHB.Reservation.Layers.L02_DataLayer
 
             });
 
-           
+
             modelBuilder.Entity<UserRole>(entity =>
             {
                 entity.HasKey(e => new { e.UserId, e.RoleId });
@@ -86,7 +85,7 @@ namespace MSHB.Reservation.Layers.L02_DataLayer
                 entity.Property(ut => ut.RefreshTokenIdHashSource).HasMaxLength(450);
             });
 
-           
+
             modelBuilder.Entity<User>()
                          .HasOne(d => d.GroupAuth)
                          .WithMany(t => t.Users)
@@ -94,51 +93,37 @@ namespace MSHB.Reservation.Layers.L02_DataLayer
                          .OnDelete(DeleteBehavior.Cascade);
 
 
-            modelBuilder.Entity<User>()
-                         .HasOne(d => d.City)
-                         .WithMany(t => t.Users)
-                         .HasForeignKey(d => d.CityId)
-                         .OnDelete(DeleteBehavior.Cascade);
-
             modelBuilder.Entity<City>()
-                          .HasOne(d => d.Parent)
-                          .WithMany(t => t.Children)
-                          .HasForeignKey(t => t.ParentId)
-                          .OnDelete(DeleteBehavior.ClientSetNull);
-            modelBuilder.Entity<City>()
-                           .HasIndex(d => d.CityName);
+                          .HasOne(d => d.Province)
+                          .WithMany(t => t.Cities)
+                          .HasForeignKey(t => t.ProvinceId);
+
+            modelBuilder.Entity<City>().HasIndex(d => d.ProvinceId);
 
 
-            modelBuilder.Entity<User>()
-                  .HasMany(d => d.UserConfigurations).WithOne(d => d.User);
+            modelBuilder.Entity<User>().HasMany(d => d.UserConfigurations).WithOne(d => d.User);
 
-            modelBuilder.Entity<AccommodationRoom>()
+            modelBuilder.Entity<Accommodation>()
                          .HasOne(d => d.City)
-                         .WithMany(t => t.AccommodationRooms)
+                         .WithMany(t => t.Accommodations)
                          .HasForeignKey(d => d.CityId)
                          .OnDelete(DeleteBehavior.ClientSetNull);
 
-                         modelBuilder.Entity<AccommodationUserRoom>()
-                         .HasOne(d => d.City)
-                         .WithMany(t => t.AccommodationUserRooms)
-                         .HasForeignKey(d => d.CityId)
-                         .OnDelete(DeleteBehavior.ClientSetNull);
-
-                          modelBuilder.Entity<AccommodationUserRoom>()
-                         .HasOne(d => d.User)
-                         .WithMany(t => t.AccommodationUserRooms)
-                         .HasForeignKey(d => d.UserId)
-                         .OnDelete(DeleteBehavior.ClientSetNull);
+            modelBuilder.Entity<AccommodationAttachment>()
+            .HasOne(d => d.Accommodation)
+            .WithMany(t => t.AccommodationAttachments)
+            .HasForeignKey(d => d.AccommodationId)
+            .OnDelete(DeleteBehavior.ClientSetNull);
 
 
-        
 
-            modelBuilder.Entity<AccommodationRoom>().HasIndex(c => c.RoomNumber);
+
+            modelBuilder.Entity<Accommodation>().HasIndex(c => c.Code);
 
             modelBuilder.HasSequence<long>("SystemCodeSequence").StartsAt(1000);
 
-            modelBuilder.Entity<AccommodationUserRoom>().Property(e => e.SystemCode)
-                .HasDefaultValueSql("NEXT VALUE FOR SystemCodeSequence");
+            //modelBuilder.Entity<AccommodationUserRoom>().Property(e => e.SystemCode)
+            //    .HasDefaultValueSql("NEXT VALUE FOR SystemCodeSequence");
 
             modelBuilder.Entity<GroupAuthRole>()
                      .HasKey(t => new { t.GroupAuthId, t.RoleId });
@@ -157,19 +142,7 @@ namespace MSHB.Reservation.Layers.L02_DataLayer
             modelBuilder.Entity<AppLogItem>()
                     .HasKey(t => new { t.Id });
 
-           
-            modelBuilder.Entity<City>()
-                    .Property(c => c.CreationDate).HasDefaultValueSql("getdate()");
-            modelBuilder.Entity<AccommodationUserAttachment>()
-                   .Property(c => c.CreationDate).HasDefaultValueSql("getdate()");
 
-            modelBuilder.Entity<AccommodationUserRoom>(entity =>
-            {               
-                entity.HasIndex(e => e.NationalCode);
-                entity.HasIndex(e => e.PhoneNumber);
-                entity.HasIndex(e => e.SystemCode);
-
-            });
             modelBuilder.Entity<FileAddress>().HasKey(x => x.FileId);
             modelBuilder.Entity<FileAddress>().Property(x => x.FileId).HasDefaultValueSql("NEWID()");
             modelBuilder.Entity<ReportStructure>().HasIndex(x => x.ReportId);

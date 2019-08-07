@@ -5,6 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\AccommodationRoom.cs" />
+    <Compile Remove="Models\AccommodationUserAttachment.cs" />
+    <Compile Remove="Models\AccommodationUserRoom.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.2.0" />
   </ItemGroup>
 

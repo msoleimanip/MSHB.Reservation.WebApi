@@ -15,7 +15,7 @@ namespace MSHB.Reservation.Layers.L01_Entities.Models
         {
             UserRoles = new HashSet<UserRole>();
             UserTokens = new HashSet<UserToken>();
-            
+
         }
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -55,9 +55,6 @@ namespace MSHB.Reservation.Layers.L01_Entities.Models
         [MaxLength(50)]
         public string SerialNumber { get; set; }
 
-        [MaxLength(200)]
-        public string SajadUserName { get; set; }
-
         public PresidentType IsPresident { get; set; }
 
         [ForeignKey("GroupAuthId")]
@@ -79,14 +76,5 @@ namespace MSHB.Reservation.Layers.L01_Entities.Models
         public long? UserConfigurationId { get; set; }
 
         public virtual ICollection<UserConfiguration> UserConfigurations { get; set; }
-        public virtual ICollection<AccommodationUserRoom> AccommodationUserRooms { get; set; }
-
-        
-
-
-
-
-
-
     }
 }

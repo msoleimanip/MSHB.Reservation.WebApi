@@ -13,7 +13,7 @@ namespace MSHB.Reservation.Layers.L04_ViewModels.ViewModels
         public long RoomPrice { get; set; }
         public long TotalRoomPrice { get; set; }
         public int? BedRoom { get; set; }
-        public RoomType RoomType { get; set; }
+        //public RoomType RoomType { get; set; }
         public int Rank { get; set; }
         public int Bed { get; set; }
         public bool? IsActivated { get; set; } = true;

@@ -8,8 +8,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using MSHB.Reservation.Layers.L03_Services.Contracts;
 using MSHB.Reservation.Layers.L04_ViewModels.InputForms;
+using MSHB.Reservation.Layers.L04_ViewModels.ViewModels;
 using MSHB.Reservation.Presentation.WebCore;
 using MSHB.Reservation.Presentation.WebUI.filters;
 using MSHB.Reservation.Shared.Common.GuardToolkit;
@@ -17,118 +19,46 @@ using MSHB.Reservation.Shared.Common.GuardToolkit;
 namespace MSHB.Reservation.Presentation.WebUI.Controllers
 {
     [Route("api/[controller]")]
-    [EnableCors("CorsPolicy")]
-    [Authorize(Roles = "City")]
     public class CityController : BaseController
     {
+        private readonly IMemoryCache _cache;
         private ICityService _CityService;
 
-        public CityController(ICityService CityService)
+        public CityController(ICityService CityService, IMemoryCache memoryCache)
         {
             _CityService = CityService;
             _CityService.CheckArgumentIsNull(nameof(_CityService));
-        }
 
-        [HttpGet("[action]"), HttpPost("[action]")]      
-        [AllowAnonymous]
-        public async Task<IActionResult> GetAllCities()
-        {
-            var Citys = await _CityService.GetAllCitiesAsync();
-            return Ok(GetRequestResult(Citys));
+            _cache = memoryCache;
+            _cache.CheckArgumentIsNull(nameof(_cache));
         }
-
 
         [HttpGet("[action]")]
-        [ValidateModelAttribute]
-        //[Authorize(Roles = "City-Get")]
-        [AllowAnonymous]
-        public async Task<IActionResult> Get([FromQuery] long Id)
+        public async Task<IActionResult> GetAllCities()
         {
-            return Ok(GetRequestResult(await _CityService.GetAsync(HttpContext.GetUser(),Id)));
+            List<CityViewModel> cities = new List<CityViewModel>();
+            cities = _cache.Get<List<CityViewModel>>("dashboard");
+            if (cities is null)
+            {
+                cities = await _CityService.GetAllAsync();
+                _cache.Set("dashboard", cities, TimeSpan.FromHours(1));
+            }
+
+            return Ok(GetRequestResult(cities));
         }
 
-        [HttpGet("[action]"), HttpPost("[action]")]
-        [ValidateModelAttribute]
-        [Authorize(Roles = "City-GetCityByUser")]
-        public async Task<IActionResult> GetCityByUser()
-        {           
-            var Citys =await _CityService.GetCityByUserAsync(HttpContext.GetUser());
-            return Ok(GetRequestResult(Citys));
+        [HttpGet("[action]/{ProvinceId}")]
+        public async Task<IActionResult> GetCities(long ProvinceId)
+        {
+            return Ok(GetRequestResult(await _CityService.GetAsync(ProvinceId)));
         }
 
-        [HttpGet("[action]"), HttpPost("[action]")]
-        [ValidateModelAttribute]
-        [Authorize(Roles = "City-GetUserCityForUser")]
-        public async Task<IActionResult> GetUserCityForUser([FromQuery] Guid userId)
+
+        [HttpGet("[action]/{ProvinceId}/{Id}")]
+        public async Task<IActionResult> GetCity(long ProvinceId, long Id)
         {
-            var Citys = await _CityService.GetUserCityForUserAsync(HttpContext.GetUser(), userId);
-            return Ok(GetRequestResult(Citys));
+            return Ok(GetRequestResult(await _CityService.GetAsync(ProvinceId, Id)));
         }
 
-        [HttpGet("[action]"), HttpPost("[action]")]
-        [ValidateModelAttribute]
-        [Authorize(Roles = "City-AddCity")]
-        public async Task<IActionResult> AddCity([FromBody] AddcityFormModel cityForm)
-        {            
-            var Citys = await _CityService.AddCityAsync(HttpContext.GetUser(), cityForm);
-            return Ok(GetRequestResult(Citys));
-        }
-
-        [HttpGet("[action]"), HttpPost("[action]")]
-        [ValidateModelAttribute]
-        [Authorize(Roles = "City-EditCity")]
-        public async Task<IActionResult> EditCity([FromBody] EditcityFormModel cityForm)
-        {
-            var Citys = await _CityService.EditCityAsync(HttpContext.GetUser(),cityForm);
-            return Ok(GetRequestResult(Citys));
-        }
-
-        [HttpGet("[action]"), HttpPost("[action]")]
-        [ValidateModelAttribute]
-        [Authorize(Roles = "City-DeactivateCity")]
-        public async Task<IActionResult> DeactivateCity([FromBody] DeactivateCityFormModel cityForm)
-        {
-            var Citys = await _CityService.DeactivateCityAsync(HttpContext.GetUser(), cityForm);
-            return Ok(GetRequestResult(Citys));
-        }
-
-        [HttpGet("[action]"), HttpPost("[action]")]
-        [ValidateModelAttribute]
-        [Authorize(Roles = "City-DeleteCity")]
-        public async Task<IActionResult> DeleteCity([FromBody]
-        [Required(ErrorMessage = "لیست اقامتگاه های ارسال شده برای حذف نامعتبر است")]List<long> CityIds)
-        {
-            var Citys = await _CityService.DeleteCityAsync(HttpContext.GetUser(),CityIds);
-            return Ok(GetRequestResult(Citys));
-        }
-        [HttpGet("[action]"), HttpPost("[action]")]
-        [ValidateModelAttribute]
-        [Authorize(Roles = "City-SetCityLocation")]
-        public async Task<IActionResult> SetCityLocation([FromBody] CityLocationFormModel cityLocationForm
-        )
-        {
-            var Citys = await _CityService.SetCityLocationAsync(HttpContext.GetUser(), cityLocationForm);
-            return Ok(GetRequestResult(Citys));
-        }
-    
-        [HttpGet("[action]"), HttpPost("[action]")]
-        [ValidateModelAttribute]
-        [Authorize(Roles = "City-SetCityImages")]
-        public async Task<IActionResult> SetCityImages([FromBody] CityImagesFormModel cityImageForm
-        )
-        {
-            var Citys = await _CityService.SetCityImagesAsync(HttpContext.GetUser(), cityImageForm);
-            return Ok(GetRequestResult(Citys));
-        }
-
-        [HttpGet("[action]"), HttpPost("[action]")]
-        [ValidateModelAttribute]
-        [Authorize(Roles = "City-DeleteAttachmentCity")]
-        public async Task<IActionResult> DeleteAttachmentCity([FromBody]
-        [Required(ErrorMessage = "لیست تصاویر ارسال شده برای حذف نامعتبر است")]List<long> deleteAttachmentCityId)
-        {
-            var Citys = await _CityService.DeleteAttachmentCityAsync(HttpContext.GetUser(), deleteAttachmentCityId);
-            return Ok(GetRequestResult(Citys));
-        }
     }
 }

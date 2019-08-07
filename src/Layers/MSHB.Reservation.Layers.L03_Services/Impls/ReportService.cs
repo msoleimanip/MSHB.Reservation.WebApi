@@ -31,58 +31,60 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
         {
             try
             {
-                var accommodationCount = string.Empty;
-                var accommodationUserCount = string.Empty;
-                var cityCount = string.Empty;
-                var userCount = string.Empty;
+                //var accommodationCount = string.Empty;
+                //var accommodationUserCount = string.Empty;
+                //var cityCount = string.Empty;
+                //var userCount = string.Empty;
 
-                if (!_cache.TryGetValue(CacheKeys.AccommodationCount, out accommodationCount))
-                {
-                    MemoryCacheEntryOptions cacheExpirationOptions = new MemoryCacheEntryOptions();
-                    cacheExpirationOptions.AbsoluteExpiration = DateTime.Now.AddMinutes(20);
-                    cacheExpirationOptions.Priority = CacheItemPriority.Normal;
-                    var accCount = await _context.AccommodationRooms.CountAsync();
-                    accommodationCount = accCount.ToString();
-                    _cache.Set<string>(CacheKeys.AccommodationCount, accCount.ToString(), cacheExpirationOptions);
+                //if (!_cache.TryGetValue(CacheKeys.AccommodationCount, out accommodationCount))
+                //{
+                //    MemoryCacheEntryOptions cacheExpirationOptions = new MemoryCacheEntryOptions();
+                //    cacheExpirationOptions.AbsoluteExpiration = DateTime.Now.AddMinutes(20);
+                //    cacheExpirationOptions.Priority = CacheItemPriority.Normal;
+                //    var accCount = await _context.AccommodationRooms.CountAsync();
+                //    accommodationCount = accCount.ToString();
+                //    _cache.Set<string>(CacheKeys.AccommodationCount, accCount.ToString(), cacheExpirationOptions);
 
-                }
-                if (!_cache.TryGetValue(CacheKeys.AccommodationUserCount, out accommodationUserCount))
-                {
-                    MemoryCacheEntryOptions cacheExpirationOptions = new MemoryCacheEntryOptions();
-                    cacheExpirationOptions.AbsoluteExpiration = DateTime.Now.AddMinutes(20);
-                    cacheExpirationOptions.Priority = CacheItemPriority.Normal;
-                    var accUserCount = await _context.AccommodationUserRooms.CountAsync();
-                    accommodationUserCount = accUserCount.ToString();
-                    _cache.Set<string>(CacheKeys.AccommodationUserCount, accUserCount.ToString(), cacheExpirationOptions);
+                //}
+                //if (!_cache.TryGetValue(CacheKeys.AccommodationUserCount, out accommodationUserCount))
+                //{
+                //    MemoryCacheEntryOptions cacheExpirationOptions = new MemoryCacheEntryOptions();
+                //    cacheExpirationOptions.AbsoluteExpiration = DateTime.Now.AddMinutes(20);
+                //    cacheExpirationOptions.Priority = CacheItemPriority.Normal;
+                //    var accUserCount = await _context.AccommodationUserRooms.CountAsync();
+                //    accommodationUserCount = accUserCount.ToString();
+                //    _cache.Set<string>(CacheKeys.AccommodationUserCount, accUserCount.ToString(), cacheExpirationOptions);
 
-                }
-                if (!_cache.TryGetValue(CacheKeys.CityCount, out cityCount))
-                {
-                    MemoryCacheEntryOptions cacheExpirationOptions = new MemoryCacheEntryOptions();
-                    cacheExpirationOptions.AbsoluteExpiration = DateTime.Now.AddMinutes(20);
-                    cacheExpirationOptions.Priority = CacheItemPriority.Normal;
-                    var cCount = await _context.Citys.Where(c => c.ParentId == null).CountAsync();
-                    cityCount = cCount.ToString();
-                    _cache.Set<string>(CacheKeys.CityCount, cCount.ToString(), cacheExpirationOptions);
+                //}
+                //if (!_cache.TryGetValue(CacheKeys.CityCount, out cityCount))
+                //{
+                //    MemoryCacheEntryOptions cacheExpirationOptions = new MemoryCacheEntryOptions();
+                //    cacheExpirationOptions.AbsoluteExpiration = DateTime.Now.AddMinutes(20);
+                //    cacheExpirationOptions.Priority = CacheItemPriority.Normal;
+                //    var cCount = await _context.Citys.Where(c => c.ParentId == null).CountAsync();
+                //    cityCount = cCount.ToString();
+                //    _cache.Set<string>(CacheKeys.CityCount, cCount.ToString(), cacheExpirationOptions);
 
-                }
-                if (!_cache.TryGetValue(CacheKeys.UserCount, out userCount))
-                {
-                    MemoryCacheEntryOptions cacheExpirationOptions = new MemoryCacheEntryOptions();
-                    cacheExpirationOptions.AbsoluteExpiration = DateTime.Now.AddMinutes(20);
-                    cacheExpirationOptions.Priority = CacheItemPriority.Normal;
-                    var uCount = await _context.Users.CountAsync();
-                    userCount = uCount.ToString();
-                    _cache.Set<string>(CacheKeys.UserCount, uCount.ToString(), cacheExpirationOptions);
+                //}
+                //if (!_cache.TryGetValue(CacheKeys.UserCount, out userCount))
+                //{
+                //    MemoryCacheEntryOptions cacheExpirationOptions = new MemoryCacheEntryOptions();
+                //    cacheExpirationOptions.AbsoluteExpiration = DateTime.Now.AddMinutes(20);
+                //    cacheExpirationOptions.Priority = CacheItemPriority.Normal;
+                //    var uCount = await _context.Users.CountAsync();
+                //    userCount = uCount.ToString();
+                //    _cache.Set<string>(CacheKeys.UserCount, uCount.ToString(), cacheExpirationOptions);
 
-                }
-                return new DashboardReportViewModel()
-                {
-                    AccommodationUserCount = accommodationUserCount,
-                    AccommodationCount = accommodationCount,
-                    CityCount = cityCount,
-                    UserCount = userCount
-                };
+                //}
+                //return new DashboardReportViewModel()
+                //{
+                //    AccommodationUserCount = accommodationUserCount,
+                //    AccommodationCount = accommodationCount,
+                //    CityCount = cityCount,
+                //    UserCount = userCount
+                //};
+
+                return null;
 
             }
             catch (Exception ex)

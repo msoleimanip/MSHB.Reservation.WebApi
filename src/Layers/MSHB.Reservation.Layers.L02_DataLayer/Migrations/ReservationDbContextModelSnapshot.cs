@@ -20,139 +20,61 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
                 .HasAnnotation("Relational:Sequence:.SystemCodeSequence", "'SystemCodeSequence', '', '1000', '1', '', '', 'Int64', 'False'")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("MSHB.Reservation.Layers.L01_Entities.Models.AccommodationRoom", b =>
+            modelBuilder.Entity("MSHB.Reservation.Layers.L01_Entities.Models.Accommodation", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Bed");
+                    b.Property<int>("AccommodationType");
 
-                    b.Property<int?>("BedRoom");
+                    b.Property<string>("Address");
 
-                    b.Property<int?>("Capacity");
-
-                    b.Property<long?>("CityId");
-
-                    b.Property<string>("DeliveryTime");
-
-                    b.Property<string>("Description");
-
-                    b.Property<string>("EvacuationTime");
-
-                    b.Property<bool?>("IsActivated");
-
-                    b.Property<int>("Rank");
-
-                    b.Property<string>("RoomNumber")
-                        .HasMaxLength(20);
-
-                    b.Property<long>("RoomPrice");
-
-                    b.Property<int>("RoomType");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CityId");
-
-                    b.HasIndex("RoomNumber");
-
-                    b.ToTable("AccommodationRoom_T");
-                });
-
-            modelBuilder.Entity("MSHB.Reservation.Layers.L01_Entities.Models.AccommodationUserAttachment", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<long>("AccommodationUserRoomId");
-
-                    b.Property<int?>("Age");
-
-                    b.Property<DateTime?>("CreationDate")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValueSql("getdate()");
-
-                    b.Property<int>("GenderType");
-
-                    b.Property<string>("Name");
-
-                    b.Property<string>("NationalCode")
-                        .HasMaxLength(20);
-
-                    b.Property<string>("Relative");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AccommodationUserRoomId");
-
-                    b.ToTable("AccommodationUserAttachment_T");
-                });
-
-            modelBuilder.Entity("MSHB.Reservation.Layers.L01_Entities.Models.AccommodationUserRoom", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<long>("AccommodationRoomId");
+                    b.Property<string>("Caption");
 
                     b.Property<long>("CityId");
 
-                    b.Property<DateTime>("CreationDate");
+                    b.Property<string>("Code");
 
-                    b.Property<string>("Description");
+                    b.Property<string>("District");
 
-                    b.Property<DateTime?>("EndTime");
+                    b.Property<Guid?>("FileId");
 
-                    b.Property<DateTime?>("EntranceTime");
+                    b.Property<bool>("IsActivated");
 
-                    b.Property<int>("GenderType");
-
-                    b.Property<int>("GuestCounts");
-
-                    b.Property<bool>("IsCancelSmsSend");
-
-                    b.Property<bool?>("IsPaied");
-
-                    b.Property<DateTime?>("LastUpdateDate");
-
-                    b.Property<string>("NationalCode")
-                        .HasMaxLength(12);
-
-                    b.Property<int>("PaymentType");
-
-                    b.Property<string>("PersonalCode");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasMaxLength(15);
-
-                    b.Property<long>("PriceAccommodation");
-
-                    b.Property<int>("Status");
-
-                    b.Property<long>("SystemCode")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValueSql("NEXT VALUE FOR SystemCodeSequence");
-
-                    b.Property<Guid>("UserId");
+                    b.Property<string>("Number");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AccommodationRoomId");
-
                     b.HasIndex("CityId");
 
-                    b.HasIndex("NationalCode");
+                    b.HasIndex("Code");
 
-                    b.HasIndex("PhoneNumber");
+                    b.ToTable("Accommodation_T");
+                });
 
-                    b.HasIndex("SystemCode");
+            modelBuilder.Entity("MSHB.Reservation.Layers.L01_Entities.Models.AccommodationAttachment", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.HasIndex("UserId");
+                    b.Property<long>("AccommodationId");
 
-                    b.ToTable("AccommodationUserRoom_T");
+                    b.Property<long>("CityId");
+
+                    b.Property<Guid?>("FileId");
+
+                    b.Property<long?>("FileSize");
+
+                    b.Property<string>("FileType")
+                        .HasMaxLength(20);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccommodationId");
+
+                    b.ToTable("CityAttachment_T");
                 });
 
             modelBuilder.Entity("MSHB.Reservation.Layers.L01_Entities.Models.AppLogItem", b =>
@@ -187,58 +109,15 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CityName")
-                        .HasMaxLength(100);
+                    b.Property<long>("ProvinceId");
 
-                    b.Property<DateTime?>("CreationDate")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValueSql("getdate()");
-
-                    b.Property<DateTime?>("DeactiveStartTime");
-
-                    b.Property<string>("Description");
-
-                    b.Property<Guid?>("FileId");
-
-                    b.Property<bool?>("IsActivated");
-
-                    b.Property<DateTime?>("LastUpdateDate");
-
-                    b.Property<double?>("Latitude");
-
-                    b.Property<double?>("Longitude");
-
-                    b.Property<long?>("ParentId");
+                    b.Property<string>("Title");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CityName");
-
-                    b.HasIndex("ParentId");
+                    b.HasIndex("ProvinceId");
 
                     b.ToTable("City_T");
-                });
-
-            modelBuilder.Entity("MSHB.Reservation.Layers.L01_Entities.Models.CityAttachment", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<long>("CityId");
-
-                    b.Property<Guid?>("FileId");
-
-                    b.Property<long?>("FileSize");
-
-                    b.Property<string>("FileType")
-                        .HasMaxLength(20);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CityId");
-
-                    b.ToTable("CityAttachment_T");
                 });
 
             modelBuilder.Entity("MSHB.Reservation.Layers.L01_Entities.Models.FileAddress", b =>
@@ -299,6 +178,19 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
                     b.ToTable("GroupAuthRole_T");
                 });
 
+            modelBuilder.Entity("MSHB.Reservation.Layers.L01_Entities.Models.Province", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Title");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Province_T");
+                });
+
             modelBuilder.Entity("MSHB.Reservation.Layers.L01_Entities.Models.ReportStructure", b =>
                 {
                     b.Property<long>("Id")
@@ -314,9 +206,12 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
                     b.Property<string>("ProtoType");
 
                     b.Property<string>("ReportId")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasMaxLength(40);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ReportId");
 
                     b.ToTable("ReportStructure_T");
                 });
@@ -385,9 +280,6 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
 
                     b.Property<string>("PhoneNumber")
                         .HasMaxLength(20);
-
-                    b.Property<string>("SajadUserName")
-                        .HasMaxLength(200);
 
                     b.Property<string>("SerialNumber")
                         .HasMaxLength(450);
@@ -474,49 +366,25 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
                     b.ToTable("UserToken_T");
                 });
 
-            modelBuilder.Entity("MSHB.Reservation.Layers.L01_Entities.Models.AccommodationRoom", b =>
+            modelBuilder.Entity("MSHB.Reservation.Layers.L01_Entities.Models.Accommodation", b =>
                 {
                     b.HasOne("MSHB.Reservation.Layers.L01_Entities.Models.City", "City")
-                        .WithMany("AccommodationRooms")
+                        .WithMany("Accommodations")
                         .HasForeignKey("CityId");
                 });
 
-            modelBuilder.Entity("MSHB.Reservation.Layers.L01_Entities.Models.AccommodationUserAttachment", b =>
+            modelBuilder.Entity("MSHB.Reservation.Layers.L01_Entities.Models.AccommodationAttachment", b =>
                 {
-                    b.HasOne("MSHB.Reservation.Layers.L01_Entities.Models.AccommodationUserRoom", "AccommodationUserRoom")
-                        .WithMany("AccommodationUserAttachments")
-                        .HasForeignKey("AccommodationUserRoomId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("MSHB.Reservation.Layers.L01_Entities.Models.AccommodationUserRoom", b =>
-                {
-                    b.HasOne("MSHB.Reservation.Layers.L01_Entities.Models.AccommodationRoom", "AccommodationRoom")
-                        .WithMany("AccommodationUserRooms")
-                        .HasForeignKey("AccommodationRoomId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("MSHB.Reservation.Layers.L01_Entities.Models.City", "City")
-                        .WithMany("AccommodationUserRooms")
-                        .HasForeignKey("CityId");
-
-                    b.HasOne("MSHB.Reservation.Layers.L01_Entities.Models.User", "User")
-                        .WithMany("AccommodationUserRooms")
-                        .HasForeignKey("UserId");
+                    b.HasOne("MSHB.Reservation.Layers.L01_Entities.Models.Accommodation", "Accommodation")
+                        .WithMany("AccommodationAttachments")
+                        .HasForeignKey("AccommodationId");
                 });
 
             modelBuilder.Entity("MSHB.Reservation.Layers.L01_Entities.Models.City", b =>
                 {
-                    b.HasOne("MSHB.Reservation.Layers.L01_Entities.Models.City", "Parent")
-                        .WithMany("Children")
-                        .HasForeignKey("ParentId");
-                });
-
-            modelBuilder.Entity("MSHB.Reservation.Layers.L01_Entities.Models.CityAttachment", b =>
-                {
-                    b.HasOne("MSHB.Reservation.Layers.L01_Entities.Models.City", "City")
-                        .WithMany("CityAttachments")
-                        .HasForeignKey("CityId")
+                    b.HasOne("MSHB.Reservation.Layers.L01_Entities.Models.Province", "Province")
+                        .WithMany("Cities")
+                        .HasForeignKey("ProvinceId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -544,9 +412,8 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
             modelBuilder.Entity("MSHB.Reservation.Layers.L01_Entities.Models.User", b =>
                 {
                     b.HasOne("MSHB.Reservation.Layers.L01_Entities.Models.City", "City")
-                        .WithMany("Users")
-                        .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .WithMany()
+                        .HasForeignKey("CityId");
 
                     b.HasOne("MSHB.Reservation.Layers.L01_Entities.Models.GroupAuth", "GroupAuth")
                         .WithMany("Users")
