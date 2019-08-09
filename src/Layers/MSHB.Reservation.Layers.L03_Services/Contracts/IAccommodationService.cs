@@ -11,6 +11,6 @@ namespace MSHB.Reservation.Layers.L03_Services.Contracts
     public interface IAccommodationService
     {
         Task<bool> AddAsync(AddAccommodationFormModel accommodationForm);
-        Task<bool> GetAsync(SearchAccommodationFormModel searchAccommodationForm);
+        Task<SearchAccommodationViewModel> GetAsync(SearchAccommodationFormModel searchAccommodationForm);
     }
 }

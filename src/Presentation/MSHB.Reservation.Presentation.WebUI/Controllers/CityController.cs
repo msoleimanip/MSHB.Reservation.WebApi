@@ -38,7 +38,7 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
         {
             List<CityViewModel> cities = new List<CityViewModel>();
             cities = _cache.Get<List<CityViewModel>>("dashboard");
-            if (cities is null)
+            if (cities is null || cities.Count == 0)
             {
                 cities = await _CityService.GetAllAsync();
                 _cache.Set("dashboard", cities, TimeSpan.FromHours(1));

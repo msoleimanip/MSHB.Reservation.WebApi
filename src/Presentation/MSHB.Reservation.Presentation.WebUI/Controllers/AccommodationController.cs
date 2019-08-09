@@ -17,7 +17,7 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
 {
     [Route("api/[controller]")]
     [EnableCors("CorsPolicy")]
-    [Authorize(Roles = "Accommodation")]
+    //[Authorize(Roles = "Accommodation")]
     public class AccommodationController : BaseController
     {
         private IAccommodationService _accommodationService;
@@ -30,7 +30,7 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
 
         [HttpGet("[action]"), HttpPost("[action]")]
         [ValidateModelAttribute]
-        [Authorize(Roles = "Accommodation-AddAccommodation")]
+        //[Authorize(Roles = "Accommodation-AddAccommodation")]
         public async Task<IActionResult> AddAccommodation([FromBody] AddAccommodationFormModel accommodationForm)
         {
             return Ok(GetRequestResult(await _accommodationService.AddAsync(accommodationForm)));
@@ -39,7 +39,7 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
 
         [HttpGet("[action]"), HttpPost("[action]")]
         [ValidateModelAttribute]
-        [Authorize(Roles = "Accommodation-Get")]
+        //[Authorize(Roles = "Accommodation-Get")]
         public async Task<IActionResult> Get([FromBody] SearchAccommodationFormModel searchAccommodationForm)
         {
             return Ok(GetRequestResult(await _accommodationService.GetAsync(searchAccommodationForm)));

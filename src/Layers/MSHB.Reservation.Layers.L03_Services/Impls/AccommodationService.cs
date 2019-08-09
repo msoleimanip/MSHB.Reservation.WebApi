@@ -20,8 +20,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
 {
     public class AccommodationService : IAccommodationService
     {
-        private readonly ReservationDbContext _context;
-        private IHostingEnvironment _hostingEnvironment;
+        private readonly ReservationDbContext _context;       
 
 
         public AccommodationService(ReservationDbContext context)
@@ -55,17 +54,73 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                     return true;
                 }
                 else
-                    throw new ReservationGlobalException(AccommodationRoomServiceErrors.AddDuplicateAccommodationError);
+                    throw new ReservationGlobalException(AccommodationServiceErrors.AddDuplicateAccommodationError);
             }
             catch (Exception ex)
             {
-                throw new ReservationGlobalException(AccommodationRoomServiceErrors.AddAccommodationError, ex);
+                throw new ReservationGlobalException(AccommodationServiceErrors.AddAccommodationError, ex);
             }
         }
 
-        public Task<bool> GetAsync(SearchAccommodationFormModel searchAccommodationForm)
+        public async Task<SearchAccommodationViewModel> GetAsync(SearchAccommodationFormModel searchAccommodationForm)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var queryable = _context.Accommodations.AsQueryable();
+
+                if (!string.IsNullOrEmpty(searchAccommodationForm.Caption))
+                {
+                    queryable = queryable.Where(q => q.Caption.Contains(searchAccommodationForm.Caption));
+                }
+
+                if (searchAccommodationForm.AccommodationType.HasValue)
+                {
+                    queryable = queryable.Where(q => q.AccommodationType == searchAccommodationForm.AccommodationType.Value);
+                }
+
+                if (searchAccommodationForm.IsActivated.HasValue)
+                {
+                    queryable = queryable.Where(q => q.IsActivated == searchAccommodationForm.IsActivated.Value);
+                }
+
+                if (searchAccommodationForm.CityId.HasValue)
+                {
+                    queryable = queryable.Where(q => q.CityId == searchAccommodationForm.CityId.Value);
+                }
+
+
+                queryable = queryable.OrderBy(x => x.CityId);
+
+                var resp = await queryable.Skip((searchAccommodationForm.PageIndex - 1) * searchAccommodationForm.PageSize).Take(searchAccommodationForm.PageSize).ToListAsync();
+                var count = await queryable.CountAsync();
+                var searchViewModel = new SearchAccommodationViewModel
+                {
+                    searchAccommodationViewModels = resp.Select(respAcc => new AccommodationViewModel()
+                    {
+                        Id = respAcc.Id,
+                        Caption = respAcc.Caption,
+                        AccommodationType = respAcc.AccommodationType,
+                        Address = respAcc.Address,
+                        CityTitle = respAcc.City.Title,
+                        Code = respAcc.Code,
+                        District = respAcc.District,
+                        IsActivated = respAcc.IsActivated,
+                        FileId = respAcc.FileId,
+                        Number = respAcc.Number
+
+                    }).ToList(),
+                    PageIndex = searchAccommodationForm.PageIndex,
+                    PageSize = searchAccommodationForm.PageSize,
+                    TotalCount = count
+                };
+                return searchViewModel;
+            }
+            catch (Exception ex)
+            {
+
+                throw new ReservationGlobalException(AccommodationServiceErrors.GetAccommodationError, ex);
+            }
+
         }
     }
 }

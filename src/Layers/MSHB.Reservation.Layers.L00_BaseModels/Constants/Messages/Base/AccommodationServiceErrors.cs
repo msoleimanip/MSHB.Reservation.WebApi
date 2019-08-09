@@ -4,7 +4,7 @@ using System.Text;
 
 namespace MSHB.Reservation.Layers.L00_BaseModels.Constants.Messages.Base
 {
-    public class AccommodationRoomServiceErrors
+    public class AccommodationServiceErrors
     {
         public static readonly ReservationErrorMessage AddAccommodationError =
           new ReservationErrorMessage("AAE-1000", "هنگام اضافه کردن مکان به اقامتگاه خطایی رخ داده  است.");
@@ -27,9 +27,9 @@ namespace MSHB.Reservation.Layers.L00_BaseModels.Constants.Messages.Base
          new ReservationErrorMessage("AAE-1007", "در مکانی از  اقامتگاه که خواهان حذف هستید اطلاعات کاربر وجود دارد");
 
         public static readonly ReservationErrorMessage GetAccommodationError =
-         new ReservationErrorMessage("AAE-1008", "دریافت اطلاعات از اتاق ها خطا رخ داده است");
+         new ReservationErrorMessage("AAE-1008", "دریافت اطلاعات از اقامتگاه ها خطا رخ داده است");
 
 
-        
+
     }
 }
