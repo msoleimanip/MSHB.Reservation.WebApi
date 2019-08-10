@@ -44,5 +44,12 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
         {
             return Ok(GetRequestResult(await _accommodationService.GetAsync(searchAccommodationForm)));
         }
+
+        [HttpGet("[action]"), HttpPost("[action]")]
+        [ValidateModelAttribute]
+        public async Task<IActionResult> AddUnit([FromBody] AddUnitFormModel addUnitForm)
+        {
+            return Ok(GetRequestResult(await _accommodationService.AddUnitAsync(addUnitForm)));
+        }
     }
 }

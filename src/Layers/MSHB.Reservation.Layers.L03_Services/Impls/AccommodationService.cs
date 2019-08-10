@@ -20,7 +20,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
 {
     public class AccommodationService : IAccommodationService
     {
-        private readonly ReservationDbContext _context;       
+        private readonly ReservationDbContext _context;
 
 
         public AccommodationService(ReservationDbContext context)
@@ -38,7 +38,6 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                     var accommodation = new Accommodation()
                     {
                         Caption = accommodationForm.Caption,
-                        AccommodationType = accommodationForm.AccommodationType,
                         Address = accommodationForm.Address,
                         CityId = accommodationForm.CityId,
                         Code = accommodationForm.Code,
@@ -73,11 +72,6 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                     queryable = queryable.Where(q => q.Caption.Contains(searchAccommodationForm.Caption));
                 }
 
-                if (searchAccommodationForm.AccommodationType.HasValue)
-                {
-                    queryable = queryable.Where(q => q.AccommodationType == searchAccommodationForm.AccommodationType.Value);
-                }
-
                 if (searchAccommodationForm.IsActivated.HasValue)
                 {
                     queryable = queryable.Where(q => q.IsActivated == searchAccommodationForm.IsActivated.Value);
@@ -99,9 +93,8 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                     {
                         Id = respAcc.Id,
                         Caption = respAcc.Caption,
-                        AccommodationType = respAcc.AccommodationType,
                         Address = respAcc.Address,
-                        CityTitle = respAcc.City.Title,
+                        CityTitle = $"{respAcc.City.Title} ({respAcc.City.Province.Title})",
                         Code = respAcc.Code,
                         District = respAcc.District,
                         IsActivated = respAcc.IsActivated,
@@ -117,10 +110,37 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
             }
             catch (Exception ex)
             {
-
                 throw new ReservationGlobalException(AccommodationServiceErrors.GetAccommodationError, ex);
             }
 
         }
+
+        public async Task<bool> AddUnitAsync(AddUnitFormModel addUnitForm)
+        {
+            try
+            {
+                var unit = new Unit()
+                {
+                    AccommodationId = addUnitForm.AccommodationId,
+                    AccommodationType = addUnitForm.AccommodationType,
+                    DoubleBedCount = addUnitForm.DoubleBedCount,
+                    IsActive = addUnitForm.IsActive,
+                    MaximumCount = addUnitForm.MaximumCount,
+                    MinimumCount = addUnitForm.MinimumCount,
+                    RoomCount = addUnitForm.RoomCount,
+                    SingleBedCount = addUnitForm.SingleBedCount
+                };
+
+                await _context.Units.AddAsync(unit);
+                await _context.SaveChangesAsync();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw new ReservationGlobalException(AccommodationServiceErrors.AddUnitError, ex);
+            }
+        }
+
     }
 }

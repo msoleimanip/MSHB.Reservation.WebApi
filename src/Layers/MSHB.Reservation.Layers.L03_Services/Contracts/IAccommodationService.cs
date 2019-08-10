@@ -12,5 +12,6 @@ namespace MSHB.Reservation.Layers.L03_Services.Contracts
     {
         Task<bool> AddAsync(AddAccommodationFormModel accommodationForm);
         Task<SearchAccommodationViewModel> GetAsync(SearchAccommodationFormModel searchAccommodationForm);
+        Task<bool> AddUnitAsync(AddUnitFormModel addUnitForm);
     }
 }

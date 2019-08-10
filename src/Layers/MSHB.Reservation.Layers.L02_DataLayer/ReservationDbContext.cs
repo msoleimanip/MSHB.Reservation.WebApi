@@ -24,6 +24,7 @@ namespace MSHB.Reservation.Layers.L02_DataLayer
         public virtual DbSet<AppLogItem> Logs { get; set; }
         public virtual DbSet<City> Citys { get; set; }
         public virtual DbSet<Province> Provinces { get; set; }
+        public virtual DbSet<Unit> Units { set; get; }
         public virtual DbSet<Accommodation> Accommodations { get; set; }
         public virtual DbSet<UserConfiguration> UserConfigurations { get; set; }
         public virtual DbSet<AccommodationAttachment> AccommodationAttachments { get; set; }
@@ -115,7 +116,11 @@ namespace MSHB.Reservation.Layers.L02_DataLayer
             .HasForeignKey(d => d.AccommodationId)
             .OnDelete(DeleteBehavior.ClientSetNull);
 
-
+            modelBuilder.Entity<Unit>()
+          .HasOne(d => d.Accommodation)
+          .WithMany(t => t.Units)
+          .HasForeignKey(d => d.AccommodationId)
+          .OnDelete(DeleteBehavior.ClientSetNull);
 
 
             modelBuilder.Entity<Accommodation>().HasIndex(c => c.Code);

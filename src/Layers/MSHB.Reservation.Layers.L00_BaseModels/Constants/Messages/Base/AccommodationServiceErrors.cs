@@ -28,8 +28,7 @@ namespace MSHB.Reservation.Layers.L00_BaseModels.Constants.Messages.Base
 
         public static readonly ReservationErrorMessage GetAccommodationError =
          new ReservationErrorMessage("AAE-1008", "دریافت اطلاعات از اقامتگاه ها خطا رخ داده است");
-
-
-
+        public static readonly ReservationErrorMessage AddUnitError =
+         new ReservationErrorMessage("AUE-1009", "هنگام ثبت اطلاعات واحد خطایی رخ داد");
     }
 }

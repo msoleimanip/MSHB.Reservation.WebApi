@@ -26,8 +26,6 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AccommodationType");
-
                     b.Property<string>("Address");
 
                     b.Property<string>("Caption");
@@ -61,8 +59,6 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
 
                     b.Property<long>("AccommodationId");
 
-                    b.Property<long>("CityId");
-
                     b.Property<Guid?>("FileId");
 
                     b.Property<long?>("FileSize");
@@ -74,7 +70,7 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
 
                     b.HasIndex("AccommodationId");
 
-                    b.ToTable("CityAttachment_T");
+                    b.ToTable("AccommodationAttachment_T");
                 });
 
             modelBuilder.Entity("MSHB.Reservation.Layers.L01_Entities.Models.AppLogItem", b =>
@@ -238,6 +234,35 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
                         .IsUnique();
 
                     b.ToTable("Role_T");
+                });
+
+            modelBuilder.Entity("MSHB.Reservation.Layers.L01_Entities.Models.Unit", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<long>("AccommodationId");
+
+                    b.Property<int>("AccommodationType");
+
+                    b.Property<int>("DoubleBedCount");
+
+                    b.Property<bool>("IsActive");
+
+                    b.Property<int>("MaximumCount");
+
+                    b.Property<int>("MinimumCount");
+
+                    b.Property<int>("RoomCount");
+
+                    b.Property<int>("SingleBedCount");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccommodationId");
+
+                    b.ToTable("Unit_T");
                 });
 
             modelBuilder.Entity("MSHB.Reservation.Layers.L01_Entities.Models.User", b =>
@@ -407,6 +432,13 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("MSHB.Reservation.Layers.L01_Entities.Models.Unit", b =>
+                {
+                    b.HasOne("MSHB.Reservation.Layers.L01_Entities.Models.Accommodation", "Accommodation")
+                        .WithMany("Units")
+                        .HasForeignKey("AccommodationId");
                 });
 
             modelBuilder.Entity("MSHB.Reservation.Layers.L01_Entities.Models.User", b =>
