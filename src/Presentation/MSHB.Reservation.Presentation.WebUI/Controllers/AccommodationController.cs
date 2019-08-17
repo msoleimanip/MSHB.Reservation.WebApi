@@ -51,5 +51,13 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
         {
             return Ok(GetRequestResult(await _accommodationService.AddUnitAsync(addUnitForm)));
         }
+
+
+        [HttpGet("[action]"), HttpPost("[action]")]
+        [ValidateModelAttribute]
+        public async Task<IActionResult> Search([FromBody] SmartSearchFormModel smartSearchForm)
+        {
+            return Ok(GetRequestResult(await _accommodationService.SmartSearchAsync(smartSearchForm)));
+        }
     }
 }

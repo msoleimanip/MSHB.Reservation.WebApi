@@ -142,5 +142,42 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
             }
         }
 
+        public async Task<object> SmartSearchAsync(SmartSearchFormModel smartSearchForm)
+        {
+            var queryable = _context.Accommodations.Where(x => x.CityId == smartSearchForm.CityId);
+
+            //if (smartSearchForm.StartDate.HasValue)
+            //{
+            //    query = query;
+            //}
+
+            //if (smartSearchForm.EndTime.HasValue)
+            //{
+            //    query = query;
+            //}
+
+            var resp = await queryable.Skip((smartSearchForm.PageIndex - 1) * smartSearchForm.PageSize).Take(smartSearchForm.PageSize).ToListAsync();
+            var count = await queryable.CountAsync();
+            var searchViewModel = new SearchAccommodationViewModel
+            {
+                searchAccommodationViewModels = resp.Select(respAcc => new AccommodationViewModel()
+                {
+                    Id = respAcc.Id,
+                    Caption = respAcc.Caption,
+                    Address = respAcc.Address,
+                    CityTitle = $"{respAcc.City.Title} ({respAcc.City.Province.Title})",
+                    Code = respAcc.Code,
+                    District = respAcc.District,
+                    IsActivated = respAcc.IsActivated,
+                    FileId = respAcc.FileId,
+                    Number = respAcc.Number
+
+                }).ToList(),
+                PageIndex = smartSearchForm.PageIndex,
+                PageSize = smartSearchForm.PageSize,
+                TotalCount = count
+            };
+            return searchViewModel;
+        }
     }
 }

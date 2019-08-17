@@ -30,6 +30,7 @@ C:\Users\me\Desktop\hamedPro\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation
 C:\Users\me\Desktop\hamedPro\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L01_Entities\obj\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.AssemblyInfo.cs
 C:\Users\me\Desktop\hamedPro\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L01_Entities\obj\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.dll
 C:\Users\me\Desktop\hamedPro\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L01_Entities\obj\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.pdb
+C:\Csharp\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L01_Entities\obj\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.csprojAssemblyReference.cache
 D:\MSHB\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L01_Entities\bin\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.deps.json
 D:\MSHB\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L01_Entities\bin\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.runtimeconfig.json
 D:\MSHB\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L01_Entities\bin\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.runtimeconfig.dev.json
@@ -41,4 +42,3 @@ D:\MSHB\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L01_Entities\
 D:\MSHB\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L01_Entities\obj\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.AssemblyInfo.cs
 D:\MSHB\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L01_Entities\obj\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.dll
 D:\MSHB\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L01_Entities\obj\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.pdb
-C:\Csharp\MSHB.Reservation.WebApi\src\Layers\MSHB.Reservation.Layers.L01_Entities\obj\Debug\netcoreapp2.2\MSHB.Reservation.Layers.L01_Entities.csprojAssemblyReference.cache
