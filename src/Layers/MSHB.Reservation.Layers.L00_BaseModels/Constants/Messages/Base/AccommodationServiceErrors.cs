@@ -30,5 +30,15 @@ namespace MSHB.Reservation.Layers.L00_BaseModels.Constants.Messages.Base
          new ReservationErrorMessage("AAE-1008", "دریافت اطلاعات از اقامتگاه ها خطا رخ داده است");
         public static readonly ReservationErrorMessage AddUnitError =
          new ReservationErrorMessage("AUE-1009", "هنگام ثبت اطلاعات واحد خطایی رخ داد");
+        public static readonly ReservationErrorMessage GetAccommodationUnitsError =
+        new ReservationErrorMessage("AUE-1010", "هنگام خواندن اطلاعات واحد ها خطایی رخ داده است");
+        public static readonly ReservationErrorMessage GetAccommodationAttachmentsError =
+      new ReservationErrorMessage("AUE-1011", "هنگام خواندن اطلاعات فایل ها خطایی رخ داده است");
+        public static readonly ReservationErrorMessage AccommodationNotExistError =
+     new ReservationErrorMessage("AUE-1012", "اقامتگاه مورد نظر یافت نشد");
+        public static readonly ReservationErrorMessage NotExistFileAddresstError =
+         new ReservationErrorMessage("AUE-1013", "فایل در پایگاه داده یافت نشد.");
+        public static readonly ReservationErrorMessage SetAccommodationAttachmentsError =
+         new ReservationErrorMessage("AUE-1014", "در هنگام اضافه کردن فایل ها خطایی رخ داد.");
     }
 }

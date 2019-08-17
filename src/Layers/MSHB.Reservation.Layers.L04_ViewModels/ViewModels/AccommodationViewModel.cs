@@ -9,7 +9,6 @@ namespace MSHB.Reservation.Layers.L04_ViewModels.ViewModels
     {
         public long Id { get; set; }
         public string Caption { get; set; }
-        public AccommodationType AccommodationType { get; set; }
         public string Code { get; set; }
         public bool IsActivated { get; set; }
         public string District { get; set; }

@@ -55,9 +55,32 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
 
         [HttpGet("[action]"), HttpPost("[action]")]
         [ValidateModelAttribute]
-        public async Task<IActionResult> Search([FromBody] SmartSearchFormModel smartSearchForm)
+        public async Task<IActionResult> SmartSearch([FromBody] SmartSearchFormModel smartSearchForm)
         {
             return Ok(GetRequestResult(await _accommodationService.SmartSearchAsync(smartSearchForm)));
+        }
+
+
+        [HttpGet("[action]"), HttpPost("[action]")]
+        [ValidateModelAttribute]
+        public async Task<IActionResult> GetAccommodationUnits([FromBody] AccommodationUnitFormModel accommodationUnitForm)
+        {
+            return Ok(GetRequestResult(await _accommodationService.GetAccommodationUnitsAsync(accommodationUnitForm)));
+        }
+
+        [HttpGet("[action]")]
+        [ValidateModelAttribute]
+        public async Task<IActionResult> GetAccommodationAttachments([FromQuery] long AccommodationId)
+        {
+            return Ok(GetRequestResult(await _accommodationService.GetAccommodationAttachmentsAsync(AccommodationId)));
+        }
+
+
+        [HttpPost("[action]")]
+        [ValidateModelAttribute]
+        public async Task<IActionResult> SetAccommodationAttachments([FromBody] AccommodationAttachmentsFormModel accommodationAttachmentsForm)
+        {
+            return Ok(GetRequestResult(await _accommodationService.SetAccommodationAttachmentsAsync(accommodationAttachmentsForm)));
         }
     }
 }

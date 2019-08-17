@@ -15,6 +15,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MSHB.Reservation.Layers.L03_Services.Mapper;
 
 namespace MSHB.Reservation.Layers.L03_Services.Impls
 {
@@ -142,7 +143,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
             }
         }
 
-        public async Task<object> SmartSearchAsync(SmartSearchFormModel smartSearchForm)
+        public async Task<SearchAccommodationViewModel> SmartSearchAsync(SmartSearchFormModel smartSearchForm)
         {
             var queryable = _context.Accommodations.Where(x => x.CityId == smartSearchForm.CityId);
 
@@ -171,13 +172,95 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                     IsActivated = respAcc.IsActivated,
                     FileId = respAcc.FileId,
                     Number = respAcc.Number
-
                 }).ToList(),
                 PageIndex = smartSearchForm.PageIndex,
                 PageSize = smartSearchForm.PageSize,
                 TotalCount = count
             };
             return searchViewModel;
+        }
+
+        public async Task<List<AccommodationUnitViewModel>> GetAccommodationUnitsAsync(AccommodationUnitFormModel accommodationUnitForm)
+        {
+            try
+            {
+                var queryable = _context.Units.Where(x => x.AccommodationId == accommodationUnitForm.AccommodationId);
+
+                if (accommodationUnitForm.StartDate.HasValue)
+                {
+
+                }
+
+                if (accommodationUnitForm.EndDate.HasValue)
+                {
+
+                }
+
+                return (await queryable.Mapper().ToListAsync());
+            }
+            catch (Exception ex)
+            {
+                throw new ReservationGlobalException(AccommodationServiceErrors.GetAccommodationUnitsError, ex);
+            }
+        }
+
+        public async Task<List<AccommodationAttachmentViewModel>> GetAccommodationAttachmentsAsync(long AccommodationId)
+        {
+            try
+            {
+                return await _context.AccommodationAttachments.Where(x => x.AccommodationId == AccommodationId).Mapper().ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new ReservationGlobalException(AccommodationServiceErrors.GetAccommodationAttachmentsError, ex);
+            }
+        }
+
+        public async Task<bool> SetAccommodationAttachmentsAsync(AccommodationAttachmentsFormModel accommodationAttachmentsForm)
+        {
+            try
+            {
+                var accommodation = _context.Accommodations.FirstOrDefault(c => c.Id == accommodationAttachmentsForm.AccommodationId);
+                if (accommodation is null)
+                    throw new ReservationGlobalException(AccommodationServiceErrors.AccommodationNotExistError);
+
+                if (accommodationAttachmentsForm.UploadFiles != null && accommodationAttachmentsForm.UploadFiles.Count > 0)
+                {
+                    var notFoundFiles = 0;
+                    var filesAddress = new List<FileAddress>();
+                    accommodationAttachmentsForm.UploadFiles.ForEach(uf =>
+                    {
+                        var fileAddress = _context.FileAddresses.Find(uf);
+                        if (fileAddress == null)
+                        {
+                            notFoundFiles++;
+                        }
+                        filesAddress.Add(fileAddress);
+                    });
+                    if (notFoundFiles > 0)
+                    {
+                        throw new ReservationGlobalException(AccommodationServiceErrors.NotExistFileAddresstError);
+                    }
+
+                    filesAddress.ForEach(async fa =>
+                    {
+                        var accommodationAttachment = new AccommodationAttachment()
+                        {
+                            Accommodation = accommodation,
+                            FileId = fa.FileId,
+                            FileSize = fa.FileSize,
+                            FileType = fa.FileType,
+                        };
+                        await _context.AccommodationAttachments.AddAsync(accommodationAttachment);
+                    });
+                    await _context.SaveChangesAsync();
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw new ReservationGlobalException(AccommodationServiceErrors.SetAccommodationAttachmentsError, ex);
+            }
         }
     }
 }
