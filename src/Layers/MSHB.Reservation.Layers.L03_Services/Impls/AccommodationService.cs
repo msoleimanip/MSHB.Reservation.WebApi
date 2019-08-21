@@ -180,11 +180,11 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
             return searchViewModel;
         }
 
-        public async Task<List<AccommodationUnitViewModel>> GetAccommodationUnitsAsync(AccommodationUnitFormModel accommodationUnitForm)
+        public async Task<GetAccommodationUnitsViewModel> GetAccommodationUnitsAsync(AccommodationUnitFormModel accommodationUnitForm)
         {
             try
             {
-                var queryable = _context.Units.Where(x => x.AccommodationId == accommodationUnitForm.AccommodationId);
+                var queryable = _context.Accommodations.Include(x => x.Units).Include(x => x.City).Where(x => x.Id == accommodationUnitForm.AccommodationId);
 
                 if (accommodationUnitForm.StartDate.HasValue)
                 {
@@ -196,7 +196,13 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
 
                 }
 
-                return (await queryable.Mapper().ToListAsync());
+                var accommodation = await queryable.FirstOrDefaultAsync();
+
+                GetAccommodationUnitsViewModel units = new GetAccommodationUnitsViewModel();
+                units.Accommodation = accommodation.Mapper();
+                units.AccommodationUnits = accommodation.Units.Mapper();
+
+                return units;
             }
             catch (Exception ex)
             {
@@ -260,6 +266,60 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
             catch (Exception ex)
             {
                 throw new ReservationGlobalException(AccommodationServiceErrors.SetAccommodationAttachmentsError, ex);
+            }
+        }
+
+        public async Task<List<AccommodationAttachmentViewModel>> GetAttachmentsAsync(long accommodationId)
+        {
+            try
+            {
+                return await _context.AccommodationAttachments.Where(x => x.AccommodationId == accommodationId).Mapper().ToListAsync();
+
+            }
+            catch (Exception ex)
+            {
+                throw new ReservationGlobalException(AccommodationServiceErrors.GetAttachmentsError, ex);
+            }
+        }
+
+        public async Task<bool> DeleteAccommodationAttachmentAsync(DeleteAttachmentFormModel DeleteAttachmentForm)
+        {
+            try
+            {
+
+                var accommodationAttachment = await _context.AccommodationAttachments.FirstOrDefaultAsync(p => p.Id == DeleteAttachmentForm.AttachmentId);
+                if (accommodationAttachment is null)
+                    throw new ReservationGlobalException(AccommodationServiceErrors.AttachmentNotFoundError);
+
+                _context.AccommodationAttachments.Remove(accommodationAttachment);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw new ReservationGlobalException(AccommodationServiceErrors.DeleteAttachmentError, ex);
+            }
+
+        }
+
+        public async Task<GetUnitViewModel> GetUnitAsync(long unitId)
+        {
+            try
+            {
+                var unit = await _context.Units.Include(x => x.Accommodation).FirstOrDefaultAsync(x => x.Id == unitId);
+                if (unit is null)
+                    throw new ReservationGlobalException(AccommodationServiceErrors.UnitNotFoundError);
+
+                return new GetUnitViewModel()
+                {
+                    Accommodation = unit.Accommodation.Mapper(),
+                    Unit = unit.Mapper()
+                };
+
+            }
+            catch (Exception ex)
+            {
+                throw new ReservationGlobalException(AccommodationServiceErrors.GetUnitError, ex);
             }
         }
     }

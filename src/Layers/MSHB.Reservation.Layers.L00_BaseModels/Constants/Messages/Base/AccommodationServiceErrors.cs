@@ -40,5 +40,15 @@ namespace MSHB.Reservation.Layers.L00_BaseModels.Constants.Messages.Base
          new ReservationErrorMessage("AUE-1013", "فایل در پایگاه داده یافت نشد.");
         public static readonly ReservationErrorMessage SetAccommodationAttachmentsError =
          new ReservationErrorMessage("AUE-1014", "در هنگام اضافه کردن فایل ها خطایی رخ داد.");
+        public static readonly ReservationErrorMessage GetAttachmentsError =
+       new ReservationErrorMessage("AUE-1015", "در هنگام خواندن تصاویر خطایی رخ داد.");
+        public static readonly ReservationErrorMessage DeleteAttachmentError =
+      new ReservationErrorMessage("AUE-1016", "در هنگام حذف تصاویر خطایی رخ داد.");
+        public static readonly ReservationErrorMessage AttachmentNotFoundError =
+      new ReservationErrorMessage("AUE-1017", "شناسه تصویر مورد نظر نامعتبر است");
+        public static readonly ReservationErrorMessage GetUnitError =
+     new ReservationErrorMessage("AUE-1018", "در خواندن اطلاعات واحد، خطایی رخ داده است");
+        public static readonly ReservationErrorMessage UnitNotFoundError =
+    new ReservationErrorMessage("AUE-1019", "واحد مورد نظر در سامانه یافت نشد");
     }
 }

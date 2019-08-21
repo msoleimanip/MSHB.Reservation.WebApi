@@ -14,8 +14,11 @@ namespace MSHB.Reservation.Layers.L03_Services.Contracts
         Task<SearchAccommodationViewModel> GetAsync(SearchAccommodationFormModel searchAccommodationForm);
         Task<bool> AddUnitAsync(AddUnitFormModel addUnitForm);
         Task<SearchAccommodationViewModel> SmartSearchAsync(SmartSearchFormModel smartSearchForm);
-        Task<List<AccommodationUnitViewModel>> GetAccommodationUnitsAsync(AccommodationUnitFormModel accommodationUnitForm);
+        Task<GetAccommodationUnitsViewModel> GetAccommodationUnitsAsync(AccommodationUnitFormModel accommodationUnitForm);
+        Task<GetUnitViewModel> GetUnitAsync(long unitId);
         Task<List<AccommodationAttachmentViewModel>> GetAccommodationAttachmentsAsync(long AccommodationId);
         Task<bool> SetAccommodationAttachmentsAsync(AccommodationAttachmentsFormModel accommodationAttachmentsForm);
+        Task<List<AccommodationAttachmentViewModel>> GetAttachmentsAsync(long accommodationId);
+        Task<bool> DeleteAccommodationAttachmentAsync(DeleteAttachmentFormModel DeleteAttachmentForm);
     }
 }

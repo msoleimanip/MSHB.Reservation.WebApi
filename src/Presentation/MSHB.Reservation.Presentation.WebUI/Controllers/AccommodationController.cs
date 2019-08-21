@@ -37,7 +37,7 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
         }
 
 
-        [HttpGet("[action]"), HttpPost("[action]")]
+        [HttpPost("[action]")]
         [ValidateModelAttribute]
         //[Authorize(Roles = "Accommodation-Get")]
         public async Task<IActionResult> Get([FromBody] SearchAccommodationFormModel searchAccommodationForm)
@@ -70,6 +70,13 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
 
         [HttpGet("[action]")]
         [ValidateModelAttribute]
+        public async Task<IActionResult> GetUnit([FromQuery] long UnitId)
+        {
+            return Ok(GetRequestResult(await _accommodationService.GetUnitAsync(UnitId)));
+        }
+
+        [HttpGet("[action]")]
+        [ValidateModelAttribute]
         public async Task<IActionResult> GetAccommodationAttachments([FromQuery] long AccommodationId)
         {
             return Ok(GetRequestResult(await _accommodationService.GetAccommodationAttachmentsAsync(AccommodationId)));
@@ -82,5 +89,22 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
         {
             return Ok(GetRequestResult(await _accommodationService.SetAccommodationAttachmentsAsync(accommodationAttachmentsForm)));
         }
+
+        [HttpGet("[action]")]
+        [ValidateModelAttribute]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetAttachments([FromQuery] long AccommodationId)
+        {
+            return Ok(GetRequestResult(await _accommodationService.GetAttachmentsAsync(AccommodationId)));
+        }
+
+        [HttpPost("[action]")]
+        [ValidateModelAttribute]
+        //[Authorize(Roles = "City-DeleteAttachmentCity")]
+        public async Task<IActionResult> DeleteAccommodationAttachment([FromBody]DeleteAttachmentFormModel DeleteAttachmentForm)
+        {            
+            return Ok(GetRequestResult(await _accommodationService.DeleteAccommodationAttachmentAsync(DeleteAttachmentForm)));
+        }
+
     }
 }
