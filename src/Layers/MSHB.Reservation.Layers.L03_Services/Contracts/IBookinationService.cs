@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace MSHB.Reservation.Layers.L03_Services.Contracts
 {
-    public interface IReservationService
+    public interface IBookinationService
     {
-        Task<bool> AddAsync(AddReservationFormModel AddFomrModel);
+        Task<bool> AddAsync(AddBookinationFormModel AddFomrModel);
     }
 }

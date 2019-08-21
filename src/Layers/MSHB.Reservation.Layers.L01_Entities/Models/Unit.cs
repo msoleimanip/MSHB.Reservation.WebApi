@@ -18,5 +18,6 @@ namespace MSHB.Reservation.Layers.L01_Entities.Models
         public bool IsActive { get; set; }
         public long AccommodationId { get; set; }
         public virtual Accommodation Accommodation { get; set; }
+        public virtual ICollection<Bookination> Bookinations { get; set; }
     }
 }

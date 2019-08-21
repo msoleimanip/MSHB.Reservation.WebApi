@@ -11,6 +11,6 @@ namespace MSHB.Reservation.Layers.L04_ViewModels.InputForms
         [Required]
         public int CityId { get; set; }
         public DateTime? StartDate { get; set; }
-        public DateTime? EndTime { get; set; }
+        public DateTime? EndDate { get; set; }
     }
 }

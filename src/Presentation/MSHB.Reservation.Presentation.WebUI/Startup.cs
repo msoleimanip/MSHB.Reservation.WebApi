@@ -67,7 +67,7 @@ namespace MSHB.Reservation.Presentation.WebUI
             services.AddTransient<IGroupAuthenticationService, GroupAuthenticationService>();
             services.AddTransient<ICityService, CityService>();
             services.AddTransient<IAccommodationService, AccommodationService>();
-            services.AddTransient<IReservationService, ReservationService>();
+            services.AddTransient<IBookinationService, BookinationService>();
             services.AddTransient<IProvinceService, ProvinceService>();
             services.AddTransient<IReportService, ReportService>();
             services.AddTransient<IFileService, FileService>();

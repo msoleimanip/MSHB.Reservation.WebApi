@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace MSHB.Reservation.Layers.L04_ViewModels.InputForms
+namespace MSHB.Reservation.Layers.L01_Entities.Models
 {
-    public class AddReservationFormModel
+    [Table("Bookination_T")]
+    public class Bookination : BaseEntity
     {
         public long UnitId { get; set; }
         public string FirstName { get; set; }
@@ -12,7 +14,9 @@ namespace MSHB.Reservation.Layers.L04_ViewModels.InputForms
         public string Mobile { get; set; }
         public string Email { get; set; }
         public string Description { get; set; }
-        public DateTime StartTime { get; set; }
-        public DateTime EndTime { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+
+        public virtual Unit Unit { get; set; }
     }
 }

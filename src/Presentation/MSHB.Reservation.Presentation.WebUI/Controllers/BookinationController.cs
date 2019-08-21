@@ -13,22 +13,22 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ReservationController : BaseController
+    public class BookinationController : BaseController
     {
-        private IReservationService _reservationService;
+        private IBookinationService _bookinationService;
 
-        public ReservationController(IReservationService reservationService)
+        public BookinationController(IBookinationService bookinationService)
         {
-            _reservationService = reservationService;
-            _reservationService.CheckArgumentIsNull(nameof(_reservationService));
+            _bookinationService = bookinationService;
+            _bookinationService.CheckArgumentIsNull(nameof(_bookinationService));
         }
 
 
         [HttpGet("[action]"), HttpPost("[action]")]
         [ValidateModelAttribute]
-        public async Task<IActionResult> Add([FromBody] AddReservationFormModel addFormModel)
+        public async Task<IActionResult> Add([FromBody] AddBookinationFormModel addFormModel)
         {
-            return Ok(GetRequestResult(await _reservationService.AddAsync(addFormModel)));
+            return Ok(GetRequestResult(await _bookinationService.AddAsync(addFormModel)));
         }
 
     }
