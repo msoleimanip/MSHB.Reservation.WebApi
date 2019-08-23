@@ -11,8 +11,7 @@ namespace MSHB.Reservation.Layers.L02_DataLayer
         public ReservationDbContext()
         {
         }
-        public ReservationDbContext(DbContextOptions options)
-: base(options)
+        public ReservationDbContext(DbContextOptions options) : base(options)
         {
         }
         public virtual DbSet<User> Users { set; get; }
@@ -27,6 +26,7 @@ namespace MSHB.Reservation.Layers.L02_DataLayer
         public virtual DbSet<Unit> Units { set; get; }
         public virtual DbSet<Accommodation> Accommodations { get; set; }
         public virtual DbSet<Bookination> Bookinations { get; set; }
+        public virtual DbSet<BookinationEntourage> BookinationEntourages { get; set; }
         public virtual DbSet<UserConfiguration> UserConfigurations { get; set; }
         public virtual DbSet<AccommodationAttachment> AccommodationAttachments { get; set; }
         public virtual DbSet<FileAddress> FileAddresses { get; set; }
@@ -128,6 +128,12 @@ namespace MSHB.Reservation.Layers.L02_DataLayer
          .WithMany(t => t.Bookinations)
          .HasForeignKey(d => d.UnitId)
          .OnDelete(DeleteBehavior.ClientSetNull);
+
+            modelBuilder.Entity<BookinationEntourage>()
+       .HasOne(d => d.Bookination)
+       .WithMany(t => t.BookinationEntourages)
+       .HasForeignKey(d => d.BookinationId)
+       .OnDelete(DeleteBehavior.ClientSetNull);
 
 
             modelBuilder.Entity<Accommodation>().HasIndex(c => c.Code);

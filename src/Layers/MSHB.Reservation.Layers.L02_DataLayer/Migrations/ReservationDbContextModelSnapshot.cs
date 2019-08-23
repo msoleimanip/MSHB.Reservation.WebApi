@@ -107,8 +107,6 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
 
                     b.Property<string>("Description");
 
-                    b.Property<string>("Email");
-
                     b.Property<DateTime>("EndDate");
 
                     b.Property<string>("FirstName");
@@ -116,6 +114,8 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
                     b.Property<string>("LastName");
 
                     b.Property<string>("Mobile");
+
+                    b.Property<string>("NationalityCode");
 
                     b.Property<DateTime>("StartDate");
 
@@ -126,6 +126,31 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
                     b.HasIndex("UnitId");
 
                     b.ToTable("Bookination_T");
+                });
+
+            modelBuilder.Entity("MSHB.Reservation.Layers.L01_Entities.Models.BookinationEntourage", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Age");
+
+                    b.Property<long>("BookinationId");
+
+                    b.Property<int>("GenderType");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("NationalityCode");
+
+                    b.Property<string>("Relative");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BookinationId");
+
+                    b.ToTable("BookinationEntourage_T");
                 });
 
             modelBuilder.Entity("MSHB.Reservation.Layers.L01_Entities.Models.City", b =>
@@ -439,6 +464,13 @@ namespace MSHB.Reservation.Layers.L02_DataLayer.Migrations
                     b.HasOne("MSHB.Reservation.Layers.L01_Entities.Models.Unit", "Unit")
                         .WithMany("Bookinations")
                         .HasForeignKey("UnitId");
+                });
+
+            modelBuilder.Entity("MSHB.Reservation.Layers.L01_Entities.Models.BookinationEntourage", b =>
+                {
+                    b.HasOne("MSHB.Reservation.Layers.L01_Entities.Models.Bookination", "Bookination")
+                        .WithMany("BookinationEntourages")
+                        .HasForeignKey("BookinationId");
                 });
 
             modelBuilder.Entity("MSHB.Reservation.Layers.L01_Entities.Models.City", b =>

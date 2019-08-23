@@ -26,9 +26,24 @@ namespace MSHB.Reservation.Presentation.WebUI.Controllers
 
         [HttpGet("[action]"), HttpPost("[action]")]
         [ValidateModelAttribute]
+        public async Task<IActionResult> Get([FromBody] SearchBookinationFormModel searchFormModel)
+        {
+            return Ok(GetRequestResult(await _bookinationService.GetAsync(searchFormModel)));
+        }
+
+        [HttpGet("[action]"), HttpPost("[action]")]
+        [ValidateModelAttribute]
         public async Task<IActionResult> Add([FromBody] AddBookinationFormModel addFormModel)
         {
             return Ok(GetRequestResult(await _bookinationService.AddAsync(addFormModel)));
+        }
+
+
+        [HttpGet("[action]"), HttpPost("[action]")]
+        [ValidateModelAttribute]
+        public async Task<IActionResult> AddEntourage([FromBody] List<AddEntourageFormModel> addFormModel)
+        {
+            return Ok(GetRequestResult(await _bookinationService.AddEntourageAsync(addFormModel)));
         }
 
     }

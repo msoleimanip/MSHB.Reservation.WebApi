@@ -5,9 +5,11 @@ using MSHB.Reservation.Layers.L01_Entities.Models;
 using MSHB.Reservation.Layers.L02_DataLayer;
 using MSHB.Reservation.Layers.L03_Services.Contracts;
 using MSHB.Reservation.Layers.L04_ViewModels.InputForms;
+using MSHB.Reservation.Layers.L04_ViewModels.ViewModels;
 using MSHB.Reservation.Shared.Common.GuardToolkit;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -34,7 +36,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                 var bookination = new Bookination()
                 {
                     Description = AddFomrModel.Description,
-                    Email = AddFomrModel.Email,
+                    NationalityCode = AddFomrModel.NationalityCode,
                     EndDate = AddFomrModel.EndDate,
                     FirstName = AddFomrModel.FirstName,
                     LastName = AddFomrModel.LastName,
@@ -51,6 +53,120 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
             catch (Exception ex)
             {
                 throw new ReservationGlobalException(BookinationServiceErrors.AddError, ex);
+            }
+        }
+
+        public async Task<SearchBookinationViewModel> GetAsync(SearchBookinationFormModel searchFormModel)
+        {
+            try
+            {
+                var queryable = _context.Bookinations.AsQueryable();
+
+                if (!string.IsNullOrEmpty(searchFormModel.FirstName))
+                {
+                    queryable = queryable.Where(q => q.FirstName.Contains(searchFormModel.FirstName));
+                }
+
+                if (!string.IsNullOrEmpty(searchFormModel.LastName))
+                {
+                    queryable = queryable.Where(q => q.LastName.Contains(searchFormModel.LastName));
+                }
+
+                if (!string.IsNullOrEmpty(searchFormModel.Mobile))
+                {
+                    queryable = queryable.Where(q => q.Mobile == searchFormModel.Mobile);
+                }
+
+                if (!string.IsNullOrEmpty(searchFormModel.NationalityCode))
+                {
+                    queryable = queryable.Where(q => q.NationalityCode == searchFormModel.NationalityCode);
+                }
+
+                if (searchFormModel.SortModel != null)
+                    switch (searchFormModel.SortModel.Col + "|" + searchFormModel.SortModel.Sort)
+                    {
+                        case "firstname|asc":
+                            queryable = queryable.OrderBy(x => x.FirstName);
+                            break;
+                        case "lastname|asc":
+                            queryable = queryable.OrderBy(x => x.LastName);
+                            break;
+                        case "lastname|desc":
+                            queryable = queryable.OrderByDescending(x => x.LastName);
+                            break;
+                        case "mobile|asc":
+                            queryable = queryable.OrderBy(x => x.Mobile);
+                            break;
+                        case "mobile|desc":
+                            queryable = queryable.OrderByDescending(x => x.Mobile);
+                            break;
+                        case "nationalityCode|asc":
+                            queryable = queryable.OrderBy(x => x.NationalityCode);
+                            break;
+                        case "nationalityCode|desc":
+                            queryable = queryable.OrderByDescending(x => x.NationalityCode);
+                            break;
+                        default:
+                            queryable = queryable.OrderBy(x => x.NationalityCode);
+                            break;
+                    }
+                else
+                    queryable = queryable.OrderBy(x => x.NationalityCode);
+                var resp = await queryable.Skip((searchFormModel.PageIndex - 1) * searchFormModel.PageSize).Take(searchFormModel.PageSize).ToListAsync();
+                var count = await queryable.CountAsync();
+                var searchViewModel = new SearchBookinationViewModel
+                {
+                    bookinationViewModels = resp.Select(respUser => new BookinationViewModel()
+                    {
+                        Id = respUser.Id,
+                        FirstName = respUser.FirstName,
+                        LastName = respUser.LastName,
+                        NationalityCode = respUser.NationalityCode,
+                        Description = respUser.Description,
+                        Mobile = respUser.Mobile,
+                        StartDate = respUser.StartDate,
+                        EndDate = respUser.EndDate
+                    }).ToList(),
+                    PageIndex = searchFormModel.PageIndex,
+                    PageSize = searchFormModel.PageSize,
+                    TotalCount = count
+                };
+                return searchViewModel;
+            }
+            catch (Exception ex)
+            {
+                throw new ReservationGlobalException(BookinationServiceErrors.GetError, ex);
+            }
+        }
+
+
+        public async Task<bool> AddEntourageAsync(List<AddEntourageFormModel> addFormModel)
+        {
+            try
+            {
+                addFormModel.ForEach(async i =>
+                {
+                    var entourage = new BookinationEntourage()
+                    {
+                        Age = i.Age,
+                        BookinationId = i.BookinationId,
+                        GenderType = i.GenderType,
+                        Name = i.Name,
+                        NationalityCode = i.NationalityCode,
+                        Relative = i.Relative
+                    };
+
+                    await _context.BookinationEntourages.AddAsync(entourage);
+                });
+
+                await _context.SaveChangesAsync();
+
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                throw new ReservationGlobalException(BookinationServiceErrors.AddEntourageError, ex);
             }
         }
     }
