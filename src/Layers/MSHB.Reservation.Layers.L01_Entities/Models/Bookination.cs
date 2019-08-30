@@ -16,6 +16,7 @@ namespace MSHB.Reservation.Layers.L01_Entities.Models
         public string Description { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
+        public Guid ReserveCode { get; set; }
 
         public virtual Unit Unit { get; set; }
         public virtual List<BookinationEntourage> BookinationEntourages { get; set; }

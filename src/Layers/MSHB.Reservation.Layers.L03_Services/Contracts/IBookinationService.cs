@@ -9,8 +9,9 @@ namespace MSHB.Reservation.Layers.L03_Services.Contracts
 {
     public interface IBookinationService
     {
-        Task<bool> AddAsync(AddBookinationFormModel AddFomrModel);
+        Task<long> AddAsync(AddBookinationFormModel AddFomrModel);
         Task<SearchBookinationViewModel> GetAsync(SearchBookinationFormModel searchFormModel);
         Task<bool> AddEntourageAsync(List<AddEntourageFormModel> addFormModel);
+        Task<BookinationViewModel> GetByIdAsync(long id);
     }
 }

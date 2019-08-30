@@ -26,7 +26,7 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
             _context.CheckArgumentIsNull(nameof(_context));
         }
 
-        public async Task<bool> AddAsync(AddBookinationFormModel AddFomrModel)
+        public async Task<long> AddAsync(AddBookinationFormModel AddFomrModel)
         {
             try
             {
@@ -42,13 +42,14 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                     LastName = AddFomrModel.LastName,
                     Mobile = AddFomrModel.Mobile,
                     StartDate = AddFomrModel.StartDate,
-                    UnitId = AddFomrModel.UnitId
+                    UnitId = AddFomrModel.UnitId,
+                    ReserveCode = Guid.NewGuid()
                 };
 
                 await _context.Bookinations.AddAsync(bookination);
                 await _context.SaveChangesAsync();
 
-                return true;
+                return bookination.Id;
             }
             catch (Exception ex)
             {
@@ -116,16 +117,17 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                 var count = await queryable.CountAsync();
                 var searchViewModel = new SearchBookinationViewModel
                 {
-                    bookinationViewModels = resp.Select(respUser => new BookinationViewModel()
+                    bookinationViewModels = resp.Select(respBook => new BookinationViewModel()
                     {
-                        Id = respUser.Id,
-                        FirstName = respUser.FirstName,
-                        LastName = respUser.LastName,
-                        NationalityCode = respUser.NationalityCode,
-                        Description = respUser.Description,
-                        Mobile = respUser.Mobile,
-                        StartDate = respUser.StartDate,
-                        EndDate = respUser.EndDate
+                        Id = respBook.Id,
+                        FirstName = respBook.FirstName,
+                        LastName = respBook.LastName,
+                        NationalityCode = respBook.NationalityCode,
+                        Description = respBook.Description,
+                        Mobile = respBook.Mobile,
+                        StartDate = respBook.StartDate,
+                        EndDate = respBook.EndDate,
+                        ReserveCode = respBook.ReserveCode
                     }).ToList(),
                     PageIndex = searchFormModel.PageIndex,
                     PageSize = searchFormModel.PageSize,
@@ -138,7 +140,6 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
                 throw new ReservationGlobalException(BookinationServiceErrors.GetError, ex);
             }
         }
-
 
         public async Task<bool> AddEntourageAsync(List<AddEntourageFormModel> addFormModel)
         {
@@ -167,6 +168,34 @@ namespace MSHB.Reservation.Layers.L03_Services.Impls
             catch (Exception ex)
             {
                 throw new ReservationGlobalException(BookinationServiceErrors.AddEntourageError, ex);
+            }
+        }
+
+        public async Task<BookinationViewModel> GetByIdAsync(long id)
+        {
+            try
+            {
+                var bookination = await _context.Bookinations.FindAsync(id);
+                if (bookination is null)
+                    throw new ReservationGlobalException(BookinationServiceErrors.BookinationNotFoundError);
+
+                return new BookinationViewModel()
+                {
+                    Description = bookination.Description,
+                    EndDate = bookination.EndDate,
+                    FirstName = bookination.FirstName,
+                    Id = bookination.Id,
+                    LastName = bookination.LastName,
+                    Mobile = bookination.Mobile,
+                    NationalityCode = bookination.NationalityCode,
+                    ReserveCode = bookination.ReserveCode,
+                    StartDate = bookination.StartDate
+                };
+
+            }
+            catch (Exception ex)
+            {
+                throw new ReservationGlobalException(BookinationServiceErrors.GetByIdError, ex);
             }
         }
     }

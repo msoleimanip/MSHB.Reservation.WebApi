@@ -14,5 +14,9 @@ namespace MSHB.Reservation.Layers.L00_BaseModels.Constants.Messages.Base
         new ReservationErrorMessage("BAE-1002", "هنگام خواندن داده ها خطایی رخ داد");
         public static readonly ReservationErrorMessage AddEntourageError =
         new ReservationErrorMessage("BAE-1003", "هنگام ذخیره اطلاعات خطایی رخ داد");
+        public static readonly ReservationErrorMessage GetByIdError =
+        new ReservationErrorMessage("BAE-1004", "هنگام گرفتن اطلاعات خطایی رخ داد");
+        public static readonly ReservationErrorMessage BookinationNotFoundError =
+      new ReservationErrorMessage("BAE-1005", "شناسه مورد نظر یافت نشد");
     }
 }

@@ -11,6 +11,7 @@ namespace MSHB.Reservation.Layers.L04_ViewModels.ViewModels
         public string LastName { get; set; }
         public string Mobile { get; set; }
         public string NationalityCode { get; set; }
+        public Guid ReserveCode { get; set; }
         public string Description { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
